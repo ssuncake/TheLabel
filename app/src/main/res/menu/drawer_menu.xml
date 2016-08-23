@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_upload"
+            android:title="업로드" />
+        <item
+            android:id="@+id/drawer_profile"
+            android:title="프로필설정" />
+        <item
+            android:id="@+id/drawer_message"
+            android:title="메세지" />
+        <item
+            android:id="@+id/drawer_likeContents"
+            android:title="내가좋아요 한 게시글" />
+        <item
+            android:id="@+id/drawer_setting"
+            android:title="설정"
+            />
+    </group>
+    <item
+        android:id="@+id/drawer_logOut"
+        android:gravity="bottom"
+        android:title="로그아웃"
+        />
+</menu>

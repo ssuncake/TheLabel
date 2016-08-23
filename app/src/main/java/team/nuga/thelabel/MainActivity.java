@@ -3,6 +3,8 @@ package team.nuga.thelabel;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,11 +16,15 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+implements NavigationView.OnNavigationItemSelectedListener{
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+
+    @BindView(R.id.drawer)
+    NavigationView drawer;
 
     ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -36,13 +42,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-
+        drawer.setNavigationItemSelectedListener(this);
     }
-
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -69,5 +85,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.drawer_upload) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+        } else if (id == R.id.drawer_profile) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UserMainFragment()).commit();
+
+
+        } else if (id == R.id.drawer_message) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+        } else if (id == R.id.drawer_likeContents) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+        } else if (id == R.id.drawer_setting) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+        } else if (id == R.id.drawer_logOut) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+        }
+        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout) ;
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
