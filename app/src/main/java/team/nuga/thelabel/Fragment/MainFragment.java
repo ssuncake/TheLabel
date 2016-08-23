@@ -1,4 +1,4 @@
-package team.nuga.thelabel;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.R;
+import team.nuga.thelabel.Adapther.ViewpagerAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  */
