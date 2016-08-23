@@ -12,10 +12,10 @@ import team.nuga.thelabel.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LabelMakeFragment extends Fragment {
+public class MyLikeContentsFragment extends Fragment {
 
 
-    public LabelMakeFragment() {
+    public MyLikeContentsFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class LabelMakeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_label_make, container, false);
+        return inflater.inflate(R.layout.fragment_my_like_contents, container, false);
     }
 
 }
