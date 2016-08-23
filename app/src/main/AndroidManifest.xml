@@ -8,10 +8,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionbar">
-        </activity>
-
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".OtherUserActivity" />
+        <activity android:name=".OtherLabelActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".PasswordSettingActivity" />
+        <activity android:name=".PushAlramSettingActivity" />
+        <activity android:name=".EntrustLeaderActivity" />
+        <activity android:name=".FireMemberActivity"></activity>
     </application>
 
 </manifest>

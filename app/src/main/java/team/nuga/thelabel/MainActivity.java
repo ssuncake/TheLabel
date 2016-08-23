@@ -15,6 +15,8 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.Fragment.MainFragment;
+import team.nuga.thelabel.Fragment.UserMainFragment;
 
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener{
