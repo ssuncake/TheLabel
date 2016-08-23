@@ -8,4 +8,7 @@
 
     <dimen name="drawer_header_margin">50dp</dimen>
     <dimen name="genre_height">20dp</dimen>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
