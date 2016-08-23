@@ -21,13 +21,18 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
                 NewsFeedFragment tab1 = new NewsFeedFragment();
                 return tab1;
             case 1:
-
-        }
-        return null;
+                LabelMakeFragment tab2 = new LabelMakeFragment();
+                return tab2;
+            case 2:
+                UserMainFragment tab3  = new UserMainFragment();
+                return tab3;
+            default:
+                return null;
+            }
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return numtabs;
     }
 }
