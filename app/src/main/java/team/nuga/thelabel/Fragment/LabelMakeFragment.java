@@ -1,4 +1,4 @@
-package team.nuga.thelabel;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import team.nuga.thelabel.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserMainFragment extends Fragment {
+public class LabelMakeFragment extends Fragment {
 
 
-    public UserMainFragment() {
+    public LabelMakeFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class UserMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_main, container, false);
+        return inflater.inflate(R.layout.fragment_label_make, container, false);
     }
 
 }

@@ -1,8 +1,12 @@
-package team.nuga.thelabel;
+package team.nuga.thelabel.Adapther;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import team.nuga.thelabel.Fragment.LabelMakeFragment;
+import team.nuga.thelabel.Fragment.NewsFeedFragment;
+import team.nuga.thelabel.Fragment.UserMainFragment;
 
 /**
  * Created by Tacademy on 2016-08-23.
