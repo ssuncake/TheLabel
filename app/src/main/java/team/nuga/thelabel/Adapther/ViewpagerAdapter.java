@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.Fragment.LabelMakeFragment;
+import team.nuga.thelabel.Fragment.LabelSelectFragment;
 import team.nuga.thelabel.Fragment.NewsFeedFragment;
 import team.nuga.thelabel.Fragment.UserMainFragment;
 
@@ -25,7 +25,7 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
                 NewsFeedFragment tab1 = new NewsFeedFragment();
                 return tab1;
             case 1:
-                LabelMakeFragment tab2 = new LabelMakeFragment();
+                LabelSelectFragment tab2 = new LabelSelectFragment();
                 return tab2;
             case 2:
                 UserMainFragment tab3  = new UserMainFragment();

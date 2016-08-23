@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.Fragment.LabelMakeFragment">
+    tools:context="team.nuga.thelabel.Fragment.UploadFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="레이블 생성 프레그먼트"
+        android:text="업로드 페이지 프레그먼트"
+        android:id="@+id/textView3"
         android:layout_gravity="center" />
-
 </FrameLayout>
