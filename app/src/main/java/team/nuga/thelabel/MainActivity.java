@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.Fragment.LabelMainFragment;
-import team.nuga.thelabel.Fragment.LabelMakeFragment;
 import team.nuga.thelabel.Fragment.MainFragment;
 import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.Fragment.ProfileSettingFragment;
@@ -98,6 +96,9 @@ implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
         switch (item.getItemId()){
             case R.id.toolbar_notification :
                 Toast.makeText(MainActivity.this, "Move Notification Activity... ", Toast.LENGTH_SHORT).show();
@@ -136,23 +137,6 @@ implements NavigationView.OnNavigationItemSelectedListener{
         return true;
     }
 
-    public void selectLabel(String labelName){ // 레이블선택화면에서 레이블을 선택하면 선택한 레이블에 따라 프래그먼트를 교체해줌
-
-        Bundle bundle = new Bundle();
-        bundle.putString("LabelName",labelName);
-        // 프래그먼트로 레이블이름을 전달하기 위해 번들값을 생성
-        LabelMainFragment selectedLabelFragment = new LabelMainFragment();
-        selectedLabelFragment.setArguments(bundle);
-        // 프래그먼트에 번들값 셋
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container,selectedLabelFragment).commit();
-        // drawer_container프래그먼트 전환
-    }
-
-    public void makeLabel(){
-
-        mFragmentManager.beginTransaction().replace(R.id.drawer_container,new LabelMakeFragment()).commit();
-    }
 
 
 
