@@ -38,12 +38,24 @@ public class LabelContainerFragment extends Fragment {
         selectedLabelFragment.setArguments(bundle);
 
 
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).addToBackStack(null).commit();
     }
 
 
     public void makeLabel(){
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,new LabelMakeFragment()).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,new LabelMakeFragment()).addToBackStack(null).commit();
+    }
+
+    public void backSelectLabel(){
+        getChildFragmentManager().popBackStack();
+    }
+
+    public void labelSetting(String labelName){
+        Bundle bundle = new Bundle();
+        bundle.putString("LabelName",labelName);
+        LabelSettingFragment selectedLabelFragment = new LabelSettingFragment();
+        selectedLabelFragment.setArguments(bundle);
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).addToBackStack(null).commit();
     }
 
 }

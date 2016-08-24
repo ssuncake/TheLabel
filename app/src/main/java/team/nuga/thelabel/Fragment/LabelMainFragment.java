@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.R;
 
 /**
@@ -20,8 +21,20 @@ public class LabelMainFragment extends Fragment {
 
     private String labelName;
 
+
     @BindView(R.id.textView_LabelMain_LabelName)
     TextView labelNameView;
+
+    @OnClick(R.id.button_LabelMain_back)
+    public void clickBackButton(){
+        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+        parent.backSelectLabel();
+    }
+    @OnClick(R.id.button_LabelMain_goSetting)
+    public void clickSettingButton(){
+        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+        parent.labelSetting(labelName);
+    }
 
     public LabelMainFragment() {
         // Required empty public constructor
@@ -37,8 +50,6 @@ public class LabelMainFragment extends Fragment {
 
         return view;
     }
-
-
 
 
     public void labelSetting(){

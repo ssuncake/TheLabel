@@ -3,14 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="team.nuga.thelabel.Fragment.LabelMakeFragment"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="레이블 생성 프레그먼트"
         android:layout_gravity="center"
         android:textColor="#ff0000" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="레이블 선택으로 돌아가기"
+        android:id="@+id/button_LabelMake_Back"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
