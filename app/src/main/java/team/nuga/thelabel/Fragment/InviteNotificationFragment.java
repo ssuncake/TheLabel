@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Adapther;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import team.nuga.thelabel.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InviteNotificationViewpagerAdapter extends Fragment {
+public class InviteNotificationFragment extends Fragment {
 
 
-    public InviteNotificationViewpagerAdapter() {
+    public InviteNotificationFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class InviteNotificationViewpagerAdapter extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invite_notification_viewpager_adapter, container, false);
+        return inflater.inflate(R.layout.fragment_invite_notification, container, false);
     }
 
 }

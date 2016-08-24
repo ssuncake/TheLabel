@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import team.nuga.thelabel.Fragment.InviteNotificationFragment;
 import team.nuga.thelabel.Fragment.LikeNotificationFragment;
 
 /**
@@ -23,7 +24,7 @@ public class NotificationViewpagerAdapter extends FragmentStatePagerAdapter {
                 LikeNotificationFragment tab1 = new LikeNotificationFragment();
                 return tab1;
             case 1:
-                InviteNotificationViewpagerAdapter tab2 = new InviteNotificationViewpagerAdapter();
+                InviteNotificationFragment tab2 = new InviteNotificationFragment();
                 return tab2;
             default:
                 return null;
