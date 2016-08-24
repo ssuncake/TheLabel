@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,8 +120,6 @@ implements NavigationView.OnNavigationItemSelectedListener{
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
-        } else if (id == R.id.drawer_logOut) {
-            Toast.makeText(MainActivity.this, "로그아웃 버튼 클릭!", Toast.LENGTH_SHORT).show();
         }
         DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout) ;
         drawerLayout.closeDrawer(GravityCompat.START);
