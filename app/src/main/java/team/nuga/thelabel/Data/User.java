@@ -1,6 +1,6 @@
 package team.nuga.thelabel.Data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,7 +16,7 @@ public class User {
     private String userSex;
     private String userProfile;
     private String userLocal;
-    private Bitmap userProfileImage;
+    private Drawable userProfileImage;
     private ArrayList<Position> userPositionList;
     private ArrayList<Ganre> userGanreList;
     private ArrayList<Label> userInLabelList;
@@ -80,11 +80,11 @@ public class User {
         this.userLocal = userLocal;
     }
 
-    public Bitmap getUserProfileImage() {
+    public Drawable getUserProfileImage() {
         return userProfileImage;
     }
 
-    public void setUserProfileImage(Bitmap userProfileImage) {
+    public void setUserProfileImage(Drawable userProfileImage) {
         this.userProfileImage = userProfileImage;
     }
 
@@ -136,7 +136,7 @@ public class User {
         this.userNeed = userNeed;
     }
 
-    public User(int userID, String userName, String userEmail, String userPassword, String userSex, String userProfile, String userLocal, Bitmap userProfileImage, ArrayList<Position> userPositionList, ArrayList<Ganre> userGanreList, ArrayList<Label> userInLabelList, HashSet<Integer> userLikeContents, HashSet<Integer> userLikeLabel, boolean userNeed) {
+    public User() {
 
         this.userID = userID;
         this.userName = userName;
