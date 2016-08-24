@@ -19,6 +19,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.Fragment.MainFragment;
+import team.nuga.thelabel.Fragment.MessageListFragment;
 import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.Fragment.ProfileSettingFragment;
 import team.nuga.thelabel.Fragment.SettingFragment;
@@ -52,10 +53,6 @@ implements NavigationView.OnNavigationItemSelectedListener{
         }
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.app_name, R.string.app_name);
-
-
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         drawer.setNavigationItemSelectedListener(this);
@@ -120,7 +117,7 @@ implements NavigationView.OnNavigationItemSelectedListener{
         int id = item.getItemId();
 
         if (id == R.id.drawer_upload) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
         } else if (id == R.id.drawer_profile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new ProfileSettingFragment()).commit();
 

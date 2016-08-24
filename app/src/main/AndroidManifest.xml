@@ -27,8 +27,10 @@
         <activity android:name=".OtherUserActivity" />
         <activity android:name=".OtherLabelActivity" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".PasswordSettingActivity" />
-        <activity android:name=".PushAlramSettingActivity" />
+        <activity android:name=".PasswordSettingActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
+        <activity android:name=".PushAlramSettingActivity"
+            android:theme="@style/AppTheme.NoActionbar"/>
         <activity android:name=".EntrustLeaderActivity" />
         <activity android:name=".FireMemberActivity"></activity>
     </application>
