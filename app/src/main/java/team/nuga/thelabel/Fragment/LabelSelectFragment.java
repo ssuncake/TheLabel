@@ -10,13 +10,12 @@ import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LabelSelectFragment extends Fragment  {
+public class LabelSelectFragment extends Fragment {
 
 
     public LabelSelectFragment() {
@@ -35,25 +34,25 @@ public class LabelSelectFragment extends Fragment  {
     @BindView(R.id.button_LabelSelect_MakeLabel)
     Button makeLabel;
 
-    @OnClick(R.id.button_LabelSelect_First)
-    public void onSelectFirstLabel(){
-        selectLabel("1st");
-    }
-
-    @OnClick(R.id.button_LabelSelect_Second)
-    void onSelectSecondLabel(){
-        selectLabel("2nd");
-    }
-
-    @OnClick(R.id.button_LabelSelect_Third)
-    void onSelectThirdLabel(){
-        selectLabel("3rd");
-    }
-
-    @OnClick(R.id.button_LabelSelect_MakeLabel)
-    void onMakeLabel(){
-        makeLabel();
-    }
+//    @OnClick(R.id.button_LabelSelect_First)
+//    public void onSelectFirstLabel(){
+//        selectLabel("1st");
+//    }
+//
+//    @OnClick(R.id.button_LabelSelect_Second)
+//    void onSelectSecondLabel(){
+//        selectLabel("2nd");
+//    }
+//
+//    @OnClick(R.id.button_LabelSelect_Third)
+//    void onSelectThirdLabel(){
+//        selectLabel("3rd");
+//    }
+//
+//    @OnClick(R.id.button_LabelSelect_MakeLabel)
+//    void onMakeLabel(){
+//        makeLabel();
+//    }
 
 
 
@@ -64,18 +63,6 @@ public class LabelSelectFragment extends Fragment  {
         ButterKnife.bind(this,view);
         return view;
     }
-
-    public void selectLabel(String lableName){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.selectLabel(lableName);
-
-    }
-
-    public void makeLabel(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.makeLabel();
-    }
-
 
 
 }

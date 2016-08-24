@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.Adapther.ViewpagerAdapter;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.Adapther.ViewpagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,13 +23,12 @@ public class MainFragment extends Fragment {
     TabLayout tabLayout;
     @BindView(R.id.main_viewpager)
     ViewPager viewPager;
-
     public MainFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -46,8 +45,6 @@ public class MainFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
-
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -63,7 +60,6 @@ public class MainFragment extends Fragment {
         });
         return view;
     }
-
 
 
 }
