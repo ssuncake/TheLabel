@@ -52,8 +52,6 @@ public class LabelMainFragment extends Fragment {
     }
 
 
-
-
     public void labelSetting(){
         labelName = getArguments().getString("LabelName"); // 메인액티비티로 부터 Bundle로 전달받은 레이블 이름을 Label네임에 저장
         labelNameView.setText(labelName);
