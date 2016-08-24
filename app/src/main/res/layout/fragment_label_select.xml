@@ -1,12 +1,37 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.Fragment.LabelSelectFragment">
+    tools:context="team.nuga.thelabel.Fragment.LabelSelectFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="label" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="첫번째 레이블"
+        android:id="@+id/button_LabelSelect_First"
+        android:layout_gravity="center_horizontal" />
 
-</FrameLayout>
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="두번째 레이블"
+        android:id="@+id/button_LabelSelect_Second"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="세번째 레이블"
+        android:id="@+id/button_LabelSelect_Third"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="레이블 만들기"
+        android:id="@+id/button_LabelSelect_MakeLabel"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
