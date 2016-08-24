@@ -85,12 +85,8 @@ public class IntroActivity extends AppCompatActivity {
     private void showLoginFragment(){
 
         container.setVisibility(View.VISIBLE);
-
         introFragmentManger = getSupportFragmentManager();
-
         introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();
-
-
     }
 
     public void moveMainActivity(){

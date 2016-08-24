@@ -12,6 +12,7 @@ import team.nuga.thelabel.Fragment.UserSearchFragment;
  */
 public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
     int numtabs;
+
     public SearchViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
         this.numtabs =numtabs;

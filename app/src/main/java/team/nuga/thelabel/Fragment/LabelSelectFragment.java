@@ -69,11 +69,15 @@ public class LabelSelectFragment extends Fragment  {
         LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
         parent.selectLabel(lableName);
 
+        //프레그먼트 교체가 부모프레그먼트에서 이루어져야 하기때문에 부모 프래그먼트를 getParentFragment로 호출하여
+        // selectLabel을 호출한다.
     }
 
     public void makeLabel(){
         LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
         parent.makeLabel();
+
+        //위와 동일
     }
 
 

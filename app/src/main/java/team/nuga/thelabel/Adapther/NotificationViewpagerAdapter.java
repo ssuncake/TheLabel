@@ -12,6 +12,7 @@ import team.nuga.thelabel.Fragment.LikeNotificationFragment;
  */
 public class NotificationViewpagerAdapter extends FragmentStatePagerAdapter {
     int numtabs;
+
     public NotificationViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
         this.numtabs = numtabs;

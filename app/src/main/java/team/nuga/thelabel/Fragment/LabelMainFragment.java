@@ -29,6 +29,7 @@ public class LabelMainFragment extends Fragment {
     public void clickBackButton(){
         LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
         parent.backSelectLabel();
+        // 레이블선택으로 돌아가기위해 역시 부모 프래그먼트를 얻어와 메소드를 실행
     }
     @OnClick(R.id.button_LabelMain_goSetting)
     public void clickSettingButton(){
@@ -53,7 +54,7 @@ public class LabelMainFragment extends Fragment {
 
 
     public void labelSetting(){
-        labelName = getArguments().getString("LabelName"); // 메인액티비티로 부터 Bundle로 전달받은 레이블 이름을 Label네임에 저장
+        labelName = getArguments().getString("LabelName"); // 부모프래그먼트로부터 전달받은 번들에서 레이블 이름을꺼내 세팅
         labelNameView.setText(labelName);
     }
 
