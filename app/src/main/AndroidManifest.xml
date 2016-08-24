@@ -3,7 +3,6 @@
     package="team.nuga.thelabel">
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +14,8 @@
             android:theme="@style/AppTheme.NoActionbar">
         </activity>
 
-        <activity android:name=".IntroActivity"
+        <activity
+            android:name=".IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

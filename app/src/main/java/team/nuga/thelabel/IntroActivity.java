@@ -53,7 +53,7 @@ public class IntroActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                        showLoginFragment();}
-                },1000);
+                },1000);//로그인 1초 후 이동.
             }
         },2000);
 
