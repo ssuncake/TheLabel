@@ -18,11 +18,8 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.Fragment.MainFragment;
+import team.nuga.thelabel.Fragment.*;
 import team.nuga.thelabel.Fragment.MessageListFragment;
-import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
-import team.nuga.thelabel.Fragment.ProfileSettingFragment;
-import team.nuga.thelabel.Fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener{
@@ -104,7 +101,7 @@ implements NavigationView.OnNavigationItemSelectedListener{
                 break;
             case R.id.toolbar_search :
                 Toast.makeText(MainActivity.this, "Move Search Activity... ", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, NotificationActivity.class);
+                intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
                 return true;
         }
@@ -117,13 +114,11 @@ implements NavigationView.OnNavigationItemSelectedListener{
         int id = item.getItemId();
 
         if (id == R.id.drawer_upload) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UploadFragment()).commit();
         } else if (id == R.id.drawer_profile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new ProfileSettingFragment()).commit();
-
-
         } else if (id == R.id.drawer_message) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
         } else if (id == R.id.drawer_likeContents) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
