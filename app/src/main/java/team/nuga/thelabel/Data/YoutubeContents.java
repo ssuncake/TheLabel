@@ -18,4 +18,6 @@ public class YoutubeContents {
 
         this.contentsYoutube = contentsYoutube;
     }
+
+    //
 }
