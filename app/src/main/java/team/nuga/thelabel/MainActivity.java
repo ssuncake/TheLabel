@@ -1,5 +1,6 @@
 package team.nuga.thelabel;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,10 +98,18 @@ implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.toolbar_notification :
+                Toast.makeText(MainActivity.this, "Move Notification Activity... ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.toolbar_search :
+                Toast.makeText(MainActivity.this, "Move Search Activity... ", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
