@@ -128,6 +128,8 @@ implements NavigationView.OnNavigationItemSelectedListener{
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
+        } else if (id == R.id.drawer_main){
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         }
         DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout) ;
         drawerLayout.closeDrawer(GravityCompat.START);

@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/drawer_main"
+            android:title="메인으로가기"/>
+        <item
             android:id="@+id/drawer_upload"
             android:title="업로드" />
     </group>
