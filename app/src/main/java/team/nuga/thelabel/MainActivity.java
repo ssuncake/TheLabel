@@ -24,11 +24,11 @@ import team.nuga.thelabel.Fragment.UserMainFragment;
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener{
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    Toolbar toolbar;
     @BindView(R.id.drawer_layout)
-    private DrawerLayout drawerLayout;
+    DrawerLayout drawerLayout;
     @BindView(R.id.drawer)
-    private NavigationView drawer;
+    NavigationView drawer;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
 

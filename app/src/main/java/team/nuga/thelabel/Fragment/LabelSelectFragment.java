@@ -36,17 +36,17 @@ public class LabelSelectFragment extends Fragment {
     Button makeLabel;
 
     @OnClick(R.id.button_LabelSelect_First)
-    private void onSelectFirstLabel(){
+    void onSelectFirstLabel(){
         selectLabel("1st");
     }
 
     @OnClick(R.id.button_LabelSelect_First)
-    private void onSelectSecondLabel(){
+    void onSelectSecondLabel(){
         selectLabel("2nd");
     }
 
     @OnClick(R.id.button_LabelSelect_First)
-    private void onSelectThirdLabel(){
+    void onSelectThirdLabel(){
         selectLabel("3rd");
     }
 
