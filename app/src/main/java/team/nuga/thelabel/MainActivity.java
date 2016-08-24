@@ -13,13 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.Fragment.LabelMainFragment;
 import team.nuga.thelabel.Fragment.LabelMakeFragment;
 import team.nuga.thelabel.Fragment.MainFragment;
-import team.nuga.thelabel.Fragment.UserMainFragment;
+import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
+import team.nuga.thelabel.Fragment.ProfileSettingFragment;
+import team.nuga.thelabel.Fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener{
@@ -50,13 +53,14 @@ implements NavigationView.OnNavigationItemSelectedListener{
 
 
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.string.app_name, R.string.app_name);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
         drawer.setNavigationItemSelectedListener(this);
-
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+
+
     }
     @Override
     public void onBackPressed() {
@@ -103,17 +107,17 @@ implements NavigationView.OnNavigationItemSelectedListener{
         if (id == R.id.drawer_upload) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         } else if (id == R.id.drawer_profile) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UserMainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new ProfileSettingFragment()).commit();
 
 
         } else if (id == R.id.drawer_message) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         } else if (id == R.id.drawer_likeContents) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_logOut) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            Toast.makeText(MainActivity.this, "로그아웃 버튼 클릭!", Toast.LENGTH_SHORT).show();
         }
         DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout) ;
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -128,11 +132,13 @@ implements NavigationView.OnNavigationItemSelectedListener{
         LabelMainFragment selectedLabelFragment = new LabelMainFragment();
         selectedLabelFragment.setArguments(bundle);
         // 프래그먼트에 번들값 셋
-        mFragmentManager.beginTransaction().replace(R.id.drawer_container,selectedLabelFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container,selectedLabelFragment).commit();
         // drawer_container프래그먼트 전환
     }
 
     public void makeLabel(){
+
         mFragmentManager.beginTransaction().replace(R.id.drawer_container,new LabelMakeFragment()).commit();
     }
 
