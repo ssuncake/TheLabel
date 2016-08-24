@@ -5,23 +5,25 @@
         <item
             android:id="@+id/drawer_upload"
             android:title="업로드" />
-        <item
-            android:id="@+id/drawer_profile"
-            android:title="프로필설정" />
-        <item
-            android:id="@+id/drawer_message"
-            android:title="메세지" />
-        <item
-            android:id="@+id/drawer_likeContents"
-            android:title="내가좋아요 한 게시글" />
-        <item
-            android:id="@+id/drawer_setting"
-            android:title="설정"
-            />
     </group>
     <item
-        android:id="@+id/drawer_logOut"
-        android:gravity="bottom"
-        android:title="로그아웃"
-        />
+        android:title="마이페이지">
+        <menu>
+
+
+            <item
+                android:id="@+id/drawer_profile"
+                android:title="프로필설정" />
+            <item
+                android:id="@+id/drawer_message"
+                android:title="메세지" />
+            <item
+                android:id="@+id/drawer_likeContents"
+                android:title="내가좋아요 한 게시글" />
+            <item
+                android:id="@+id/drawer_setting"
+                android:title="설정" />
+        </menu>
+    </item>
+
 </menu>

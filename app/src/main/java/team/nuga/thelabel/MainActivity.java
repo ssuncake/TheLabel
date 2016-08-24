@@ -20,6 +20,8 @@ import team.nuga.thelabel.Fragment.UserMainFragment;
 
 public class MainActivity extends AppCompatActivity
 implements NavigationView.OnNavigationItemSelectedListener{
+
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -38,19 +40,18 @@ implements NavigationView.OnNavigationItemSelectedListener{
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
+
         ActionBar ab = getSupportActionBar();
         if (null != ab) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
-
-
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         drawer.setNavigationItemSelectedListener(this);
+
+
     }
     @Override
     public void onBackPressed() {
@@ -97,6 +98,8 @@ implements NavigationView.OnNavigationItemSelectedListener{
         if (id == R.id.drawer_upload) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         } else if (id == R.id.drawer_profile) {
+            item.setIcon(R.drawable.profile_girl);
+            item.setTitleCondensed("ddd");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UserMainFragment()).commit();
 
 
@@ -105,8 +108,6 @@ implements NavigationView.OnNavigationItemSelectedListener{
         } else if (id == R.id.drawer_likeContents) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         } else if (id == R.id.drawer_setting) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
-        } else if (id == R.id.drawer_logOut) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         }
         DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout) ;
