@@ -98,17 +98,5 @@ public class Label {
         this.labelLikeUser = labelLikeUser;
     }
 
-    public Label(int labelID, int labelILike, int labelLeaderID, boolean labelNeed, String labelName, String labelProfile, ArrayList<User> labelMemberList, ArrayList<Position> labelNeedPositionList, ArrayList<Ganre> labelGanre, HashSet<Integer> labelLikeUser) {
 
-        this.labelID = labelID;
-        this.labelILike = labelILike;
-        this.labelLeaderID = labelLeaderID;
-        this.labelNeed = labelNeed;
-        this.labelName = labelName;
-        this.labelProfile = labelProfile;
-        this.labelMemberList = labelMemberList;
-        this.labelNeedPositionList = labelNeedPositionList;
-        this.labelGanre = labelGanre;
-        this.labelLikeUser = labelLikeUser;
-    }
 }

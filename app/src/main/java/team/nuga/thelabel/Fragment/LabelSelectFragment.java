@@ -11,6 +11,8 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.Data.Label;
+import team.nuga.thelabel.Data.User;
 import team.nuga.thelabel.R;
 
 /**
@@ -30,44 +32,67 @@ public class LabelSelectFragment extends Fragment  {
     Button selectSecondLabel;
 
     @BindView(R.id.button_LabelSelect_Third)
-    Button selecThirdtLabel;
+    Button selecThirdLabel;
 
-    @BindView(R.id.button_LabelSelect_MakeLabel)
-    Button makeLabel;
+
 
     @OnClick(R.id.button_LabelSelect_First)
     public void onSelectFirstLabel(){
-        selectLabel("1st");
+        if(selectFirstLabel.getText().equals("레이블 만들기")){
+            makeLabel();
+        }else{
+            selectLabel(user.getUserInLabelList().get(0));
+        }
+
     }
 
     @OnClick(R.id.button_LabelSelect_Second)
     void onSelectSecondLabel(){
-        selectLabel("2nd");
+        if(selectSecondLabel.getText().equals("레이블 만들기")){
+            makeLabel();
+        }else{
+            selectLabel(user.getUserInLabelList().get(1));
+        }
     }
 
     @OnClick(R.id.button_LabelSelect_Third)
     void onSelectThirdLabel(){
-        selectLabel("3rd");
+        if(selecThirdLabel.getText().equals("레이블 만들기")){
+            makeLabel();
+        }else{
+            selectLabel(user.getUserInLabelList().get(2));
+        };
     }
 
-    @OnClick(R.id.button_LabelSelect_MakeLabel)
-    void onMakeLabel(){
-        makeLabel();
-    }
 
+
+    User user;
+    Button[] buttons;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        user =(User) getArguments().getSerializable("dummyUser");
+
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this,view);
+
+       buttons = new Button[3];
+       buttons[0] = selectFirstLabel;
+        buttons[1] = selectSecondLabel;
+        buttons[2] = selecThirdLabel;
+        buttonSetting(user);
+
+
         return view;
     }
 
-    public void selectLabel(String lableName){
+    public void selectLabel(Label label){
         LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.selectLabel(lableName);
+        parent.selectLabel(label);
 
         //프레그먼트 교체가 부모프레그먼트에서 이루어져야 하기때문에 부모 프래그먼트를 getParentFragment로 호출하여
         // selectLabel을 호출한다.
@@ -79,6 +104,18 @@ public class LabelSelectFragment extends Fragment  {
 
         //위와 동일
     }
+
+    public void buttonSetting(User user){
+        if(user.getUserInLabelList()!=null)
+        {
+            int size = user.getUserInLabelList().size();
+            this.user = user;
+            for(int i =0; i<size; i++){
+                buttons[i].setText(user.getUserInLabelList().get(i).getLabelName().toString());
+            }
+        }
+    }
+
 
 
 

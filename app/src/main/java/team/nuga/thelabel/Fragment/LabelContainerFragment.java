@@ -2,17 +2,25 @@ package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import team.nuga.thelabel.Data.Label;
+import team.nuga.thelabel.Data.User;
 import team.nuga.thelabel.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LabelContainerFragment extends Fragment {
+
+    User user;
+
 
 
     public LabelContainerFragment() {
@@ -21,21 +29,35 @@ public class LabelContainerFragment extends Fragment {
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        user = (User)getArguments().getSerializable("dummyUser");
+        Toast.makeText(getActivity(), user.getUserName()+"레이블프래그먼트전달완료", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_label_container, container, false);
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,new LabelSelectFragment()).commit();
+
+
+        LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
+        Bundle b  = new Bundle();
+        b.putSerializable("dummyUser",user);
+        labelSelectFragment.setArguments(b);
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelSelectFragment).commit();
         // 처음 탭화면에서 레이블을 선택하게되면 FragmentContainer가 호출되고 그아래에 차일드프래그먼트로 바로 LabelSelectFragment를 호출한다.
 
         return view;
     }
 
-    public void selectLabel(String labelName){
+    public void selectLabel(Label label){
         // 하위 프래그먼트인 LabelSelectFragment에서 레이블을 선택하게 되면, 이 메소드를 통해 프래그먼트를 Main프래그먼트로 교체해주는 역할을 하는 메소드
 
 
         Bundle bundle = new Bundle();
+        String labelName = label.getLabelName().toString();
         bundle.putString("LabelName",labelName);
         LabelMainFragment selectedLabelFragment = new LabelMainFragment();
         selectedLabelFragment.setArguments(bundle);
@@ -49,14 +71,37 @@ public class LabelContainerFragment extends Fragment {
 
 
     public void makeLabel(){
+
+        LabelMakeFragment labelMakeFragment = new LabelMakeFragment();
+        Bundle b = new Bundle();
+        b.putSerializable("dummyUser",user);
+        labelMakeFragment.setArguments(b);
         // 위와 마찬가지로 하위프래그먼트인 레이블선택프래그먼트에서 만들기버튼을 누르면 MakeLabel프래그먼트로 교체를 위한 역할을 한다.
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,new LabelMakeFragment()).addToBackStack(null).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelMakeFragment).addToBackStack(null).commit();
     }
 
     public void backSelectLabel(){
         getChildFragmentManager().popBackStack();
     }
-    // 하위프레그먼트에서 돌아가기버튼을 누르면 마지막으로 addtoBackStack한 트랜젝션이 실행되기 전으로 간다.
+
+
+
+    public void successMakeLabel(User user){
+        FragmentManager fm = getChildFragmentManager();
+//        getChildFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
+        for(int i=0;i<user.getUserInLabelList().size();i++)
+        {
+            Toast.makeText(getActivity(),user.getUserInLabelList().get(i).getLabelName() +" 생 성 완 료 "+ i, Toast.LENGTH_SHORT).show();
+        }
+        LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
+        Bundle b  = new Bundle();
+        b.putSerializable("dummyUser",user);
+        labelSelectFragment.setArguments(b);
+        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelSelectFragment).commit();
+    }
+
+
+
 
     public void labelSetting(String labelName){
         // 하위프래그먼트에서 레이블 세팅을 위해 만들어둔 메소드. 위와 동일

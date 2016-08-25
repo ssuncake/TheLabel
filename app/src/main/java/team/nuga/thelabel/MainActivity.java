@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.Data.User;
 import team.nuga.thelabel.Fragment.MainFragment;
 import team.nuga.thelabel.Fragment.MessageListFragment;
 import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
 
+    private User dummyUser;
+    private Bundle dummyBundle;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+
 
         ActionBar ab = getSupportActionBar();
         if (null != ab) {
@@ -62,7 +69,19 @@ public class MainActivity extends AppCompatActivity
 
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+
+        //// 가짜 데이터를 만들어서 메인프레그먼트로 넘김니다.
+        dummyUser = new User();
+        dummyUser.setUserName("이정호");
+        dummyBundle = new Bundle();
+        dummyBundle.putSerializable("dummyUser",dummyUser);
+        MainFragment mainFragment = new MainFragment();
+        mainFragment.setArguments(dummyBundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+
+
+
 
 
     }
@@ -146,6 +165,7 @@ public class MainActivity extends AppCompatActivity
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
         return true;
     }
+
 
 
 }

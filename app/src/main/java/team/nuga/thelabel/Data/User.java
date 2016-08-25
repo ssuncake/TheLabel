@@ -2,13 +2,14 @@ package team.nuga.thelabel.Data;
 
 import android.graphics.drawable.Drawable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class User {
+public class User implements Serializable{
     private int userID;
     private String userName;
     private String userEmail;
@@ -23,6 +24,15 @@ public class User {
    private HashSet<Integer> userLikeContents;
     private HashSet<Integer> userLikeLabel;
     private boolean userNeed;
+
+    public void addLabelList(Label label){
+        if(userInLabelList==null){
+            userInLabelList = new ArrayList<Label>();
+            userInLabelList.add(label);
+        }else{
+            userInLabelList.add(label);
+        }
+    }
 
     public int getUserID() {
         return userID;

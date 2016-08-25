@@ -15,6 +15,13 @@
         android:layout_gravity="center"
         android:textColor="#ff0000" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_MakeLabel_InputName"
+        android:layout_gravity="center_horizontal"
+        android:text="레이블 이름" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
