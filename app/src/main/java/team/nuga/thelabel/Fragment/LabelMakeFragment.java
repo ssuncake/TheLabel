@@ -41,8 +41,8 @@ public class LabelMakeFragment extends Fragment {
        user = (User)getArguments().getSerializable("dummyUser");
     }
 
-    @OnClick(R.id.button_LabelMake_Back)
-    public void ClickBack(){
+    @OnClick(R.id.button_LabelMake_Complete)
+    public void completeMakeLabel(){
         LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
         String labelName = inputName.getText().toString();
         newLabel = new Label();
@@ -51,6 +51,12 @@ public class LabelMakeFragment extends Fragment {
 
         parent.successMakeLabel(user);
 //        parent.backSelectLabel();
+    }
+
+    @OnClick(R.id.button_LabelMake_Cancel)
+    public void cancelMakeLabel(){
+        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+        parent.backSelectLabel();
     }
 
 

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import team.nuga.thelabel.Data.Label;
 import team.nuga.thelabel.Data.User;
@@ -32,7 +31,6 @@ public class LabelContainerFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = (User)getArguments().getSerializable("dummyUser");
-        Toast.makeText(getActivity(), user.getUserName()+"레이블프래그먼트전달완료", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -88,11 +86,8 @@ public class LabelContainerFragment extends Fragment {
 
     public void successMakeLabel(User user){
         FragmentManager fm = getChildFragmentManager();
-//        getChildFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
-        for(int i=0;i<user.getUserInLabelList().size();i++)
-        {
-            Toast.makeText(getActivity(),user.getUserInLabelList().get(i).getLabelName() +" 생 성 완 료 "+ i, Toast.LENGTH_SHORT).show();
-        }
+        getChildFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
+
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
         b.putSerializable("dummyUser",user);
