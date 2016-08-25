@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a5a5a5"
+    android:background="@color/color_white"
     tools:context="team.nuga.thelabel.OtherUserActivity">
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -25,6 +25,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="개인계정"
+            android:id="@+id/text_otheruser"
             android:textColor="@color/color_white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -36,13 +37,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:id="@+id/message_container"
-        android:background="@color/color_gray_2"
+        android:background="@color/color_white"
         android:layout_alignParentStart="true"
         android:layout_below="@id/frameLayout">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/imageView_chatting"
             android:src="@drawable/chatting"
             android:layout_alignParentTop="true"
@@ -51,15 +52,50 @@
             android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/text_otheruser"
-            android:textColor="@color/color_white"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:id="@+id/button_label"
+            android:text="레이블 없음"
+            android:layout_marginTop="33dp"
+            android:layout_below="@+id/imageView_chatting"
+            android:layout_alignLeft="@+id/button_labelinvite"
+            android:layout_alignStart="@+id/button_labelinvite">
+        </Button>
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:id="@+id/button_yeslabel"
+            android:text="레이블초대 (리더)"
+            android:layout_marginTop="130dp"
+            android:layout_below="@+id/imageView_chatting"
+            android:layout_toRightOf="@+id/imageView_chatting"
+            android:layout_toEndOf="@+id/imageView_chatting">
+        </Button>
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:id="@+id/button_labelinvite"
+            android:text="레이블초대 (리더X)"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_alignTop="@+id/button_yeslabel"
+            android:layout_toRightOf="@+id/button_yeslabel"
+            android:layout_toEndOf="@+id/button_yeslabel">
+        </Button>
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:id="@+id/button_onelabel"
+            android:text="레이블 있음"
+            android:layout_alignTop="@+id/button_label"
+            android:layout_alignLeft="@+id/button_yeslabel"
+            android:layout_alignStart="@+id/button_yeslabel" />
+
     </RelativeLayout>
 
 </RelativeLayout>

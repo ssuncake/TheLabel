@@ -35,7 +35,8 @@
             android:theme="@style/AppTheme.NoActionbar"
             android:screenOrientation="portrait"/>
         <activity android:name=".OtherLabelActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionbar"/>
         <activity android:name=".MessageActivity"
             android:theme="@style/AppTheme.NoActionbar"
             android:screenOrientation="portrait"/>

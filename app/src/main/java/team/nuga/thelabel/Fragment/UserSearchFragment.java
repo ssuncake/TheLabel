@@ -41,6 +41,7 @@ public class UserSearchFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),OtherUserActivity.class);
                 intent.putExtra("name",position+"님의 계정입니다.");
                 startActivity(intent);
+
 //                switch(position){
 //                    case 0:
 //                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);

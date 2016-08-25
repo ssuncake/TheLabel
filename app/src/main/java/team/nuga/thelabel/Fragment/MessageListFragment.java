@@ -34,6 +34,7 @@ public class MessageListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_message_list, container, false);
         listView =(RecyclerView)view.findViewById(R.id.recyclerview_message);
         messageAdapter = new MessageAdapter();
@@ -41,8 +42,9 @@ public class MessageListFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
                 Intent intent = new Intent(getActivity(),MessageActivity.class);
-                intent.putExtra("message",position+"님과의 채팅화면 입니다.");
+                intent.putExtra("message","친구"+position+"과의 채팅화면");
                 startActivity(intent);
+
 //                switch(position){
 //                    case 0:
 //                        Intent intent = new Intent(getActivity(), MessageActivity.class);
@@ -72,7 +74,7 @@ public class MessageListFragment extends Fragment {
         Random r = new Random();
         for (int i = 0; i<3; i++){
             User u = new User();
-            u.setUserName("name "+i);
+            u.setUserName("친구 "+i);
             u.setUserProfileImage(getResources().getDrawable(R.drawable.profile_girl));
             messageAdapter.add(u);
         }
