@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
 
 
-        //// 가짜 데이터를 만들어서 메인프레그먼트로 넘김니다.
+        //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
         dummyUser = new User();
         dummyUser.setUserName("이정호");
         dummyBundle = new Bundle();

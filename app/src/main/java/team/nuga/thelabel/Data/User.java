@@ -26,12 +26,12 @@ public class User implements Serializable{
     private boolean userNeed;
 
     public void addLabelList(Label label){
-        if(userInLabelList==null){
-            userInLabelList = new ArrayList<Label>();
-            userInLabelList.add(label);
-        }else{
-            userInLabelList.add(label);
-        }
+            if(userInLabelList==null){
+                userInLabelList = new ArrayList<Label>();
+                userInLabelList.add(label);
+            }else{
+                userInLabelList.add(label);
+            }
     }
 
     public int getUserID() {

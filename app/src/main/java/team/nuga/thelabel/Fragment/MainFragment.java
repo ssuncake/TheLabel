@@ -46,14 +46,19 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view); //fragment나 viewholder를 사용할 때 ButterKnife.bind(this)방식은 activity일 때
 
-        dummyUser =(User)getArguments().getSerializable("dummyUser");
+
+
+        dummyUser =(User)getArguments().getSerializable("dummyUser"); // 메인 액티비티로부터 받아온 더미유저를 사용
+
+
 
         tabLayout.addTab(tabLayout.newTab().setText("newsfeed")); //setindicator을 사용하게 되면 내가 원하는 view를 넣을 수 있고, setText나 setIon을 사용하면 글자나 아이콘을 사용할 수 있다.
         tabLayout.addTab(tabLayout.newTab().setText("label"));
         tabLayout.addTab(tabLayout.newTab().setText("account"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //getChildFragmentManager을 사용해도 되고
+        MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //어뎁터에 가짜 유저데이터를 넘겨줌.
+
         viewPager.setAdapter(mainViewpagerAdapter);                                                                       //getActivity().getSupportFragmentManager()을 사용해도 된다.
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout)); //tab과 viewpager가 같이 변환 될 수 있도록 해주는 메소드
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
