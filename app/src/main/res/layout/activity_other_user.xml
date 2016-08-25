@@ -36,6 +36,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:id="@+id/message_container"
+        android:background="@color/color_gray_2"
         android:layout_alignParentStart="true"
         android:layout_below="@id/frameLayout">
 
@@ -44,7 +45,6 @@
             android:layout_height="20dp"
             android:id="@+id/imageView_chatting"
             android:src="@drawable/chatting"
-            android:background="#00000000"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
