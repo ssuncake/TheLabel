@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView_musicContents"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_musicContent"
+        android:layout_marginBottom="@dimen/cardView_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/cardView_profileImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile_girl" />
+                <TextView
+                    android:id="@+id/textView_cardView_profileId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="워니몬"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/cardView_profileImage"
+                    android:layout_toEndOf="@+id/cardView_profileImage" />
+
+                <TextView
+                    android:text="16.08.25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="@dimen/cardView_seekerBar_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/toggleButton"
+                    android:layout_toEndOf="@+id/toggleButton" />
+                <TextView
+                    android:text="재생시간"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView12"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/seekBar"
+                    android:layout_alignEnd="@+id/seekBar" />
+                <TextView
+                    android:text="남은시간"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/toggleButton"
+                    android:layout_toRightOf="@+id/toggleButton"
+                    android:layout_toEndOf="@+id/toggleButton" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardView_Like_ShareButton_Size">
+                <ImageView
+                    android:src="@android:drawable/btn_star_big_on"
+                    android:layout_width="@dimen/cardView_LikeImage_size"
+                    android:layout_height="@dimen/cardView_LikeImage_size"
+                    android:id="@+id/imageView"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:text="좋아요 0개"
+                    android:textSize="@dimen/cardView_LikeImage_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/imageView"
+                    android:layout_toEndOf="@+id/imageView" />
+                <ImageButton
+                    android:src="@android:drawable/btn_star_big_off"
+                    android:layout_width="@dimen/cardView_Like_ShareButton_Size"
+                    android:layout_height="@dimen/cardView_Like_ShareButton_Size"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/imageButton"
+                    android:layout_toStartOf="@+id/imageButton" />
+                <ImageButton
+                    android:src="@android:drawable/ic_menu_share"
+                    android:layout_width="@dimen/cardView_Like_ShareButton_Size"
+                    android:layout_height="@dimen/cardView_Like_ShareButton_Size"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/imageButton" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:text="@string/DummyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

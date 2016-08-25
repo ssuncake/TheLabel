@@ -9,6 +9,14 @@
     <dimen name="text_size">16sp</dimen>
 
 
+    <!--카드뷰 속성 값들-->
+    <dimen name="cardView_margin">10dp</dimen> <!-- 카드뷰와 카드뷰 사이의 마진값 -->
+    <dimen name="cardView_textContent_size">15dp</dimen>
+    <dimen name="cardView_Like_ShareButton_Size">30dp</dimen>
+    <dimen name="cardView_profileImage_size">48dp</dimen>
+    <dimen name="cardView_LikeImage_size">10dp</dimen>
+    <dimen name="cardView_seekerBar_width">230dp</dimen>
+
     <!--User IntroActivity-->
     <dimen name="intro_movelogo">150dp</dimen>
 
