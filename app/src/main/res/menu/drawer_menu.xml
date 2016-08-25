@@ -16,7 +16,8 @@
 
             <item
                 android:id="@+id/drawer_profile"
-                android:title="프로필설정" />
+                android:title="프로필설정"
+                />
             <item
                 android:id="@+id/drawer_message"
                 android:title="메세지" />

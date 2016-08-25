@@ -15,7 +15,7 @@ public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
 
     public SearchViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
-        this.numtabs =numtabs;
+        this.numtabs =tabCount;
     }
 
     @Override

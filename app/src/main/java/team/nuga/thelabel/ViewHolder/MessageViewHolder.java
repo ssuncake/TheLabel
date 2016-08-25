@@ -1,4 +1,4 @@
-package team.nuga.thelabel;
+package team.nuga.thelabel.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.R;
 
 /**
  * Created by Tacademy on 2016-08-24.

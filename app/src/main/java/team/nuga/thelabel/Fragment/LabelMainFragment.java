@@ -48,7 +48,6 @@ public class LabelMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_label_main, container, false);
         ButterKnife.bind(this,view);
         labelSetting();
-
         return view;
     }
 
