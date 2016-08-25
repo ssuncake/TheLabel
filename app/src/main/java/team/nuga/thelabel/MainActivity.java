@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Bundle dummyBundle;
 
 
-
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        ActionBar ab = getSupportActionBar();
-        if (null != ab) {
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowCustomEnabled(true);
-            ab.setDisplayShowTitleEnabled(true);
-            ab.setTitle("     The label ");
+        actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle("     The label ");
 
         }
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
@@ -148,17 +148,24 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
 
+
         if (id == R.id.drawer_upload) {
+            actionBar.setTitle("업로드");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UploadFragment()).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {
+            actionBar.setTitle("Toolbar_Profile");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new ProfileSettingFragment()).commit();
         } else if (id == R.id.drawer_message) {
+            actionBar.setTitle("Toolbar_Message");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
         } else if (id == R.id.drawer_likeContents) {
+            actionBar.setTitle("Toolbar_LikePage");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
+            actionBar.setTitle("Toolbar_Setting");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
+            actionBar.setTitle("Toolbar_AppTitle");
             dummyBundle = new Bundle();
             dummyBundle.putSerializable("dummyUser",dummyUser);
             MainFragment mainFragment = new MainFragment();

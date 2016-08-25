@@ -8,10 +8,20 @@
 
     <dimen name="drawer_header_margin">50dp</dimen>
     <dimen name="genre_height">20dp</dimen>
+    
 
 
     <string name="DummyText">한산섬 달 밝은 밤에 수루에 혼자 앉아 큰 칼 옆에 차고 깊은 시름 하는 차에 어디서 일성호가는 남의 애를 끊나니</string>
 
+
+    <!--툴바 타이틀 설정-->
+    <string name="Toolbar_AppTitle">The label</string>
+    <string name="Toolbar_Message">Message</string>
+    <string name="Toolbar_OtherUser">OtherUser</string>
+    <string name="Toolbar_LabelPage">Label Page</string>
+    <string name="Toolbar_Setting">AppSettings</string>
+    <string name="Toolbar_Profile">profileSettings</string>
+    <string name="Toolbar_LikePage">Toolbar_LikePage</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
