@@ -1,5 +1,6 @@
 package team.nuga.thelabel.Adapther;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +33,11 @@ public class SearchUserResultAdapter extends RecyclerView.Adapter<SearchUserView
         holder.setOnSearchItemClickListener(this);
         return holder;
     }
-
+    Context mContext;
     @Override
     public void onBindViewHolder(SearchUserViewHolder holder, int position) {
         holder.setUser(items.get(position));
+
     }
 
     @Override

@@ -40,17 +40,23 @@ public class MessageListFragment extends Fragment {
         messageAdapter.setOnAdapterItemClickListener(new MessageAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
-                switch(position){
-                    case 0:
-                        Intent intent = new Intent(getActivity(), MessageActivity.class);
-                        startActivity(intent);
-                    case 1:
-                        Intent intent1 = new Intent(getActivity(), MessageActivity.class);
-                        startActivity(intent1);
-                    case 2:
-                        Intent intent2 = new Intent(getActivity(), MessageActivity.class);
-                        startActivity(intent2);
-                }
+                Intent intent = new Intent(getActivity(),MessageActivity.class);
+                intent.putExtra("message",position+"님과의 채팅화면 입니다.");
+                startActivity(intent);
+//                switch(position){
+//                    case 0:
+//                        Intent intent = new Intent(getActivity(), MessageActivity.class);
+//                        startActivity(intent);
+//                        break;
+//                    case 1:
+//                        Intent intent1 = new Intent(getActivity(), MessageActivity.class);
+//                        startActivity(intent1);
+//                        break;
+//                    case 2:
+//                        Intent intent2 = new Intent(getActivity(), MessageActivity.class);
+//                        startActivity(intent2);
+//                        break;
+//                }
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());

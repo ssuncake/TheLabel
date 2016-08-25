@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="알림"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/color_white"
             android:textSize="22sp"
             android:textStyle="bold" />
     </FrameLayout>
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알람 설정 화면"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/color_white"
         android:id="@+id/text_phush_alram_setting"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

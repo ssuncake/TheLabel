@@ -32,10 +32,12 @@
         <activity android:name=".RecorderActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".OtherUserActivity"
+            android:theme="@style/AppTheme.NoActionbar"
             android:screenOrientation="portrait"/>
         <activity android:name=".OtherLabelActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".MessageActivity"
+            android:theme="@style/AppTheme.NoActionbar"
             android:screenOrientation="portrait"/>
         <activity android:name=".PasswordSettingActivity"
             android:theme="@style/AppTheme.NoActionbar"

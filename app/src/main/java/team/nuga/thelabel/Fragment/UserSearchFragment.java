@@ -21,14 +21,12 @@ import team.nuga.thelabel.R;
  * A simple {@link Fragment} subclass.
  */
 public class UserSearchFragment extends Fragment {
-
     RecyclerView listView;
     SearchUserResultAdapter adapter;
 
     public UserSearchFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,17 +38,20 @@ public class UserSearchFragment extends Fragment {
         adapter.setOnAdapterItemClickListener(new SearchUserResultAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
-                switch(position){
-                    case 0:
-                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-                        startActivity(intent);
-                    case 1:
-                        Intent intent1 = new Intent(getActivity(), OtherUserActivity.class);
-                        startActivity(intent1);
-                    case 2:
-                        Intent intent2 = new Intent(getActivity(), OtherUserActivity.class);
-                        startActivity(intent2);
-                }
+                Intent intent = new Intent(getActivity(),OtherUserActivity.class);
+                intent.putExtra("name",position+"님의 계정입니다.");
+                startActivity(intent);
+//                switch(position){
+//                    case 0:
+//                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent);
+//                    case 1:
+//                        Intent intent1 = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent1);
+//                    case 2:
+//                        Intent intent2 = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent2);
+//                }
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
