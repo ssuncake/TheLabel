@@ -87,7 +87,6 @@ public class LabelContainerFragment extends Fragment {
     public void successMakeLabel(User user){
         FragmentManager fm = getChildFragmentManager();
         getChildFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
-
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
         b.putSerializable("dummyUser",user);

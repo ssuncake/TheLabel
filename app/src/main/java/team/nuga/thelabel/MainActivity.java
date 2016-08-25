@@ -159,7 +159,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.drawer_setting) {
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            dummyBundle = new Bundle();
+            dummyBundle.putSerializable("dummyUser",dummyUser);
+            MainFragment mainFragment = new MainFragment();
+            mainFragment.setArguments(dummyBundle);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
