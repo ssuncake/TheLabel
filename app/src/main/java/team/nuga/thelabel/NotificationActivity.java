@@ -2,20 +2,17 @@ package team.nuga.thelabel;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.Adapther.NotificationViewpagerAdapter;
-import team.nuga.thelabel.Fragment.LikeNotificationFragment;
 
 public class NotificationActivity extends AppCompatActivity {
-    @BindView(R.id.main_tablayout)
+    @BindView(R.id.notification_tablayout)
     TabLayout tabLayout;
-    @BindView(R.id.main_viewpager)
+    @BindView(R.id.notification_viewpager)
     ViewPager viewPager;
 
     @Override
@@ -24,10 +21,10 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.notification_content, new LikeNotificationFragment());
-        fragmentTransaction.commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.main_viewpager, new InviteNotificationFragment());
+//        fragmentTransaction.commit();
 
         tabLayout.addTab(tabLayout.newTab().setText("내소식"));
         tabLayout.addTab(tabLayout.newTab().setText("초대"));
