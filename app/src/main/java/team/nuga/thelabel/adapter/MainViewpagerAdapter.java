@@ -5,10 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import team.nuga.thelabel.Fragment.LabelContainerFragment;
+import team.nuga.thelabel.Fragment.NewsFeedFragment;
+import team.nuga.thelabel.Fragment.UserMainFragment;
 import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.fragment.LabelContainerFragment;
-import team.nuga.thelabel.fragment.NewsFeedFragment;
-import team.nuga.thelabel.fragment.UserMainFragment;
+
 
 /**
  * Created by Tacademy on 2016-08-23.

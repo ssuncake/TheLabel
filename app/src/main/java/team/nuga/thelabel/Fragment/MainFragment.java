@@ -1,4 +1,4 @@
-package team.nuga.thelabel.fragment;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
@@ -61,6 +61,9 @@ public class MainFragment extends Fragment {
 
         viewPager.setAdapter(mainViewpagerAdapter);                                                                       //getActivity().getSupportFragmentManager()을 사용해도 된다.
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout)); //tab과 viewpager가 같이 변환 될 수 있도록 해주는 메소드
+
+
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -77,6 +80,11 @@ public class MainFragment extends Fragment {
 
             }
         });
+
+        int tabindex = getArguments().getInt("tabIndex");
+        if(tabindex!=0){
+            viewPager.setCurrentItem(tabindex);
+        }
         return view;
     }
 

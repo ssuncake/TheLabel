@@ -21,7 +21,7 @@
     <dimen name="intro_movelogo">150dp</dimen>
 
     <!--Notification 속성값-->
-    <dimen name="notification_items_height">50dp</dimen>
+    <dimen name="notification_items_height">70dp</dimen>
     <dimen name="notification_Initems_margin">10dp</dimen>
 
 
