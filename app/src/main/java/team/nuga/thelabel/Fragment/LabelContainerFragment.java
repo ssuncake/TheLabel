@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Fragment;
+package team.nuga.thelabel.fragment;
 
 
 import android.os.Bundle;
@@ -57,7 +57,7 @@ public class LabelContainerFragment extends Fragment {
         Bundle bundle = new Bundle();
         String labelName = label.getLabelName().toString();
         bundle.putString("LabelName",labelName);
-        LabelMainFragment selectedLabelFragment = new LabelMainFragment();
+        team.nuga.thelabel.fragment.LabelMainFragment selectedLabelFragment = new team.nuga.thelabel.fragment.LabelMainFragment();
         selectedLabelFragment.setArguments(bundle);
         // 레이블 이름을 전달하기위해 번들을 생성해주고 putString으로 번들안에 레이블이름을 넣어둔다. 그러한 번들을 프래그먼트로 셋팅
 
@@ -101,7 +101,7 @@ public class LabelContainerFragment extends Fragment {
         // 하위프래그먼트에서 레이블 세팅을 위해 만들어둔 메소드. 위와 동일
         Bundle bundle = new Bundle();
         bundle.putString("LabelName",labelName);
-        LabelSettingFragment selectedLabelFragment = new LabelSettingFragment();
+        team.nuga.thelabel.fragment.LabelSettingFragment selectedLabelFragment = new team.nuga.thelabel.fragment.LabelSettingFragment();
         selectedLabelFragment.setArguments(bundle);
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).addToBackStack(null).commit();
     }

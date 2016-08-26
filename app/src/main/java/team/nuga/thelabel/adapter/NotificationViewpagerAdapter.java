@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.Fragment.InviteNotificationFragment;
-import team.nuga.thelabel.Fragment.LikeNotificationFragment;
+import team.nuga.thelabel.fragment.InviteNotificationFragment;
+import team.nuga.thelabel.fragment.LikeNotificationFragment;
 
 
 /**

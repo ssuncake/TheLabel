@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.Fragment.LabelContainerFragment;
-import team.nuga.thelabel.Fragment.NewsFeedFragment;
-import team.nuga.thelabel.Fragment.UserMainFragment;
+import team.nuga.thelabel.fragment.LabelContainerFragment;
+import team.nuga.thelabel.fragment.NewsFeedFragment;
+import team.nuga.thelabel.fragment.UserMainFragment;
 import team.nuga.thelabel.data.User;
 
 
