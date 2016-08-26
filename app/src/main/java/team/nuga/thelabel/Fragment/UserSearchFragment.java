@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 
 import java.util.Random;
 
-import team.nuga.thelabel.adapther.SearchUserResultAdapter;
-import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.adapther.SearchUserResultListAdapter;
-import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.adapther.SearchUserResultListAdapter;
+import team.nuga.thelabel.data.User;
 
 /**
  * A simple {@link Fragment} subclass.
