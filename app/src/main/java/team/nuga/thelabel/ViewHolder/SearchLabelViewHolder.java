@@ -1,10 +1,10 @@
-package team.nuga.thelabel.ViewHolder;
+package team.nuga.thelabel.viewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import team.nuga.thelabel.Data.Label;
+import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.R;
 
 /**

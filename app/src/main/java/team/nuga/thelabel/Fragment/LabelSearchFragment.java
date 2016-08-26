@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import java.util.Random;
 
-import team.nuga.thelabel.Adapther.SearchLabelResultListAdapter;
-import team.nuga.thelabel.Data.Label;
+import team.nuga.thelabel.adapther.SearchLabelResultListAdapter;
+import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.OtherLabelActivity;
 import team.nuga.thelabel.R;
 
