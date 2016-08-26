@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.adapther.NotificationViewpagerAdapter;
+import team.nuga.thelabel.adapter.NotificationViewpagerAdapter;
 import team.nuga.thelabel.data.LikeNotification;
 
 public class NotificationActivity extends AppCompatActivity {

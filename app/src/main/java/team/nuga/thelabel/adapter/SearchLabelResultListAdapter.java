@@ -1,4 +1,4 @@
-package team.nuga.thelabel.adapther;
+package team.nuga.thelabel.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.viewHolder.SearchLabelViewHolder;
+import team.nuga.thelabel.viewholder.SearchLabelViewHolder;
 
 /**
  * Created by Tacademy on 2016-08-26.

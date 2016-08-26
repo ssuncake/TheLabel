@@ -14,7 +14,7 @@ import java.util.Random;
 
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.adapther.SearchUserResultListAdapter;
+import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
 import team.nuga.thelabel.data.User;
 
 /**

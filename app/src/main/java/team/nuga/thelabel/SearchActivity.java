@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.adapther.SearchViewpagerAdapter;
+import team.nuga.thelabel.adapter.SearchViewpagerAdapter;
 
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_tablayout)

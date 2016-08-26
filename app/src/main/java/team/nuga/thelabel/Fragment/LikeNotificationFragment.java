@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import team.nuga.thelabel.NotificationActivity;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.adapther.NotificationLikeAdapter;
+import team.nuga.thelabel.adapter.NotificationLikeAdapter;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.LikeNotification;
 import team.nuga.thelabel.data.User;

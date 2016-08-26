@@ -1,4 +1,4 @@
-package team.nuga.thelabel.viewHolder;
+package team.nuga.thelabel.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

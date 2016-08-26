@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.Random;
 
-import team.nuga.thelabel.adapther.MessageAdapter;
+import team.nuga.thelabel.adapter.MessageAdapter;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.MessageActivity;
 import team.nuga.thelabel.R;

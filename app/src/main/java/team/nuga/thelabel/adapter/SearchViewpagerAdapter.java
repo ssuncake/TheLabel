@@ -1,31 +1,31 @@
-package team.nuga.thelabel.adapther;
+package team.nuga.thelabel.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.Fragment.InviteNotificationFragment;
-import team.nuga.thelabel.Fragment.LikeNotificationFragment;
+import team.nuga.thelabel.Fragment.LabelSearchFragment;
+import team.nuga.thelabel.Fragment.UserSearchFragment;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class NotificationViewpagerAdapter extends FragmentStatePagerAdapter {
+public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
     int numtabs;
 
-    public NotificationViewpagerAdapter(FragmentManager fm, int tabCount) {
+    public SearchViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
-        this.numtabs = tabCount;
+        this.numtabs =tabCount;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                LikeNotificationFragment tab1 = new LikeNotificationFragment();
+                UserSearchFragment tab1 = new UserSearchFragment();
                 return tab1;
             case 1:
-                InviteNotificationFragment tab2 = new InviteNotificationFragment();
+                LabelSearchFragment tab2 = new LabelSearchFragment();
                 return tab2;
             default:
                 return null;

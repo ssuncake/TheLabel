@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.Random;
 
-import team.nuga.thelabel.adapther.SearchLabelResultListAdapter;
+import team.nuga.thelabel.adapter.SearchLabelResultListAdapter;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.OtherLabelActivity;
 import team.nuga.thelabel.R;

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.adapther.MainViewpagerAdapter;
+import team.nuga.thelabel.adapter.MainViewpagerAdapter;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
 

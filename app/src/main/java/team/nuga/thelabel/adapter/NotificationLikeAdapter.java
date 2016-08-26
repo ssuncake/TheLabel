@@ -1,4 +1,4 @@
-package team.nuga.thelabel.adapther;
+package team.nuga.thelabel.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.LikeNotification;
-import team.nuga.thelabel.viewHolder.NotificationLikeViewHolder;
+import team.nuga.thelabel.viewholder.NotificationLikeViewHolder;
 
 /**
  * Created by Tacademy on 2016-08-26.
