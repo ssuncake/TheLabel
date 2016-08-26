@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import team.nuga.thelabel.NotificationActivity;
 import team.nuga.thelabel.R;
@@ -44,7 +43,6 @@ public class LikeNotificationFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, LikeNotification notification, int position) {
                 NotificationActivity parent = (NotificationActivity)getActivity();
-                Toast.makeText(getActivity(), notification.getSender().getUserName()+"   !@!@     "+notification.getContents().getContentsTitle(), Toast.LENGTH_SHORT).show();
                parent.receiveNotification(notification);
             }
         });

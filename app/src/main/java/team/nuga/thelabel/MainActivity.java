@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == REQUEST_LIKENOTIFICATION){
             if(resultCode == Activity.RESULT_OK){
                 LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
-                Toast.makeText(MainActivity.this, notification.getContents().getContentsTitle()+" gggg!", Toast.LENGTH_SHORT).show();
                 goMainFragment();
             }
         }
