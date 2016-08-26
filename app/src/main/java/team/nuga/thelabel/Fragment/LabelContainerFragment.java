@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import team.nuga.thelabel.Data.Label;
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
 
 /**

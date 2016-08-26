@@ -1,21 +1,27 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
+
+import java.io.Serializable;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class LikeNotification {
-    private int NotificationLikeUser;
+public class LikeNotification extends Notification implements Serializable {
+    private User sender;
+    private Contents contents;
 
-    public int getNotificationLikeUser() {
-        return NotificationLikeUser;
+    public User getSender() {
+        return sender;
     }
 
-    public void setNotificationLikeUser(int notificationLikeUser) {
-        NotificationLikeUser = notificationLikeUser;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public LikeNotification(int notificationLikeUser) {
+    public Contents getContents() {
+        return contents;
+    }
 
-        NotificationLikeUser = notificationLikeUser;
+    public void setContents(Contents contents) {
+        this.contents = contents;
     }
 }

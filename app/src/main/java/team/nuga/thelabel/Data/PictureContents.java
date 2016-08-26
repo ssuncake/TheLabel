@@ -1,23 +1,13 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
-import android.graphics.Bitmap;
+import java.io.Serializable;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class PictureContents {
-    public Bitmap getContentsPicture() {
-        return contentsPicture;
-    }
+public class PictureContents implements Serializable {
 
-    public void setContentsPicture(Bitmap contentsPicture) {
-        this.contentsPicture = contentsPicture;
-    }
 
-    public PictureContents(Bitmap contentsPicture) {
 
-        this.contentsPicture = contentsPicture;
-    }
-
-    private Bitmap contentsPicture;
+    private String contentsPicture;
 }

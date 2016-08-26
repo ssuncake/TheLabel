@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
 /**
  * Created by Tacademy on 2016-08-24.

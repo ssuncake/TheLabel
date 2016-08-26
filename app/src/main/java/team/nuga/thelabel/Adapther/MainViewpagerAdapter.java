@@ -1,11 +1,11 @@
-package team.nuga.thelabel.Adapther;
+package team.nuga.thelabel.adapther;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.Fragment.LabelContainerFragment;
 import team.nuga.thelabel.Fragment.NewsFeedFragment;
 import team.nuga.thelabel.Fragment.UserMainFragment;

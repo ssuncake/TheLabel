@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
 import android.graphics.drawable.Drawable;
 

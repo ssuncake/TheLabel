@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Adapther;
+package team.nuga.thelabel.adapther;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

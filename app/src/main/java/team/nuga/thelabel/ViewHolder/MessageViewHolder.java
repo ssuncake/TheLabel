@@ -1,11 +1,11 @@
-package team.nuga.thelabel.ViewHolder;
+package team.nuga.thelabel.viewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
 
 /**

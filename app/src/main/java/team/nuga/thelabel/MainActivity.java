@@ -1,5 +1,6 @@
 package team.nuga.thelabel;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,7 +19,8 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.data.LikeNotification;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.Fragment.MainFragment;
 import team.nuga.thelabel.Fragment.MessageListFragment;
 import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
@@ -28,6 +30,10 @@ import team.nuga.thelabel.Fragment.UploadFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int REQUEST_LIKENOTIFICATION = 200;
+
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -74,11 +80,8 @@ public class MainActivity extends AppCompatActivity
         dummyUser = new User();
         dummyUser.setUserName("이정호");
         dummyBundle = new Bundle();
-        dummyBundle.putSerializable("dummyUser",dummyUser);
-        MainFragment mainFragment = new MainFragment();
-        mainFragment.setArguments(dummyBundle);
+        goMainFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
 
 
 
@@ -132,7 +135,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.toolbar_notification:  //툴바 상단 노티피케이션 메뉴 클릭시 해당 액티비티 띄움
                 Toast.makeText(MainActivity.this, "Move Notification Activity... ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, NotificationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_LIKENOTIFICATION);
                 break;
             case R.id.toolbar_search:    //툴바 상단 검색 메뉴 클릭시 해당 액티비티 띄움
                 Toast.makeText(MainActivity.this, "Move Search Activity... ", Toast.LENGTH_SHORT).show();
@@ -165,13 +168,7 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle("Toolbar_Setting");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
-            actionBar.setTitle("Toolbar_AppTitle");
-            dummyBundle = new Bundle();
-            dummyBundle.putSerializable("dummyUser",dummyUser);
-            MainFragment mainFragment = new MainFragment();
-            mainFragment.setArguments(dummyBundle);
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+            goMainFragment();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -180,5 +177,25 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_LIKENOTIFICATION){
+            if(resultCode == Activity.RESULT_OK){
+                LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
+                Toast.makeText(MainActivity.this, notification.getContents().getContentsTitle()+" gggg!", Toast.LENGTH_SHORT).show();
+                goMainFragment();
+            }
+        }
+    }
+
+    public void goMainFragment()
+    {
+        actionBar.setTitle("Toolbar_AppTitle");
+        dummyBundle.putSerializable("dummyUser",dummyUser);
+        MainFragment mainFragment = new MainFragment();
+        mainFragment.setArguments(dummyBundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+    }
 
 }

@@ -1,12 +1,13 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class Label {
+public class Label implements Serializable {
     private int labelID;
     private int labelILike;
     private int labelLeaderID;

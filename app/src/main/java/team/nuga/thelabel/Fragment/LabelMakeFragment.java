@@ -12,8 +12,8 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import team.nuga.thelabel.Data.Label;
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
 
 /**

@@ -1,11 +1,12 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
+import java.io.Serializable;
 import java.net.URL;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class MusicContents {
+public class MusicContents implements Serializable {
     private URL contentsMusic;
 
     public URL getContentsMusic() {

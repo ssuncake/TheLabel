@@ -1,4 +1,4 @@
-package team.nuga.thelabel.Adapther;
+package team.nuga.thelabel.adapther;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import team.nuga.thelabel.Data.User;
-import team.nuga.thelabel.ViewHolder.MessageViewHolder;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.viewHolder.MessageViewHolder;
 import team.nuga.thelabel.R;
 
 /**

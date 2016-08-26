@@ -1,5 +1,7 @@
 package team.nuga.thelabel;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -7,9 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.Adapther.NotificationViewpagerAdapter;
+import team.nuga.thelabel.adapther.NotificationViewpagerAdapter;
+import team.nuga.thelabel.data.LikeNotification;
 
 public class NotificationActivity extends AppCompatActivity {
+
+    public static final String RESULT_NOTIFICATION = "result_notification" ;
+
     @BindView(R.id.notification_tablayout)
     TabLayout tabLayout;
     @BindView(R.id.notification_viewpager)
@@ -50,6 +56,13 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void receiveNotification(LikeNotification notification){
+        Intent data = new Intent();
+        data.putExtra(RESULT_NOTIFICATION,notification);
+        setResult(Activity.RESULT_OK,data);
+        finish();
     }
 
 }

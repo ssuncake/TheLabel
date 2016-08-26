@@ -1,12 +1,13 @@
-package team.nuga.thelabel.Data;
+package team.nuga.thelabel.data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class Contents {
+public class Contents implements Serializable{
     private int contentsID;
     private int contentsType;
     private int contentsWriterID;
@@ -15,6 +16,24 @@ public class Contents {
     private int contentsPrivacy;
     private String contentsText;
     private Date contentsDate;
+    private HashSet<Integer> contentsLikeUsers;
+    private String contentsTitle;
+
+    public String getContentsTitle() {
+        return contentsTitle;
+    }
+
+    public void setContentsTitle(String contentsTitle) {
+        this.contentsTitle = contentsTitle;
+    }
+
+    public Date getContentsDate() {
+        return contentsDate;
+    }
+
+    public void setContentsDate(Date contentsDate) {
+        this.contentsDate = contentsDate;
+    }
 
     public int getContentsID() {
         return contentsID;
@@ -80,18 +99,8 @@ public class Contents {
         this.contentsLikeUsers = contentsLikeUsers;
     }
 
-    public Contents(int contentsID, int contentsType, int contentsWriterID, int contentsBoardID, int contentsLike, int contentsPrivacy, String contentsText, HashSet<Integer> contentsLikeUsers) {
 
-        this.contentsID = contentsID;
-        this.contentsType = contentsType;
-        this.contentsWriterID = contentsWriterID;
-        this.contentsBoardID = contentsBoardID;
-        this.contentsLike = contentsLike;
-        this.contentsPrivacy = contentsPrivacy;
-        this.contentsText = contentsText;
-        this.contentsLikeUsers = contentsLikeUsers;
-    }
 
-    private HashSet<Integer> contentsLikeUsers;
+
 
 }

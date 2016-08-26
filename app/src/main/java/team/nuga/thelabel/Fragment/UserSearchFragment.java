@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import java.util.Random;
 
-import team.nuga.thelabel.Adapther.SearchUserResultAdapter;
-import team.nuga.thelabel.Data.User;
+import team.nuga.thelabel.adapther.SearchUserResultAdapter;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 
@@ -41,18 +41,6 @@ public class UserSearchFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),OtherUserActivity.class);
                 intent.putExtra("name",position+"님의 계정입니다.");
                 startActivity(intent);
-
-//                switch(position){
-//                    case 0:
-//                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent);
-//                    case 1:
-//                        Intent intent1 = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent1);
-//                    case 2:
-//                        Intent intent2 = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent2);
-//                }
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
