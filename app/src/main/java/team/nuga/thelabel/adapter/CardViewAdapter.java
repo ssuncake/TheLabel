@@ -9,32 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.MusicContents;
 import team.nuga.thelabel.viewholder.CardViewHolder;
 
-public class CardViewAdapter extends RecyclerView.Adapter<CardViewHolder>{
- List<Contents> items = new ArrayList<>();
- public void add(Contents contents){
- items.add(contents);
+public class CardViewAdapter extends RecyclerView.Adapter<CardViewHolder> {
+    List<MusicContents> items = new ArrayList<>();
 
- notifyDataSetChanged();
- }
+    public void add(MusicContents contents) {
+        items.add(contents);
 
- @Override
- public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
- View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_music_content,parent,false);
- CardViewHolder cardViewHolder = new CardViewHolder(view);
+        notifyDataSetChanged();
+    }
 
- return cardViewHolder;
- }
+    @Override
+    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_music_content, parent, false);
+        CardViewHolder cardViewHolder = new CardViewHolder(view);
 
- @Override
- public void onBindViewHolder(CardViewHolder holder, int position) {
- holder.setContent(items.get(position));
- }
+        return cardViewHolder;
+    }
 
- @Override
- public int getItemCount() {
- return items.size();
- }
- }
+    @Override
+    public void onBindViewHolder(CardViewHolder holder, int position) {
+        holder.setContent(items.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+}

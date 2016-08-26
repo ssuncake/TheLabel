@@ -9,6 +9,7 @@ import java.net.URL;
 public class MusicContents implements Serializable {
     private URL contentsMusic;
 
+
     public URL getContentsMusic() {
         return contentsMusic;
     }
@@ -21,4 +22,26 @@ public class MusicContents implements Serializable {
 
         this.contentsMusic = contentsMusic;
     }
+
+
+    //
+    public MusicContents() {
+        this.writerNickName = writerNickName;
+
+    }
+
+    private int writerNickName;
+
+    public MusicContents(int writerNickName) {
+        this.writerNickName = writerNickName;
+    }
+
+    public int getWriterNickName() {
+        return writerNickName;
+    }
+
+    public void setWriterNickName(String s) {
+        this.writerNickName = writerNickName;
+    }
+//
 }

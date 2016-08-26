@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.MusicContents;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -42,11 +43,11 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    team.nuga.thelabel.data.Contents contents;
-    public void setContent(team.nuga.thelabel.data.Contents content) {
+    MusicContents contents;
+    public void setContent(MusicContents content) {
         this.contents = content;
 //        writer_profileImage.setImageDrawable(contents.getContentsWriterID());
         writer_profileImage.setImageResource(R.drawable.profile_girl);
-        writer_Id.setText(contents.getContentsWriterID());
+        writer_Id.setText(contents.getWriterNickName());
     }
 }

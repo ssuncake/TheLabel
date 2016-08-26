@@ -12,9 +12,7 @@ import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.viewholder.MessageViewHolder;
 import team.nuga.thelabel.R;
 
-/**
- * Created by Tacademy on 2016-08-24.
- */
+
 public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder>
         implements MessageViewHolder.OnMessageItemClickListener {
     List<User> items = new ArrayList<>();

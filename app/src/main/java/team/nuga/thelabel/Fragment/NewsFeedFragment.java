@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.adapter.CardViewAdapter;
+import team.nuga.thelabel.adapter.MyAdapter;
+import team.nuga.thelabel.adapter.MyData;
 
 
 /**
@@ -20,7 +23,9 @@ import team.nuga.thelabel.adapter.CardViewAdapter;
  */
 public class NewsFeedFragment extends Fragment {
 
-    CardViewAdapter cardViewAdapter;
+//        CardViewAdapter cardViewAdapter;
+    ArrayList<MyData> mDataset;
+    RecyclerView.Adapter myAdapter;
     @BindView(R.id.recyclerview_newsfeed)
     RecyclerView recyclerView;
 
@@ -34,16 +39,34 @@ public class NewsFeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news_feed, container, false);
-        ButterKnife.bind(this,view);
-        cardViewAdapter = new CardViewAdapter();
+        ButterKnife.bind(this, view);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
 
-        recyclerView.setAdapter(cardViewAdapter);
+//        recyclerView.setLayoutManager(manager);
+//        recyclerView.setAdapter(cardViewAdapter);
 //        initData();
+
+
+        mDataset = new ArrayList<>();
+        myAdapter = new MyAdapter(mDataset);
+
+        recyclerView.setAdapter(myAdapter);
+
+
+
         return view;
+
     }
 
-}
+    private void initData() {
+//        Random r = new Random();
+//        for (int i = 0; i < 3; i++) {
+//            MusicContents u = new MusicContents();
+//            u.setWriterNickName("nick"+i);
+//            CardViewAdapter.add(u);
+        }
+
+    }
