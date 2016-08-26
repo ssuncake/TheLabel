@@ -19,14 +19,14 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.data.LikeNotification;
-import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.Fragment.MainFragment;
 import team.nuga.thelabel.Fragment.MessageListFragment;
 import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.Fragment.ProfileSettingFragment;
 import team.nuga.thelabel.Fragment.SettingFragment;
 import team.nuga.thelabel.Fragment.UploadFragment;
+import team.nuga.thelabel.data.LikeNotification;
+import team.nuga.thelabel.data.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,11 +82,8 @@ public class MainActivity extends AppCompatActivity
         dummyBundle = new Bundle();
         goMainFragment();
 
-
-
-
-
-
+//        drawer_nickname = (TextView)findViewById(R.id.TextView_drawer_nickname) ;
+//        drawer_nickname.setText(dummyUser.getUserName());
     }
 
     boolean backButtonClicked = false;
