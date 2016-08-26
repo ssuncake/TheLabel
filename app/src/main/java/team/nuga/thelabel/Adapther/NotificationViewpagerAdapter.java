@@ -15,7 +15,7 @@ public class NotificationViewpagerAdapter extends FragmentStatePagerAdapter {
 
     public NotificationViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
-        this.numtabs = numtabs;
+        this.numtabs = tabCount;
     }
 
     @Override
