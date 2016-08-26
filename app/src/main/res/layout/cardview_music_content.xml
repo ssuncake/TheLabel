@@ -55,7 +55,7 @@
                     android:layout_alignParentStart="true" />
 
                 <SeekBar
-                    android:id="@+id/seekBar"
+                    android:id="@+id/seekBar_cardView"
                     android:layout_width="@dimen/cardView_seekerBar_width"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -65,12 +65,13 @@
                     android:text="재생시간"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView12"
+                    android:id="@+id/textView_playtime"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignRight="@+id/seekBar"
-                    android:layout_alignEnd="@+id/seekBar" />
+                    android:layout_alignRight="@+id/seekBar_cardView"
+                    android:layout_alignEnd="@+id/seekBar_cardView" />
                 <TextView
                     android:text="남은시간"
+                    android:id="@+id/textView_closeTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/toggleButton"
@@ -90,6 +91,7 @@
                     android:layout_alignParentStart="true" />
                 <TextView
                     android:text="좋아요 0개"
+                    android:id="@+id/textView_likeText"
                     android:textSize="@dimen/cardView_LikeImage_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,12 +99,13 @@
                     android:layout_toRightOf="@+id/imageView"
                     android:layout_toEndOf="@+id/imageView" />
                 <ImageButton
+                    android:id="@+id/imageButton_like_button_cardView"
                     android:src="@android:drawable/btn_star_big_off"
                     android:layout_width="@dimen/cardView_Like_ShareButton_Size"
                     android:layout_height="@dimen/cardView_Like_ShareButton_Size"
                     android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/imageButton"
-                    android:layout_toStartOf="@+id/imageButton" />
+                    android:layout_toLeftOf="@+id/imageButton_share_cardView"
+                    android:layout_toStartOf="@+id/imageButton_share_cardView" />
                 <ImageButton
                     android:src="@android:drawable/ic_menu_share"
                     android:layout_width="@dimen/cardView_Like_ShareButton_Size"
@@ -110,7 +113,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/imageButton" />
+                    android:id="@+id/imageButton_share_cardView" />
 
             </RelativeLayout>
 

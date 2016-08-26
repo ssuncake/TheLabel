@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00000000"
-    tools:context=".Fragment.MainFragment">
+    tools:context=".fragment.MainFragment">
 
     <android.support.design.widget.TabLayout
         android:elevation="30dp"

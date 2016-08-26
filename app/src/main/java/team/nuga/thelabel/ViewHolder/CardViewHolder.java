@@ -2,44 +2,51 @@ package team.nuga.thelabel.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
-import team.nuga.thelabel.data.User;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.R;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
 public class CardViewHolder extends RecyclerView.ViewHolder {
-    ImageView userphotoView;
-    TextView usernameView;
+    @BindView(R.id.cardView_profileImage)
+    ImageView writer_profileImage;
+    @BindView(R.id.textView_cardView_profileId)
+    TextView writer_Id;
+    @OnClick(R.id.textView_cardView_profileId)
 
-    public interface OnMessageItemClickListener{
-        public void onMessageItemClick(View view, User user, int position);
+
+    public void onWriterIdClick(){
+//        Intent intent = new Intent(, OtherUserActivity.class);
     }
-    OnMessageItemClickListener listener;
-    public void setOnMessageItemClickListener(OnMessageItemClickListener listener){
-        this.listener = listener;
-    }
+    @BindView(R.id.seekBar_cardView)
+    SeekBar seekBar;
+    //    @BindView(R.id.) //재생버튼
+    ToggleButton playButton;
+    @BindView(R.id.imageButton_share_cardView)
+    ImageButton imageButton;
+
+
+
     public CardViewHolder(final View itemView) {
         super(itemView);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(listener !=null){
-                    listener.onMessageItemClick(view, user, getAdapterPosition());
-                }
-            }
-        });
-        userphotoView = (ImageView)itemView.findViewById(R.id.image_user);
-        usernameView = (TextView)itemView.findViewById(R.id.text_username);
-    }
-    User user;
+        ButterKnife.bind(this.itemView);
 
-    public void setUser(User user){
-        this.user = user;
-        userphotoView.setImageDrawable(user.getUserProfileImage());
-        usernameView.setText(user.getUserName());
+    }
+
+    team.nuga.thelabel.data.Contents contents;
+    public void setContent(team.nuga.thelabel.data.Contents content) {
+        this.contents = content;
+//        writer_profileImage.setImageDrawable(contents.getContentsWriterID());
+        writer_profileImage.setImageResource(R.drawable.profile_girl);
+        writer_Id.setText(contents.getContentsWriterID());
     }
 }

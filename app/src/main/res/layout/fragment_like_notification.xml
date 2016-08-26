@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.Fragment.LikeNotificationFragment">
+    tools:context="team.nuga.thelabel.fragment.LikeNotificationFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
