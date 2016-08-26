@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/ImageView_LikeNotification"
+        android:id="@+id/ImageView_InviteNotification"
         android:background="#555599"
         android:layout_weight="0.15"
         android:layout_margin="@dimen/notification_Initems_margin" />
@@ -18,17 +18,32 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textView_LikeNotification_Contents"
-        android:layout_weight="0.75"
+        android:id="@+id/textView_InviteNotification_Contents"
+        android:layout_weight="0.65"
         android:layout_marginLeft="@dimen/notification_Initems_margin"
         android:layout_marginRight="@dimen/notification_Initems_margin"
         android:textSize="15sp" />
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="5.5"
-        android:id="@+id/textView_LikeNotification_Date"
-        android:layout_weight="0.1"/>
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="승낙"
+            android:id="@+id/button_InviteNotification_OK"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="거절"
+            android:id="@+id/button_InviteNotification_No"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
 </LinearLayout>

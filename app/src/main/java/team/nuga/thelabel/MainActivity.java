@@ -19,12 +19,12 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.fragment.MainFragment;
-import team.nuga.thelabel.fragment.MessageListFragment;
-import team.nuga.thelabel.fragment.MyLikeContentsFragment;
-import team.nuga.thelabel.fragment.ProfileSettingFragment;
-import team.nuga.thelabel.fragment.SettingFragment;
-import team.nuga.thelabel.fragment.UploadFragment;
+import team.nuga.thelabel.Fragment.MainFragment;
+import team.nuga.thelabel.Fragment.MessageListFragment;
+import team.nuga.thelabel.Fragment.MyLikeContentsFragment;
+import team.nuga.thelabel.Fragment.ProfileSettingFragment;
+import team.nuga.thelabel.Fragment.SettingFragment;
+import team.nuga.thelabel.Fragment.UploadFragment;
 import team.nuga.thelabel.data.LikeNotification;
 import team.nuga.thelabel.data.User;
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         dummyUser = new User();
         dummyUser.setUserName("이정호");
         dummyBundle = new Bundle();
-        goMainFragment();
+        goMainFragment(0);
 
 //        drawer_nickname = (TextView)findViewById(R.id.TextView_drawer_nickname) ;
 //        drawer_nickname.setText(dummyUser.getUserName());
@@ -165,8 +165,8 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle("Toolbar_Setting");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
-            goMainFragment();
-//            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MainFragment()).commit();
+            goMainFragment(0);
+
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
@@ -179,15 +179,19 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == REQUEST_LIKENOTIFICATION){
             if(resultCode == Activity.RESULT_OK){
                 LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
-                goMainFragment();
+                goMainFragment(2);
             }
         }
     }
 
-    public void goMainFragment()
+    public void goMainFragment(int tabIndex)
     {
         actionBar.setTitle("Toolbar_AppTitle");
         dummyBundle.putSerializable("dummyUser",dummyUser);
+        if(tabIndex != 0){
+            dummyBundle.putInt("tabIndex",tabIndex);
+        }
+
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(dummyBundle);
 

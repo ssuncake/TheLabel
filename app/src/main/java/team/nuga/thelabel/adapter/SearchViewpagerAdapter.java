@@ -4,8 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import team.nuga.thelabel.fragment.LabelSearchFragment;
-import team.nuga.thelabel.fragment.UserSearchFragment;
+import team.nuga.thelabel.Fragment.LabelSearchFragment;
+import team.nuga.thelabel.Fragment.UserSearchFragment;
+
 
 /**
  * Created by Tacademy on 2016-08-24.

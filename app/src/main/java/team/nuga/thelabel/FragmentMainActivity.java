@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import team.nuga.thelabel.fragment.MainFragment;
+import team.nuga.thelabel.Fragment.MainFragment;
 
 public class FragmentMainActivity extends AppCompatActivity {
 

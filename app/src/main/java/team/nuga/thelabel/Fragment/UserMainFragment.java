@@ -1,4 +1,4 @@
-package team.nuga.thelabel.fragment;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;

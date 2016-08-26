@@ -1,4 +1,4 @@
-package team.nuga.thelabel.fragment;
+package team.nuga.thelabel.Fragment;
 
 
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.R;
 
 /**
  * A simple {@link Fragment} subclass.
