@@ -15,11 +15,11 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
     ImageView userphotoView;
     TextView usernameView;
 
-    public interface OnSearchItemClickListener{
+    public interface OnSearchUserItemClickListener{
         public void onUserItemClick(View view, User user, int position);
     }
-    OnSearchItemClickListener listener;
-    public void setOnSearchItemClickListener(OnSearchItemClickListener listener){
+    OnSearchUserItemClickListener listener;
+    public void setOnSearchItemClickListener(OnSearchUserItemClickListener listener){
         this.listener = listener;
     }
     public SearchUserViewHolder(final View itemView) {

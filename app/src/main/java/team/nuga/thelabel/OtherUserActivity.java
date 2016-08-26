@@ -29,6 +29,7 @@ public class OtherUserActivity extends AppCompatActivity {
         String i = intent.getStringExtra("name");
         text.setText(i + "");
         setResult(RESULT_OK, intent);
+
         imageView = (ImageView) findViewById(R.id.imageView_chatting);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

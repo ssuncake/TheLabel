@@ -16,13 +16,12 @@ import team.nuga.thelabel.viewHolder.SearchUserViewHolder;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class SearchUserResultAdapter extends RecyclerView.Adapter<SearchUserViewHolder>
-        implements SearchUserViewHolder.OnSearchItemClickListener {
-    List<User> items = new ArrayList<>();
+public class SearchUserResultListAdapter extends RecyclerView.Adapter<SearchUserViewHolder>
+        implements SearchUserViewHolder.OnSearchUserItemClickListener {
+    List<User> useritems = new ArrayList<>();
 
-    public void add(User u) {
-        items.add(u);
-
+    public void add(User user) {
+        useritems.add(user);
         notifyDataSetChanged();
     }
 
@@ -36,13 +35,12 @@ public class SearchUserResultAdapter extends RecyclerView.Adapter<SearchUserView
     Context mContext;
     @Override
     public void onBindViewHolder(SearchUserViewHolder holder, int position) {
-        holder.setUser(items.get(position));
-
+        holder.setUser(useritems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return useritems.size();
     }
 
     public interface OnAdapterItemClickListener {

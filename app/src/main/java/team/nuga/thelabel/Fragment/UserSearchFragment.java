@@ -14,6 +14,8 @@ import java.util.Random;
 
 import team.nuga.thelabel.adapther.SearchUserResultAdapter;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.Adapther.SearchUserResultListAdapter;
+import team.nuga.thelabel.Data.User;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 
@@ -22,7 +24,7 @@ import team.nuga.thelabel.R;
  */
 public class UserSearchFragment extends Fragment {
     RecyclerView listView;
-    SearchUserResultAdapter adapter;
+    SearchUserResultListAdapter useradapter;
 
     public UserSearchFragment() {
         // Required empty public constructor
@@ -33,20 +35,32 @@ public class UserSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
-        listView =(RecyclerView)view.findViewById(R.id.recyclerview_search);
-        adapter = new SearchUserResultAdapter();
-        adapter.setOnAdapterItemClickListener(new SearchUserResultAdapter.OnAdapterItemClickListener() {
+        listView =(RecyclerView)view.findViewById(R.id.recyclerview_user_search);
+        useradapter = new SearchUserResultListAdapter();
+        useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
                 Intent intent = new Intent(getActivity(),OtherUserActivity.class);
                 intent.putExtra("name",position+"님의 계정입니다.");
                 startActivity(intent);
+
+//                switch(position){
+//                    case 0:
+//                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent);
+//                    case 1:
+//                        Intent intent1 = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent1);
+//                    case 2:
+//                        Intent intent2 = new Intent(getActivity(), OtherUserActivity.class);
+//                        startActivity(intent2);
+//                }
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
-        listView.setAdapter(adapter);
+        listView.setAdapter(useradapter);
         initData();
         return view;
     }
@@ -55,10 +69,10 @@ public class UserSearchFragment extends Fragment {
     private void initData(){
         Random r = new Random();
         for (int i = 0; i<3; i++){
-            User u = new User();
-            u.setUserName("name "+i);
-            u.setUserProfileImage(getResources().getDrawable(R.drawable.profile_girl));
-            adapter.add(u);
+            User user = new User();
+            user.setUserName("name "+i);
+            user.setUserProfileImage(getResources().getDrawable(R.drawable.profile_girl));
+            useradapter.add(user);
         }
 
     }
