@@ -27,13 +27,13 @@ public class LabelMainFragment extends Fragment {
 
     @OnClick(R.id.button_LabelMain_back)
     public void clickBackButton(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+        team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();
         parent.backSelectLabel();
         // 레이블선택으로 돌아가기위해 역시 부모 프래그먼트를 얻어와 메소드를 실행
     }
     @OnClick(R.id.button_LabelMain_goSetting)
     public void clickSettingButton(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+        team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();
         parent.labelSetting(labelName);
     }
 

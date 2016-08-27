@@ -8,8 +8,8 @@ import java.io.Serializable;
 public class InviteNotification extends Notification implements Serializable {
 
     private int inviteMode;
-    private Label sendLabel;
-    private User joinUser;
+    private team.nuga.thelabel.data.Label sendLabel;
+    private team.nuga.thelabel.data.User joinUser;
     public static final int INVITELABEL = 100;
     public static final int JOINRQUEST = 200;
 
@@ -24,19 +24,19 @@ public class InviteNotification extends Notification implements Serializable {
         this.inviteMode = JOINRQUEST;
     }
 
-    public Label getSendLabel() {
+    public team.nuga.thelabel.data.Label getSendLabel() {
         return sendLabel;
     }
 
-    public void setSendLabel(Label sendLabel) {
+    public void setSendLabel(team.nuga.thelabel.data.Label sendLabel) {
         this.sendLabel = sendLabel;
     }
 
-    public User getJoinUser() {
+    public team.nuga.thelabel.data.User getJoinUser() {
         return joinUser;
     }
 
-    public void setJoinUser(User joinUser) {
+    public void setJoinUser(team.nuga.thelabel.data.User joinUser) {
         this.joinUser = joinUser;
     }
 }
