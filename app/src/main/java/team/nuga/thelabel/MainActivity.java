@@ -15,18 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.data.LikeNotification;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.fragment.MainFragment;
 import team.nuga.thelabel.fragment.MessageListFragment;
 import team.nuga.thelabel.fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.fragment.ProfileSettingFragment;
 import team.nuga.thelabel.fragment.SettingFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
-import team.nuga.thelabel.data.LikeNotification;
-import team.nuga.thelabel.data.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,8 +36,6 @@ public class MainActivity extends AppCompatActivity
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
     public static final String TABINDEX = "tabindex";
 
-    public static final int LABELTAB = 1;
-    public static final int USERTAB = 2;
 
     private static final int REQUEST_LIKENOTIFICATION = 200;
 
@@ -47,12 +47,14 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.drawer)
     NavigationView drawer;
 
+    private TextView headerUserName;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private FragmentManager mFragmentManager;
 
     private User mainUser;
-    private Bundle dummyBundle;
+    private Bundle bundle;
 
 
     ActionBar actionBar;
@@ -85,11 +87,13 @@ public class MainActivity extends AppCompatActivity
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
         mainUser = new User();
         mainUser.setUserName("이정호");
-        dummyBundle = new Bundle();
+        bundle = new Bundle();
         goMainFragment(0);
 
-//        drawer_nickname = (TextView)findViewById(R.id.TextView_drawer_nickname) ;
-//        drawer_nickname.setText(dummyUser.getUserName());
+        // 헤더뷰 관련 설정
+        View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
+        headerUserName =(TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
+        headerUserName.setText(mainUser.getUserName());
     }
 
     boolean backButtonClicked = false;
@@ -105,7 +109,7 @@ public class MainActivity extends AppCompatActivity
                 super.onBackPressed();
             }
             if (backButtonClicked == false) {
-                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
                 backButtonClicked = true;
             }
         }
@@ -136,12 +140,10 @@ public class MainActivity extends AppCompatActivity
         }
         switch (item.getItemId()) {
             case R.id.toolbar_notification:  //툴바 상단 노티피케이션 메뉴 클릭시 해당 액티비티 띄움
-                Toast.makeText(MainActivity.this, "Move Notification Activity... ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, NotificationActivity.class);
                 startActivityForResult(intent,REQUEST_LIKENOTIFICATION);
                 break;
             case R.id.toolbar_search:    //툴바 상단 검색 메뉴 클릭시 해당 액티비티 띄움
-                Toast.makeText(MainActivity.this, "Move Search Activity... ", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
                 return true;
@@ -159,27 +161,30 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle("업로드");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UploadFragment()).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {
-            actionBar.setTitle("Toolbar_Profile");
+            actionBar.setTitle("프로필 설정");
             Bundle b = new Bundle();
             b.putSerializable(MainActivity.MAINUSER,mainUser);
             ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
             profileSettingFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
         } else if (id == R.id.drawer_message) {
-            actionBar.setTitle("Toolbar_Message");
+            actionBar.setTitle("메세지");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
         } else if (id == R.id.drawer_likeContents) {
-            actionBar.setTitle("Toolbar_LikePage");
+            actionBar.setTitle("내가 좋아요한 게시물");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
-            actionBar.setTitle("Toolbar_Setting");
+            actionBar.setTitle("설정");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
-            goMainFragment(0);
+            goMainFragment(MainFragment.NEWSFEEDTAB);
 
         }
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
+
         return true;
     }
 
@@ -189,23 +194,25 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == REQUEST_LIKENOTIFICATION){
             if(resultCode == Activity.RESULT_OK){
                 LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
-                goMainFragment(2);
+                goMainFragment(MainFragment.USERTAB);
             }
         }
     }
 
     public void goMainFragment(int tabIndex) // 메인 프래그먼트로 이동하며 인자로 받은 값 0~2탭으로 바로이동시켜줍니다.
     {
-        actionBar.setTitle("Toolbar_AppTitle");
-        dummyBundle.putSerializable(MAINUSER,mainUser);
+        actionBar.setTitle("The Label");
+        bundle.putSerializable(MAINUSER,mainUser);
         if(tabIndex != 0){
-            dummyBundle.putInt(TABINDEX,tabIndex);
+            bundle.putInt(TABINDEX,tabIndex);
         }
         MainFragment mainFragment = new MainFragment();
-        mainFragment.setArguments(dummyBundle);
+        mainFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
     }
 
-
+    public void drawerUserSetting(String name){
+        headerUserName.setText(name);
+    }
 
 }

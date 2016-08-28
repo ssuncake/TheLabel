@@ -27,10 +27,11 @@ public class ProfileSettingFragment extends Fragment {
 
     @OnClick(R.id.button_ProfileSetting_Complete)
     public void ClickComplete(){
-        String s= inputName.getText().toString();
-        user.setUserName(s);
+        String inputUserName= inputName.getText().toString();
+        user.setUserName(inputUserName);
         MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.goMainFragment(MainActivity.USERTAB);
+        mainActivity.drawerUserSetting(inputUserName);
+        mainActivity.goMainFragment(MainFragment.USERTAB);
     }
 
 

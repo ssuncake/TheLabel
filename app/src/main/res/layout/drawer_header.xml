@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView_MainHeader_Profile"
         android:src="@drawable/profile_girl"
         android:layout_marginLeft="@dimen/drawer_header_margin"
         android:layout_marginTop="@dimen/drawer_header_margin" />
@@ -15,20 +15,20 @@
     <ImageView
         android:layout_width="64dp"
         android:layout_height="@dimen/genre_height"
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView_MainHeader_Ganre"
         android:src="@drawable/genre_hiphap"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_alignRight="@+id/imageView2"
-        android:layout_alignEnd="@+id/imageView2" />
+        android:layout_alignBottom="@+id/imageView_MainHeader_Profile"
+        android:layout_alignRight="@+id/imageView_MainHeader_Profile"
+        android:layout_alignEnd="@+id/imageView_MainHeader_Profile" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/TextView_nickname"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
+        android:id="@+id/textView_MainHeader_Name"
+        android:layout_alignTop="@+id/imageView_MainHeader_Profile"
+        android:layout_toRightOf="@+id/imageView_MainHeader_Profile"
+        android:layout_toEndOf="@+id/imageView_MainHeader_Profile"
         android:layout_marginLeft="29dp"
         android:layout_marginStart="29dp"
         android:textColor="#ff000000"
@@ -39,10 +39,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ff333333"
-        android:text="#힙합"
-        android:id="@+id/TextView_genre"
-        android:layout_below="@+id/TextView_nickname"
-        android:layout_alignLeft="@+id/TextView_nickname"
-        android:layout_alignStart="@+id/TextView_nickname" />
+        android:text="#보컬"
+        android:id="@+id/textView_MainHeader_Position"
+        android:layout_below="@+id/textView_MainHeader_Name"
+        android:layout_alignLeft="@+id/textView_MainHeader_Name"
+        android:layout_alignStart="@+id/textView_MainHeader_Name" />
 
 </RelativeLayout>

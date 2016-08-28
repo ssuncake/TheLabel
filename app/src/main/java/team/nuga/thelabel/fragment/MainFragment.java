@@ -22,6 +22,13 @@ import team.nuga.thelabel.R;
  */
 
 public class MainFragment extends Fragment {
+
+    public static final int NEWSFEEDTAB = 0;
+    public static final int LABELTAB = 1;
+    public static final int USERTAB = 2;
+
+
+
     @BindView(R.id.main_tablayout)
     TabLayout tabLayout;
     @BindView(R.id.main_viewpager)
