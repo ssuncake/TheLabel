@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
@@ -30,22 +31,21 @@ public class LabelContainerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = (User)getArguments().getSerializable("dummyUser");
+        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_label_container, container, false);
 
 
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
-        b.putSerializable("dummyUser",user);
+        b.putSerializable(MainActivity.MAINUSER,user);
         labelSelectFragment.setArguments(b);
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelSelectFragment).commit();
-        // 처음 탭화면에서 레이블을 선택하게되면 FragmentContainer가 호출되고 그아래에 차일드프래그먼트로 바로 LabelSelectFragment를 호출한다.
+        //처음 탭화면에서 레이블을 선택하게되면 FragmentContainer가 호출되고 그아래에 차일드프래그먼트로 바로 LabelSelectFragment를 호출한다.
 
         return view;
     }
@@ -72,7 +72,7 @@ public class LabelContainerFragment extends Fragment {
 
         LabelMakeFragment labelMakeFragment = new LabelMakeFragment();
         Bundle b = new Bundle();
-        b.putSerializable("dummyUser",user);
+        b.putSerializable(MainActivity.MAINUSER,user);
         labelMakeFragment.setArguments(b);
         // 위와 마찬가지로 하위프래그먼트인 레이블선택프래그먼트에서 만들기버튼을 누르면 MakeLabel프래그먼트로 교체를 위한 역할을 한다.
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelMakeFragment).addToBackStack(null).commit();
@@ -89,7 +89,7 @@ public class LabelContainerFragment extends Fragment {
         getChildFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
-        b.putSerializable("dummyUser",user);
+        b.putSerializable(MainActivity.MAINUSER,user);
         labelSelectFragment.setArguments(b);
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelSelectFragment).commit();
     }

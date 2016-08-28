@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.fragment.LabelContainerFragment;
 import team.nuga.thelabel.fragment.NewsFeedFragment;
 import team.nuga.thelabel.fragment.UserMainFragment;
@@ -30,18 +31,18 @@ public class MainViewpagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0:
                 NewsFeedFragment tab1 = new NewsFeedFragment();
-//              bundle.putSerializable("dummyUser",user);
-//               tab1.setArguments(bundle);
+              bundle.putSerializable(MainActivity.MAINUSER,user);
+               tab1.setArguments(bundle);
                 return tab1;
             case 1:
                 LabelContainerFragment tab2 = new LabelContainerFragment();
-                bundle.putSerializable("dummyUser",user);
+                bundle.putSerializable(MainActivity.MAINUSER,user);
                 tab2.setArguments(bundle);
                 return tab2;
             case 2:
                 UserMainFragment tab3  = new UserMainFragment();
-//                bundle.putSerializable("dummyUser",user);
-//                tab3.setArguments(bundle);
+                bundle.putSerializable(MainActivity.MAINUSER,user);
+                tab3.setArguments(bundle);
                 return tab3;
             default:
                 return null;

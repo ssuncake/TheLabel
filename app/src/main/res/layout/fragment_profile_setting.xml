@@ -1,15 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.fragment.ProfileSettingFragment">
+    tools:context="team.nuga.thelabel.fragment.ProfileSettingFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저 개인 프로필 설정 프레그먼트"
-        android:id="@+id/textView2"
-        android:layout_gravity="center" />
-</FrameLayout>
+        android:text="유저 이름을 입력하세요"
+        android:id="@+id/textView_ProfileSetting_inputName" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_ProfileSetting_inputName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료"
+        android:id="@+id/button_ProfileSetting_Complete" />
+</LinearLayout>

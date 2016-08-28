@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:text="user"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="#ff0000" />
+        android:id="@+id/textView_UserMain_UsrName"
+        android:textColor="#FFFF00" />
 
 </FrameLayout>

@@ -31,6 +31,12 @@ import team.nuga.thelabel.data.User;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String TABINDEX = "tabindex";
+
+    public static final int LABELTAB = 1;
+    public static final int USERTAB = 2;
+
     private static final int REQUEST_LIKENOTIFICATION = 200;
 
 
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
 
-    private User dummyUser;
+    private User mainUser;
     private Bundle dummyBundle;
 
 
@@ -77,8 +83,8 @@ public class MainActivity extends AppCompatActivity
 
 
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
-        dummyUser = new User();
-        dummyUser.setUserName("이정호");
+        mainUser = new User();
+        mainUser.setUserName("이정호");
         dummyBundle = new Bundle();
         goMainFragment(0);
 
@@ -154,7 +160,11 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UploadFragment()).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {
             actionBar.setTitle("Toolbar_Profile");
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new ProfileSettingFragment()).commit();
+            Bundle b = new Bundle();
+            b.putSerializable(MainActivity.MAINUSER,mainUser);
+            ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
+            profileSettingFragment.setArguments(b);
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
         } else if (id == R.id.drawer_message) {
             actionBar.setTitle("Toolbar_Message");
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
@@ -184,18 +194,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void goMainFragment(int tabIndex)
+    public void goMainFragment(int tabIndex) // 메인 프래그먼트로 이동하며 인자로 받은 값 0~2탭으로 바로이동시켜줍니다.
     {
         actionBar.setTitle("Toolbar_AppTitle");
-        dummyBundle.putSerializable("dummyUser",dummyUser);
+        dummyBundle.putSerializable(MAINUSER,mainUser);
         if(tabIndex != 0){
-            dummyBundle.putInt("tabIndex",tabIndex);
+            dummyBundle.putInt(TABINDEX,tabIndex);
         }
-
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(dummyBundle);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
     }
+
+
 
 }

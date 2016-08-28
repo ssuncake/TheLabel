@@ -6,8 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.User;
 
 
 /**
@@ -15,6 +20,10 @@ import team.nuga.thelabel.R;
  */
 public class UserMainFragment extends Fragment {
 
+    User user;
+
+    @BindView(R.id.textView_UserMain_UsrName)
+    TextView userName;
 
     public UserMainFragment() {
         // Required empty public constructor
@@ -25,7 +34,12 @@ public class UserMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_main, container, false);
+        ButterKnife.bind(this,view);
+        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+        userName.setText(user.getUserName()+" 의 계정입니다.");
+
+        return view;
     }
 
 }

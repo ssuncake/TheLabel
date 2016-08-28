@@ -12,6 +12,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
@@ -38,7 +39,7 @@ public class LabelMakeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       user = (User)getArguments().getSerializable("dummyUser");
+       user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
     }
 
     @OnClick(R.id.button_LabelMake_Complete)

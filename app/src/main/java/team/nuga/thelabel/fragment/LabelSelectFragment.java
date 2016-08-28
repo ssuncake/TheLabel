@@ -11,6 +11,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
@@ -75,7 +76,7 @@ public class LabelSelectFragment extends Fragment  {
                              Bundle savedInstanceState) {
 
 
-        user =(User) getArguments().getSerializable("dummyUser");
+        user =(User) getArguments().getSerializable(MainActivity.MAINUSER);
 
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this,view);

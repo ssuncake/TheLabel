@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.adapter.MainViewpagerAdapter;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
@@ -48,7 +49,7 @@ public class MainFragment extends Fragment {
 
 
 
-        dummyUser =(User)getArguments().getSerializable("dummyUser"); // 메인 액티비티로부터 받아온 더미유저를 사용
+        dummyUser =(User)getArguments().getSerializable(MainActivity.MAINUSER); // 메인 액티비티로부터 받아온 더미유저를 사용
 
 
 
@@ -81,7 +82,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        int tabindex = getArguments().getInt("tabIndex");
+        int tabindex = getArguments().getInt(MainActivity.TABINDEX);
         if(tabindex!=0){
             viewPager.setCurrentItem(tabindex);
         }
