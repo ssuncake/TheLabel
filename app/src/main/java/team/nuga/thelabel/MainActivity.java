@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -98,20 +100,27 @@ public class MainActivity extends AppCompatActivity
     }
 
     boolean backButtonClicked = false;
-//s
+        Handler mHandler = new Handler(Looper.getMainLooper());
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (backButtonClicked == false) {
+                        Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+                        backButtonClicked = true;
+                    }
+                }
+            },1000);
             if (backButtonClicked == true) {
                 Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
                 super.onBackPressed();
-            }
-            if (backButtonClicked == false) {
-                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
-                backButtonClicked = true;
             }
         }
     }
