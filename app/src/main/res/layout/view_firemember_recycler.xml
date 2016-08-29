@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/image_user"
         android:layout_width="50dp"
@@ -10,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="#0f0"
+        android:background="@color/colorPrimary"
         android:scaleType="centerCrop" />
 
     <TextView
@@ -19,8 +20,19 @@
         android:layout_height="wrap_content"
         android:text="Medium Text"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/image_user"
         android:layout_toEndOf="@+id/image_user" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="탈퇴"
+        android:id="@+id/button_subfiremember"
+        android:layout_alignBottom="@+id/image_user"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

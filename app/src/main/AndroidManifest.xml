@@ -47,9 +47,11 @@
             android:theme="@style/AppTheme.NoActionbar"
             android:screenOrientation="portrait"/>
         <activity android:name=".EntrustLeaderActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionbar"/>
         <activity android:name=".FireMemberActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionbar"></activity>
     </application>
 
 </manifest>

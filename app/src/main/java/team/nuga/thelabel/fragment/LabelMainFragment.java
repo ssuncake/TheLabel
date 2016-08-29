@@ -1,16 +1,20 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.EntrustLeaderActivity;
+import team.nuga.thelabel.FireMemberActivity;
 import team.nuga.thelabel.R;
 
 /**
@@ -21,10 +25,24 @@ public class LabelMainFragment extends Fragment {
 
     private String labelName;
 
-
+    @BindView(R.id.button_entrustLeader)
+    Button entrustLeaderbutton;
+    @BindView(R.id.button_firemember)
+    Button firememberbutton;
     @BindView(R.id.textView_LabelMain_LabelName)
     TextView labelNameView;
 
+    @OnClick(R.id.button_entrustLeader)
+    void entrustLeaderOnClick(){
+        Intent intent = new Intent(getActivity(), EntrustLeaderActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button_firemember)
+    void firememberOnClick(){
+        Intent intent = new Intent(getActivity(), FireMemberActivity.class);
+        startActivity(intent);
+    }
     @OnClick(R.id.button_LabelMain_back)
     public void clickBackButton(){
         team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();

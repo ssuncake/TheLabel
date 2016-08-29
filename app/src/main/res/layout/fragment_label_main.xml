@@ -7,6 +7,25 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:id="@+id/button_entrustLeader"
+        android:layout_gravity="center_horizontal"
+        android:text="권한위임" />
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:id="@+id/button_firemember"
+        android:layout_gravity="center_horizontal"
+        android:text="멤버탈퇴" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
