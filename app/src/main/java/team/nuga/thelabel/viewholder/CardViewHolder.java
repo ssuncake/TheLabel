@@ -18,27 +18,21 @@ import team.nuga.thelabel.data.MusicContents;
  * Created by Tacademy on 2016-08-24.
  */
 public class CardViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.cardView_profileImage)
+//    @BindView(R.id.cardView_profileImage)
     ImageView writer_profileImage;
-    @BindView(R.id.textView_cardView_profileId)
+//    @BindView(R.id.textView_cardView_profileId)
     TextView writer_Id;
 //    @OnClick(R.id.textView_cardView_profileId)
 
-
-    public void onWriterIdClick(){
-//        Intent intent = new Intent(, OtherUserActivity.class);
-    }
-    @BindView(R.id.seekBar_cardView)
+//    @BindView(R.id.seekBar_cardView)
     SeekBar seekBar;    //    @BindView(R.id.) //재생버튼
     ToggleButton playButton;
-    @BindView(R.id.imageButton_share_cardView)
+//    @BindView(R.id.imageButton_share_cardView)
     ImageButton imageButton;
-
-
 
     public CardViewHolder(final View itemView) {
         super(itemView);
-        ButterKnife.bind(this.itemView);
+    writer_Id = (TextView)itemView.findViewById(R.id.textView_cardView_profileId);
 
     }
 
@@ -48,5 +42,9 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
 //        writer_profileImage.setImageDrawable(contents.getContentsWriterID());
 //        writer_profileImage.setImageResource(R.drawable.profile_girl); //dummy profile Image...
         writer_Id.setText(contents.getWriterNickName());
+    }
+
+    public void onWriterIdClick(){
+//        Intent intent = new Intent(, OtherUserActivity.class);
     }
 }
