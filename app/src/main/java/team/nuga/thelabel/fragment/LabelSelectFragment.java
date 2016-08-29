@@ -7,64 +7,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.MainActivity;
+import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.R;
+import team.nuga.thelabel.wiget.LabelSelectView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LabelSelectFragment extends Fragment  {
 
+    List<Label> userlabellist;
+
 
     public LabelSelectFragment() {
         // Required empty public constructor
     }
 
-    @BindView(R.id.button_LabelSelect_First)
-    Button selectFirstLabel;
-
-    @BindView(R.id.button_LabelSelect_Second)
-    Button selectSecondLabel;
-
-    @BindView(R.id.button_LabelSelect_Third)
-    Button selecThirdLabel;
-
-
-
-    @OnClick(R.id.button_LabelSelect_First)
-    public void onSelectFirstLabel(){
-        if(selectFirstLabel.getText().equals("레이블 만들기")){
-            makeLabel();
-        }else{
-            selectLabel(user.getUserInLabelList().get(0));
-        }
-
-    }
-
-    @OnClick(R.id.button_LabelSelect_Second)
-    void onSelectSecondLabel(){
-        if(selectSecondLabel.getText().equals("레이블 만들기")){
-            makeLabel();
-        }else{
-            selectLabel(user.getUserInLabelList().get(1));
-        }
-    }
-
-    @OnClick(R.id.button_LabelSelect_Third)
-    void onSelectThirdLabel(){
-        if(selecThirdLabel.getText().equals("레이블 만들기")){
-            makeLabel();
-        }else{
-            selectLabel(user.getUserInLabelList().get(2));
-        };
-    }
-
+    @BindView(R.id.layout_LabelSelect)
+    RelativeLayout relativeLayout;
+    @BindView(R.id.layout_LabelSelectFrist)
+    RelativeLayout relativeLayoutFrist;
+    @BindView(R.id.layout_LabelSelectSecond)
+    RelativeLayout relativeLayoutSecond;
 
 
     User user;
@@ -75,17 +47,20 @@ public class LabelSelectFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        user =(User) getArguments().getSerializable(MainActivity.MAINUSER);
-
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this,view);
 
-       buttons = new Button[3];
-       buttons[0] = selectFirstLabel;
-        buttons[1] = selectSecondLabel;
-        buttons[2] = selecThirdLabel;
-        buttonSetting(user);
+        LabelSelectView labelSelectView = new LabelSelectView(getContext());
+        LabelSelectView labelSelectViewFirst = new LabelSelectView(getContext());
+        LabelSelectView labelSelectViewSecond = new LabelSelectView(getContext());
+
+        relativeLayout.addView(labelSelectView); //CustomView 추가 하는 방법
+        relativeLayoutFrist.addView(labelSelectViewFirst);
+        relativeLayoutSecond.addView(labelSelectViewSecond);
+
+        user =(User) getArguments().getSerializable(MainActivity.MAINUSER);
+        userlabellist = user.getUserInLabelList();
+//        labelSelectView.setLabel(userlabellist.get(3));
 
 
         return view;
