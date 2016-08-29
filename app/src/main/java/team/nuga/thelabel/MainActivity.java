@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity
     public static final String TABINDEX = "tabindex";
 
 
-    private static final int REQUEST_LIKENOTIFICATION = 200;
+    public static final int REQUEST_LIKENOTIFICATION = 200;
+    public static final int REQUEST_UPLOAD = 300;
 
 
     @BindView(R.id.toolbar)
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         mainUser = new User();
         mainUser.setUserName("이정호");
         bundle = new Bundle();
-        goMainFragment(0);
+        goMainFragment(MainFragment.NEWSFEEDTAB);
 
         // 헤더뷰 관련 설정
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
@@ -159,9 +160,14 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.drawer_upload) {
             actionBar.setTitle("업로드");
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new UploadFragment()).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
+            Bundle b = new Bundle();
+            b.putSerializable(MainActivity.MAINUSER,mainUser);
+            UploadFragment uploadFragment = new UploadFragment();
+            uploadFragment.setArguments(b);
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, uploadFragment).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {
             actionBar.setTitle("프로필 설정");
+            drawer.setCheckedItem(R.id.drawer_profile);
             Bundle b = new Bundle();
             b.putSerializable(MainActivity.MAINUSER,mainUser);
             ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
@@ -169,12 +175,15 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
         } else if (id == R.id.drawer_message) {
             actionBar.setTitle("메세지");
+            drawer.setCheckedItem(R.id.drawer_message);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
         } else if (id == R.id.drawer_likeContents) {
             actionBar.setTitle("내가 좋아요한 게시물");
+            drawer.setCheckedItem(R.id.drawer_likeContents);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
             actionBar.setTitle("설정");
+            drawer.setCheckedItem(R.id.drawer_setting);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
             goMainFragment(MainFragment.NEWSFEEDTAB);
@@ -196,11 +205,17 @@ public class MainActivity extends AppCompatActivity
                 LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
                 goMainFragment(MainFragment.USERTAB);
             }
+        }else if(requestCode == REQUEST_UPLOAD){
+            if(resultCode==Activity.RESULT_OK){
+                int tabindex = data.getIntExtra(MainActivity.TABINDEX,0);
+                goMainFragment(tabindex);
+            }
         }
     }
 
     public void goMainFragment(int tabIndex) // 메인 프래그먼트로 이동하며 인자로 받은 값 0~2탭으로 바로이동시켜줍니다.
     {
+        drawer.setCheckedItem(R.id.drawer_main);
         actionBar.setTitle("The Label");
         bundle.putSerializable(MAINUSER,mainUser);
         if(tabIndex != 0){
@@ -209,10 +224,18 @@ public class MainActivity extends AppCompatActivity
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+
     }
 
     public void drawerUserSetting(String name){
         headerUserName.setText(name);
+    }
+
+    public void startUploadActivity(int mode){
+        Intent intent = new Intent(this,UploadActivity.class);
+        intent.putExtra(MainActivity.MAINUSER,mainUser);
+        intent.putExtra(UploadFragment.UPLOADMODE, mode);
+        startActivityForResult(intent,MainActivity.REQUEST_UPLOAD);
     }
 
 }

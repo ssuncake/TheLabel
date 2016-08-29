@@ -6,10 +6,24 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="업로드 페이지 프레그먼트"
-        android:id="@+id/textView3"
-        android:layout_gravity="center" />
+        android:text="음원 업로드"
+        android:id="@+id/button_Upload_MusicUpload"
+        android:layout_gravity="left|top" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 업로드"
+        android:id="@+id/button_Upload_PhotoUpload"
+        android:layout_gravity="left|center_vertical" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유튜브업로드"
+        android:id="@+id/button_Upload_YoutubeUpload"
+        android:layout_gravity="left|bottom" />
 </FrameLayout>

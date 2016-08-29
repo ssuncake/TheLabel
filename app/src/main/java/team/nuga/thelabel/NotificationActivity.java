@@ -27,11 +27,6 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
 
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.main_viewpager, new InviteNotificationFragment());
-//        fragmentTransaction.commit();
-
         tabLayout.addTab(tabLayout.newTab().setText("내소식"));
         tabLayout.addTab(tabLayout.newTab().setText("초대"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
