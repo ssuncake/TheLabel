@@ -11,6 +11,24 @@
 
 
     <string name="DummyText">한산섬 달 밝은 밤에 수루에 혼자 앉아 큰 칼 옆에 차고 깊은 시름 하는 차에 어디서 일성호가는 남의 애를 끊나니</string>
+    <string name="DummyText_agree">서비스 이용 약관 내용 입니다.\n서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n
+                     서비스 이용 약관 내용 입니다.\n서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n
+            서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n  서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 그만좀 내려
+    </string>
+
+
+        <!--회원가입화면-->
+    <string name="text_agree_service">서비스 이용약관 동의 (필수)</string>
+    <string name="text_agree_personalInformation"> 개인정보 수집/이용 동의 (필수)</string>
+    <string name="hint_Email">이메일 아이디</string>
+    <string name="hint_password">비밀번호(영문, 숫자, 특수문자 8-16자리)</string>
+    <string name="hint_password_check">비밀번호 재입력</string>
+    <string name="agree_service"></string>
+    <string name="agree_personalInformation"></string>
+    <string name="check_overlap">중복확인</string>
+    <string name="next_step">다음 단계</string>
+    <string name="Toolbar_AppTitle_signUp_activity">이메일 입력 및 약관동의</string>
+    <string name="Toolbar_AppTitle_edit_signUp_activity">기본정보 입력</string>
 
 
     <!--툴바 타이틀 설정-->
