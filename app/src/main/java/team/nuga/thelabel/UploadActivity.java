@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,8 +27,6 @@ public class UploadActivity extends AppCompatActivity {
 
 
 
-    @BindView(R.id.toolBar_Upload)
-    Toolbar toolbar;
     @BindView(R.id.layout_Upload_SelectLabel)
     LinearLayout selectLabel;
     @BindView(R.id.radioGroup_UploadRadio)
@@ -53,6 +52,10 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar_Upload);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         uploadMode = getIntent().getIntExtra(UploadFragment.UPLOADMODE,-1);
         switch(uploadMode){
             case MUSIC :
@@ -106,5 +109,14 @@ public class UploadActivity extends AppCompatActivity {
         radioGroup.addView(button);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
