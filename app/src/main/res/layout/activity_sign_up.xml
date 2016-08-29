@@ -33,23 +33,13 @@
         </ScrollView>
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_agree_service"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignTop="@+id/checkBox_service"
-        android:layout_toRightOf="@+id/checkBox_service"
-        android:layout_toEndOf="@+id/checkBox_service" />
-
     <CheckBox
         android:id="@+id/checkBox_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="New CheckBox"
+        android:text="@string/text_agree_personalInformation"
         android:layout_below="@+id/frameLayout_personal"/>
 
     <FrameLayout
@@ -89,8 +79,8 @@
         android:ems="10"
         android:hint="@string/hint_password_check"
         android:inputType="textPassword"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignRight="@+id/button_checkOverlap"
+        android:layout_alignEnd="@+id/button_checkOverlap" />
 
     <EditText
         android:id="@+id/editText_signUp_password"
@@ -102,8 +92,8 @@
         android:ems="10"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignRight="@+id/button_checkOverlap"
+        android:layout_alignEnd="@+id/button_checkOverlap" />
 
     <EditText
         android:id="@+id/editText_signUp_email"
@@ -115,34 +105,24 @@
         android:ems="10"
         android:hint="@string/hint_Email"
         android:inputType="textEmailAddress"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_toStartOf="@+id/button2" />
+        android:layout_toLeftOf="@+id/button_checkOverlap"
+        android:layout_toStartOf="@+id/button_checkOverlap" />
 
     <CheckBox
         android:id="@+id/checkBox_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
+        android:text="@string/text_agree_service"
         android:checked="false"
         android:layout_below="@+id/frameLayout_service"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_agree_personalInformation"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignTop="@+id/checkBox_personal"
-        android:layout_toRightOf="@+id/checkBox_personal"
-        android:layout_toEndOf="@+id/checkBox_personal" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
+        android:text="@string/next_step"
+        android:id="@+id/button_nextStep_signUp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -152,8 +132,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
+        android:text="@string/check_overlap"
+        android:id="@+id/button_checkOverlap"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
