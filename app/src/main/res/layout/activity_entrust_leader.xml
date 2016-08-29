@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="개인계정"
+            android:text="권한 위임"
             android:id="@+id/text_entrustleader"
             android:textColor="@color/color_white"
             android:textSize="22sp"

@@ -48,8 +48,6 @@ public class ProfileSettingFragment extends Fragment {
 
         user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
 
-
-
         return view;
     }
 
