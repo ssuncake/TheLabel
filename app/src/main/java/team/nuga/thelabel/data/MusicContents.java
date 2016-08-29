@@ -25,22 +25,21 @@ public class MusicContents implements Serializable {
 
 
     //
+
+
     public MusicContents() {
         this.writerNickName = writerNickName;
 
     }
 
-    private int writerNickName;
+    private String writerNickName;
 
-    public MusicContents(int writerNickName) {
-        this.writerNickName = writerNickName;
-    }
 
-    public int getWriterNickName() {
+    public String getWriterNickName() {
         return writerNickName;
     }
 
-    public void setWriterNickName(String s) {
+    public void setWriterNickName(String writerNickName) {
         this.writerNickName = writerNickName;
     }
 //

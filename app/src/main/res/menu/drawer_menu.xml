@@ -9,6 +9,7 @@
             android:id="@+id/drawer_upload"
             android:title="업로드" />
     </group>
+    <group>
     <item
         android:title="마이페이지">
         <menu>
@@ -29,5 +30,6 @@
                 android:title="설정" />
         </menu>
     </item>
+    </group>
 
 </menu>

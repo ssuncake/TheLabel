@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.MusicContents;
 
 /**
  * Created by Blissun on 2016-08-26.
@@ -17,47 +20,49 @@ import team.nuga.thelabel.R;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private ArrayList<MyData> myDataset;
 
-public static class ViewHolder extends RecyclerView.ViewHolder{
-    public TextView textView;
-    public ImageView imageView;
+    List<MyData> items = new ArrayList<>();
 
-    public ViewHolder(View view){
-        super(view);
+    public void add(MyData contents) {
+        items.add(contents);
 
-        textView = (TextView)view.findViewById(R.id.textView_cardView_profileId);
-        imageView = (ImageView)view.findViewById(R.id.cardView_profileImage);
+        notifyDataSetChanged();
     }
-}
-    public MyAdapter(ArrayList<MyData> myDataset){
-        myDataset = myDataset;
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView textView;
+        public ImageView imageView;
+
+
+        public ViewHolder(View view){
+            super(view);
+
+            textView = (TextView)view.findViewById(R.id.textView_cardView_profileId);
+            imageView = (ImageView)view.findViewById(R.id.cardView_profileImage);
+        }
     }
 
 
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
       View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_music_content, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
+    MyData contents;
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageResource(R.drawable.profile_girl);
-//        holder.textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(view.getContext(), OtherUserActivity.class);
-//            }
-//        });
-        holder.textView.setText("222222222");
+
+
+        holder.textView.setText(contents.getProfileId());
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return items.size();
     }
 }
 

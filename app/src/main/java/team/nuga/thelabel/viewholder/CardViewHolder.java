@@ -22,15 +22,14 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     ImageView writer_profileImage;
     @BindView(R.id.textView_cardView_profileId)
     TextView writer_Id;
-    @OnClick(R.id.textView_cardView_profileId)
+//    @OnClick(R.id.textView_cardView_profileId)
 
 
     public void onWriterIdClick(){
 //        Intent intent = new Intent(, OtherUserActivity.class);
     }
     @BindView(R.id.seekBar_cardView)
-    SeekBar seekBar;
-    //    @BindView(R.id.) //재생버튼
+    SeekBar seekBar;    //    @BindView(R.id.) //재생버튼
     ToggleButton playButton;
     @BindView(R.id.imageButton_share_cardView)
     ImageButton imageButton;
@@ -47,7 +46,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     public void setContent(MusicContents content) {
         this.contents = content;
 //        writer_profileImage.setImageDrawable(contents.getContentsWriterID());
-        writer_profileImage.setImageResource(R.drawable.profile_girl);
+//        writer_profileImage.setImageResource(R.drawable.profile_girl); //dummy profile Image...
         writer_Id.setText(contents.getWriterNickName());
     }
 }

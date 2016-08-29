@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.adapter.CardViewAdapter;
 import team.nuga.thelabel.adapter.MyAdapter;
 import team.nuga.thelabel.adapter.MyData;
+import team.nuga.thelabel.data.MusicContents;
 
 
 /**
@@ -23,9 +26,10 @@ import team.nuga.thelabel.adapter.MyData;
  */
 public class NewsFeedFragment extends Fragment {
 
-//        CardViewAdapter cardViewAdapter;
-    ArrayList<MyData> mDataset;
-    RecyclerView.Adapter myAdapter;
+    CardViewAdapter cardViewAdapter;
+
+//   MyAdapter myAdapter;
+
     @BindView(R.id.recyclerview_newsfeed)
     RecyclerView recyclerView;
 
@@ -42,31 +46,35 @@ public class NewsFeedFragment extends Fragment {
         ButterKnife.bind(this, view);
         recyclerView.setHasFixedSize(true);
 
+            cardViewAdapter = new CardViewAdapter();
+        recyclerView.setAdapter(cardViewAdapter);
+
+
+
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
 
-//        recyclerView.setLayoutManager(manager);
-//        recyclerView.setAdapter(cardViewAdapter);
-//        initData();
 
 
-        mDataset = new ArrayList<>();
-        myAdapter = new MyAdapter(mDataset);
+//        myAdapter = new MyAdapter();
 
-        recyclerView.setAdapter(myAdapter);
-
+//        mDataset = new ArrayList<>();
 
 
+//        recyclerView.setAdapter(myAdapter);
+        initData();
         return view;
 
     }
 
     private void initData() {
-//        Random r = new Random();
-//        for (int i = 0; i < 3; i++) {
-//            MusicContents u = new MusicContents();
-//            u.setWriterNickName("nick"+i);
-//            CardViewAdapter.add(u);
+        Random r = new Random();
+        for (int i = 0; i < 3; i++) {
+            MusicContents u = new MusicContents();
+            u.setWriterNickName("nick" + i);
+            cardViewAdapter.add(u);
         }
 
     }
+
+}
