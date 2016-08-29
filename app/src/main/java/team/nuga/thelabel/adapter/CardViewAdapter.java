@@ -17,7 +17,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     public void add(MusicContents contents) {
         items.add(contents);
-
         notifyDataSetChanged();
     }
 

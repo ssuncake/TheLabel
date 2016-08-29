@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.CardViewAdapter;
+import team.nuga.thelabel.data.MusicContents;
 
 
 /**
@@ -40,7 +43,7 @@ public class NewsFeedFragment extends Fragment {
         ButterKnife.bind(this, view);
         recyclerView.setHasFixedSize(true);
 
-            cardViewAdapter = new CardViewAdapter();
+        cardViewAdapter = new CardViewAdapter();
         recyclerView.setAdapter(cardViewAdapter);
 
 
@@ -56,19 +59,19 @@ public class NewsFeedFragment extends Fragment {
 
 
 //        recyclerView.setAdapter(myAdapter);
-//        initData();
+        initData();
         return view;
 
     }
 
-//    private void initData() {
-//        Random r = new Random();
-//        for (int i = 0; i < 3; i++) {
-//            MusicContents u = new MusicContents();
-//            u.setWriterNickName("nick" + i);
-//            cardViewAdapter.add(u);
-//        }
-//
-//    }
+    private void initData() {
+        Random r = new Random();
+        for (int i = 0; i < 3; i++) {
+            MusicContents u = new MusicContents();
+            u.setWriterNickName("nick" + i);
+            cardViewAdapter.add(u);
+        }
+
+    }
 
 }
