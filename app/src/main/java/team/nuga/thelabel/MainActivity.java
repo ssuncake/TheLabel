@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
 
-
         if (id == R.id.drawer_upload) {
             actionBar.setTitle("업로드");
             Bundle b = new Bundle();

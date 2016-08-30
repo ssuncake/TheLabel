@@ -17,12 +17,13 @@ public class User implements Serializable{
     private String userEmail;
     @SerializedName("password")
     private String userPassword;
+
     private String userSex;
     private String userProfile;
     private String userLocal;
 
     private Position userPosition;
-    private Ganre userGanre;
+    private Genre userGenre;
     private ArrayList<Label> userInLabelList;
    private HashSet<Integer> userLikeContents;
     private HashSet<Integer> userLikeLabel;

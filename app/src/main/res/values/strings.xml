@@ -10,30 +10,30 @@
     <dimen name="genre_height">20dp</dimen>
 
 
-    <string name="DummyText">한산섬 달 밝은 밤에 수루에 혼자 앉아 큰 칼 옆에 차고 깊은 시름 하는 차에 어디서 일성호가는 남의 애를 끊나니</string>
-    <string name="DummyText_agree">서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 
+    <string name="DummyText"> 한산섬 달 밝은 밤에 수루에 혼자 앉아 \n 큰 칼 옆에 차고 깊은 시름 하는 차에 \n 어디서 일성호가는 남의 애를 끊나니</string>
+    <string name="DummyText_agree"> 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n
         서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 
-        서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 그만좀 내려
+        서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 서비스 이용 약관 내용 입니다.\n 그만좀 내려요!
     </string>
     <string name="DummyText_account">
         홍대 버스킹 환영합니다!\n[더레이블] 매주 토요일\n메세나폴리스 8시 공연!
     </string>
 
 
-    <!--회원가입화면-->
+<!--회원가입화면-->
     <string name="text_agree_service">서비스 이용약관 동의 (필수)</string>
     <string name="text_agree_personalInformation"> 개인정보 수집/이용 동의 (필수)</string>
     <string name="hint_Email">이메일 아이디</string>
     <string name="hint_password">비밀번호(영문, 숫자, 특수문자 8-16자리)</string>
     <string name="hint_password_check">비밀번호 재입력</string>
-    <string name="agree_service"></string>
-    <string name="agree_personalInformation"></string>
     <string name="check_overlap">중복확인</string>
     <string name="next_step">다음 단계</string>
     <string name="Toolbar_AppTitle_signUp_activity">이메일 입력 및 약관동의</string>
     <string name="Toolbar_AppTitle_edit_signUp_activity">기본정보 입력</string>
 
 <!--회원가입Edit화면-->
+    <string name="default_choice">선택하지않음</string>
+
     <string name="hint_nicknameEdit">      닉네임 (한글, 영문, 숫자, 특수문자 2-8자리 이내) </string>
     <string name="text_usersex">성별</string>
     <string name="text_male">남자</string>
@@ -43,12 +43,18 @@
     <string name="text_city_detail">시/군/구</string>
     <string name="text_Position">포지션</string>
     <string name="text_Genre">장르</string>
+
     <string name="text_position_vocal">보컬</string>
     <string name="text_position_piano">피아노</string>
     <string name="text_position_acoustic">어쿠스틱</string>
     <string name="text_position_elec">일렉</string>
     <string name="text_position_base">베이스</string>
     <string name="text_position_etc">etc</string>
+    <string name="text_position_guitar">기타</string>
+    <string name="text_position_electricGuitar">일렉기타</string>
+    <string name="text_position_drum">드럼</string>
+    <string name="text_position_keyboard">키보드</string>
+
     <string name="text_genre_Song">가요</string>
     <string name="text_genre_RnBSoul">R<![CDATA["&"]]>B/SOUL</string>
     <string name="text_genre_Rock">락</string>
@@ -59,12 +65,13 @@
     <string name="text_genre_CCM">CCM</string>
     <string name="text_genre_Electronica">일렉트로니카</string>
     <string name="text_genre_AcousticPork">어쿠스틱/포크</string>
+
     <string name="text_SignUpComplete">가입완료</string>
 
 
 
 
-    <!--툴바 타이틀 설정-->
+ <!--툴바 타이틀 설정-->
     <string name="Toolbar_AppTitle">The label</string>
     <string name="Toolbar_Message">Message</string>
     <string name="Toolbar_OtherUser">OtherUser</string>
@@ -72,11 +79,13 @@
     <string name="Toolbar_Setting">AppSettings</string>
     <string name="Toolbar_Profile">profileSettings</string>
     <string name="Toolbar_LikePage">Toolbar_LikePage</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
+ <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>

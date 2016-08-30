@@ -16,7 +16,7 @@ public class Label implements Serializable {
     private String labelProfile;
     private ArrayList<User> labelMemberList;
     private ArrayList<Position> labelNeedPositionList;
-    private ArrayList<Ganre> labelGanre;
+    private ArrayList<Genre> labelGenre;
     private HashSet<Integer> labelLikeUser;
 
     public int getLabelID() {
@@ -83,12 +83,12 @@ public class Label implements Serializable {
         this.labelNeedPositionList = labelNeedPositionList;
     }
 
-    public ArrayList<Ganre> getLabelGanre() {
-        return labelGanre;
+    public ArrayList<Genre> getLabelGenre() {
+        return labelGenre;
     }
 
-    public void setLabelGanre(ArrayList<Ganre> labelGanre) {
-        this.labelGanre = labelGanre;
+    public void setLabelGenre(ArrayList<Genre> labelGenre) {
+        this.labelGenre = labelGenre;
     }
 
     public HashSet<Integer> getLabelLikeUser() {
