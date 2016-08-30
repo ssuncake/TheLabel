@@ -21,7 +21,7 @@ public class LabelSelectView extends FrameLayout {
     TextView labelTitleView;
 
     public void init(){
-        inflate(getContext(), R.layout.view_label_select,this);
+        inflate(getContext(), R.layout.view_label_select, this);
 //    settingView = (ImageView)findViewById(R.id.imageview_label_select);
     labelTitleView = (TextView)findViewById(R.id.textview_label_select);
 }
