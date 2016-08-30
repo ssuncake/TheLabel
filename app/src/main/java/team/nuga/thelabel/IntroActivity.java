@@ -53,7 +53,7 @@ public class IntroActivity extends AppCompatActivity {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       showLoginFragment();}
+                        showLoginFragment();}
                 },1000);//로그인 1초 후 이동.
             }
         },2000);

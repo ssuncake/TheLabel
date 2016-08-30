@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 
 
     ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        User user = (User)getIntent().getSerializableExtra("LoginUser");
+        User user = (User) getIntent().getSerializableExtra("LoginUser");
         Toast.makeText(MainActivity.this, "ㅎㅎ+"+user.getUserName(), Toast.LENGTH_SHORT).show();
 
         actionBar = getSupportActionBar();
@@ -96,12 +97,13 @@ public class MainActivity extends AppCompatActivity
 
         // 헤더뷰 관련 설정
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
-        headerUserName =(TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
+        headerUserName = (TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
         headerUserName.setText(mainUser.getUserName());
     }
 
     boolean backButtonClicked = false;
-        Handler mHandler = new Handler(Looper.getMainLooper());
+    Handler mHandler = new Handler(Looper.getMainLooper());
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -109,21 +111,24 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    if (backButtonClicked == false) {
-                        Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
-                        backButtonClicked = true;
+            if (backButtonClicked == false) {
+                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+                backButtonClicked = true;
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        backButtonClicked = false;
                     }
-                }
-            },1000);
-            if (backButtonClicked == true) {
-                Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
-                super.onBackPressed();
+                },1000);
             }
+            else if(backButtonClicked == true) {
+                Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
+                    super.onBackPressed();
+            }
+
         }
+
+
     }
 
     @Override
@@ -152,7 +157,7 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.toolbar_notification:  //툴바 상단 노티피케이션 메뉴 클릭시 해당 액티비티 띄움
                 Intent intent = new Intent(this, NotificationActivity.class);
-                startActivityForResult(intent,REQUEST_LIKENOTIFICATION);
+                startActivityForResult(intent, REQUEST_LIKENOTIFICATION);
                 break;
             case R.id.toolbar_search:    //툴바 상단 검색 메뉴 클릭시 해당 액티비티 띄움
                 intent = new Intent(this, SearchActivity.class);
@@ -171,7 +176,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.drawer_upload) {
             actionBar.setTitle("업로드");
             Bundle b = new Bundle();
-            b.putSerializable(MainActivity.MAINUSER,mainUser);
+            b.putSerializable(MainActivity.MAINUSER, mainUser);
             UploadFragment uploadFragment = new UploadFragment();
             uploadFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, uploadFragment).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
@@ -179,7 +184,7 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
             Bundle b = new Bundle();
-            b.putSerializable(MainActivity.MAINUSER,mainUser);
+            b.putSerializable(MainActivity.MAINUSER, mainUser);
             ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
             profileSettingFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
@@ -201,7 +206,6 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
 
         return true;
@@ -210,14 +214,14 @@ public class MainActivity extends AppCompatActivity
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_LIKENOTIFICATION){
-            if(resultCode == Activity.RESULT_OK){
-                LikeNotification notification =(LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
+        if (requestCode == REQUEST_LIKENOTIFICATION) {
+            if (resultCode == Activity.RESULT_OK) {
+                LikeNotification notification = (LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
                 goMainFragment(MainFragment.USERTAB);
             }
-        }else if(requestCode == REQUEST_UPLOAD){
-            if(resultCode==Activity.RESULT_OK){
-                int tabindex = data.getIntExtra(MainActivity.TABINDEX,0);
+        } else if (requestCode == REQUEST_UPLOAD) {
+            if (resultCode == Activity.RESULT_OK) {
+                int tabindex = data.getIntExtra(MainActivity.TABINDEX, 0);
                 goMainFragment(tabindex);
             }
         }
@@ -227,9 +231,9 @@ public class MainActivity extends AppCompatActivity
     {
         drawer.setCheckedItem(R.id.drawer_main);
         actionBar.setTitle("The Label");
-        bundle.putSerializable(MAINUSER,mainUser);
-        if(tabIndex != 0){
-            bundle.putInt(TABINDEX,tabIndex);
+        bundle.putSerializable(MAINUSER, mainUser);
+        if (tabIndex != 0) {
+            bundle.putInt(TABINDEX, tabIndex);
         }
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
@@ -237,15 +241,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void drawerUserSetting(String name){
+    public void drawerUserSetting(String name) {
         headerUserName.setText(name);
     }
 
-    public void startUploadActivity(int mode){
-        Intent intent = new Intent(this,UploadActivity.class);
-        intent.putExtra(MainActivity.MAINUSER,mainUser);
+    public void startUploadActivity(int mode) {
+        Intent intent = new Intent(this, UploadActivity.class);
+        intent.putExtra(MainActivity.MAINUSER, mainUser);
         intent.putExtra(UploadFragment.UPLOADMODE, mode);
-        startActivityForResult(intent,MainActivity.REQUEST_UPLOAD);
+        startActivityForResult(intent, MainActivity.REQUEST_UPLOAD);
     }
 
 }
