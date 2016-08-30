@@ -42,6 +42,9 @@ public class SignUpEditActivity extends AppCompatActivity {
     boolean isCheckedRadioGroup_genre_second = false;      //장르 라디오그룹 체크상태
     boolean isCheckedRadioGroup_genre_third = false;      //장르 라디오그룹 체크상태
 
+    int positionId = 1;
+    int genreId = 1;
+
     private void RadioGroupClick() {
         radioGroup_position_first.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
