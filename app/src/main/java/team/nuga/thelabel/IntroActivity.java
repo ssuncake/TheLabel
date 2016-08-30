@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.data.User;
 
 public class IntroActivity extends AppCompatActivity {
@@ -21,8 +23,18 @@ public class IntroActivity extends AppCompatActivity {
     FragmentManager introFragmentManger;
 
     @BindView(R.id.imageView_Intro_LogoImage)
-    ImageView logo;
-
+    ImageView logo;int clickImage = 0;
+    @OnClick(R.id.imageView_Intro_LogoImage)
+    public void click(){
+        clickImage ++;
+        if(9>clickImage && clickImage>5){
+            Toast.makeText(IntroActivity.this, 10-clickImage+"번 더!...", Toast.LENGTH_SHORT).show();
+        }else if(clickImage>9){Intent intent = new Intent(this, ScrollingActivity.class);
+            Toast.makeText(this, "♡♡♡", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            clickImage = 0;
+        }
+    }
     @BindView(R.id.linearLayout_intro_main)
     FrameLayout mainLayout;
 

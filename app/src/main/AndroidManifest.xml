@@ -75,13 +75,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
+            android:exported="true"
             android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpEditActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-        <activity android:name=".SignUpEditActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            ></activity>
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

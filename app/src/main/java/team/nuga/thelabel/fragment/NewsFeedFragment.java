@@ -25,8 +25,6 @@ public class NewsFeedFragment extends Fragment {
 
     CardViewAdapter cardViewAdapter;
 
-//   MyAdapter myAdapter;
-
     @BindView(R.id.recyclerview_newsfeed)
     RecyclerView recyclerView;
 
@@ -53,12 +51,8 @@ public class NewsFeedFragment extends Fragment {
 
 
 
-//        myAdapter = new MyAdapter();
-
-//        mDataset = new ArrayList<>();
 
 
-//        recyclerView.setAdapter(myAdapter);
         initData();
         return view;
 

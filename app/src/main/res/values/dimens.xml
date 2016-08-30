@@ -9,9 +9,6 @@
     <dimen name="text_size_16sp">16sp</dimen>
 
 
-
-
-
     <!--카드뷰 속성 값들-->
     <dimen name="cardView_margin">10dp</dimen>                      <!-- 카드뷰와 카드뷰 사이의 마진값 -->
     <dimen name="cardView_textContent_size">15dp</dimen>            <!--카드뷰에 입력한 텍스트의 출력 사이즈-->
@@ -25,7 +22,8 @@
     <dimen name="TextSize_EditSignUp_subtitle">15dp</dimen>         <!--성별, 지역, 포지션, 장르-->
     <dimen name="TextSize_EditSignUp_elementText">15dp</dimen>      <!--성별,지역....각 요소들 텍스트-->
     <dimen name="profileSize_120dp">120dp</dimen>
-    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_signUp_subtitle">30dp
+    </dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
 
     <!--User IntroActivity-->
     <dimen name="intro_movelogo">150dp</dimen>
@@ -33,6 +31,8 @@
     <!--Notification 속성값-->
     <dimen name="notification_items_height">70dp</dimen>
     <dimen name="notification_Initems_margin">10dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 
 </resources>
