@@ -24,17 +24,17 @@ public abstract class NetworkRequest<T> implements Callback {
         this.listener = listener;
     }
 
-    public abstract Request getRequst();
+    public abstract Request getRequest();
     protected  abstract T parse(ResponseBody body) throws IOException;
     Call call;
     void process(OkHttpClient client){
-        Request request = getRequst();
+        Request request = getRequest();
         call = client.newCall(request);
         call.enqueue(this);
     }
 
     public T processSync(OkHttpClient client) throws  IOException{
-        Request request = getRequst();
+        Request request = getRequest();
         call = client.newCall(request);
         Response response = call.execute();
         if(response.isSuccessful()){

@@ -1,7 +1,5 @@
 package team.nuga.thelabel.data;
 
-import android.graphics.drawable.Drawable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -22,7 +20,7 @@ public class User implements Serializable{
     private String userSex;
     private String userProfile;
     private String userLocal;
-    private Drawable userProfileImage;
+
     private Position userPosition;
     private Ganre userGanre;
     private ArrayList<Label> userInLabelList;
@@ -47,22 +45,11 @@ public class User implements Serializable{
         this.userName = userName;
     }
 
-
-    public Drawable getUserProfileImage() {
-        return userProfileImage;
-    }
-
-    public void setUserProfileImage(Drawable userProfileImage) {
-        this.userProfileImage = userProfileImage;
-    }
-
-
-
     public ArrayList<Label> getUserInLabelList() {
         return userInLabelList;
     }
 
-
-
-
+    public String getEmail() {
+        return userEmail;
+    }
 }

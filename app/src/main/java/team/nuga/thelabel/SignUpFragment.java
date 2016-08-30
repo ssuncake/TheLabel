@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.data.User;
 
 
 /**
@@ -23,7 +24,7 @@ public class SignUpFragment extends Fragment {
     @OnClick(R.id.button_SignUp_moveMain)
     public void OnClick(){
         IntroActivity introActivity = (IntroActivity)getActivity();
-        introActivity.moveMainActivity();
+        introActivity.moveMainActivity(new User());
     }
 
 

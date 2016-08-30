@@ -39,7 +39,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
 
     public void setUser(User user){
         this.user = user;
-        userphotoView.setImageDrawable(user.getUserProfileImage());
+
         usernameView.setText(user.getUserName());
     }
 }

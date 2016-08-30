@@ -10,20 +10,22 @@ import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import team.nuga.thelabel.data.NetworkResult;
+
 import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.manager.NetworkRequest;
+
 
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class LoginRequest extends AbstractRequest<NetworkRequest<User>> {
+public class LoginRequest extends AbstractRequest<NetworkResult<User>> {
 
     private static final String LOGINADDRESS = "auth/local/login";
 
     Request request;
     public LoginRequest(Context context,String email,String password) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(LOGINADDRESS)
+                .addPathSegments(LOGINADDRESS)
                 .build();
         RequestBody body = new FormBody.Builder()
                 .add("email", email)
@@ -40,11 +42,11 @@ public class LoginRequest extends AbstractRequest<NetworkRequest<User>> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NetworkRequest<User>>(){}.getType();
+        return new TypeToken<NetworkResult<User>>(){}.getType();
     }
 
     @Override
-    public Request getRequst() {
+    public Request getRequest() {
         return request;
     }
 }

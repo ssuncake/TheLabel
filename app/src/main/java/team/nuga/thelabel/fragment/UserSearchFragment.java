@@ -69,7 +69,7 @@ public class UserSearchFragment extends Fragment {
         for (int i = 0; i<3; i++){
             User user = new User();
             user.setUserName("name "+i);
-            user.setUserProfileImage(getResources().getDrawable(R.drawable.profile_girl));
+
             useradapter.add(user);
         }
 

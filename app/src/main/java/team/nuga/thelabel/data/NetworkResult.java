@@ -4,13 +4,13 @@ package team.nuga.thelabel.data;
  * Created by Tacademy on 2016-08-30.
  */
 public class NetworkResult<T> {
-    private T result;
-    private int code;
+    private String message;
+    private T user;
 
-    public T getResult() {
-        return this.result;
+
+    public String getMessage(){ return this.message;}
+    public T getUser() {
+        return this.user;
     }
-    public int getCode() {
-        return this.code;
-    }
+
 }

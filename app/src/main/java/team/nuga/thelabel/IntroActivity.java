@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.data.User;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -89,8 +90,10 @@ public class IntroActivity extends AppCompatActivity {
         introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();
     }
 
-    public void moveMainActivity(){
+    public void moveMainActivity(User user){
+
         Intent intent = new Intent(IntroActivity.this,MainActivity.class);
+        intent.putExtra("LoginUser",user);
         startActivity(intent);
         finish();
     }

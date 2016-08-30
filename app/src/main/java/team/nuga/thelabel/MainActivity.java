@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-
+        User user = (User)getIntent().getSerializableExtra("LoginUser");
+        Toast.makeText(MainActivity.this, "ㅎㅎ+"+user.getUserName(), Toast.LENGTH_SHORT).show();
 
         actionBar = getSupportActionBar();
         if (null != actionBar) {

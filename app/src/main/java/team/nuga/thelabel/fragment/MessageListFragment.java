@@ -75,7 +75,7 @@ public class MessageListFragment extends Fragment {
         for (int i = 0; i<3; i++){
             User u = new User();
             u.setUserName("친구 "+i);
-            u.setUserProfileImage(getResources().getDrawable(R.drawable.profile_girl));
+
             messageAdapter.add(u);
         }
 
