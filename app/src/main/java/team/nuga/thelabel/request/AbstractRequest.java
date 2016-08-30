@@ -1,8 +1,11 @@
 package team.nuga.thelabel.request;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import okhttp3.HttpUrl;
 import okhttp3.ResponseBody;
@@ -26,8 +29,14 @@ public abstract class AbstractRequest<T> extends NetworkRequest<T> {
     @Override
     protected T parse(ResponseBody body) throws IOException {
         String text = body.string();
+        Log.d("Gson","rbody = " +text);
         Gson gson = new Gson();
-        // 0829
+        T result = gson.fromJson(text, getType());
+        return result;
 
     }
+
+    protected Type getType(int code){ return getType();}
+
+    protected abstract Type getType();
 }

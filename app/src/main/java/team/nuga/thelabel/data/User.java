@@ -2,6 +2,8 @@ package team.nuga.thelabel.data;
 
 import android.graphics.drawable.Drawable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,8 +13,11 @@ import java.util.HashSet;
  */
 public class User implements Serializable{
     private int userID;
+    @SerializedName("nickname")
     private String userName;
+    @SerializedName("email")
     private String userEmail;
+    @SerializedName("password")
     private String userPassword;
     private String userSex;
     private String userProfile;
