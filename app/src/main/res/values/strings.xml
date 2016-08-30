@@ -31,32 +31,32 @@
     <string name="Toolbar_AppTitle_edit_signUp_activity">기본정보 입력</string>
 
 <!--회원가입Edit화면-->
-    <string name="hint_nicknameEdit"> 닉네임 (한글, 영문, 숫자, 특수문자 2-8자리 이내) </string>
-    <string name="text_usersex"> 성별 </string>
-    <string name="text_male"> 남자 </string>
-    <string name="text_female"> 여자 </string>
-    <string name="text_location"> 지역 </string>
-    <string name="text_city"> 시/도 </string>
-    <string name="text_city_detail"> 시/군/구 </string>
-    <string name="text_Position"> 포지션 </string>
-    <string name="text_Genre"> 장르 </string>
-    <string name="text_position_vocal"> 보컬 </string>
-    <string name="text_position_piano"> 피아노 </string>
-    <string name="text_position_acoustic"> 어쿠스틱 </string>
-    <string name="text_position_elec"> 일렉 </string>
-    <string name="text_position_base"> 베이스 </string>
-    <string name="text_position_etc"> etc </string>
-    <string name="text_genre_Song"> 가요 </string>
-    <string name="text_genre_RnBSoul"> "R<![CDATA["&"]]>B/SOUL </string>
-    <string name="text_genre_Rock"> 락 </string>
-    <string name="text_genre_Jazz"> 재즈 </string>
-    <string name="text_genre_RapHiphop"> 랩/힙합 </string>
-    <string name="text_genre_NewAge"> 뉴에이지 </string>
-    <string name="text_genre_Pop"> 팝 </string>
-    <string name="text_genre_CCM"> CCM </string>
-    <string name="text_genre_Electronica"> 일렉트로니카 </string>
-    <string name="text_genre_AcousticPork"> 어쿠스틱/포크 </string>
-    <string name="text_SignUpComplete"> 가입완료 </string>
+    <string name="hint_nicknameEdit">      닉네임 (한글, 영문, 숫자, 특수문자 2-8자리 이내) </string>
+    <string name="text_usersex">성별</string>
+    <string name="text_male">남자</string>
+    <string name="text_female">여자</string>
+    <string name="text_location">지역</string>
+    <string name="text_city">시/도</string>
+    <string name="text_city_detail">시/군/구</string>
+    <string name="text_Position">포지션</string>
+    <string name="text_Genre">장르</string>
+    <string name="text_position_vocal">보컬</string>
+    <string name="text_position_piano">피아노</string>
+    <string name="text_position_acoustic">어쿠스틱</string>
+    <string name="text_position_elec">일렉</string>
+    <string name="text_position_base">베이스</string>
+    <string name="text_position_etc">etc</string>
+    <string name="text_genre_Song">가요</string>
+    <string name="text_genre_RnBSoul">R<![CDATA["&"]]>B/SOUL</string>
+    <string name="text_genre_Rock">락</string>
+    <string name="text_genre_Jazz">재즈</string>
+    <string name="text_genre_RapHiphop">랩/힙합</string>
+    <string name="text_genre_NewAge">뉴에이지</string>
+    <string name="text_genre_Pop">팝</string>
+    <string name="text_genre_CCM">CCM</string>
+    <string name="text_genre_Electronica">일렉트로니카</string>
+    <string name="text_genre_AcousticPork">어쿠스틱/포크</string>
+    <string name="text_SignUpComplete">가입완료</string>
 
 
 

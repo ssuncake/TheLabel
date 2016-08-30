@@ -6,16 +6,28 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+
+
+
 
 
     <!--카드뷰 속성 값들-->
-    <dimen name="cardView_margin">10dp</dimen> <!-- 카드뷰와 카드뷰 사이의 마진값 -->
-    <dimen name="cardView_textContent_size">15dp</dimen>
-    <dimen name="cardView_Like_ShareButton_Size">30dp</dimen>
-    <dimen name="cardView_profileImage_size">48dp</dimen>
-    <dimen name="cardView_LikeImage_size">10dp</dimen>
-    <dimen name="cardView_seekerBar_width">230dp</dimen>
+    <dimen name="cardView_margin">10dp</dimen>                      <!-- 카드뷰와 카드뷰 사이의 마진값 -->
+    <dimen name="cardView_textContent_size">15dp</dimen>            <!--카드뷰에 입력한 텍스트의 출력 사이즈-->
+    <dimen name="cardView_Like_ShareButton_Size">30dp</dimen>       <!--좋아요 버튼과 공유버튼 사이즈-->
+    <dimen name="cardView_profileImage_size">48dp</dimen>           <!--프로필이미지사이즈-->
+    <dimen name="cardView_LikeImage_size">10dp</dimen>              <!--좋아요텍스트 옆 작은이미지 사이즈-->
+    <dimen name="cardView_seekerBar_width">230dp</dimen>            <!--재생바 가로길이-->
+
+    <!--회원가입 속성값들-->
+    <dimen name="button_overlapCheck">30dp</dimen>                  <!--중복확인 버튼-->
+    <dimen name="TextSize_EditSignUp_subtitle">15dp</dimen>         <!--성별, 지역, 포지션, 장르-->
+    <dimen name="TextSize_EditSignUp_elementText">15dp</dimen>      <!--성별,지역....각 요소들 텍스트-->
+    <dimen name="profileSize_120dp">120dp</dimen>
+    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+
+
 
     <!--User IntroActivity-->
     <dimen name="intro_movelogo">150dp</dimen>
