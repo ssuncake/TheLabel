@@ -3,10 +3,347 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SignUpEditActivity">
+<LinearLayout
+    android:layout_width="match_parent" android:orientation="vertical"
+    android:layout_height="wrap_content">
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/profile_girl" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText"
+            android:layout_marginLeft="30dp"
+            android:text="@string/text_usersex"
+            android:textSize="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_overlap"
+            android:id="@+id/button2"
+            android:layout_alignBottom="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText"
+                android:layout_toEndOf="@+id/radioButton"
+                android:layout_toRightOf="@+id/radioButton"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/text_female" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText"
+                android:layout_toEndOf="@+id/textView2"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_weight="1"
+                android:text="@string/text_male" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_location"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_city"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/spinner_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_city_detail"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_Position"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/radioGroup">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroup_first"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButton_vocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_toEndOf="@+id/radioButton_etc"
+                    android:layout_toRightOf="@+id/radioButton_etc"
+                    android:text="@string/text_position_vocal" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_piano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/radioButton_etc"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_toEndOf="@+id/radioGroup_second"
+                    android:layout_toRightOf="@+id/radioGroup_second"
+                    android:text="@string/text_position_piano" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_accoustic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/radioButton_etc"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_toEndOf="@+id/radioButton_piano"
+                    android:layout_toRightOf="@+id/radioButton_piano"
+                    android:text="@string/text_position_acoustic" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGroup_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="false"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButton_elec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/text_position_elec" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_position_base" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_etc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_toEndOf="@+id/radioGroup_second"
+                    android:layout_toRightOf="@+id/radioGroup_second"
+                    android:checked="false"
+                    android:text="@string/text_position_etc" />
+
+            </RadioGroup>
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_Genre"
+            android:id="@+id/textView6"
+            android:layout_below="@+id/radioGroup"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/RadioGroup_relative">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioButton_Song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_genre_Song" />
+
+            <RadioButton
+                android:id="@+id/radioButton_Rock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_genre_Rock"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/radioButton_RnBSOUL"
+                android:layout_toEndOf="@+id/radioButton_RnBSOUL" />
+
+            <RadioButton
+                android:id="@+id/radioButton_NewAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_genre_NewAge"
+                android:layout_below="@+id/radioButton_Song"
+                android:layout_toRightOf="@+id/radioButton_Song"
+                android:layout_toEndOf="@+id/radioButton_Song" />
+
+            <RadioButton
+                android:id="@+id/radioButton_RapHiphop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_genre_RapHiphop"
+                android:layout_below="@+id/radioButton_Song"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RadioButton
+                android:id="@+id/radioButton_Pop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_genre_Pop"
+                android:layout_below="@+id/radioButton_Rock"
+                android:layout_alignLeft="@+id/radioButton_Rock"
+                android:layout_alignStart="@+id/radioButton_Rock" />
+
+            <RadioButton
+                android:id="@+id/radioButton_RnBSOUL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_toEndOf="@+id/radioButton_RapHiphop"
+                android:layout_toRightOf="@+id/radioButton_RapHiphop"
+                android:text="@string/text_genre_RnBSoul" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_genre_Jazz"
+                android:id="@+id/radioButton_Jazz"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/radioButton_Rock"
+                android:layout_toEndOf="@+id/radioButton_Rock" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_genre_CCM"
+                android:id="@+id/radioButton_CCM"
+                android:layout_below="@+id/radioButton_Jazz"
+                android:layout_alignLeft="@+id/radioButton_Jazz"
+                android:layout_alignStart="@+id/radioButton_Jazz" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_genre_Electronica"
+                android:id="@+id/radioButton_Electronica"
+                android:layout_below="@+id/radioButton_NewAge"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_genre_AcousticPork"
+                android:id="@+id/radioButton_AcousticPork"
+                android:layout_below="@+id/radioButton_NewAge"
+                android:layout_toRightOf="@+id/radioButton_RapHiphop"
+                android:layout_toEndOf="@+id/radioButton_RapHiphop" />
+
+        </RelativeLayout>
+    </RadioGroup>
+</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_SignUpComplete"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

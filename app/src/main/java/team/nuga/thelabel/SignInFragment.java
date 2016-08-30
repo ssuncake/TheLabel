@@ -6,15 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import team.nuga.thelabel.data.NetworkResult;
-import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.manager.NetworkManager;
-import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.LoginRequest;
 
 
@@ -36,17 +31,6 @@ public class SignInFragment extends Fragment {
         String dummyPassword = "1101";
 
         LoginRequest request = new LoginRequest(getContext(),dummyEmail,dummyPassword);
-        NetworkManager.getInstance().getNetworkData(request,new NetworkManager.OnResultListener<NetworkResult<User>>(){
-                    @Override
-                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
-
-                    }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                Toast.makeText(getContext(), "로그인 실패??", Toast.LENGTH_SHORT).show();
-            }
-        });
         IntroActivity introActivity = (IntroActivity)getActivity();
         introActivity.moveMainActivity();
     }
