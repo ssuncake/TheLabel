@@ -8,8 +8,15 @@ import java.util.HashSet;
  * Created by Tacademy on 2016-08-24.
  */
 public class Contents implements Serializable{
+
+    public static final int MUSIC = 0;
+    public static final int PICTURE = 1;
+    public static final int YOUTUBE = 2;
+    protected int contentsType;
+
+
     private int contentsID;
-    private int contentsType;
+
     private int contentsWriterID;
     private int contentsBoardID;
     private int contentsLike;

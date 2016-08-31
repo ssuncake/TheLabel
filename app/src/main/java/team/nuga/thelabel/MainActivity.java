@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        User user = (User) getIntent().getSerializableExtra("LoginUser");
-        Toast.makeText(MainActivity.this, "ㅎㅎ+"+user.getUserName(), Toast.LENGTH_SHORT).show();
 
         actionBar = getSupportActionBar();
         if (null != actionBar) {
@@ -89,9 +87,18 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
 
 
+        User user = (User)getIntent().getSerializableExtra("LoginUser");
+        if (user==null){
+
+            mainUser = new User();
+            mainUser.setUserName("이정호");
+        }else{
+            mainUser = user;
+        }
+
+        Toast.makeText(MainActivity.this, "ㅎㅎ+"+user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
-        mainUser = new User();
-        mainUser.setUserName("이정호");
+
         bundle = new Bundle();
         goMainFragment(MainFragment.NEWSFEEDTAB);
 
@@ -171,6 +178,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
+
 
         if (id == R.id.drawer_upload) {
             actionBar.setTitle("업로드");

@@ -6,8 +6,13 @@ import java.net.URL;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class MusicContents implements Serializable {
+public class MusicContents extends Contents implements Serializable {
     private URL contentsMusic;
+
+    public MusicContents() {
+        super();
+        super.contentsType = Contents.MUSIC;
+    }
 
 
     public URL getContentsMusic() {
@@ -27,10 +32,7 @@ public class MusicContents implements Serializable {
     //
 
 
-    public MusicContents() {
-        this.writerNickName = writerNickName;
 
-    }
 
     private String writerNickName;
 
