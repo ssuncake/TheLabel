@@ -9,7 +9,7 @@ import team.nuga.thelabel.R;
  */
 public class Position implements Serializable {
 
-     String[] position = {String.valueOf(R.string.default_choice),    //1 선택하지않음
+    public static String[] position = {String.valueOf(R.string.default_choice),    //1 선택하지않음
              String.valueOf(R.string.text_position_vocal),            //2 보컬
              String.valueOf(R.string.text_position_guitar),           //3 기타
              String.valueOf(R.string.text_position_base),             //4 베이스

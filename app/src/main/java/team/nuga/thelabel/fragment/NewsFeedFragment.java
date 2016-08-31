@@ -51,8 +51,6 @@ public class NewsFeedFragment extends Fragment {
 
 
 
-
-
         initData();
         return view;
 
