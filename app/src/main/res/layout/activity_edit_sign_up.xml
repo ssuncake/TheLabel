@@ -97,6 +97,12 @@
         </LinearLayout>
 
         <TextView
+            android:background="@drawable/custom_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_line2" />
+
+        <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,7 +129,7 @@
                 android:textSize="20dp" />
 
             <Spinner
-                android:id="@+id/spinner_detail"
+                android:id="@+id/spinner_town"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -135,6 +141,12 @@
                 android:text="@string/text_city_detail"
                 android:textSize="20dp" />
         </LinearLayout>
+
+        <TextView
+            android:background="@drawable/custom_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_line1" />
 
         <TextView
             android:id="@+id/textView_position"
@@ -221,19 +233,24 @@
 
             </RadioGroup>
 
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/radioGroup_position_second"
-                android:text="@string/text_Genre"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginLeft="@dimen/margin_signUp_subtitle" />
-
         </RelativeLayout>
+
+        <TextView
+            android:background="@drawable/custom_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_line" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/radioGroup_position_second"
+            android:text="@string/text_Genre"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="@dimen/margin_signUp_subtitle" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -272,7 +289,7 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup_genre_secondLine"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/radioGroup_genre_firstLine"
                 android:orientation="horizontal">
@@ -323,7 +340,7 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup_genre_firstLine"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -374,7 +391,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_signUpComplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
