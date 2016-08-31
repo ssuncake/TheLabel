@@ -3,6 +3,7 @@ package team.nuga.thelabel.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,11 @@ import butterknife.ButterKnife;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.LabelSelectRequest;
 import team.nuga.thelabel.wiget.LabelSelectView;
 
 /**
@@ -25,6 +30,7 @@ import team.nuga.thelabel.wiget.LabelSelectView;
 public class LabelSelectFragment extends Fragment  {
 
     List<Label> userlabellist;
+
 
 
     public LabelSelectFragment() {
@@ -49,6 +55,22 @@ public class LabelSelectFragment extends Fragment  {
 
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this,view);
+
+        LabelSelectRequest request = new LabelSelectRequest(getContext());
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label[]>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
+                Label[] labels = result.getData();
+                for(Label l : labels){
+                    Log.e("레이블 이름",l.getLabelName());
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<Label[]>> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
 
         LabelSelectView labelSelectView = new LabelSelectView(getContext());
         LabelSelectView labelSelectViewFirst = new LabelSelectView(getContext());

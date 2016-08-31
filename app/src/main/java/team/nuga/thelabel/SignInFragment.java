@@ -32,8 +32,8 @@ public class SignInFragment extends Fragment {
 
     @OnClick(R.id.button_SignIn_moveMain)
     public void OnClickLogin(){
-        String dummyEmail = "nam@gmail.com";
-        String dummyPassword = "1101";
+        String dummyEmail = "ki@gmail.com";
+        String dummyPassword = "1107";
 
         LoginRequest request = new LoginRequest(getContext(),dummyEmail,dummyPassword);
 

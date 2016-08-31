@@ -6,6 +6,7 @@ package team.nuga.thelabel.data;
 public class NetworkResult<T> {
     private String message;
     private T user;
+    private T data;
 
 
     public String getMessage(){ return this.message;}
@@ -13,4 +14,7 @@ public class NetworkResult<T> {
         return this.user;
     }
 
+    public T getData() {
+        return data;
+    }
 }
