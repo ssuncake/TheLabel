@@ -7,12 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
 
 public class SignUpEditActivity extends AppCompatActivity {
     @BindView(R.id.radioGroup_userSex)
@@ -32,12 +35,390 @@ public class SignUpEditActivity extends AppCompatActivity {
     @BindView(R.id.spinner_town)
     Spinner spinner_town;
 
-
+    @BindView(R.id.button_signUpComplete)
+    Button button_signUpComplete;
 
     int TOWNID = 0;
     int CITYID = 0;
 
+    @OnClick(R.id.button_signUpComplete)
+    public void onClicksignUpComplete() {
+        Log.e(" 가입 정보 값 ", "포지션ID값 : " + positionId + ", 장르 ID값 :" + genreId +", 시/도 ID값 : " + CITYID + ", 시/군/구 ID값 : " + TOWNID);
+    }
 
+
+
+    @OnItemSelected(value=R.id.spinner_city, callback=OnItemSelected.Callback.ITEM_SELECTED)
+    public void onItemSelected(int position){
+        position = position + 1;
+        CITYID = position;
+        Log.e("   시/도 ID ", CITYID + " " + spinner_city.getSelectedItem().toString());
+
+
+        if (position == 1) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Town_Default);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    TOWNID = 1;
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+
+        } else if (position == 2) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Seoul);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 1 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+        } else if (position == 3) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gyeonggi);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 25 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+        } else if (position == 4) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gangwon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 70 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 5) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Incheon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 88 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 6) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 98 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 7) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 113 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 8) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Sejong);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 129 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 9) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeJeon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 130 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 10) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyongBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 135 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 11) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyonNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 160 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 12) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeGu);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 183 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 13) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Busan);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 191 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 14) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Ulsan);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 207 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 15) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 212 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 16) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 228 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 17) {
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gwangju);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 250 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } else if (position == 18) {
+            TOWNID = 1;
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Jeju);
+            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_town.setAdapter(spinner_townAdapter);
+            spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        TOWNID = 255 + i;
+                    } else {
+                        TOWNID = 1;
+                    }
+                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,335 +432,16 @@ public class SignUpEditActivity extends AppCompatActivity {
         spinner_city.setAdapter(spinner_cityAdapter);
 
 
-        spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                position = position + 1;
-                CITYID = position;
-                Log.e("   시/도 ID ", CITYID + " " +spinner_city.getSelectedItem().toString());
-
-
-
-                if (position == 1) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Town_Default);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            TOWNID = 1;
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-
-                } else if (position == 2) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Seoul);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 1+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID+"" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                } else if (position == 3) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gyeonggi);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 25+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID+"" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                } else if (position == 4) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gangwon);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 70+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 5) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Incheon);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 88+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 6) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungBook);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 98+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 7) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungNam);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 113+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 8) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Sejong);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 129+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 9) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeJeon);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 130+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 10) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyongBook);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 135+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 11) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyonNam);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 160+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 12) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeGu);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 183+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 13) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Busan);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 191+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 14) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Ulsan);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 207+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 15) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonBook);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 212+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 16) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonNam);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){TOWNID = 228+i;
-                            }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 17) {
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gwangju);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(i!=0){ TOWNID = 250+i;
-                            }else {TOWNID=1;}
-
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                } else if (position == 18) {
-                    TOWNID = 1;
-                    ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Jeju);
-                    spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spinner_town.setAdapter(spinner_townAdapter);
-                    spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                           if(i!=0){            TOWNID = 255+i;
-                           }else {TOWNID=1;}
-                            Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem()+" position : "+i);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Log.e("선택 안했음...", "ㅠㅠ");
-            }
-        });
+//        spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                Log.e("선택 안했음...", "ㅠㅠ");
+//            }
+//        });
 
 
     }
@@ -391,8 +453,8 @@ public class SignUpEditActivity extends AppCompatActivity {
     boolean isCheckedRadioGroup_genre_second = false;      //장르 라디오그룹 체크상태
     boolean isCheckedRadioGroup_genre_third = false;      //장르 라디오그룹 체크상태
 
-    int positionId = 1;
-    int genreId = 1;
+    int positionId = 1; //선택ㄴㄴ
+    int genreId = 1;  //선택 ㄴㄴ
 
     private void RadioGroupClick() {
         radioGroup_position_first.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -405,6 +467,7 @@ public class SignUpEditActivity extends AppCompatActivity {
                             onRadioGroup_position_first();
                             radioGroup_position_first.check(checkedPosition);
                         }
+                        positionId = 2;
                         break;
                     case R.id.radioButton_piano:
                         isCheckedRadioGroup_position_first = true;
@@ -459,18 +522,26 @@ public class SignUpEditActivity extends AppCompatActivity {
                         isCheckedRadioGroup_genre_first = true;
                         onRadioGroup_genre_first();
                         radioGroup_genre_firstLine.check(checkedGenre);
+                        genreId = 2;
+                        break;
                     case R.id.radioButton_RnBSOUL:
                         isCheckedRadioGroup_genre_first = true;
                         onRadioGroup_genre_first();
                         radioGroup_genre_firstLine.check(checkedGenre);
+                        genreId = 9;
+                        break;
                     case R.id.radioButton_Rock:
                         isCheckedRadioGroup_genre_first = true;
                         onRadioGroup_genre_first();
                         radioGroup_genre_firstLine.check(checkedGenre);
+                        genreId = 5;
+                        break;
                     case R.id.radioButton_Jazz:
                         isCheckedRadioGroup_genre_first = true;
                         onRadioGroup_genre_first();
                         radioGroup_genre_firstLine.check(checkedGenre);
+                        genreId = 10;
+                        break;
                 }
             }
         });
@@ -482,18 +553,26 @@ public class SignUpEditActivity extends AppCompatActivity {
                         isCheckedRadioGroup_genre_second = true;
                         onRadioGroup_genre_second();
                         radioGroup_genre_secondLine.check(checkedGenre);
+                        genreId = 4;
+                        break;
                     case R.id.radioButton_NewAge:
                         isCheckedRadioGroup_genre_second = true;
                         onRadioGroup_genre_second();
                         radioGroup_genre_secondLine.check(checkedGenre);
+                        genreId = 8;
+                        break;
                     case R.id.radioButton_Pop:
                         isCheckedRadioGroup_genre_second = true;
                         onRadioGroup_genre_second();
                         radioGroup_genre_secondLine.check(checkedGenre);
+                        genreId = 3;
+                        break;
                     case R.id.radioButton_CCM:
                         isCheckedRadioGroup_genre_second = true;
                         onRadioGroup_genre_second();
                         radioGroup_genre_secondLine.check(checkedGenre);
+                        genreId = 11;
+                        break;
                 }
             }
         });
@@ -505,10 +584,14 @@ public class SignUpEditActivity extends AppCompatActivity {
                         isCheckedRadioGroup_genre_third = true;
                         onRadioGroup_genre_third();
                         radioGroup_genre_thirdLine.check(checkedGenre);
+                        genreId = 7;
+                        break;
                     case R.id.radioButton_AcousticPork:
                         isCheckedRadioGroup_genre_third = true;
                         onRadioGroup_genre_third();
                         radioGroup_genre_thirdLine.check(checkedGenre);
+                        genreId = 6;
+                        break;
                 }
             }
         });
@@ -678,4 +761,31 @@ public class SignUpEditActivity extends AppCompatActivity {
     public String[] Jeju = {"선택하지않음",
             "제주시", "서귀포시"
     };
+
+    public String[] position = {
+            String.valueOf(R.string.default_choice),                 //1 선택하지않음
+            String.valueOf(R.string.text_position_vocal),            //2 보컬
+            String.valueOf(R.string.text_position_guitar),           //3 기타
+            String.valueOf(R.string.text_position_base),             //4 베이스
+            String.valueOf(R.string.text_position_electricGuitar),   //5 일렉기타
+            String.valueOf(R.string.text_position_drum),             //6 드럼
+            String.valueOf(R.string.text_position_keyboard),         //7 키보드
+            String.valueOf(R.string.text_position_etc),              //8 etc...
+    };
+
+
+    public String[] genre = {
+            String.valueOf(R.string.default_choice),                //1 선택하지 않음
+            String.valueOf(R.string.text_genre_Song),               //2 가요
+            String.valueOf(R.string.text_genre_Pop),                //3 팝
+            String.valueOf(R.string.text_genre_RapHiphop),          //4 랩/힙합
+            String.valueOf(R.string.text_genre_Rock),               //5 락
+            String.valueOf(R.string.text_genre_AcousticPork),       //6 어쿠스틱/포크
+            String.valueOf(R.string.text_genre_Electronica),        //7 일렉트로니카
+            String.valueOf(R.string.text_genre_NewAge),             //8 뉴에이지
+            String.valueOf(R.string.text_genre_RnBSoul),            //9 R&B / Soul
+            String.valueOf(R.string.text_genre_Jazz),               //10 재즈
+            String.valueOf(R.string.text_genre_CCM),                //11 CCM
+    };
+
 }
