@@ -8,11 +8,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.MusicContents;
+import team.nuga.thelabel.data.Contents;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -36,12 +33,12 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    MusicContents contents;
-    public void setContent(MusicContents content) {
+    Contents contents;
+    public void setContent(Contents content) {
         this.contents = content;
 //        writer_profileImage.setImageDrawable(contents.getContentsWriterID());
 //        writer_profileImage.setImageResource(R.drawable.profile_girl); //dummy profile Image...
-        writer_Id.setText(contents.getWriterNickName());
+//        writer_Id.setText(contents.getWriterNickName());
     }
 
     public void onWriterIdClick(){

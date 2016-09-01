@@ -2,6 +2,7 @@ package team.nuga.thelabel.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -16,8 +17,9 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder> { //AccountTypeYoutubeViewHolder, AccountTypeMusicViewHolder, AccountTypePictureViewHolder는
-//    List<User> userList = new ArrayList<>();                                           //ParentContentsViewHolder를 상속 받았다.
+public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
+        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick {
+//    List<User> userList = new ArrayList<>();
 //    List<Contents> contentsList = new ArrayList<>();
 //    MusicContents musicContents;
 //    PictureContents pictureContents;
@@ -68,10 +70,43 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
         holder.setContents(mcontentslist.get(position));
-    }
 
+    }
     @Override
     public int getItemCount() {
         return mcontentslist.size();
+    }
+
+
+    public interface OnContentsItemClickListener {
+        public void onContentsItemClick(View view, Contents user, int position);
+    }
+
+    OnContentsItemClickListener listener;
+
+    public void setOnAdapterItemClickListener(OnContentsItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onMusicContentItemClick(View view, Contents contents, int adapterPosition) {
+        if (listener != null) {
+            listener.onContentsItemClick(view, contents, adapterPosition);
+        }
+    }
+
+    @Override
+    public void onPictureContentsItemClick(View view, Contents contents, int adapterPosition) {
+        if (listener != null) {
+            listener.onContentsItemClick(view, contents, adapterPosition);
+        }
+
+    }
+
+    @Override
+    public void onYoutubeContentsItemClick(View view, Contents contents, int adapterPosition) {
+        if (listener != null) {
+            listener.onContentsItemClick(view, contents, adapterPosition);
+        }
     }
 }

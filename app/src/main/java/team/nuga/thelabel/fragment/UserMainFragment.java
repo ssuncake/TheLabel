@@ -11,19 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
-import team.nuga.thelabel.data.MusicContents;
 import team.nuga.thelabel.data.NetworkResult;
-import team.nuga.thelabel.data.PictureContents;
 import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.data.YoutubeContents;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
@@ -53,7 +48,7 @@ public class UserMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this,view);
 
-        ContentsRequest contentsRequest = new ContentsRequest(getContext(),1,5);
+        ContentsRequest contentsRequest = new ContentsRequest(getContext(),2,10);
         NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResult<Contents[]>>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<Contents[]>> request, NetworkResult<Contents[]> result) {
@@ -62,6 +57,8 @@ public class UserMainFragment extends Fragment {
                     Log.e("게시글 ID",""+ c.getContentsID());
                     Log.e("파일경로", ""+c.getContentsPath());
                     Log.e("파일타입", ""+c.getContentsType());
+                   accountAdatper.add(c);
+
                 }
             }
 
@@ -78,24 +75,24 @@ public class UserMainFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(accountAdatper);
-        initData();
+//        initData();
         return view;
     }
-    public void initData(){
-        Contents contents ;
-       Random r = new Random();
-        for(int i=0;i<10;i++)
-       {
-           if(r.nextInt()%3==0){
-               contents = new MusicContents();
-               accountAdatper.add(contents);
-          }else if(r.nextInt()%3==1){
-               contents = new PictureContents();
-               accountAdatper.add(contents);
-           }else{
-               contents = new YoutubeContents();
-               accountAdatper.add(contents);
-           }
-       }
-    }
+//    public void initData(){
+//        Contents contents ;
+//       Random r = new Random();
+//        for(int i=0;i<10;i++)
+//       {
+//           if(r.nextInt()%3==0){
+//               contents = new MusicContents();
+//               accountAdatper.add(contents);
+//          }else if(r.nextInt()%3==1){
+//               contents = new PictureContents();
+//               accountAdatper.add(contents);
+//           }else{
+//               contents = new YoutubeContents();
+//               accountAdatper.add(contents);
+//           }
+//       }
+//    }
 }

@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.MusicContents;
+
+import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.viewholder.CardViewHolder;
 
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewHolder> {
-    List<MusicContents> items = new ArrayList<>();
+    List<Contents> items = new ArrayList<>();
 
-    public void add(MusicContents contents) {
+    public void add(Contents contents) {
         items.add(contents);
         notifyDataSetChanged();
     }
