@@ -30,6 +30,10 @@
     <string name="next_step">다음 단계</string>
     <string name="Toolbar_AppTitle_signUp_activity">이메일 입력 및 약관동의</string>
     <string name="Toolbar_AppTitle_edit_signUp_activity">기본정보 입력</string>
+    <string name="err_msg_email">Email을 입력하세요.</string>
+    <string name="err_msg_password">비밀번호를 입력하세요</string>
+    <string name="err_msg_password_check">입력하신 비밀번호와 다릅니다.</string>
+
 
     <!--회원가입Edit화면-->
     <string name="default_choice">선택하지않음</string>

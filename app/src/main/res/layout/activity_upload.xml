@@ -17,13 +17,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <EditText
+        <FrameLayout
+            android:id="@+id/upload_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_Upload"
-            android:layout_gravity="center_horizontal"
-            android:text="음원url 입력" />
+            android:layout_height="wrap_content">
+        </FrameLayout>
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/editText_Upload"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="음원url 입력" />-->
     </LinearLayout>
 
     <LinearLayout

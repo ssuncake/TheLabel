@@ -10,14 +10,14 @@
     tools:context="team.nuga.thelabel.SignUpActivity">
 
     <FrameLayout
+        android:id="@+id/frameLayout_personal"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/frameLayout_personal"
-        android:layout_below="@+id/frameLayout_service"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/frameLayout_service"
         android:layout_marginTop="40dp">
-
+        <!--서비스약관-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -33,29 +33,20 @@
         </ScrollView>
     </FrameLayout>
 
-    <CheckBox
-        android:id="@+id/checkBox_personal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="@string/text_agree_personalInformation"
-        android:layout_below="@+id/frameLayout_personal"/>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-
         android:id="@+id/frameLayout_service"
-        android:layout_below="@+id/editText_signUp_password_check"
+        android:layout_width="match_parent"
+
+        android:layout_height="150dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TextInput_signUp_password_check">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="false"
-            >
+            android:fillViewport="false">
 
             <TextView
                 android:id="@+id/textView_serviceAgree"
@@ -69,73 +60,107 @@
         </ScrollView>
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/editText_signUp_password_check"
+    <CheckBox
+        android:id="@+id/checkBox_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText_signUp_password"
-        android:ems="10"
-        android:hint="@string/hint_password_check"
-        android:inputType="textPassword"
-        android:layout_alignRight="@+id/button_checkOverlap"
-        android:layout_alignEnd="@+id/button_checkOverlap" />
+        android:layout_below="@+id/frameLayout_personal"
+        android:text="@string/text_agree_personalInformation" />
 
-    <EditText
-        android:id="@+id/editText_signUp_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText_signUp_email"
-        android:ems="10"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
-        android:layout_alignRight="@+id/button_checkOverlap"
-        android:layout_alignEnd="@+id/button_checkOverlap" />
 
-    <EditText
-        android:id="@+id/editText_signUp_email"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInput_signUp_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editText_signUp_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/button_checkOverlap"
+            android:layout_toStartOf="@+id/button_checkOverlap"
+            android:ems="10"
+            android:hint="@string/hint_Email"
+            android:inputType="textEmailAddress"
+            android:singleLine="true">
+
+            <requestFocus />
+        </EditText>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInput_signUp_password"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:hint="@string/hint_Email"
-        android:inputType="textEmailAddress"
-        android:layout_toLeftOf="@+id/button_checkOverlap"
-        android:layout_toStartOf="@+id/button_checkOverlap" />
+        android:layout_below="@+id/TextInput_signUp_email">
+
+        <EditText
+            android:id="@+id/editText_signUp_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button_checkOverlap"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/button_checkOverlap"
+            android:ems="10"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInput_signUp_password_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextInput_signUp_password">
+
+        <EditText
+            android:id="@+id/editText_signUp_password_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button_checkOverlap"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/button_checkOverlap"
+            android:ems="10"
+            android:hint="@string/hint_password_check"
+            android:inputType="textPassword"
+            android:singleLine="true"></EditText>
+    </android.support.design.widget.TextInputLayout>
+
 
     <CheckBox
         android:id="@+id/checkBox_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_agree_service"
-        android:checked="false"
-        android:layout_below="@+id/frameLayout_service"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/frameLayout_service"
+        android:checked="false"
+        android:text="@string/text_agree_service" />
 
     <Button
+        android:id="@+id/button_nextStep_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next_step"
-        android:id="@+id/button_nextStep_signUp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/next_step" />
 
     <Button
+        android:id="@+id/button_checkOverlap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/check_overlap"
-        android:id="@+id/button_checkOverlap"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_alignParentTop="true"
+        android:text="@string/check_overlap" />
 </RelativeLayout>

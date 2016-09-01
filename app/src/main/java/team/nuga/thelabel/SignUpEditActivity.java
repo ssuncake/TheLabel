@@ -92,8 +92,8 @@ public class SignUpEditActivity extends AppCompatActivity {
 
         RadioGroupClick();
 
-        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, city);
-        spinner_cityAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, city);
+        spinner_cityAdapter.setDropDownViewResource(R.layout.spin);
         spinner_city.setAdapter(spinner_cityAdapter);
 
 

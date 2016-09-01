@@ -60,7 +60,6 @@ public class IntroActivity extends AppCompatActivity {
                 //
                 //
                 //
-
                 moveUpLogo();
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -69,14 +68,11 @@ public class IntroActivity extends AppCompatActivity {
                 },1000);//로그인 1초 후 이동.
             }
         },2000);
-
-
-
-
     }
 
     public void signUpFragmentCall(){
-        introFragmentManger.beginTransaction().replace(R.id.frameLayout_intro_container,new SignUpFragment()).commit();
+        Intent intent=new Intent(this, SignUpActivity.class);
+        startActivity(intent);
     }
 
     private void moveUpLogo(){
@@ -92,22 +88,20 @@ public class IntroActivity extends AppCompatActivity {
                 logo.setY(y);
             }
         });
-        logoAnimator.start();
-    }
+logoAnimator.start();
+        }
 
-    private void showLoginFragment(){
-
+private void showLoginFragment(){
         container.setVisibility(View.VISIBLE);
         introFragmentManger = getSupportFragmentManager();
         introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();
-    }
+        }
 
-    public void moveMainActivity(User user){
-
+public void moveMainActivity(User user){
         Intent intent = new Intent(IntroActivity.this,MainActivity.class);
         intent.putExtra("LoginUser",user);
         startActivity(intent);
         finish();
-    }
+        }
 
-}
+        }

@@ -18,6 +18,9 @@ import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.fragment.MainFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
+import team.nuga.thelabel.fragment.UploadImageFragment;
+import team.nuga.thelabel.fragment.UploadMusicFragment;
+import team.nuga.thelabel.fragment.UploadYoutubeFragment;
 
 public class UploadActivity extends AppCompatActivity {
 
@@ -59,12 +62,16 @@ public class UploadActivity extends AppCompatActivity {
         uploadMode = getIntent().getIntExtra(UploadFragment.UPLOADMODE,-1);
         switch(uploadMode){
             case MUSIC :
+                getSupportFragmentManager().beginTransaction().replace(R.id.upload_content, new UploadMusicFragment()).commit();
                 Toast.makeText(UploadActivity.this, "음악 업로드 화면", Toast.LENGTH_SHORT).show();
                 break;
             case PHOTO :
+                getSupportFragmentManager().beginTransaction().replace(R.id.upload_content, new UploadImageFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().add(R.id.content, new UploadImageFragment());
                 Toast.makeText(UploadActivity.this, "사진 업로드 화면", Toast.LENGTH_SHORT).show();
                 break;
             case YOUTUBE:
+                getSupportFragmentManager().beginTransaction().replace(R.id.upload_content, new UploadYoutubeFragment()).commit();
                 Toast.makeText(UploadActivity.this, "유튜브 업로드 화면", Toast.LENGTH_SHORT).show();
                 break;
 
