@@ -51,7 +51,7 @@ public class NotificationLikeViewHolder extends RecyclerView.ViewHolder {
     public void setNotification(LikeNotification notification){
         this.notification  = notification;
 //        this.date.setText(notification.getNotificationDate().toString());
-        contentsText.setText(notification.getSender().getUserName()+" 님이 "+notification.getContents().getContentsTitle()+" 게시물을 좋아합니다.");
+        contentsText.setText(notification.getSender().getUserName()+" 님이 "+" 게시물을 좋아합니다.");
 
     }
 }

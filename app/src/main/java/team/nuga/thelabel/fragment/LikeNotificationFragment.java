@@ -63,7 +63,7 @@ public class LikeNotificationFragment extends Fragment {
         User u = new User();
         u.setUserName("선두원");
         Contents c = new Contents();
-        c.setContentsTitle("오늘의 밥");
+
         n.setSender(u);
         n.setContents(c);
         adapter.addNotification(n);
@@ -72,7 +72,7 @@ public class LikeNotificationFragment extends Fragment {
         u = new User();
         u.setUserName("구혜빈");
         c = new Contents();
-        c.setContentsTitle("래시가드뭐사지");
+
         n.setSender(u);
         n.setContents(c);
         adapter.addNotification(n);
@@ -81,7 +81,7 @@ public class LikeNotificationFragment extends Fragment {
         u = new User();
         u.setUserName("안드로이드");
         c = new Contents();
-        c.setContentsTitle("갤럭시 노트 7");
+
         n.setSender(u);
         n.setContents(c);
         adapter.addNotification(n);

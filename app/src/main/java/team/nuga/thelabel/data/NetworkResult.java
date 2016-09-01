@@ -15,6 +15,6 @@ public class NetworkResult<T> {
     }
 
     public T getData() {
-        return data;
+        return this.data;
     }
 }

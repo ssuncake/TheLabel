@@ -9,10 +9,10 @@ import team.nuga.thelabel.R;
  * Created by Tacademy on 2016-08-31.
  */
 public class AccountTypeMusicViewHolder extends ParentContentsViewHolder {
-    TextView titletwoView;
+    TextView titleMusicView;
     public AccountTypeMusicViewHolder(View itemView) {
         super(itemView);
-        titletwoView = (TextView)itemView.findViewById(R.id.title_type_two);
+        titleMusicView = (TextView)itemView.findViewById(R.id.title_type_music);
     }
 //    public void setContents (Contents contents){
 //        Log.w("뷰타입" , ""+contents.getContentsType());

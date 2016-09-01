@@ -25,11 +25,7 @@ public class MusicContents extends Contents implements Serializable {
 
     public MusicContents(URL contentsMusic) {
 
-        this.contentsMusic = contentsMusic;
-    }
-
-
-    //
+        this.contentsMusic = contentsMusic;   }   //
 
 
 

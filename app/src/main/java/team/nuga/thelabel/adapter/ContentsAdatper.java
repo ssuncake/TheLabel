@@ -8,10 +8,6 @@ import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
-import team.nuga.thelabel.data.MusicContents;
-import team.nuga.thelabel.data.PictureContents;
-import team.nuga.thelabel.data.User;
-import team.nuga.thelabel.data.YoutubeContents;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypeYoutubeViewHolder;
@@ -20,57 +16,24 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder> { //ParentContentsViewHolder에 AccountTypeYoutubeViewHolder, AccountTypeMusicView
-//    List<User> userList = new ArrayList<>();
+public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder> { //AccountTypeYoutubeViewHolder, AccountTypeMusicViewHolder, AccountTypePictureViewHolder는
+//    List<User> userList = new ArrayList<>();                                           //ParentContentsViewHolder를 상속 받았다.
 //    List<Contents> contentsList = new ArrayList<>();
-    MusicContents musicContents;
-    PictureContents pictureContents;
-    YoutubeContents youtubeContents;
-    public void add(User user){
-        muserlist.add(user);
-        notifyDataSetChanged();
-    }
+//    MusicContents musicContents;
+//    PictureContents pictureContents;
+//    YoutubeContents youtubeContents;
+////    public void add(User user){
+//        muserlist.add(user);
+//        notifyDataSetChanged();
+//    }
+
+//    private ArrayList<User> muserlist = new ArrayList<>();
+    private ArrayList<Contents> mcontentslist = new ArrayList<>();
     public void add(Contents contents){
         mcontentslist.add(contents);
         notifyDataSetChanged();
     }
-    private ArrayList<User> muserlist = new ArrayList<>();
-    private ArrayList<Contents> mcontentslist = new ArrayList<>();
 
-
-
-
-//    class AccountTypeMusicViewHolder extends ParentContentsViewHolder {
-//        TextView titletwoView;
-//        public AccountTypeMusicViewHolder(View itemView) {
-//            super(itemView);
-//            titletwoView = (TextView)itemView.findViewById(R.id.title_type_two);
-//        }
-//        public void setContents (Contents contents){
-//            Log.w("뷰타입" , ""+contents.getContentsType());
-//
-//        }
-//    }
-//    class AccountTypePictureViewHolder extends ParentContentsViewHolder {
-//        TextView titlethreeView;
-//        public AccountTypePictureViewHolder(View itemView) {
-//            super(itemView);
-//            titlethreeView = (TextView)itemView.findViewById(R.id.title_type_three);
-//        }
-//        public void setContents (Contents contents){
-//            Log.w("뷰타입" , ""+contents.getContentsType());
-//        }
-//    }
-//    class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder {
-//        TextView titlefourView;
-//        public AccountTypeYoutubeViewHolder(View itemView) {
-//            super(itemView);
-//            titlefourView = (TextView)itemView.findViewById(R.id.title_type_four);
-//        }
-//        public void setContents (Contents contents){
-//            Log.w("뷰타입" , ""+contents.getContentsType());
-//        }
-//    }
 
     @Override
     public int getItemViewType(int position) {
