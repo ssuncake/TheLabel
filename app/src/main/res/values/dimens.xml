@@ -18,12 +18,15 @@
     <dimen name="cardView_seekerBar_width">230dp</dimen>            <!--재생바 가로길이-->
 
     <!--회원가입 속성값들-->
-    <dimen name="button_overlapCheck">30dp</dimen>                  <!--중복확인 버튼-->
+    <dimen name="editText_nickName_height">40dp</dimen>
+    <dimen name="button_overlapCheck">48dp</dimen>                  <!--중복확인 버튼-->
     <dimen name="TextSize_EditSignUp_subtitle">15dp</dimen>         <!--성별, 지역, 포지션, 장르-->
-    <dimen name="TextSize_EditSignUp_elementText">15dp</dimen>      <!--성별,지역....각 요소들 텍스트-->
+    <dimen name="TextSize_EditSignUp_elementText">10dp</dimen>      <!--성별,지역....각 요소들 텍스트-->
     <dimen name="profileSize_120dp">120dp</dimen>
-    <dimen name="margin_signUp_subtitle">30dp
-    </dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_radiogroup_LeftRight">30dp</dimen>               <!-- 라디오그룹 Left Right 마진값 -->
+    <dimen name="TextSize_radioButton">10dp</dimen>               <!--라디오버튼 텍스트 사이즈-->
+
 
     <!--User IntroActivity-->
     <dimen name="intro_movelogo">150dp</dimen>

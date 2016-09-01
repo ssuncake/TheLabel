@@ -14,15 +14,32 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp">
 
             <ImageView
+                android:id="@+id/ImageView_profileImage"
                 android:layout_width="@dimen/profileSize_120dp"
                 android:layout_height="@dimen/profileSize_120dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/profile_girl"
-                android:id="@+id/ImageView_profileImage" />
+                android:src="@drawable/profile_girl" />
+
+            <ImageButton
+                android:id="@+id/imageButton_uploadProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/ImageView_profileImage"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/ImageView_profileImage"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#00000000"
+                android:baselineAlignBottom="false"
+                android:clickable="true"
+                android:contextClickable="false"
+                android:foregroundTintMode="multiply"
+                android:src="@drawable/ic_menu_camera" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -30,10 +47,11 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editText_signUp_userNickName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_nicknameEdit" />
+                android:layout_height="@dimen/editText_nickName_height"
+                android:hint="@string/hint_nicknameEdit"
+                android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -41,20 +59,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/editText"
+                android:layout_below="@+id/editText_signUp_userNickName"
                 android:layout_marginLeft="@dimen/margin_signUp_subtitle"
                 android:text="@string/text_usersex"
-                android:textSize="20dp" />
+                android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_checkOverlap"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_overlapCheck"
-                android:text="@string/check_overlap"
-                android:textSize="@dimen/text_size_16sp"
-                android:layout_alignParentTop="true"
+                android:layout_above="@+id/textView2"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/check_overlap"
+                android:textSize="@dimen/text_size_16sp" />
 
         </RelativeLayout>
 
@@ -65,105 +83,117 @@
             android:orientation="horizontal">
 
             <RadioGroup
+
+                android:id="@+id/radioGroup_userSex"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView2"
-                android:orientation="horizontal"
-                android:id="@+id/radioGroup_userSex">
+                android:layout_marginLeft="@dimen/margin_radiogroup_LeftRight"
+                android:layout_marginRight="@dimen/margin_radiogroup_LeftRight"
+                android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/radioButton_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText"
-                    android:layout_toEndOf="@+id/radioButton"
-                    android:layout_toRightOf="@+id/radioButton"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/text_female" />
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText"
+                    android:layout_below="@+id/editText_signUp_userNickName"
                     android:layout_toEndOf="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
                     android:layout_weight="1"
+                    android:checked="false"
                     android:text="@string/text_male" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_signUp_userNickName"
+                    android:layout_toEndOf="@+id/radioButton_male"
+                    android:layout_toRightOf="@+id/radioButton_male"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/text_female" />
             </RadioGroup>
         </LinearLayout>
 
         <TextView
-            android:background="@drawable/custom_line"
+            android:id="@+id/custom_line2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/custom_line2" />
+            android:background="@drawable/custom_line" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_signUp_subtitle"
             android:text="@string/text_location"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginLeft="@dimen/margin_signUp_subtitle" />
+            android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/spinner_city"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="3" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_city"
-                android:textSize="20dp" />
+                android:textSize="@dimen/TextSize_EditSignUp_elementText" />
 
             <Spinner
                 android:id="@+id/spinner_town"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="3" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+
                 android:text="@string/text_city_detail"
-                android:textSize="20dp" />
+                android:textSize="@dimen/TextSize_EditSignUp_elementText" />
         </LinearLayout>
 
         <TextView
-            android:background="@drawable/custom_line"
+            android:id="@+id/custom_line1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/custom_line1" />
+            android:background="@drawable/custom_line" />
 
         <TextView
             android:id="@+id/textView_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_signUp_subtitle"
             android:text="@string/text_Position"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginLeft="@dimen/margin_signUp_subtitle" />
+            android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_radiogroup_LeftRight"
+            android:layout_marginRight="@dimen/margin_radiogroup_LeftRight">
 
             <RadioGroup
                 android:id="@+id/radioGroup_position_first"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -171,36 +201,34 @@
                     android:id="@+id/radioButton_vocal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioButton_etc"
-                    android:layout_toRightOf="@+id/radioButton_etc"
+                    android:layout_weight="1"
+                    android:checked="false"
                     android:text="@string/text_position_vocal" />
 
                 <RadioButton
-                    android:id="@+id/radioButton_piano"
+                    android:id="@+id/radioButton_guitar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/radioButton_etc"
                     android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioGroup_position_second"
-                    android:layout_toRightOf="@+id/radioGroup_position_second"
-                    android:text="@string/text_position_piano" />
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/text_position_guitar" />
 
                 <RadioButton
-                    android:id="@+id/radioButton_accoustic"
+                    android:id="@+id/radioButton_base"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/radioButton_etc"
                     android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioButton_piano"
-                    android:layout_toRightOf="@+id/radioButton_piano"
-                    android:text="@string/text_position_acoustic" />
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/text_position_base" />
             </RadioGroup>
 
             <RadioGroup
                 android:id="@+id/radioGroup_position_second"
-                android:layout_width="wrap_content"
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="false"
                 android:layout_below="@+id/radioGroup_position_first"
@@ -211,35 +239,51 @@
                     android:id="@+id/radioButton_elec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:checked="false"
                     android:text="@string/text_position_elec" />
 
                 <RadioButton
-                    android:id="@+id/radioButton_base"
+                    android:id="@+id/radioButton_drum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_position_base" />
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/text_position_drum" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_keyboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/text_position_keyboard" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGroup_position_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/radioGroup_position_second"
+                android:layout_gravity="right"
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/radioButton_etc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioGroup_position_second"
-                    android:layout_toRightOf="@+id/radioGroup_position_second"
                     android:checked="false"
                     android:text="@string/text_position_etc" />
-
             </RadioGroup>
 
         </RelativeLayout>
 
         <TextView
-            android:background="@drawable/custom_line"
+            android:id="@+id/custom_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/custom_line" />
+            android:background="@drawable/custom_line" />
 
         <TextView
             android:id="@+id/textView6"
@@ -248,20 +292,21 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/radioGroup_position_second"
+            android:layout_marginLeft="@dimen/margin_signUp_subtitle"
             android:text="@string/text_Genre"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginLeft="@dimen/margin_signUp_subtitle" />
+            android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_radiogroup_LeftRight"
+            android:layout_marginRight="@dimen/margin_radiogroup_LeftRight">
 
             <RadioGroup
                 android:id="@+id/radioGroup_genre_thirdLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/radioGroup_genre_secondLine"
                 android:orientation="horizontal">
 
@@ -269,22 +314,19 @@
                     android:id="@+id/radioButton_Electronica"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/radioButton_NewAge"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_Electronica" />
+                    android:text="@string/text_genre_Electronica"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_AcousticPork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/radioButton_NewAge"
-                    android:layout_toEndOf="@+id/radioButton_RapHiphop"
-                    android:layout_toRightOf="@+id/radioButton_RapHiphop"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_AcousticPork" />
-
+                    android:text="@string/text_genre_AcousticPork"
+                    android:textSize="@dimen/TextSize_radioButton" />
             </RadioGroup>
 
             <RadioGroup
@@ -292,98 +334,91 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/radioGroup_genre_firstLine"
-                android:orientation="horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="4">
 
                 <RadioButton
                     android:id="@+id/radioButton_RapHiphop"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/radioButton_Song"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_RapHiphop" />
+                    android:text="@string/text_genre_RapHiphop"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_NewAge"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/radioButton_Song"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioButton_Song"
-                    android:layout_toRightOf="@+id/radioButton_Song"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_NewAge" />
+                    android:text="@string/text_genre_NewAge"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_CCM"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/radioButton_Jazz"
-                    android:layout_alignStart="@+id/radioButton_Jazz"
-                    android:layout_below="@+id/radioButton_Jazz"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_CCM" />
+                    android:text="@string/text_genre_CCM"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_Pop"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/radioButton_Rock"
-                    android:layout_alignStart="@+id/radioButton_Rock"
-                    android:layout_below="@+id/radioButton_Rock"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_Pop" />
+                    android:text="@string/text_genre_Pop"
+                    android:textSize="@dimen/TextSize_radioButton" />
+
             </RadioGroup>
 
             <RadioGroup
                 android:id="@+id/radioGroup_genre_firstLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="4">
 
                 <RadioButton
                     android:id="@+id/radioButton_Song"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_Song" />
+                    android:text="@string/text_genre_Song"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_Rock"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioButton_RnBSOUL"
-                    android:layout_toRightOf="@+id/radioButton_RnBSOUL"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_Rock" />
+                    android:text="@string/text_genre_Rock"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_RnBSOUL"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_toEndOf="@+id/radioButton_RapHiphop"
-                    android:layout_toRightOf="@+id/radioButton_RapHiphop"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_RnBSoul" />
+                    android:text="@string/text_genre_RnBSoul"
+                    android:textSize="@dimen/TextSize_radioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton_Jazz"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/radioButton_Rock"
-                    android:layout_toRightOf="@+id/radioButton_Rock"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/text_genre_Jazz" />
-
+                    android:text="@string/text_genre_Jazz"
+                    android:textSize="@dimen/TextSize_radioButton" />
             </RadioGroup>
 
         </RelativeLayout>
@@ -395,7 +430,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal"
         android:text="@string/text_SignUpComplete" />
 
