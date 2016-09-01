@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     tools:context="team.nuga.thelabel.fragment.LabelSelectFragment"
     android:orientation="vertical"
+    android:id="@+id/layout_LabelSelectMain"
   >
     <RelativeLayout
         android:layout_width="match_parent"

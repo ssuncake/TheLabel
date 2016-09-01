@@ -1,5 +1,7 @@
 package team.nuga.thelabel.data;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -18,13 +20,13 @@ public class User implements Serializable{
     @SerializedName("password")
     private String userPassword;
 
+    private ArrayList<Label> userInLabelList;
+
     private String userSex;
     private String userProfile;
     private String userLocal;
-
     private Position userPosition;
     private Genre userGenre;
-    private ArrayList<Label> userInLabelList;
    private HashSet<Integer> userLikeContents;
     private HashSet<Integer> userLikeLabel;
     private boolean userNeed;
@@ -34,7 +36,21 @@ public class User implements Serializable{
                 userInLabelList = new ArrayList<Label>();
                 userInLabelList.add(label);
             }else{
-                userInLabelList.add(label);
+                if(userInLabelList.size() == 3)
+                {
+                    Log.e("레이블 추가", "최대 허용 할 수 있는 레이블 수 초과해서 add명령어 실행");
+                    return;
+                }else{
+                    int id = label.getLabelID();
+                    for(Label l : userInLabelList){
+                        if(l.getLabelID() == id ){
+                            Log.e("레이블 추가", "id가 같은 레이블존재");
+                            return;
+                        }
+                    }
+                    userInLabelList.add(label);
+                }
+
             }
     }
 

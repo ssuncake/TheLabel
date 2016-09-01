@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -37,16 +37,19 @@ public class LabelSelectFragment extends Fragment  {
         // Required empty public constructor
     }
 
-    @BindView(R.id.layout_LabelSelect)
-    RelativeLayout relativeLayout;
-    @BindView(R.id.layout_LabelSelectFrist)
-    RelativeLayout relativeLayoutFrist;
-    @BindView(R.id.layout_LabelSelectSecond)
-    RelativeLayout relativeLayoutSecond;
+
+    @BindView(R.id.layout_LabelSelectMain)
+    LinearLayout linearLayout;
 
 
     User user;
+    List<Label> labels;
     Button[] buttons;
+    LabelSelectView[] labelSelectViews = new LabelSelectView[3];
+    LabelSelectView labelView;
+
+
+
 
 
     @Override
@@ -56,33 +59,58 @@ public class LabelSelectFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this,view);
 
+        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+
+
+
+        for(int i=0 ; i<3 ; i++){
+
+            labelView = new LabelSelectView(getContext(),i);
+            labelSelectViews[i] = labelView;
+        }
+
+        linearLayout.addView(labelSelectViews[0]);
+        linearLayout.addView(labelSelectViews[1]);
+        linearLayout.addView(labelSelectViews[2]);
+
+
         LabelSelectRequest request = new LabelSelectRequest(getContext());
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label[]>>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
                 Label[] labels = result.getData();
                 for(Label l : labels){
-                    Log.e("레이블 이름",l.getLabelName());
+                    user.addLabelList(l);
                 }
+                for( int i = 0 ;  i<3 ;  i++){
+                    if(i<user.getUserInLabelList().size()){
+                        labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
+                    }
+
+                    labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("레이블 클릭","뷰클릭");
+                            LabelSelectView l = (LabelSelectView)view;
+                            if(l.getEmpty())
+                            {
+                                Log.e("레이블 클릭","엠티 : "+l.getEmpty());
+                               makeLabel();
+                            }else{
+                                Log.e("레이블 클릭","레이블 이름 "+ l.getLabel().getLabelName());
+                                selectLabel(l.getLabel());
+                            }
+                        }
+                    });
+                }
+                Log.e("레이블 클릭","labels size : "+ labels.length + " user labelsize : "+ user.getUserInLabelList().size());
             }
 
             @Override
             public void onFail(NetworkRequest<NetworkResult<Label[]>> request, int errorCode, String errorMessage, Throwable e) {
-
+                Log.e("레이블 선택","불러오기 실패");
             }
         });
-
-        LabelSelectView labelSelectView = new LabelSelectView(getContext());
-        LabelSelectView labelSelectViewFirst = new LabelSelectView(getContext());
-        LabelSelectView labelSelectViewSecond = new LabelSelectView(getContext());
-
-        relativeLayout.addView(labelSelectView); //CustomView 추가 하는 방법
-        relativeLayoutFrist.addView(labelSelectViewFirst);
-        relativeLayoutSecond.addView(labelSelectViewSecond);
-
-        user =(User) getArguments().getSerializable(MainActivity.MAINUSER);
-        userlabellist = user.getUserInLabelList();
-//        labelSelectView.setLabel(userlabellist.get(3));
 
 
         return view;
@@ -113,8 +141,6 @@ public class LabelSelectFragment extends Fragment  {
             }
         }
     }
-
-
 
 
 }

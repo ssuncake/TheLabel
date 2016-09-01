@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView_label_select_Profile"
         android:src="@drawable/label_make"
         android:background="@color/color_white" />
 
@@ -22,13 +22,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignBottom="@+id/imageView_label_select_Profile"
        >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/setting"
-            android:id="@+id/imageview_label_select"
+            android:id="@+id/imageview_label_select_setting"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -41,12 +41,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wonder girls"
+        android:text="레이블을 만들어보세요"
         android:id="@+id/textview_label_select"
         android:textColor="@color/cardview_dark_background"
         android:gravity="center"
         android:layout_marginBottom="30dp"
-        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignBottom="@+id/imageView_label_select_Profile"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
