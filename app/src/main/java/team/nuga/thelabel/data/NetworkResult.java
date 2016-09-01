@@ -7,8 +7,15 @@ public class NetworkResult<T> {
     private String message;
     private T user;
     private T data;
+    private T error;
 
 
+    public boolean isError(){
+        if(error==null)
+            return true;
+        else
+            return false;
+    }
     public String getMessage(){ return this.message;}
     public T getUser() {
         return this.user;

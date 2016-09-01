@@ -1,39 +1,206 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.fragment.LabelMakeFragment"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    tools:context="team.nuga.thelabel.fragment.LabelMakeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="레이블 생성 프레그먼트"
-        android:layout_gravity="center"
-        android:textColor="#ff0000" />
-
-    <EditText
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_MakeLabel_InputName"
-        android:layout_gravity="center_horizontal"
-        android:text="레이블 이름" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="생성 취소"
-        android:id="@+id/button_LabelMake_Cancel"
-        android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="생성 완료"
-        android:id="@+id/button_LabelMake_Complete"
-        android:layout_gravity="center_horizontal" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#aaaaff">
+
+                <ImageButton
+                    android:id="@+id/imageButton_LabelMake_ImageSetting"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom" />
+            </FrameLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textLayout_MakeLabel_InputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editText_MakeLabel_InputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/makelabel_inputName"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinnerView_MakeLabel_Genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:ms_enableFloatingLabel="false"
+                app:ms_floatingLabelText="장르"
+                app:ms_hint="장르" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textLaout_MakeLabel_InputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editText_MakeLabel_InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/makelabel_inputText"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_MakeLabel_Need"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEED" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup_MakeLabel_Need"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButton_MakeLabel_On"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="On" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton_MakeLabel_Off"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="OFF" />
+                    </RadioGroup>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/relativeLayout_MakeLabel_needPosition">
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_vocal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="보컬" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_base"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:checked="false"
+                            android:text="베이스" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_piano"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/checkBox_MakeLabel_vocal"
+                            android:checked="false"
+                            android:text="피아노" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_drum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/checkBox_MakeLabel_base"
+                            android:layout_alignStart="@+id/checkBox_MakeLabel_base"
+                            android:layout_below="@+id/checkBox_MakeLabel_base"
+                            android:checked="false"
+                            android:text="드럼" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_acoustic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/checkBox_MakeLabel_drum"
+                            android:checked="false"
+                            android:text="어쿠스틱" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_etc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/checkBox_MakeLabel_acoustic"
+                            android:checked="false"
+                            android:text="etc" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_MakeLabel_elec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/checkBox_MakeLabel_drum"
+                            android:layout_alignStart="@+id/checkBox_MakeLabel_drum"
+                            android:layout_below="@+id/checkBox_MakeLabel_drum"
+                            android:checked="false"
+                            android:text="일렉" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_LabelMake_Cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="생성 취소" />
+
+                <Button
+                    android:id="@+id/button_LabelMake_Complete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="생성 완료" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

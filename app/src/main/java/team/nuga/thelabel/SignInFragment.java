@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,8 @@ public class SignInFragment extends Fragment {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
 
+
+
                 String message = result.getMessage();
                 Log.e("로그인 성공",message);
                 User user = result.getUser();
@@ -52,6 +55,7 @@ public class SignInFragment extends Fragment {
 
             @Override
             public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(getActivity(), "로그인 실패 !", Toast.LENGTH_SHORT).show();
                 Log.e("로그인 실패",errorMessage);
             }
         });

@@ -40,4 +40,7 @@ dependencies {
     compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
     compile 'com.yqritc:recyclerview-multiple-viewtypes-adapter:1.1.0'
 
+
+    compile 'com.github.ganfra:material-spinner:1.1.1'
+
 }

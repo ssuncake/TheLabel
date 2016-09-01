@@ -185,4 +185,12 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
+
+    <!-- Make Label 사용-->
+    <string name="makelabel_inputName">레이블 이름</string>
+    <string name="makelabel_inputText">소개글 (50자 이내)</string>
+    <string name="makelabel_inpputGenre">장르 선택</string>
+    <string name="makelabel_need">NEED</string>
+    <string name="makelabel_inputName_err">이름을 입력해주세요</string>
 </resources>
