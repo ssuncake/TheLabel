@@ -22,10 +22,12 @@ import butterknife.OnItemSelected;
 public class SignUpEditActivity extends AppCompatActivity {
     @BindView(R.id.imageButton_uploadProfileImage)
     ImageButton imageButton_uploadProfileImage;
+
     @OnClick(R.id.imageButton_uploadProfileImage)
-    public void setImageButton_uploadProfileImage(){
+    public void setImageButton_uploadProfileImage() {
         Toast.makeText(SignUpEditActivity.this, "이미지를 골라주세요 ♪", Toast.LENGTH_SHORT).show();
     }
+
     @BindView(R.id.radioGroup_userSex)
     RadioGroup radioGroup_userSex;                  //성별
 
@@ -57,11 +59,12 @@ public class SignUpEditActivity extends AppCompatActivity {
     Button button_checkOverlap; //닉네임 중복확인 버튼
 
     boolean isDuplicated;
+
     @OnClick(R.id.button_checkOverlap)
-    public void onClickCheckOverlap(){
-        if(isDuplicated==true){
+    public void onClickCheckOverlap() {
+        if (isDuplicated == true) {
             Toast.makeText(SignUpEditActivity.this, "이미 있는 닉네임이에요.. 다시 지어주세요♪", Toast.LENGTH_SHORT).show();
-        }else if(isDuplicated==false){
+        } else if (isDuplicated == false) {
             Toast.makeText(SignUpEditActivity.this, "사용 가능합니다♪", Toast.LENGTH_SHORT).show();
         }
     }

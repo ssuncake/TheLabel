@@ -25,10 +25,18 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     } //popup 메뉴로 생긴 메소드
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        Toast.makeText(itemView.getContext(), "ddd", Toast.LENGTH_SHORT).show();
+    public boolean onMenuItemClick(MenuItem item) {     // popup 메뉴로 생긴 메소드 (popup menu에 들어가 있는 item 클릭시 호출 됨)
+        switch (item.getItemId()){
+            case R.id.contents_change:
+                Toast.makeText(itemView.getContext(), "Contents Change", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.contents_delete:
+
+//                Toast.makeText(itemView.getContext(),"Contents Delete", Toast.LENGTH_SHORT).show();
+                break;
+        }
         return true;
-    } // popup 메뉴로 생긴 메소드
+    }
 
 
     public interface OnPictureContentsItemClick {
@@ -43,8 +51,6 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     public AccountTypePictureViewHolder(View itemView) {
         super(itemView);
-        itemView.setOnClickListener(this);
-        itemView.setOnLongClickListener(this);
 //        titlePictureView = (TextView)itemView.findViewById(R.id.textView_username);
         imageViewPicture = (ImageView) itemView.findViewById(R.id.image_contnet_picture);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +62,10 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
                 Log.v("Picture", "test success");
             }
         });
+        itemView.setOnClickListener(this); //popup listener
+        itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);
-        imageViewMenu.setOnClickListener(this);
+        imageViewMenu.setOnClickListener(this); //imageMenu 클릭 시 메뉴 팝업메뉴가 뜨도록
     }
 
     @Override
@@ -69,22 +77,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
             popupMenu.show();
         }
 
-//        imageViewMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//              //                new AlertDialog.Builder(itemView.getContext())
-////                        .setMessage("홍길동 님에게"+"\n"+"대표권한을 위임하겠습니까?")
-////                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-////                            @Override
-////                            public void onClick(DialogInterface dialogInterface, int i) {
-////
-////                            }
-////                        }).show();
-//                itemView.setOnCreateContextMenuListener(this);
-//            }
-//        });
     }
-
     Contents contents;
 
     public void setPictureContent(Contents contents) {
