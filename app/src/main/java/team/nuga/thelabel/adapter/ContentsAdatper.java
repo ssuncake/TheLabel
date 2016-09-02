@@ -49,19 +49,19 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         switch (viewType){
             case Contents.MUSIC:
-                ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.view_account_type_two, parent,false);
+                ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent,false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 return accounttypeOne;
             case Contents.PICTURE:
-                ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.view_account_type_three, parent,false);
+                ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent,false);
                 AccountTypePictureViewHolder accounttypeTwo = new AccountTypePictureViewHolder(viewTwo);
                 return accounttypeTwo;
             case Contents.YOUTUBE:
-                ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.view_account_type_four, parent,false);
+                ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
                 AccountTypeYoutubeViewHolder accounttypeThree = new AccountTypeYoutubeViewHolder(viewThree);
                 return accounttypeThree;
             default:
-                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.view_account_type_four, parent,false);
+                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
                 AccountTypeYoutubeViewHolder accounttypeFour = new AccountTypeYoutubeViewHolder(viewFour);
                 return accounttypeFour;
         }
