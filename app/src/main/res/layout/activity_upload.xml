@@ -13,23 +13,28 @@
         android:id="@+id/toolBar_Upload"
         android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <FrameLayout
             android:id="@+id/upload_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </FrameLayout>
+        <TextView
+            android:id="@+id/textView_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/editText_Upload"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="음원url 입력" />-->
-    </LinearLayout>
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/editText_Upload"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="음원url 입력" />-->
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -72,13 +77,13 @@
     </LinearLayout>
 
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/radioGroup_UploadRadio">
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup_UploadRadio">
 
-        </RadioGroup>
+    </RadioGroup>
 
 
     <TextView
