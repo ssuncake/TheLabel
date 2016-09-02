@@ -36,11 +36,15 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용
+    public static final String NEWLEADER = "NewLeader";
     public static final String TABINDEX = "tabindex";
 
 
     public static final int REQUEST_LIKENOTIFICATION = 200;
     public static final int REQUEST_UPLOAD = 300;
+    public static final int REQUEST_MAKELABEL = 400;
+    public static final int REQUEST_SETTINGLABEL = 410;
 
 
     @BindView(R.id.toolbar)

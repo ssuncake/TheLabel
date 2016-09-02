@@ -1,6 +1,7 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.LabelMakeActivity;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
@@ -79,31 +81,42 @@ public class LabelSelectFragment extends Fragment  {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
                 Label[] labels = result.getData();
-                for(Label l : labels){
-                    user.addLabelList(l);
-                }
-                for( int i = 0 ;  i<3 ;  i++){
-                    if(i<user.getUserInLabelList().size()){
-                        labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
+                if(labels!=null) {
+                    for (Label l : labels) {
+                        user.addLabelList(l);
                     }
-
-                    labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Log.e("레이블 클릭","뷰클릭");
-                            LabelSelectView l = (LabelSelectView)view;
-                            if(l.getEmpty())
-                            {
-                                Log.e("레이블 클릭","엠티 : "+l.getEmpty());
-                               makeLabel();
-                            }else{
-                                Log.e("레이블 클릭","레이블 이름 "+ l.getLabel().getLabelName());
-                                selectLabel(l.getLabel());
-                            }
+                    for (int i = 0; i < 3; i++) {
+                        if (i < user.getUserInLabelList().size()) {
+                            labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
                         }
-                    });
+
+                        labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.e("레이블 클릭", "뷰클릭");
+                                LabelSelectView l = (LabelSelectView) view;
+                                if (l.getEmpty()) {
+                                    Log.e("레이블 클릭", "엠티 : " + l.getEmpty());
+                                    makeLabel();
+                                } else {
+                                    Log.e("레이블 클릭", "레이블 이름 " + l.getLabel().getLabelName());
+                                    selectLabel(l.getLabel());
+                                }
+                            }
+                        });
+                    }
+                    Log.e("레이블 클릭","labels size : "+ labels.length + " user labelsize : "+ user.getUserInLabelList().size());
+                }else{
+                    for (int i = 0; i < 3; i++) {
+                        labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                makeLabel();
+                            }
+                        });
+                    }
                 }
-                Log.e("레이블 클릭","labels size : "+ labels.length + " user labelsize : "+ user.getUserInLabelList().size());
+
             }
 
             @Override
@@ -125,10 +138,9 @@ public class LabelSelectFragment extends Fragment  {
     }
 
     public void makeLabel(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.makeLabel();
-
-        //위와 동일
+        Intent intent = new Intent(getActivity(), LabelMakeActivity.class);
+        intent.putExtra(MainActivity.MAINUSER,user);
+        startActivityForResult(intent,MainActivity.REQUEST_MAKELABEL);
     }
 
     public void buttonSetting(User user){

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.R;
 
 /**
@@ -17,17 +16,17 @@ import team.nuga.thelabel.R;
 public class LabelSettingFragment extends Fragment {
 
 
-    public LabelSettingFragment() {
-        // Required empty public constructor
-    }
-
-    @OnClick(R.id.button_LabelSetting_Back)
-    public void clickBack(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.backSelectLabel();
-    }
-
-
+//    public LabelSettingFragment() {
+//        // Required empty public constructor
+//    }
+//
+//    @OnClick(R.id.button_LabelSetting_Back)
+//    public void clickBack(){
+//        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
+//        parent.backSelectLabel();
+//    }
+//
+//
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

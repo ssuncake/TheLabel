@@ -1,18 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
 
-    tools:context="team.nuga.thelabel.fragment.LabelMakeFragment">
+    tools:context="team.nuga.thelabel.LabelMakeActivity"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolBar_LabelMake"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent">>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,7 +30,7 @@
                 android:background="#aaaaff">
 
                 <ImageButton
-                    android:id="@+id/imageButton_LabelMake_ImageSetting"
+                    android:id="@+id/imageButton_LabelSetting_ImageSetting"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right|bottom" />
@@ -50,8 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 app:ms_enableFloatingLabel="false"
-                app:ms_floatingLabelText="장르"
-                app:ms_hint="장르" />
+                app:ms_floatingLabelText="@string/makelabel_inpputGenre"
+                app:ms_hint="@string/makelabel_inpputGenre" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textLaout_MakeLabel_InputText"
@@ -76,7 +82,7 @@
                     android:id="@+id/textView_MakeLabel_Need"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NEED" />
+                    android:text="@string/makelabel_need" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,9 +90,9 @@
                     android:orientation="vertical">
 
                     <RadioGroup
+                        android:id="@+id/radioGroup_MakeLabel_Need"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/radioGroup_MakeLabel_Need"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -105,16 +111,16 @@
                     </RadioGroup>
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout_MakeLabel_needPosition"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/relativeLayout_MakeLabel_needPosition">
+                        android:layout_height="wrap_content">
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_vocal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
-                            android:text="보컬" />
+                            android:text="@string/text_position_vocal" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_base"
@@ -123,7 +129,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
                             android:checked="false"
-                            android:text="베이스" />
+                            android:text="@string/text_position_base" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_piano"
@@ -133,7 +139,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/checkBox_MakeLabel_vocal"
                             android:checked="false"
-                            android:text="피아노" />
+                            android:text="@string/text_position_piano" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_drum"
@@ -143,7 +149,7 @@
                             android:layout_alignStart="@+id/checkBox_MakeLabel_base"
                             android:layout_below="@+id/checkBox_MakeLabel_base"
                             android:checked="false"
-                            android:text="드럼" />
+                            android:text="@string/text_position_drum" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_acoustic"
@@ -153,7 +159,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/checkBox_MakeLabel_drum"
                             android:checked="false"
-                            android:text="어쿠스틱" />
+                            android:text="@string/text_position_acoustic" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_etc"
@@ -163,7 +169,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/checkBox_MakeLabel_acoustic"
                             android:checked="false"
-                            android:text="etc" />
+                            android:text="@string/text_position_etc" />
 
                         <CheckBox
                             android:id="@+id/checkBox_MakeLabel_elec"
@@ -173,7 +179,7 @@
                             android:layout_alignStart="@+id/checkBox_MakeLabel_drum"
                             android:layout_below="@+id/checkBox_MakeLabel_drum"
                             android:checked="false"
-                            android:text="일렉" />
+                            android:text="@string/text_position_electricGuitar" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -185,19 +191,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button_LabelMake_Cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="생성 취소" />
+
 
                 <Button
                     android:id="@+id/button_LabelMake_Complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="생성 완료" />
+                    android:text="@string/makelabel_complete" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

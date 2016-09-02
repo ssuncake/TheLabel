@@ -1,17 +1,13 @@
-package team.nuga.thelabel.fragment;
-
+package team.nuga.thelabel;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,20 +20,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.ganfra.materialspinner.MaterialSpinner;
-import team.nuga.thelabel.MainActivity;
-import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class LabelMakeFragment extends Fragment {
-
-
-    User user;
-
-    Label newLabel;
+public class LabelMakeActivity extends AppCompatActivity {
 
     @BindView(R.id.textLayout_MakeLabel_InputName)
     TextInputLayout inputLayoutName;
@@ -55,45 +40,30 @@ public class LabelMakeFragment extends Fragment {
     @BindView(R.id.relativeLayout_MakeLabel_needPosition)
     RelativeLayout needPosition;
 
-    int selectGanre;
-
-
-    public LabelMakeFragment() {
-        // Required empty public constructor
-    }
-
-
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-       user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
-    }
-
     @OnClick(R.id.button_LabelMake_Complete)
     public void completeMakeLabel(){
         String name = editTextName.getText().toString();
         String Text = editTextText.getText().toString();
         int genreId = selectGanre;
-
-
-    }
-
-    @OnClick(R.id.button_LabelMake_Cancel)
-    public void cancelMakeLabel(){
-        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
-        parent.backSelectLabel();
     }
 
 
+
+    User user;
+    int selectGanre;
+    String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_label_make, container, false);
-        ButterKnife.bind(this,view);
-        String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, ITEMS);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_label_make);
+        user = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
+        ButterKnife.bind(this);
+
+
+        //장르선택 스피너 부분
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,13 +80,14 @@ public class LabelMakeFragment extends Fragment {
             }
         });
 
+
+        // NEED 설정 부분
         needPosition.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
             }
         });
-
         positionsClickable(false);
         editTextName.addTextChangedListener(new ErrorWatcher(editTextName));
 
@@ -137,10 +108,9 @@ public class LabelMakeFragment extends Fragment {
             }
         });
 
-
-        return view;
     }
 
+    // 니드포지션부분 클릭여부 결정
     public void positionsClickable(boolean b){
         for(int j=0 ; j<needPosition.getChildCount(); j++){
             CheckBox c =(CheckBox) needPosition.getChildAt(j);
@@ -150,7 +120,8 @@ public class LabelMakeFragment extends Fragment {
     }
 
 
-    private class ErrorWatcher implements TextWatcher{
+    //에딧 텍스트 이벤트 처리부분
+    private class ErrorWatcher implements TextWatcher {
 
         View view;
 
@@ -175,11 +146,10 @@ public class LabelMakeFragment extends Fragment {
                     if(editTextName.getText().toString().trim().isEmpty()){
                         inputLayoutName.setError(getString(R.string.makelabel_inputName_err));
                         if(view.requestFocus())
-                            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                     }
                     break;
             }
         }
     }
-
 }

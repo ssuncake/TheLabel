@@ -39,7 +39,6 @@ public class LabelContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_label_container, container, false);
 
-
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
         b.putSerializable(MainActivity.MAINUSER,user);
@@ -67,16 +66,6 @@ public class LabelContainerFragment extends Fragment {
         // 비긴트랙젝션부터 커밋까지의 내용이 취소된다.
     }
 
-
-    public void makeLabel(){
-
-        LabelMakeFragment labelMakeFragment = new LabelMakeFragment();
-        Bundle b = new Bundle();
-        b.putSerializable(MainActivity.MAINUSER,user);
-        labelMakeFragment.setArguments(b);
-        // 위와 마찬가지로 하위프래그먼트인 레이블선택프래그먼트에서 만들기버튼을 누르면 MakeLabel프래그먼트로 교체를 위한 역할을 한다.
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelMakeFragment).addToBackStack(null).commit();
-    }
 
     public void backSelectLabel(){
         getChildFragmentManager().popBackStack();

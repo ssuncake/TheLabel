@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <manifest package="com.yqritc.recyclerviewmultipleviewtypesadapter"></manifest>
+
+    <manifest package="com.yqritc.recyclerviewmultipleviewtypesadapter" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -24,11 +26,7 @@
         <activity
             android:name=".IntroActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MemberListActivity"
@@ -85,7 +83,18 @@
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".LabelMakeActivity" />
+        <activity android:name=".LabelSettingActivity" />
+        <activity
+            android:name=".TestLoginActivity"
+            android:label="@string/title_activity_test_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

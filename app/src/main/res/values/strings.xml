@@ -19,6 +19,29 @@
         홍대 버스킹 환영합니다!\n[더레이블] 매주 토요일\n메세나폴리스 8시 공연!
     </string>
 
+    <!--장르 및 포지션 -->
+
+    <string name="text_position_vocal">보컬</string>
+    <string name="text_position_piano">피아노</string>
+    <string name="text_position_acoustic">어쿠스틱</string>
+    <string name="text_position_elec">일렉</string>
+    <string name="text_position_base">베이스</string>
+    <string name="text_position_etc">etc</string>
+    <string name="text_position_guitar">기타</string>
+    <string name="text_position_electricGuitar">일렉기타</string>
+    <string name="text_position_drum">드럼</string>
+    <string name="text_position_keyboard">키보드</string>
+
+    <string name="text_genre_Song">가요</string>
+    <string name="text_genre_RnBSoul">R<![CDATA["&"]]>B/SOUL</string>
+    <string name="text_genre_Rock">락</string>
+    <string name="text_genre_Jazz">재즈</string>
+    <string name="text_genre_RapHiphop">랩/힙합</string>
+    <string name="text_genre_NewAge">뉴에이지</string>
+    <string name="text_genre_Pop">팝</string>
+    <string name="text_genre_CCM">CCM</string>
+    <string name="text_genre_Electronica">일렉트로니카</string>
+    <string name="text_genre_AcousticPork">어쿠스틱/포크</string>
 
     <!--회원가입화면-->
     <string name="text_agree_service">서비스 이용약관 동의 (필수)</string>
@@ -48,27 +71,6 @@
     <string name="text_Position">포지션</string>
     <string name="text_Genre">장르</string>
 
-    <string name="text_position_vocal">보컬</string>
-    <string name="text_position_piano">피아노</string>
-    <string name="text_position_acoustic">어쿠스틱</string>
-    <string name="text_position_elec">일렉</string>
-    <string name="text_position_base">베이스</string>
-    <string name="text_position_etc">etc</string>
-    <string name="text_position_guitar">기타</string>
-    <string name="text_position_electricGuitar">일렉기타</string>
-    <string name="text_position_drum">드럼</string>
-    <string name="text_position_keyboard">키보드</string>
-
-    <string name="text_genre_Song">가요</string>
-    <string name="text_genre_RnBSoul">R<![CDATA["&"]]>B/SOUL</string>
-    <string name="text_genre_Rock">락</string>
-    <string name="text_genre_Jazz">재즈</string>
-    <string name="text_genre_RapHiphop">랩/힙합</string>
-    <string name="text_genre_NewAge">뉴에이지</string>
-    <string name="text_genre_Pop">팝</string>
-    <string name="text_genre_CCM">CCM</string>
-    <string name="text_genre_Electronica">일렉트로니카</string>
-    <string name="text_genre_AcousticPork">어쿠스틱/포크</string>
 
     <string name="text_SignUpComplete">가입완료</string>
 
@@ -191,10 +193,18 @@
     </string>
 
 
-    <!-- Make Label 사용-->
+    <!-- 레이블 생성 및 설정에서 사용 사용-->
     <string name="makelabel_inputName">레이블 이름</string>
     <string name="makelabel_inputText">소개글 (50자 이내)</string>
-    <string name="makelabel_inpputGenre">장르 선택</string>
+    <string name="makelabel_inpputGenre">장르</string>
     <string name="makelabel_need">NEED</string>
     <string name="makelabel_inputName_err">이름을 입력해주세요</string>
+
+    <string name="makelabel_complete">생성 완료</string>
+    <string name="settinglabel_complete">설정 완료</string>
+    <string name="settinglabel_profile_edit">프로필 수정</string>
+    <string name="settinglabel_member_manage">마스터 권한 및 맴버 관리</string>
+    <string name="settinglabel_entrust">권한 위임</string>
+    <string name="settinglabel_finemember">맴버 탈퇴</string>
+    <string name="title_activity_test_login">Sign in</string>
 </resources>

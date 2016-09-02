@@ -37,7 +37,6 @@ public class LabelMainFragment extends Fragment {
         Intent intent = new Intent(getActivity(), EntrustLeaderActivity.class);
         startActivity(intent);
     }
-
     @OnClick(R.id.button_firemember)
     void firememberOnClick(){
         Intent intent = new Intent(getActivity(), FireMemberActivity.class);
