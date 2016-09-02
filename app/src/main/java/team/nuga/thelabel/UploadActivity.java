@@ -114,8 +114,6 @@ public class UploadActivity extends AppCompatActivity {
         button = new RadioButton(this);
         button.setText("비공개");
         radioGroup.addView(button);
-
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
