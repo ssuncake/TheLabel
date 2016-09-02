@@ -199,7 +199,6 @@
     <string name="makelabel_inpputGenre">장르</string>
     <string name="makelabel_need">NEED</string>
     <string name="makelabel_inputName_err">이름을 입력해주세요</string>
-
     <string name="makelabel_complete">생성 완료</string>
     <string name="settinglabel_complete">설정 완료</string>
     <string name="settinglabel_profile_edit">프로필 수정</string>
@@ -207,4 +206,9 @@
     <string name="settinglabel_entrust">권한 위임</string>
     <string name="settinglabel_finemember">맴버 탈퇴</string>
     <string name="title_activity_test_login">Sign in</string>
+
+
+    <!-- 레이블 메인-->
+    <string name="labelmain_memberlist">구성 멤버</string>
+    <string name="labelmain_plusmember">+더보기</string>
 </resources>

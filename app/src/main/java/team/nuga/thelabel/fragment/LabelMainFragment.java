@@ -4,6 +4,9 @@ package team.nuga.thelabel.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,10 @@ import team.nuga.thelabel.FireMemberActivity;
 import team.nuga.thelabel.LabelSettingActivity;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.wiget.LabelMainTop;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +41,10 @@ public class LabelMainFragment extends Fragment {
     Button firememberbutton;
     @BindView(R.id.textView_LabelMain_LabelName)
     TextView labelNameView;
+    @BindView(R.id.view_LabelMainTop)
+    LabelMainTop labelMainTop;
+    @BindView(R.id.recyclerView_LabelMain_Member)
+    RecyclerView memberRecycler;
 
     @OnClick(R.id.button_entrustLeader)
     void entrustLeaderOnClick(){
@@ -59,6 +69,8 @@ public class LabelMainFragment extends Fragment {
         startActivityForResult(intent,MainActivity.REQUEST_SETTINGLABEL);
     }
 
+    LabelMainListAdapter adapter;
+
     public LabelMainFragment() {
         // Required empty public constructor
     }
@@ -69,14 +81,37 @@ public class LabelMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_label_main, container, false);
         ButterKnife.bind(this,view);
-        labelSetting();
+
+
+        try{
+            // 이부분에서 주어지는 레이블 아이디를 받아서 서버에서 레이블 정보를 받아 설정해야하지만 서버가 구현안함 ㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂ
+        }catch (NullPointerException e){
+            Log.e("레이블 메인","레이블 전달받기 실패");
+            e.printStackTrace();
+        }
+        labelMainTop = new LabelMainTop(getContext(),null);
+        labelMainTop.setLabel(label);
+
+        adapter = new LabelMainListAdapter();
+        memberRecycler.setAdapter(adapter);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        memberRecycler.setLayoutManager(manager);
+
+        dummyAddmember();
+
+
         return view;
     }
 
-
-    public void labelSetting(){
-        labelName = getArguments().getString("LabelName"); // 부모프래그먼트로부터 전달받은 번들에서 레이블 이름을꺼내 세팅
-        labelNameView.setText(labelName);
+    public void dummyAddmember(){
+        for(int i=0;i<30;i++){
+            User user = new User();
+            user.setUserName("유저 "+i);
+            adapter.addUser(user);
+        }
     }
+
+
 
 }

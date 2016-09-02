@@ -7,58 +7,99 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_weight="0.5"
-        android:layout_marginTop="20dp"
-        android:id="@+id/button_entrustLeader"
-        android:layout_gravity="center_horizontal"
-        android:text="권한위임" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2" >
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <team.nuga.thelabel.wiget.LabelMainTop
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/view_LabelMainTop"
+                android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_weight="0.5"
-        android:id="@+id/button_firemember"
-        android:layout_gravity="center_horizontal"
-        android:text="멤버탈퇴" />
+            <FrameLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView_LabelMain_LabelName"
-        android:layout_gravity="center"
-        android:layout_weight="3"
-        android:gravity="bottom"
-        android:textColor="#ff0000" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/labelmain_memberlist"
+                    android:id="@+id/textView_LabelMain_MemberTitle"
+                    android:layout_gravity="center" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="레이블 선택후 메인화면 프레그먼트"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:layout_weight="2"
-        android:textColor="#ff0000" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/labelmain_plusmember"
+                    android:id="@+id/button_LabelMain_Memberlist"
+                    android:layout_gravity="right" />
+            </FrameLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="레이블 세팅"
-        android:id="@+id/button_LabelMain_goSetting"
-        android:layout_gravity="center_horizontal" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerView_LabelMain_Member" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="레이블 선택으로 돌아가기"
-        android:id="@+id/button_LabelMain_back"
-        android:layout_gravity="center_horizontal" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+                android:id="@+id/button_entrustLeader"
+                android:layout_gravity="center_horizontal"
+                android:text="권한위임" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/button_firemember"
+                android:layout_gravity="center_horizontal"
+                android:text="멤버탈퇴" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textView_LabelMain_LabelName"
+                android:layout_gravity="center"
+                android:gravity="bottom"
+                android:textColor="#ff0000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="레이블 선택후 메인화면 프레그먼트"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
+                android:textColor="#ff0000" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="레이블 세팅"
+                android:id="@+id/button_LabelMain_goSetting"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="레이블 선택으로 돌아가기"
+                android:id="@+id/button_LabelMain_back"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

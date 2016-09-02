@@ -10,7 +10,6 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
@@ -127,19 +126,7 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1116";
         goMain(email,password);
     }
-    @OnClick(R.id.button_testlogin_17)
-    public void click17()
-    {
-        User user = new User();
-        user.setUserName("더미유저");
-        Label label = new Label();
-        label.setLabelName("더미레이블 1");
-        user.getUserInLabelList().add(label);
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("LoginUser",user);
-        startActivity(intent);
-        finish();
-    }
+
 
     @BindView(R.id.editText_testinpuid)
     EditText inputid;

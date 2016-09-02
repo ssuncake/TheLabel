@@ -31,10 +31,6 @@ public class Label implements Serializable {
         return labelID;
     }
 
-    public void setLabelID(int labelID) {
-        this.labelID = labelID;
-    }
-
 
     public String getLabelName() {
         return labelName;
@@ -53,17 +49,8 @@ public class Label implements Serializable {
         return labelGenre;
     }
 
-    public void setLabelGenre(String labelGenre) {
-        this.labelGenre = labelGenre;
-    }
 
-    public HashSet<Integer> getLabelLikeUser() {
-        return labelLikeUser;
-    }
 
-    public void setLabelLikeUser(HashSet<Integer> labelLikeUser) {
-        this.labelLikeUser = labelLikeUser;
-    }
 
 
 }

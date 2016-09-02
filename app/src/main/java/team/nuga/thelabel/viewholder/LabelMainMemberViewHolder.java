@@ -1,0 +1,33 @@
+package team.nuga.thelabel.viewholder;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.User;
+
+/**
+ * Created by Tacademy on 2016-09-02.
+ */
+public class LabelMainMemberViewHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.textView_LabelMainMember_MemberName)
+    TextView memberName;
+    @BindView(R.id.textView_LabelMainMember_MemberPosition)
+    TextView memberPosition;
+    @BindView(R.id.imageView_LabelMainMember_MemberImage)
+    ImageView memberImage;
+
+    public LabelMainMemberViewHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this,itemView);
+    }
+
+    public void setUser(User user){
+
+    }
+}

@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity
 
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
     public static final String MAINUSERINLABELS = "MainUserInLabels";
-    public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용
+    public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용 레이블객체를 직접 이동
+    public static final String LABELID = "labelId"; // 레이블의 아이디만 전달할때 이용
+
     public static final String NEWLEADER = "NewLeader";
     public static final String TABINDEX = "tabindex";
 
