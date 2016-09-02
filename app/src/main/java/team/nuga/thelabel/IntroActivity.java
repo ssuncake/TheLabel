@@ -101,7 +101,6 @@ public void moveMainActivity(User user){
         Intent intent = new Intent(IntroActivity.this,MainActivity.class);
         intent.putExtra("LoginUser",user);
         startActivity(intent);
-        finish();
         }
 
-        }
+}

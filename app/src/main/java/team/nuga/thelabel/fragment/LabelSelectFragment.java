@@ -81,6 +81,24 @@ public class LabelSelectFragment extends Fragment  {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
                 Label[] labels = result.getData();
+                for(int i=0;i<3;i++){
+                    labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("레이블 클릭", "뷰클릭");
+                            LabelSelectView l = (LabelSelectView) view;
+                            if (l.getEmpty()) {
+                                Log.e("레이블 클릭", "엠티 : " + l.getEmpty());
+                                makeLabel();
+                            } else {
+                                Log.e("레이블 클릭", "레이블 이름 " + l.getLabel().getLabelName());
+                                selectLabel(l.getLabel());
+                            }
+                        }
+                    });
+                }
+
+
                 if(labels!=null) {
                     for (Label l : labels) {
                         user.addLabelList(l);
@@ -89,34 +107,9 @@ public class LabelSelectFragment extends Fragment  {
                         if (i < user.getUserInLabelList().size()) {
                             labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
                         }
-
-                        labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Log.e("레이블 클릭", "뷰클릭");
-                                LabelSelectView l = (LabelSelectView) view;
-                                if (l.getEmpty()) {
-                                    Log.e("레이블 클릭", "엠티 : " + l.getEmpty());
-                                    makeLabel();
-                                } else {
-                                    Log.e("레이블 클릭", "레이블 이름 " + l.getLabel().getLabelName());
-                                    selectLabel(l.getLabel());
-                                }
-                            }
-                        });
                     }
                     Log.e("레이블 클릭","labels size : "+ labels.length + " user labelsize : "+ user.getUserInLabelList().size());
-                }else{
-                    for (int i = 0; i < 3; i++) {
-                        labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                makeLabel();
-                            }
-                        });
-                    }
                 }
-
             }
 
             @Override

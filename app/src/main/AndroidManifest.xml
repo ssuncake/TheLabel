@@ -88,7 +88,7 @@
         <activity android:name=".LabelSettingActivity" />
         <activity
             android:name=".TestLoginActivity"
-            android:label="@string/title_activity_test_login" >
+            android:label="TheLabel" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
