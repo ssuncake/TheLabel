@@ -17,11 +17,14 @@ public class Label implements Serializable {
     private boolean labelNeed;
     @SerializedName("label_name")
     private String labelName;
-
+    @SerializedName("text")
     private String labelProfile;
+
     private ArrayList<User> labelMemberList;
     private ArrayList<Position> labelNeedPositionList;
-    private ArrayList<Genre> labelGenre;
+    @SerializedName("need_genre")
+    private String labelGenre;
+
     private HashSet<Integer> labelLikeUser;
 
     public int getLabelID() {
@@ -32,29 +35,6 @@ public class Label implements Serializable {
         this.labelID = labelID;
     }
 
-    public int getLabelILike() {
-        return labelILike;
-    }
-
-    public void setLabelILike(int labelILike) {
-        this.labelILike = labelILike;
-    }
-
-    public int getLabelLeaderID() {
-        return labelLeaderID;
-    }
-
-    public void setLabelLeaderID(int labelLeaderID) {
-        this.labelLeaderID = labelLeaderID;
-    }
-
-    public boolean isLabelNeed() {
-        return labelNeed;
-    }
-
-    public void setLabelNeed(boolean labelNeed) {
-        this.labelNeed = labelNeed;
-    }
 
     public String getLabelName() {
         return labelName;
@@ -68,31 +48,12 @@ public class Label implements Serializable {
         return labelProfile;
     }
 
-    public void setLabelProfile(String labelProfile) {
-        this.labelProfile = labelProfile;
-    }
 
-    public ArrayList<User> getLabelMemberList() {
-        return labelMemberList;
-    }
-
-    public void setLabelMemberList(ArrayList<User> labelMemberList) {
-        this.labelMemberList = labelMemberList;
-    }
-
-    public ArrayList<Position> getLabelNeedPositionList() {
-        return labelNeedPositionList;
-    }
-
-    public void setLabelNeedPositionList(ArrayList<Position> labelNeedPositionList) {
-        this.labelNeedPositionList = labelNeedPositionList;
-    }
-
-    public ArrayList<Genre> getLabelGenre() {
+    public String getLabelGenre() {
         return labelGenre;
     }
 
-    public void setLabelGenre(ArrayList<Genre> labelGenre) {
+    public void setLabelGenre(String labelGenre) {
         this.labelGenre = labelGenre;
     }
 

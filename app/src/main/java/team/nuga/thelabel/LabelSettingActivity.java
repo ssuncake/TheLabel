@@ -17,10 +17,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.GetLabelByIdRequest;
 
 public class LabelSettingActivity extends AppCompatActivity {
 
     public static final int REQUEST_ENTRUSTLEADER = 510;
+    public static final int REQUEST_FIREMEMBER = 520;
 
     @BindView(R.id.textLayout_LabelSetting_InputName)
     TextInputLayout inputLayoutName;
@@ -38,7 +43,7 @@ public class LabelSettingActivity extends AppCompatActivity {
     @BindView(R.id.relativeLayout_LabelSetting_needPosition)
     RelativeLayout needPosition;
 
-    @OnClick(R.id.button_LabelMake_Complete)
+    @OnClick(R.id.button_LabelSetting_Complete)
     public void completeMakeLabel(){
         String name = editTextName.getText().toString();
         String Text = editTextText.getText().toString();
@@ -46,15 +51,23 @@ public class LabelSettingActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.button_LabelSetting_Entrust)
-            public void EntrustMember(){
+    public void entrustMember(){
         Intent intent = new Intent(this,EntrustLeaderActivity.class);
         intent.putExtra(MainActivity.SELECTLABEL,label);
         startActivityForResult(intent,REQUEST_ENTRUSTLEADER);
     }
 
+    @OnClick(R.id.button_LabelSetting_Entrust)
+    public void fireMember(){
+        Intent intent = new Intent(this,FireMemberActivity.class);
+        intent.putExtra(MainActivity.SELECTLABEL,label);
+        startActivityForResult(intent,REQUEST_FIREMEMBER);
+    }
+
 
 
     Label label;
+    Label newLabel;
     int selectGanre;
     String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
 
@@ -63,6 +76,25 @@ public class LabelSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label_setting);
         ButterKnife.bind(this);
+
+        label=(Label)getIntent().getSerializableExtra(MainActivity.SELECTLABEL);
+        int labelId = label.getLabelID();
+        Log.e("레이블 세팅","전달받은 레이블 id : "+labelId);
+
+        GetLabelByIdRequest request = new GetLabelByIdRequest(this,labelId);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<Label>> request, NetworkResult<Label> result) {
+                newLabel = result.getLabel();
+                Log.e("레이블 세팅","네트워크로 받은 레이블: "+newLabel.getLabelName()+" // 소개글 :  "+newLabel.getLabelProfile()+" //장르 "+newLabel.getLabelGenre());
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<Label>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("레이블 세팅","레이블 리퀘스트 실패+ "+errorMessage);
+            }
+        });
+
 
         //장르선택 스피너 부분
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ITEMS);
@@ -78,7 +110,7 @@ public class LabelSettingActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 selectGanre = 1;
-                Log.e("레이블 생성","장르 선택 : "+selectGanre);
+                Log.e("레이블 생성","장르 선택 안함");
             }
         });
     }

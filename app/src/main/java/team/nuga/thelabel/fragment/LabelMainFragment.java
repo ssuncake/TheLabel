@@ -15,7 +15,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.EntrustLeaderActivity;
 import team.nuga.thelabel.FireMemberActivity;
+import team.nuga.thelabel.LabelSettingActivity;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.Label;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +27,7 @@ public class LabelMainFragment extends Fragment {
 
 
     private String labelName;
+    Label label;
 
     @BindView(R.id.button_entrustLeader)
     Button entrustLeaderbutton;
@@ -50,8 +54,9 @@ public class LabelMainFragment extends Fragment {
     }
     @OnClick(R.id.button_LabelMain_goSetting)
     public void clickSettingButton(){
-        team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();
-        parent.labelSetting(labelName);
+        Intent intent = new Intent(getActivity(), LabelSettingActivity.class);
+        intent.putExtra(MainActivity.SELECTLABEL,label);
+        startActivityForResult(intent,MainActivity.REQUEST_SETTINGLABEL);
     }
 
     public LabelMainFragment() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import android.view.ViewGroup;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.LabelSelectRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +25,7 @@ import team.nuga.thelabel.data.User;
 public class LabelContainerFragment extends Fragment {
 
     User user;
+    Label[] labels;
 
 
 
@@ -39,14 +45,43 @@ public class LabelContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_label_container, container, false);
 
+        LabelSelectRequest request = new LabelSelectRequest(getContext());
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label[]>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
+                Label[] labels = result.getData();
+
+                if (labels != null) {
+                    for (Label l : labels) {
+                        user.addLabelList(l);
+                    }
+
+                    Log.e("레이블 클릭", "labels size : " + labels.length + " user labelsize : " + user.getUserInLabelList().size());
+
+                    init();
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<Label[]>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("레이블 선택", "불러오기 실패");
+            }
+        });
+
+
+
+
+
+        return view;
+    }
+
+    public void init(){
         LabelSelectFragment labelSelectFragment =  new LabelSelectFragment();
         Bundle b  = new Bundle();
         b.putSerializable(MainActivity.MAINUSER,user);
         labelSelectFragment.setArguments(b);
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,labelSelectFragment).commit();
         //처음 탭화면에서 레이블을 선택하게되면 FragmentContainer가 호출되고 그아래에 차일드프래그먼트로 바로 LabelSelectFragment를 호출한다.
-
-        return view;
     }
 
     public void selectLabel(Label label){
@@ -86,13 +121,6 @@ public class LabelContainerFragment extends Fragment {
 
 
 
-    public void labelSetting(String labelName){
-        // 하위프래그먼트에서 레이블 세팅을 위해 만들어둔 메소드. 위와 동일
-        Bundle bundle = new Bundle();
-        bundle.putString("LabelName",labelName);
-        team.nuga.thelabel.fragment.LabelSettingFragment selectedLabelFragment = new team.nuga.thelabel.fragment.LabelSettingFragment();
-        selectedLabelFragment.setArguments(bundle);
-        getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).addToBackStack(null).commit();
-    }
+
 
 }

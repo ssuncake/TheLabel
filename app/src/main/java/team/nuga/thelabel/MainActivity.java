@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String MAINUSERINLABELS = "MainUserInLabels";
     public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용
     public static final String NEWLEADER = "NewLeader";
     public static final String TABINDEX = "tabindex";
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity
             mainUser = user;
         }
 
-        Toast.makeText(MainActivity.this, "ㅎㅎ+"+user.getUserName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "로그인 유저 : "+user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
 
         bundle = new Bundle();

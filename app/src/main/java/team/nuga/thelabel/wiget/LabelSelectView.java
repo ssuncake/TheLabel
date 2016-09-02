@@ -12,25 +12,36 @@ import team.nuga.thelabel.data.Label;
 /**
  * Created by Tacademy on 2016-08-29.
  */
-public class LabelSelectView extends FrameLayout  implements View.OnClickListener{
+public class LabelSelectView extends FrameLayout {
+
 
     private boolean isEmpty = true;
     Label label;
     int index;
+    Context context;
 
     public LabelSelectView(Context context,int index) {
         super(context);
+        this.context  = context;
         this.index = index;
         init();
     }
 
-    ImageView settingView;
+    public ImageView settingView;
     TextView labelTitleView;
 
     public void init() {
         inflate(getContext(), R.layout.view_label_select, this);
         settingView = (ImageView) findViewById(R.id.imageview_label_select_setting);
+        settingView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listener!=null)
+                    listener.onSettingClick(label);
+            }
+        });
         settingView.setVisibility(INVISIBLE);
+
         labelTitleView = (TextView) findViewById(R.id.textview_label_select);
     }
 
@@ -41,7 +52,6 @@ public class LabelSelectView extends FrameLayout  implements View.OnClickListene
         settingView.setVisibility(VISIBLE);
         labelTitleView.setText(label.getLabelName());
         isEmpty = false;
-
     }
 
     public Label getLabel() {
@@ -64,8 +74,17 @@ public class LabelSelectView extends FrameLayout  implements View.OnClickListene
         this.index = index;
     }
 
-    @Override
-    public void onClick(View view) {
 
+
+
+
+    public interface  OnSettingImageClickListener{
+        public void onSettingClick(Label label);
+    }
+
+    OnSettingImageClickListener listener;
+
+    public void setOnSettingImageClickListener(OnSettingImageClickListener listener){
+        this.listener = listener;
     }
 }

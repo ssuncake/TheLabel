@@ -8,6 +8,8 @@ public class NetworkResult<T> {
     private T user;
     private T data;
     private T error;
+    private T label;
+
 
 
     public boolean isError(){
@@ -23,5 +25,9 @@ public class NetworkResult<T> {
 
     public T getData() {
         return this.data;
+    }
+
+    public T getLabel() {
+        return label;
     }
 }

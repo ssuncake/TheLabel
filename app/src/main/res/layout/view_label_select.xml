@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="175dp"
     android:paddingBottom="5dp"
     android:layout_weight="1"
@@ -12,31 +12,18 @@
         android:src="@drawable/label_make"
         android:background="@color/color_white" />
 
-
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/setting"
+        android:id="@+id/imageview_label_select_setting"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/imageView_label_select_Profile"
-       >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/setting"
-            android:id="@+id/imageview_label_select_setting"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp" />
-
-    </RelativeLayout>
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="right|top" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +33,9 @@
         android:textColor="@color/cardview_dark_background"
         android:gravity="center"
         android:layout_marginBottom="30dp"
-        android:layout_alignBottom="@+id/imageView_label_select_Profile"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|bottom" />
 
-</RelativeLayout>
+
+</FrameLayout>
