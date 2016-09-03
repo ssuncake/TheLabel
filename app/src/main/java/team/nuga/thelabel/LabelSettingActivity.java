@@ -17,10 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import team.nuga.thelabel.data.Label;
-import team.nuga.thelabel.data.NetworkResult;
-import team.nuga.thelabel.manager.NetworkManager;
-import team.nuga.thelabel.manager.NetworkRequest;
-import team.nuga.thelabel.request.GetLabelByIdRequest;
+import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 
 public class LabelSettingActivity extends AppCompatActivity {
 
@@ -81,19 +78,19 @@ public class LabelSettingActivity extends AppCompatActivity {
         int labelId = label.getLabelID();
         Log.e("레이블 세팅","전달받은 레이블 id : "+labelId);
 
-        GetLabelByIdRequest request = new GetLabelByIdRequest(this,labelId);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label>>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResult<Label>> request, NetworkResult<Label> result) {
-                newLabel = result.getLabel();
-                Log.e("레이블 세팅","네트워크로 받은 레이블: "+newLabel.getLabelName()+" // 소개글 :  "+newLabel.getLabelProfile()+" //장르 "+newLabel.getLabelGenre());
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResult<Label>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("레이블 세팅","레이블 리퀘스트 실패+ "+errorMessage);
-            }
-        });
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId);
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label>>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<NetworkResult<Label>> request, NetworkResult<Label> result) {
+//                newLabel = result.getLabel();
+//                Log.e("레이블 세팅","네트워크로 받은 레이블: "+newLabel.getLabelName()+" // 소개글 :  "+newLabel.getLabelProfile()+" //장르 "+newLabel.getLabelGenre());
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<NetworkResult<Label>> request, int errorCode, String errorMessage, Throwable e) {
+//                Log.e("레이블 세팅","레이블 리퀘스트 실패+ "+errorMessage);
+//            }
+//        });
 
 
         //장르선택 스피너 부분

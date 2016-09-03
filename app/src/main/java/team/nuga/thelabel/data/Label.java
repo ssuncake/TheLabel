@@ -3,7 +3,6 @@ package team.nuga.thelabel.data;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -11,17 +10,22 @@ import java.util.HashSet;
  */
 public class Label implements Serializable {
     @SerializedName("id")
-    private int labelID;
-    private int labelILike;
+    private int labelID; // 레이블 셀렉에서 이걸로사용
+
+    private int label_id; // 레이블 메인에선 이거사용용
+   private int labelILike;
     private int labelLeaderID;
+
     private boolean labelNeed;
     @SerializedName("label_name")
     private String labelName;
     @SerializedName("text")
     private String labelProfile;
 
-    private ArrayList<User> labelMemberList;
-    private ArrayList<Position> labelNeedPositionList;
+
+    @SerializedName("need_position")
+    private String[] labelNeedPositionList;
+
     @SerializedName("need_genre")
     private String labelGenre;
 

@@ -23,7 +23,11 @@ import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.NetworkResultLabeMain;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 import team.nuga.thelabel.wiget.LabelMainTop;
 
 /**
@@ -82,9 +86,26 @@ public class LabelMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_label_main, container, false);
         ButterKnife.bind(this,view);
 
+        int id = getArguments().getInt(MainActivity.LABELID);
+
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),id);
+
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
+                Log.e("레이블 메인","page "+result.getPage()+"  count "+result.getCount());
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResultLabeMain> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("레이블 메인","레이블 찾기 실패 : "+errorMessage);
+            }
+        });
+
+
 
         try{
-            // 이부분에서 주어지는 레이블 아이디를 받아서 서버에서 레이블 정보를 받아 설정해야하지만 서버가 구현안함 ㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂㄷㅂ
+
         }catch (NullPointerException e){
             Log.e("레이블 메인","레이블 전달받기 실패");
             e.printStackTrace();

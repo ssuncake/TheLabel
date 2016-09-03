@@ -17,12 +17,15 @@ import team.nuga.thelabel.data.NetworkResult;
  */
 public class LabelSelectRequest extends AbstractRequest<NetworkResult<Label[]>> {
 
+
+
     private static final String PATH = "labels";
 
     Request request;
     public LabelSelectRequest(Context context) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegments(PATH)
+                .addQueryParameter("labelPage","true")
                 .build();
 
 

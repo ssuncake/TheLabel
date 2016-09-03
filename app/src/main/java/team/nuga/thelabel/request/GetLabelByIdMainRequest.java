@@ -8,21 +8,23 @@ import java.lang.reflect.Type;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
-import team.nuga.thelabel.data.Label;
-import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultLabeMain;
 
 
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class GetLabelByIdRequest extends AbstractRequest<NetworkResult<Label>> {
+public class GetLabelByIdMainRequest extends AbstractRequest<NetworkResultLabeMain> {
 
-    private static final String PATH = "labels?setting=false&label_id=";
+    private static final String PATH = "labels/";
+    private static final String PATH2 = ":label_id";
 
     Request request;
-    public GetLabelByIdRequest(Context context, int id) {
+    public GetLabelByIdMainRequest(Context context, int id) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(PATH+id)
+                .addPathSegments(PATH+id+PATH2)
+                .addQueryParameter("page","1")
+                .addQueryParameter("count","10")
                 .build();
 
 
@@ -36,7 +38,7 @@ public class GetLabelByIdRequest extends AbstractRequest<NetworkResult<Label>> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NetworkResult<Label>>(){}.getType();
+        return new TypeToken<NetworkResultLabeMain>(){}.getType();
     }
 
     @Override

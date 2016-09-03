@@ -63,7 +63,7 @@ public class LabelContainerFragment extends Fragment {
 
             @Override
             public void onFail(NetworkRequest<NetworkResult<Label[]>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("레이블 선택", "불러오기 실패");
+                Log.e("레이블 선택", "불러오기 실패 "+errorMessage);
             }
         });
 
