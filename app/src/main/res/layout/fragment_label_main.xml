@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="team.nuga.thelabel.fragment.LabelMainFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/color_white">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -26,7 +27,8 @@
             <FrameLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/labelmain_title"
+                android:background="@color/maintitle_blue"
                 >
 
                 <TextView
@@ -41,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/labelmain_plusmember"
                     android:id="@+id/button_LabelMain_Memberlist"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="right"
+                    android:background="@color/maintitle_blue"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -50,41 +53,21 @@
                 android:id="@+id/recyclerView_LabelMain_Member"
                 android:padding="5dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20dp"
-                android:id="@+id/button_entrustLeader"
-                android:layout_gravity="center_horizontal"
-                android:text="권한위임" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:id="@+id/button_firemember"
-                android:layout_gravity="center_horizontal"
-                android:text="멤버탈퇴" />
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView_LabelMain_LabelName"
-                android:layout_gravity="center"
-                android:gravity="bottom"
-                android:textColor="#ff0000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="레이블 선택후 메인화면 프레그먼트"
-                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/labelmain_title"
+                android:text="@string/labelmain_labecontents"
+                android:id="@+id/textView_LabelMain_ContentsTitle"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical"
-                android:textColor="#ff0000" />
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/maintitle_blue"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/labelmain_contents_heigh"
+                android:id="@+id/recyclerView_LabelMain_Contetns"
+                android:layout_gravity="center_horizontal" />
 
             <Button
                 android:layout_width="wrap_content"

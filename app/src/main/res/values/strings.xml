@@ -211,4 +211,5 @@
     <!-- 레이블 메인-->
     <string name="labelmain_memberlist">구성 멤버</string>
     <string name="labelmain_plusmember">+더보기</string>
+    <string name="labelmain_labecontents">레이블 소식</string>
 </resources>

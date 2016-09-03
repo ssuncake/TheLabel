@@ -33,7 +33,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
             }
         });
         userphotoView = (ImageView)itemView.findViewById(R.id.image_user);
-        usernameView = (TextView)itemView.findViewById(R.id.text_username);
+        usernameView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
     }
     User user;
 

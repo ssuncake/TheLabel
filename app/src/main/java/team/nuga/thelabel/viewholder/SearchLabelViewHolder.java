@@ -30,7 +30,7 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-        labelnameView = (TextView)itemView.findViewById(R.id.text_username);
+        labelnameView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
     }
     Label label;
     public void setLabel(Label label){

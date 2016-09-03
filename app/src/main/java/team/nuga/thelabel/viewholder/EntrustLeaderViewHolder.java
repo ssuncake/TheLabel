@@ -36,7 +36,7 @@ public class EntrustLeaderViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-        entrustleaderView = (TextView)itemView.findViewById(R.id.text_username);
+        entrustleaderView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
         entrustleaderbutton = (Button)itemView.findViewById(R.id.button_etrustleader) ;
         entrustleaderbutton.setOnClickListener(new View.OnClickListener() {
             @Override

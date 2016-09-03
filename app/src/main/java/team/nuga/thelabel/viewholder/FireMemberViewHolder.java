@@ -35,7 +35,7 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-        firememberView = (TextView)itemView.findViewById(R.id.text_username);
+        firememberView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
         firememberbutton = (Button)itemView.findViewById(R.id.button_subfiremember) ;
         firememberbutton.setOnClickListener(new View.OnClickListener() {
             @Override

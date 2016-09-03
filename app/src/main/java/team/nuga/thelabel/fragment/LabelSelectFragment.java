@@ -89,8 +89,10 @@ public class LabelSelectFragment extends Fragment  {
         }
 
         for (int i = 0; i < 3; i++) {
-            if (i < user.getUserInLabelList().size()) {
-                labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
+            if(user.getUserInLabelList() != null) {
+                if (i < user.getUserInLabelList().size()) {
+                    labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
+                }
             }
         }
 

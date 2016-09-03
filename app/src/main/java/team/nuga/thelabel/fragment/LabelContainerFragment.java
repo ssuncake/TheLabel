@@ -57,8 +57,9 @@ public class LabelContainerFragment extends Fragment {
                     }
 
                     Log.e("레이블 클릭", "labels size : " + labels.length + " user labelsize : " + user.getUserInLabelList().size());
-                    init();
+
                 }
+                init();
             }
 
             @Override

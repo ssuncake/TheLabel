@@ -39,5 +39,8 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!--label main 속성값-->
+    <dimen name="labelmain_title">30dp</dimen>
+    <dimen name="labelmain_contents_heigh">500dp</dimen>
 
 </resources>

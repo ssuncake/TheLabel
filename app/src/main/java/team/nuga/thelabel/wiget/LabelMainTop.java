@@ -20,7 +20,7 @@ import team.nuga.thelabel.data.Label;
  */
 public class LabelMainTop extends LinearLayout {
 
-    Boolean isMyLabel=true;
+    
     Boolean isNeed=true;
     Label label;
 
@@ -51,17 +51,6 @@ public class LabelMainTop extends LinearLayout {
         ButterKnife.bind(this);
 
 
-        //내 레이블이 아닐경우 표시
-        if(isMyLabel){
-            requestJoin.setVisibility(INVISIBLE);
-        }else{
-            requestJoin.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getContext(), "가입요청 누름", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
 
         // 레이블이 구인중일 때 표시
         if(!isNeed){
@@ -85,9 +74,24 @@ public class LabelMainTop extends LinearLayout {
     public void setLabel(Label label){
         if(label!=null){
             this.label = label;
+            Log.w("레이블 메인탑뷰","전달받은 레이블 : "+label.getLabelName());
         }else{
             Log.e("레이블 메인탑뷰","받은 레이블이 Null");
         }
         init();
+    }
+
+    public void setIsMyLabel(boolean b){
+        //내 레이블이 아닐경우 표시
+        if(b){
+            requestJoin.setVisibility(INVISIBLE);
+        }else{
+            requestJoin.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "가입요청 누름", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

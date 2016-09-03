@@ -10,16 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import team.nuga.thelabel.EntrustLeaderActivity;
-import team.nuga.thelabel.FireMemberActivity;
 import team.nuga.thelabel.LabelSettingActivity;
 import team.nuga.thelabel.MainActivity;
+import team.nuga.thelabel.MemberListActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Label;
@@ -38,28 +35,15 @@ public class LabelMainFragment extends Fragment {
 
     private String labelName;
     Label label;
+    LabelMainListAdapter adapter;
 
-    @BindView(R.id.button_entrustLeader)
-    Button entrustLeaderbutton;
-    @BindView(R.id.button_firemember)
-    Button firememberbutton;
-    @BindView(R.id.textView_LabelMain_LabelName)
-    TextView labelNameView;
+
+
     @BindView(R.id.view_LabelMainTop)
     LabelMainTop labelMainTop;
     @BindView(R.id.recyclerView_LabelMain_Member)
     RecyclerView memberRecycler;
 
-    @OnClick(R.id.button_entrustLeader)
-    void entrustLeaderOnClick(){
-        Intent intent = new Intent(getActivity(), EntrustLeaderActivity.class);
-        startActivity(intent);
-    }
-    @OnClick(R.id.button_firemember)
-    void firememberOnClick(){
-        Intent intent = new Intent(getActivity(), FireMemberActivity.class);
-        startActivity(intent);
-    }
     @OnClick(R.id.button_LabelMain_back)
     public void clickBackButton(){
         team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();
@@ -73,7 +57,14 @@ public class LabelMainFragment extends Fragment {
         startActivityForResult(intent,MainActivity.REQUEST_SETTINGLABEL);
     }
 
-    LabelMainListAdapter adapter;
+    @OnClick(R.id.button_LabelMain_Memberlist)
+    public void clickMemberList(){
+        Intent intent = new Intent(getActivity(), MemberListActivity.class);
+        intent.putExtra(MainActivity.LABELID,label.getLabelID());
+        startActivity(intent);
+    }
+
+
 
     public LabelMainFragment() {
         // Required empty public constructor
@@ -94,6 +85,22 @@ public class LabelMainFragment extends Fragment {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
                 Log.e("레이블 메인","page "+result.getPage()+"  count "+result.getCount());
+                label = result.getResult();
+
+                labelMainTop = new LabelMainTop(getContext(),null);
+                labelMainTop.setLabel(label);
+
+
+                adapter = new LabelMainListAdapter();
+                memberRecycler.setAdapter(adapter);
+                LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+                manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                memberRecycler.setLayoutManager(manager);
+
+                dummyAddmember();
+
+
+
             }
 
             @Override
@@ -104,25 +111,9 @@ public class LabelMainFragment extends Fragment {
 
 
 
-        try{
-
-        }catch (NullPointerException e){
-            Log.e("레이블 메인","레이블 전달받기 실패");
-            e.printStackTrace();
-        }
-        labelMainTop = new LabelMainTop(getContext(),null);
-        labelMainTop.setLabel(label);
-
-        adapter = new LabelMainListAdapter();
-        memberRecycler.setAdapter(adapter);
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        memberRecycler.setLayoutManager(manager);
-
-        dummyAddmember();
-
 
         return view;
+
     }
 
     public void dummyAddmember(){
