@@ -24,7 +24,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 
 import team.nuga.thelabel.R;
-
 /**
  * An abstract activity which deals with recovering from errors which may occur during API
  * initialization, but can be corrected through user action.
@@ -44,7 +43,6 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
       Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
   }
-
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RECOVERY_DIALOG_REQUEST) {
@@ -52,7 +50,6 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
       getYouTubePlayerProvider().initialize(DeveloperKey.DEVELOPER_KEY, this);
     }
   }
-
   protected abstract YouTubePlayer.Provider getYouTubePlayerProvider();
 
 }

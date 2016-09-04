@@ -35,7 +35,7 @@ public class PlayerViewDemoActivity extends YouTubeFailureRecoveryActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.playerview_demo);
+    setContentView(R.layout.youtube_playerview_demo);
 
     YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
     youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
@@ -48,6 +48,8 @@ public class PlayerViewDemoActivity extends YouTubeFailureRecoveryActivity {
       player.cueVideo("wKJ9KzGQq0w");
     }
   }
+
+
 
   @Override
   protected YouTubePlayer.Provider getYouTubePlayerProvider() {

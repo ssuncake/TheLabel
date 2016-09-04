@@ -53,6 +53,8 @@ public class FragmentDemoActivity extends YouTubeFailureRecoveryActivity {
     }
   }
 
+
+
   @Override
   protected YouTubePlayer.Provider getYouTubePlayerProvider() {
     return (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);

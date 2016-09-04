@@ -85,6 +85,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".youtube.FragmentDemoActivity"
+           android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
