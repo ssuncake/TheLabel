@@ -81,6 +81,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".youtube.PlayerViewDemoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
