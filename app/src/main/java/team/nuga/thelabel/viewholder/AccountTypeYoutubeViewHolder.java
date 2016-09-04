@@ -42,7 +42,7 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
             @Override
             public void onClick(View view) {
                 if(youtubeContentslist!=null){
-                    youtubeContentslist.onYoutubeContentsItemClick(view , contents, getAdapterPosition());
+                   youtubeContentslist.onYoutubeContentsItemClick(view , contents, getAdapterPosition());
                 }
                 Log.v("Youtube","test success");
             }
