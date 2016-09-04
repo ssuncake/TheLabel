@@ -20,8 +20,8 @@ import team.nuga.thelabel.MemberListActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.Member;
 import team.nuga.thelabel.data.NetworkResultLabeMain;
-import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
@@ -36,6 +36,7 @@ public class LabelMainFragment extends Fragment {
     private String labelName;
     Label label;
     LabelMainListAdapter adapter;
+    Member[] members;
 
 
 
@@ -60,7 +61,7 @@ public class LabelMainFragment extends Fragment {
     @OnClick(R.id.button_LabelMain_Memberlist)
     public void clickMemberList(){
         Intent intent = new Intent(getActivity(), MemberListActivity.class);
-        intent.putExtra(MainActivity.LABELID,label.getLabelID());
+        intent.putExtra(MainActivity.LABELID,label.getLabel_id());
         startActivity(intent);
     }
 
@@ -85,19 +86,20 @@ public class LabelMainFragment extends Fragment {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
                 Log.e("레이블 메인","page "+result.getPage()+"  count "+result.getCount());
+
                 label = result.getResult();
-
-                labelMainTop = new LabelMainTop(getContext(),null);
                 labelMainTop.setLabel(label);
-
 
                 adapter = new LabelMainListAdapter();
                 memberRecycler.setAdapter(adapter);
                 LinearLayoutManager manager = new LinearLayoutManager(getActivity());
                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 memberRecycler.setLayoutManager(manager);
+                members = result.getMember();
+                memberSetting();
 
-                dummyAddmember();
+
+//                dummyAddmember();
 
 
 
@@ -116,12 +118,17 @@ public class LabelMainFragment extends Fragment {
 
     }
 
-    public void dummyAddmember(){
-        for(int i=0;i<30;i++){
-            User user = new User();
-            user.setUserName("유저 "+i);
-            adapter.addUser(user);
-        }
+//    public void dummyAddmember(){
+//        for(int i=0;i<30;i++){
+//            User user = new User();
+//            user.setUserName("유저 "+i);
+//            adapter.addUser(user);
+//        }
+//    }
+
+    public void memberSetting(){
+        for(Member m : members)
+            adapter.addUser(m);
     }
 
 

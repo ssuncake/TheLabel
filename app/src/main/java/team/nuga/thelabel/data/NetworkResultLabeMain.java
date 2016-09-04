@@ -7,7 +7,7 @@ public class NetworkResultLabeMain {
     int page;
     String count;
     Label result;
-    User[] member;
+    Member[] member;
     Contents[] data;
 
     public int getPage() {
@@ -22,7 +22,7 @@ public class NetworkResultLabeMain {
         return result;
     }
 
-    public User[] getMember() {
+    public Member[] getMember() {
         return member;
     }
 

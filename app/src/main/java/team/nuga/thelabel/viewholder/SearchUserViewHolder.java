@@ -40,6 +40,6 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
     public void setUser(User user){
         this.user = user;
 
-        usernameView.setText(user.getUserName());
+//        usernameView.setText(user.getUserName());
     }
 }

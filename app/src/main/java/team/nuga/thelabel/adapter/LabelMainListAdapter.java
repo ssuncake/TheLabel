@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.Member;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.viewholder.LabelMainMemberViewHolder;
 
@@ -17,9 +18,9 @@ import team.nuga.thelabel.viewholder.LabelMainMemberViewHolder;
  */
 public class LabelMainListAdapter extends RecyclerView.Adapter<LabelMainMemberViewHolder> {
 
-    List<User> list = new ArrayList();
+    List<Member> list = new ArrayList();
 
-    public void addUser(User user){
+    public void addUser(Member user){
         list.add(user);
         notifyDataSetChanged();
     }

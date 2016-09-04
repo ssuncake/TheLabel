@@ -42,6 +42,7 @@ public class LabelMainTop extends LinearLayout {
 
     public LabelMainTop(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
 
@@ -50,35 +51,26 @@ public class LabelMainTop extends LinearLayout {
         inflate(getContext(),R.layout.view_labelmain_top,this);
         ButterKnife.bind(this);
 
-
-
-        // 레이블이 구인중일 때 표시
-        if(!isNeed){
-            needPositionLayout.setVisibility(INVISIBLE);
-        }else{
-            // 니드포지션해서 추가
-        }
-
-        //레이블 값들 설정
-        try{
-            labelName.setText(label.getLabelName());
-//            labelText.setText(label.getLabelProfile());
-//            labelGanre.setText(label.getLabelGenre());
-
-        }catch(NullPointerException e){
-            Log.w("레이블 메인탑뷰","레이블 설정값중 Null 발생");
-            e.printStackTrace();
-        }
     }
 
     public void setLabel(Label label){
         if(label!=null){
             this.label = label;
             Log.w("레이블 메인탑뷰","전달받은 레이블 : "+label.getLabelName());
+            // 레이블이 구인중일 때 표시
+            if(!isNeed){
+                needPositionLayout.setVisibility(INVISIBLE);
+            }else{
+                // 니드포지션해서 추가
+            }
+            labelName.setText(label.getLabelName());
+            labelGanre.setText(label.getLabelGenre());
+//           labelText.setText(label.getLabelProfile());
+
+
         }else{
             Log.e("레이블 메인탑뷰","받은 레이블이 Null");
         }
-        init();
     }
 
     public void setIsMyLabel(boolean b){

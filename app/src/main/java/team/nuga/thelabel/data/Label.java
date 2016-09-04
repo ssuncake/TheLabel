@@ -26,7 +26,7 @@ public class Label implements Serializable {
     @SerializedName("need_position")
     private String[] labelNeedPositionList;
 
-    @SerializedName("need_genre")
+    @SerializedName("label_genre")
     private String labelGenre;
 
     private HashSet<Integer> labelLikeUser;
@@ -53,8 +53,7 @@ public class Label implements Serializable {
         return labelGenre;
     }
 
-
-
-
-
+    public int getLabel_id() {
+        return label_id;
+    }
 }
