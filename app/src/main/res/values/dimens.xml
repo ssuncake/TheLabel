@@ -48,4 +48,12 @@
     <dimen name="imageview_marginLeft">30dp</dimen>
     <!--textview 속성값-->
     <dimen name="textview_marginLeft">5dp</dimen>
+
+
+    <!--setting 속성 값-->
+    <dimen name="settingtitle_height">20dp</dimen>
+    <dimen name="settingmenu_itemheight">60dp</dimen>
+    <dimen name="settingtitle_leftmargin">10dp</dimen>
+    <dimen name="settingitem_leftmargin">20dp</dimen>
+    <dimen name="settingitem_topmargin">5dp</dimen>
 </resources>

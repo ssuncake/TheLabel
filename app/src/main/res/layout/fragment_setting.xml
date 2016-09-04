@@ -1,37 +1,272 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.fragment.SettingFragment">
+    tools:context="team.nuga.thelabel.fragment.SettingFragment"
+    android:background="@color/setting_background"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_width="112dp"
-        android:layout_height="34dp"
-        android:text="설정 화면  프레그먼트"
-        android:id="@+id/textView5"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingtitle_height"
+        android:id="@+id/view_Setting_title_account">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="내정보"
-        android:id="@+id/button_myimpormaton"
-        android:layout_gravity="left|top"
-        android:layout_below="@+id/textView5"
-        android:layout_toLeftOf="@+id/textView5"
-        android:layout_toStartOf="@+id/textView5"
-        android:layout_marginTop="55dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/settingtitle_height"
+            android:text="@string/setting_title_account"
+            android:id="@+id/textView_Setting_Title_Account"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_titletext"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/settingtitle_leftmargin" />
+    </RelativeLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="알림 설정"
-        android:id="@+id/button_alram_setting"
-        android:layout_below="@+id/button_myimpormaton"
-        android:layout_toLeftOf="@+id/textView5"
-        android:layout_toStartOf="@+id/textView5" />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_account"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_account"
+            android:id="@+id/textView_Setting_itemMyAccount"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_itemArrow_Account"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingtitle_height"
+        android:id="@+id/view_Setting_title_alram">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/settingtitle_height"
+            android:text="@string/setting_title_alram"
+            android:id="@+id/textView_Setting_Title_Alram"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_titletext"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/settingtitle_leftmargin" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_alram"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_push"
+            android:id="@+id/textView_Setting_Item_Alram"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New CheckBox"
+            android:id="@+id/checkBox_Setting_Item_Push"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingtitle_height"
+        android:id="@+id/view_Setting_title_company">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/settingtitle_height"
+            android:text="@string/setting_title_custom"
+            android:id="@+id/textView_Setting_title_company"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_titletext"
+            android:layout_marginLeft="@dimen/settingtitle_leftmargin"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_company"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_company"
+            android:id="@+id/textView_Setting_Item_Company"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_itemArrow_Company"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_accessterms"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_accessterms"
+            android:id="@+id/textView_Setting_Item_AccessTerms"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_itemArrow_Accessterms"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_copyright"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_copyright"
+            android:id="@+id/textView_Setting_Item_Copyright"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_itemArrow_Copyright"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingtitle_height">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_version"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_version"
+            android:id="@+id/textView_Setting_Item_Version"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textView_Setting_Item_VersionContents"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView_Setting_Item_Version"
+            android:layout_toEndOf="@+id/textView_Setting_Item_Version"
+            android:layout_marginLeft="268dp"
+            android:layout_marginStart="268dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingtitle_height">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingmenu_itemheight"
+        android:id="@+id/view_Setting_item_logout"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/settingitem_topmargin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/setting_item_logout"
+            android:id="@+id/textView_Setting_Item_Logout"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/setting_itemtext"
+            android:layout_marginLeft="@dimen/settingitem_leftmargin" />
+
+    </RelativeLayout>
+
+</LinearLayout>
