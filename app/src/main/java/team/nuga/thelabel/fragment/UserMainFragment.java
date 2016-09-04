@@ -57,6 +57,7 @@ public class UserMainFragment extends Fragment {
                     Log.e("게시글 ID",""+ c.getContentsID());
                     Log.e("파일경로", ""+c.getContentsPath());
                     Log.e("파일타입", ""+c.getContentsType());
+                    Log.e("좋아요 개수",""+c.getLikeCount());
                    accountAdatper.add(c);
 
                 }

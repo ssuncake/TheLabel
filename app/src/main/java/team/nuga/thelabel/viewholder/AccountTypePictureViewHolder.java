@@ -1,5 +1,7 @@
 package team.nuga.thelabel.viewholder;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +33,22 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
                 Toast.makeText(itemView.getContext(), "Contents Change", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.contents_delete:
+                new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("삭제 확인")
+                        .setMessage("이 게시물을 삭제하시겠습니까?")
+                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
 //                Toast.makeText(itemView.getContext(),"Contents Delete", Toast.LENGTH_SHORT).show();
                 break;
         }

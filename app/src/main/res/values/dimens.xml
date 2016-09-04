@@ -43,4 +43,9 @@
     <dimen name="labelmain_title">30dp</dimen>
     <dimen name="labelmain_contents_heigh">500dp</dimen>
 
+    <!--imageview 속성값-->
+    <dimen name="imageview_marginTop">15dp</dimen>
+    <dimen name="imageview_marginLeft">30dp</dimen>
+    <!--textview 속성값-->
+    <dimen name="textview_marginLeft">5dp</dimen>
 </resources>

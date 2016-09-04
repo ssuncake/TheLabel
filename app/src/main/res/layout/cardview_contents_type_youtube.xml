@@ -56,9 +56,55 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="동영상 화면"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="♥좋아요"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/textView_Iike"
+                    android:textColor="@android:color/black" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView_numlike"
+                    android:layout_marginLeft="@dimen/textview_marginLeft"
+                    android:layout_alignBottom="@+id/textView_Iike"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_toRightOf="@+id/textView_Iike"
+                    android:layout_toEndOf="@+id/textView_Iike"
+                    android:text="4"
+                    android:layout_alignTop="@+id/textView_Iike" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="개"
+                    android:textSize="15sp"
+                    android:id="@+id/textView_like_count"
+                    android:textColor="@android:color/black"
+                    android:layout_alignTop="@+id/textView_numlike"
+                    android:layout_toRightOf="@+id/textView_numlike"
+                    android:layout_toEndOf="@+id/textView_numlike" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

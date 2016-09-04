@@ -19,9 +19,10 @@ public class ContentsRequest extends AbstractRequest<NetworkResult<Contents[]>> 
     Request request;
     public ContentsRequest(Context context, int page, int count ){
 //        String path = "users?page="+page+"&count="+count;
-        String path = "users?page=1&count=5";
+        String path = "users/me?page=1&count=5";
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment("users")
+                .addPathSegment("me")
                 .addQueryParameter("page",page+"")
                 .addQueryParameter("count",count+"")
                 .build();
