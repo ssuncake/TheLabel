@@ -8,7 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.data.Member;
 
 /**
  * Created by Tacademy on 2016-09-02.
@@ -27,7 +27,9 @@ public class LabelMainMemberViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this,itemView);
     }
 
-    public void setUser(User user){
-
+    public void setUser(Member member){
+        memberName.setText(member.getUser_nickname());
+        memberPosition.setText(member.getUser_possition());
+        //이미지 세팅
     }
 }

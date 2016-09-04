@@ -28,7 +28,7 @@ public class MemberListViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setMember(Member member){
-        name.setText(member.getUser_nickname());
+        name.setText(member.getUser_name());
 
         // 사진과 리더여부 설정해줘야함
     }

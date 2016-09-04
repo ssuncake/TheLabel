@@ -17,13 +17,14 @@ import team.nuga.thelabel.data.NetworkResult;
  */
 public class MemberListRequest extends AbstractRequest<NetworkResult<Member[]>> {
 
-    private static final String PATH = "labels/";
+    private static final String PATH = "labels";
     private static final String PATH2 = ":label_id";
 
     Request request;
     public MemberListRequest(Context context, int id) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(PATH+id+PATH2)
+                .addPathSegment(PATH)
+                .addPathSegment(id+PATH2)
                 .addQueryParameter("members","true")
                 .build();
 
