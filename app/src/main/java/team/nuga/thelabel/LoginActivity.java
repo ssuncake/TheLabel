@@ -3,6 +3,7 @@ package team.nuga.thelabel;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -31,6 +32,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -61,6 +65,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    @BindView(R.id.textview_login_signUp)
+    TextView textView_signUp;
+    @OnClick(R.id.textview_login_signUp)
+    public void signUpClick(){
+        Intent intent=new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+    @BindView(R.id.textView_login_findID)
+    TextView textView_findID;
+    @OnClick(R.id.textView_login_findID)
+    public void onfindIdClick(){
+
+    }
+    @BindView(R.id.textView_login_findPW)
+    TextView textView_findPW;
+    @OnClick(R.id.textView_login_findPW)
+    public void onfindPW(){
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

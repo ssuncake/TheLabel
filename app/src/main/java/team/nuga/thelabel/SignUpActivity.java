@@ -3,7 +3,9 @@ package team.nuga.thelabel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,12 +22,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignUpActivity extends AppCompatActivity {
-//    @BindView(R.id.TextInput_signUp_password)
+    //    @BindView(R.id.TextInput_signUp_password)
     TextInputLayout inputLayout_password;
-//    @BindView(R.id.TextInput_signUp_password_check)
-TextInputLayout inputLayout_password_check;
-//    @BindView(R.id.TextInput_signUp_email)
-TextInputLayout inputLayout_email;
+    //    @BindView(R.id.TextInput_signUp_password_check)
+    TextInputLayout inputLayout_password_check;
+    //    @BindView(R.id.TextInput_signUp_email)
+    TextInputLayout inputLayout_email;
 
     @BindView(R.id.editText_signUp_email)
     EditText editText_email;
@@ -36,16 +38,19 @@ TextInputLayout inputLayout_email;
 
     @BindView(R.id.button_checkOverlap)
     Button button_emailCheck;
+
     @OnClick(R.id.button_checkOverlap)
-    public void onClickCheckOverlap(){
+    public void onClickCheckOverlap() {
         Toast.makeText(SignUpActivity.this, "중복확인 클릭..", Toast.LENGTH_SHORT).show();
     }
+
     @BindView(R.id.button_nextStep_signUp)
     Button button_nextstep;
+
     @OnClick(R.id.button_nextStep_signUp) //다음단계 버튼
-    public void onClcikNextStep(){
+    public void onClcikNextStep() {
 //        submitForm();
-        Intent intent = new Intent(this, SignUpEditActivity.class );
+        Intent intent = new Intent(this, SignUpEditActivity.class);
 //        intent.putExtra()
         startActivity(intent);
 //        finish();
@@ -59,19 +64,29 @@ TextInputLayout inputLayout_email;
     CheckBox checkBox_service;
     @BindView(R.id.checkBox_personal)
     CheckBox checkBox_personal;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle("이메일 입력 및 약관동의");
+        }
         editText_email.getFreezesText();
 
 
-        inputLayout_email = (TextInputLayout)findViewById(R.id.TextInput_signUp_email);
-        inputLayout_password = (TextInputLayout)findViewById(R.id.TextInput_signUp_password);
-        inputLayout_password_check = (TextInputLayout)findViewById(R.id.TextInput_signUp_password_check);
+        inputLayout_email = (TextInputLayout) findViewById(R.id.TextInput_signUp_email);
+        inputLayout_password = (TextInputLayout) findViewById(R.id.TextInput_signUp_password);
+        inputLayout_password_check = (TextInputLayout) findViewById(R.id.TextInput_signUp_password_check);
         editText_email.addTextChangedListener(new MyTextWatcher(editText_email));
         editText_password.addTextChangedListener(new MyTextWatcher(editText_password));
         editText_passwordCheck.addTextChangedListener(new MyTextWatcher(editText_passwordCheck));
@@ -108,9 +123,9 @@ TextInputLayout inputLayout_email;
         return true;
     }
 
-private static boolean isValidEmail(String email) {
-    return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-}
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
