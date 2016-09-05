@@ -23,6 +23,17 @@ public class Contents implements Serializable{
 
     @SerializedName("numlike")
     private int likeCount;
+    @SerializedName("ctime")
+    private String ContentTime;
+
+
+    public String getContentTime() {
+        return ContentTime;
+    }
+
+    public void setContentTime(String contentTime) {
+        ContentTime = contentTime;
+    }
 
 
     public int getLikeCount() {

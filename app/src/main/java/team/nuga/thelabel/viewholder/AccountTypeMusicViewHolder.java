@@ -6,12 +6,14 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -24,6 +26,11 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     TextView userName;
     @BindView(R.id.textView_numlike)
     TextView likeCount;
+    @BindView(R.id.textView_content_time)
+    TextView conetentTime;
+    @BindView(R.id.imageView_like_off)
+    CheckBox likeOffImageView;
+
     private ImageView imageViewMenu;
 
 
@@ -96,6 +103,9 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
             popupMenu.show();
         }
     }
+    @OnClick(R.id.imageView_like_off)
+    public void onLikeOffClick(){
+    }
 
     public void setMusicContents(Contents contents){
         this.contents = contents;
@@ -106,8 +116,9 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 //    }
 
     public void applyData(User user, Contents contents) {
-//        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
         likeCount.setText(""+contents.getLikeCount());
         userName.setText(user.getUserName());
+        conetentTime.setText(contents.getContentTime());
+//        Log.e("시간", "Time"+contents.getContentTime());
     }
 }

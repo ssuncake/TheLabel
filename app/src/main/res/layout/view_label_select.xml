@@ -13,9 +13,9 @@
         android:background="@color/color_white" />
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/setting"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/btn_setting"
         android:id="@+id/imageview_label_select_setting"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

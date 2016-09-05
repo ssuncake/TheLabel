@@ -24,6 +24,8 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
     TextView likeCount;
     @BindView(R.id.textView_username)
     TextView userName;
+    @BindView(R.id.textView_content_time)
+    TextView conetentTime;
     private ImageView imageViewMenu;
 
 
@@ -105,6 +107,7 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
     public void applyData(User user, Contents contents) {
         likeCount.setText(""+contents.getLikeCount());
         userName.setText(user.getUserName());
+        conetentTime.setText(contents.getContentTime());
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
 }

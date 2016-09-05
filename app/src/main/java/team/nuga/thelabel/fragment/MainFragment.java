@@ -60,9 +60,9 @@ public class MainFragment extends Fragment {
 
 
 
-        tabLayout.addTab(tabLayout.newTab().setText("newsfeed")); //setindicator을 사용하게 되면 내가 원하는 view를 넣을 수 있고, setText나 setIon을 사용하면 글자나 아이콘을 사용할 수 있다.
-        tabLayout.addTab(tabLayout.newTab().setText("label"));
-        tabLayout.addTab(tabLayout.newTab().setText("account"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.main_fragment_home)); //setindicator을 사용하게 되면 내가 원하는 view를 넣을 수 있고, setText나 setIon을 사용하면 글자나 아이콘을 사용할 수 있다.
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.main_fragment_label));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.main_fragment_account));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //어뎁터에 가짜 유저데이터를 넘겨줌.

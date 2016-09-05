@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
@@ -72,8 +71,8 @@ public class UserMainFragment extends Fragment {
                 Log.e("유저메인 실패",errorMessage);
             }
         });
-        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
-        userName.setText(user.getUserName()+" 의 계정입니다.");
+//        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+//        userName.setText(user.getUserName()+" 의 계정입니다.");
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_user_main);
         accountAdatper = new ContentsAdatper();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);

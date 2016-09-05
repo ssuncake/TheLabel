@@ -53,6 +53,18 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
 
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=""
+                    android:textSize="10sp"
+                    android:id="@+id/textView_content_time"
+                    android:textColor="@android:color/black"
+                    android:layout_alignBottom="@+id/imageView_menu"
+                    android:layout_toLeftOf="@+id/imageView_menu"
+                    android:layout_toStartOf="@+id/imageView_menu" />
+
             </RelativeLayout>
 
             <RelativeLayout

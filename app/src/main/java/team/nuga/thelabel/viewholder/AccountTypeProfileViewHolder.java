@@ -19,10 +19,12 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
     public AccountTypeProfileViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
     }
 
     @Override
     public void applyData(User user, Contents contents) {
         profileUsername.setText(user.getUserName());
     }
+
 }

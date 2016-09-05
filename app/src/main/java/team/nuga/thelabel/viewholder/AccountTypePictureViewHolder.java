@@ -24,6 +24,8 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     TextView likeCount;
     @BindView(R.id.textView_username)
     TextView userNmae;
+    @BindView(R.id.textView_content_time)
+    TextView conetentTime;
     ImageView imageViewPicture;
     private ImageView imageViewMenu;
 //    User user;
@@ -75,7 +77,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     public AccountTypePictureViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
 //        titlePictureView = (TextView)itemView.findViewById(R.id.textView_username);
         imageViewPicture = (ImageView) itemView.findViewById(R.id.image_contnet_picture);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -123,9 +125,8 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     @Override
     public void applyData(User user, Contents contents) {
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
-        likeCount.setText(""+contents.getLikeCount());
+        likeCount.setText("" + contents.getLikeCount());
         userNmae.setText(user.getUserName());
+        conetentTime.setText(contents.getContentTime());
     }
-
-
 }
