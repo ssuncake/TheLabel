@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+
 import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
@@ -19,7 +22,8 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  * Created by Tacademy on 2016-08-30.
  */
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
-        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick {
+        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick,
+        YouTubePlayer.OnInitializedListener{
 //    List<User> userList = new ArrayList<>();
 //    List<Contents> contentsList = new ArrayList<>();
 //    MusicContents musicContents;
@@ -89,7 +93,6 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 //            ((AccountTypeYoutubeViewHolder)holder).setUser(user);
 //            ((AccountTypeYoutubeViewHolder)holder).setContents(mcontentslist.get(position));
 //        }
-
         holder.setData(user,mcontentslist.get(position));
     }
     @Override
@@ -97,13 +100,27 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         return mcontentslist.size();
     }
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                        boolean wasRestored) {
+        if (!wasRestored) {
+            player.cueVideo("nCgQDjiotG0");
+        }
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+    }
+
 
     public interface OnContentsItemClickListener {
         public void onContentsItemClick(View view, Contents user, int position);
     }
 
-    OnContentsItemClickListener listener;
 
+
+    OnContentsItemClickListener listener;
     public void setOnAdapterItemClickListener(OnContentsItemClickListener listener) {
         this.listener = listener;
     }

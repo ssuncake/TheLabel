@@ -93,7 +93,7 @@ public class SignUpEditActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        RadioGroupClick();
+//        RadioGroupClick();
 
         ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, city);
         spinner_cityAdapter.setDropDownViewResource(R.layout.spin);
@@ -106,7 +106,6 @@ public class SignUpEditActivity extends AppCompatActivity {
     public void onItemSelected(int position) {
         position = position + 1;
         CITYID = position;
-        Log.e("   시/도 ID ", CITYID + " " + spinner_city.getSelectedItem().toString());
         if (position == 1) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Town_Default);
             spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -450,245 +449,245 @@ public class SignUpEditActivity extends AppCompatActivity {
 
     }
 
-
-    boolean isCheckedRadioGroup_position_first = false;   //포지션 라디오그룹 체크상태
-    boolean isCheckedRadioGroup_position_second = false;   //포지션 라디오그룹 체크상태
-    boolean isCheckedRadioGroup_position_third = false;   //포지션 라디오그룹 체크상태
-
-    boolean isCheckedRadioGroup_genre_first = false;      //장르 라디오그룹 체크상태
-    boolean isCheckedRadioGroup_genre_second = false;      //장르 라디오그룹 체크상태
-    boolean isCheckedRadioGroup_genre_third = false;      //장르 라디오그룹 체크상태
-
-    private void RadioGroupClick() {
-        radioGroup_position_first.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                                                 @Override
-                                                                 public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
-                                                                     switch (checkedPosition) {
-                                                                         case R.id.radioButton_vocal:
-                                                                             isCheckedRadioGroup_position_first = true;
-                                                                             onRadioGroup_position_first();
-                                                                             radioGroup_position_first.check(checkedPosition);
-                                                                             positionId = 2;
-                                                                             break;
-                                                                         case R.id.radioButton_guitar:
-                                                                             isCheckedRadioGroup_position_first = true;
-                                                                             onRadioGroup_position_first();
-                                                                             radioGroup_position_first.check(checkedPosition);
-                                                                             positionId = 3;
-                                                                             break;
-                                                                         case R.id.radioButton_base:
-                                                                             isCheckedRadioGroup_position_first = true;
-                                                                             onRadioGroup_position_first();
-                                                                             radioGroup_position_first.check(checkedPosition);
-                                                                             positionId = 4;
-                                                                             break;
-                                                                     }
-                                                                 }
-                                                             }
-        );
-        radioGroup_position_second.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-
-                                                              {
-                                                                  @Override
-                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
-                                                                      switch (checkedPosition) {
-                                                                          case R.id.radioButton_elec:
-                                                                              isCheckedRadioGroup_position_second = true;
-                                                                              onRadioGroup_position_second();
-                                                                              radioGroup_position_second.check(checkedPosition);
-                                                                              positionId = 5;
-                                                                              break;
-                                                                          case R.id.radioButton_drum:
-                                                                              isCheckedRadioGroup_position_second = true;
-                                                                              onRadioGroup_position_second();
-                                                                              radioGroup_position_second.check(checkedPosition);
-                                                                              positionId = 6;
-                                                                              break;
-                                                                          case R.id.radioButton_keyboard:
-                                                                              isCheckedRadioGroup_position_second = true;
-                                                                              onRadioGroup_position_second();
-                                                                              radioGroup_position_second.check(checkedPosition);
-                                                                              positionId = 7;
-                                                                              break;
-                                                                      }
-                                                                  }
-                                                              }
-
-        );
-        radioGroup_position_third.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                                                 @Override
-                                                                 public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
-                                                                     switch (checkedPosition) {
-                                                                         case R.id.radioButton_etc:
-                                                                             isCheckedRadioGroup_position_third = true;
-                                                                             onRadioGroup_position_third();
-                                                                             radioGroup_position_third.check(checkedPosition);
-                                                                             positionId = 8;
-                                                                             break;
-//                    case R.id.radioButton_
-//                        isCheckedRadioGroup_position_second = true;
-//                        if (isCheckedRadioGroup_position_first == true) {
-//                            onRadioGroup_position_second();
-//                            radioGroup_position_second.check(checkedPosition);
-//                        }
-//                        break;
-//                    case R.id.radioButton_:
-//                        isCheckedRadioGroup_position_second = true;
-//                        if (isCheckedRadioGroup_position_first == true) {
-//                            onRadioGroup_position_second();
-//                            radioGroup_position_second.check(checkedPosition);
-//                        }
-//                        break;
-                                                                     }
-                                                                 }
-                                                             }
-
-        );
-
-
-        radioGroup_genre_firstLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-
-                                                              {
-                                                                  @Override
-                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
-                                                                      switch (checkedGenre) {
-                                                                          case R.id.radioButton_Song:
-                                                                              isCheckedRadioGroup_genre_first = true;
-                                                                              onRadioGroup_genre_first();
-                                                                              radioGroup_genre_firstLine.check(checkedGenre);
-                                                                              genreId = 2;
-                                                                              break;
-                                                                          case R.id.radioButton_RnBSOUL:
-                                                                              isCheckedRadioGroup_genre_first = true;
-                                                                              onRadioGroup_genre_first();
-                                                                              radioGroup_genre_firstLine.check(checkedGenre);
-                                                                              genreId = 9;
-                                                                              break;
-                                                                          case R.id.radioButton_Rock:
-                                                                              isCheckedRadioGroup_genre_first = true;
-                                                                              onRadioGroup_genre_first();
-                                                                              radioGroup_genre_firstLine.check(checkedGenre);
-                                                                              genreId = 5;
-                                                                              break;
-                                                                          case R.id.radioButton_Jazz:
-                                                                              isCheckedRadioGroup_genre_first = true;
-                                                                              onRadioGroup_genre_first();
-                                                                              radioGroup_genre_firstLine.check(checkedGenre);
-                                                                              genreId = 10;
-                                                                              break;
-                                                                      }
-                                                                  }
-                                                              }
-
-        );
-        radioGroup_genre_secondLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-
-                                                               {
-                                                                   @Override
-                                                                   public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
-                                                                       switch (checkedGenre) {
-                                                                           case R.id.radioButton_RapHiphop:
-                                                                               isCheckedRadioGroup_genre_second = true;
-                                                                               onRadioGroup_genre_second();
-                                                                               radioGroup_genre_secondLine.check(checkedGenre);
-                                                                               genreId = 4;
-                                                                               break;
-                                                                           case R.id.radioButton_NewAge:
-                                                                               isCheckedRadioGroup_genre_second = true;
-                                                                               onRadioGroup_genre_second();
-                                                                               radioGroup_genre_secondLine.check(checkedGenre);
-                                                                               genreId = 8;
-                                                                               break;
-                                                                           case R.id.radioButton_Pop:
-                                                                               isCheckedRadioGroup_genre_second = true;
-                                                                               onRadioGroup_genre_second();
-                                                                               radioGroup_genre_secondLine.check(checkedGenre);
-                                                                               genreId = 3;
-                                                                               break;
-                                                                           case R.id.radioButton_CCM:
-                                                                               isCheckedRadioGroup_genre_second = true;
-                                                                               onRadioGroup_genre_second();
-                                                                               radioGroup_genre_secondLine.check(checkedGenre);
-                                                                               genreId = 11;
-                                                                               break;
-                                                                       }
-                                                                   }
-                                                               }
-
-        );
-        radioGroup_genre_thirdLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-
-                                                              {
-                                                                  @Override
-                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
-                                                                      switch (checkedGenre) {
-                                                                          case R.id.radioButton_Electronica:
-                                                                              isCheckedRadioGroup_genre_third = true;
-                                                                              onRadioGroup_genre_third();
-                                                                              radioGroup_genre_thirdLine.check(checkedGenre);
-                                                                              genreId = 7;
-                                                                              break;
-                                                                          case R.id.radioButton_AcousticPork:
-                                                                              isCheckedRadioGroup_genre_third = true;
-                                                                              onRadioGroup_genre_third();
-                                                                              radioGroup_genre_thirdLine.check(checkedGenre);
-                                                                              genreId = 6;
-                                                                              break;
-                                                                      }
-                                                                  }
-                                                              }
-
-        );
-    }
-
-
-    private void onRadioGroup_position_first() {
-        radioGroup_position_second.clearCheck();
-        radioGroup_position_third.clearCheck();
-        isCheckedRadioGroup_position_second = false;
-        isCheckedRadioGroup_position_third = false;
-        isCheckedRadioGroup_position_first = true;
-    }
-
-    private void onRadioGroup_position_second() {
-        radioGroup_position_first.clearCheck();
-        radioGroup_position_third.clearCheck();
-        isCheckedRadioGroup_position_first = false;
-        isCheckedRadioGroup_position_third = false;
-        isCheckedRadioGroup_position_second = true;
-    }
-
-    private void onRadioGroup_position_third() {
-        radioGroup_position_third.clearCheck();
-        radioGroup_position_second.clearCheck();
-        isCheckedRadioGroup_position_first = false;
-        isCheckedRadioGroup_position_second = false;
-        isCheckedRadioGroup_position_third = true;
-    }
-
-    private void onRadioGroup_genre_first() {
-        radioGroup_genre_secondLine.clearCheck();
-        radioGroup_genre_thirdLine.clearCheck();
-        isCheckedRadioGroup_genre_second = false;
-        isCheckedRadioGroup_genre_third = false;
-        isCheckedRadioGroup_genre_first = true;
-    }
-
-    private void onRadioGroup_genre_second() {
-        radioGroup_genre_firstLine.clearCheck();
-        radioGroup_genre_thirdLine.clearCheck();
-        isCheckedRadioGroup_genre_first = false;
-        isCheckedRadioGroup_genre_third = false;
-        isCheckedRadioGroup_genre_second = true;
-    }
-
-    private void onRadioGroup_genre_third() {
-        radioGroup_genre_firstLine.clearCheck();
-        radioGroup_genre_secondLine.clearCheck();
-        isCheckedRadioGroup_genre_first = false;
-        isCheckedRadioGroup_genre_second = false;
-        isCheckedRadioGroup_genre_third = true;
-    }
+//
+//    boolean isCheckedRadioGroup_position_first = false;   //포지션 라디오그룹 체크상태
+//    boolean isCheckedRadioGroup_position_second = false;   //포지션 라디오그룹 체크상태
+//    boolean isCheckedRadioGroup_position_third = false;   //포지션 라디오그룹 체크상태
+//
+//    boolean isCheckedRadioGroup_genre_first = false;      //장르 라디오그룹 체크상태
+//    boolean isCheckedRadioGroup_genre_second = false;      //장르 라디오그룹 체크상태
+//    boolean isCheckedRadioGroup_genre_third = false;      //장르 라디오그룹 체크상태
+//
+//    private void RadioGroupClick() {
+//        radioGroup_position_first.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                                                                 @Override
+//                                                                 public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+//                                                                     switch (checkedPosition) {
+//                                                                         case R.id.radioButton_vocal:
+//                                                                             isCheckedRadioGroup_position_first = true;
+//                                                                             onRadioGroup_position_first();
+//                                                                             radioGroup_position_first.check(checkedPosition);
+//                                                                             positionId = 2;
+//                                                                             break;
+//                                                                         case R.id.radioButton_guitar:
+//                                                                             isCheckedRadioGroup_position_first = true;
+//                                                                             onRadioGroup_position_first();
+//                                                                             radioGroup_position_first.check(checkedPosition);
+//                                                                             positionId = 3;
+//                                                                             break;
+//                                                                         case R.id.radioButton_base:
+//                                                                             isCheckedRadioGroup_position_first = true;
+//                                                                             onRadioGroup_position_first();
+//                                                                             radioGroup_position_first.check(checkedPosition);
+//                                                                             positionId = 4;
+//                                                                             break;
+//                                                                     }
+//                                                                 }
+//                                                             }
+//        );
+//        radioGroup_position_second.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//
+//                                                              {
+//                                                                  @Override
+//                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+//                                                                      switch (checkedPosition) {
+//                                                                          case R.id.radioButton_elec:
+//                                                                              isCheckedRadioGroup_position_second = true;
+//                                                                              onRadioGroup_position_second();
+//                                                                              radioGroup_position_second.check(checkedPosition);
+//                                                                              positionId = 5;
+//                                                                              break;
+//                                                                          case R.id.radioButton_drum:
+//                                                                              isCheckedRadioGroup_position_second = true;
+//                                                                              onRadioGroup_position_second();
+//                                                                              radioGroup_position_second.check(checkedPosition);
+//                                                                              positionId = 6;
+//                                                                              break;
+//                                                                          case R.id.radioButton_keyboard:
+//                                                                              isCheckedRadioGroup_position_second = true;
+//                                                                              onRadioGroup_position_second();
+//                                                                              radioGroup_position_second.check(checkedPosition);
+//                                                                              positionId = 7;
+//                                                                              break;
+//                                                                      }
+//                                                                  }
+//                                                              }
+//
+//        );
+//        radioGroup_position_third.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                                                                 @Override
+//                                                                 public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+//                                                                     switch (checkedPosition) {
+//                                                                         case R.id.radioButton_etc:
+//                                                                             isCheckedRadioGroup_position_third = true;
+//                                                                             onRadioGroup_position_third();
+//                                                                             radioGroup_position_third.check(checkedPosition);
+//                                                                             positionId = 8;
+//                                                                             break;
+////                    case R.id.radioButton_
+////                        isCheckedRadioGroup_position_second = true;
+////                        if (isCheckedRadioGroup_position_first == true) {
+////                            onRadioGroup_position_second();
+////                            radioGroup_position_second.check(checkedPosition);
+////                        }
+////                        break;
+////                    case R.id.radioButton_:
+////                        isCheckedRadioGroup_position_second = true;
+////                        if (isCheckedRadioGroup_position_first == true) {
+////                            onRadioGroup_position_second();
+////                            radioGroup_position_second.check(checkedPosition);
+////                        }
+////                        break;
+//                                                                     }
+//                                                                 }
+//                                                             }
+//
+//        );
+//
+//
+//        radioGroup_genre_firstLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//
+//                                                              {
+//                                                                  @Override
+//                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
+//                                                                      switch (checkedGenre) {
+//                                                                          case R.id.radioButton_Song:
+//                                                                              isCheckedRadioGroup_genre_first = true;
+//                                                                              onRadioGroup_genre_first();
+//                                                                              radioGroup_genre_firstLine.check(checkedGenre);
+//                                                                              genreId = 2;
+//                                                                              break;
+//                                                                          case R.id.radioButton_RnBSOUL:
+//                                                                              isCheckedRadioGroup_genre_first = true;
+//                                                                              onRadioGroup_genre_first();
+//                                                                              radioGroup_genre_firstLine.check(checkedGenre);
+//                                                                              genreId = 9;
+//                                                                              break;
+//                                                                          case R.id.radioButton_Rock:
+//                                                                              isCheckedRadioGroup_genre_first = true;
+//                                                                              onRadioGroup_genre_first();
+//                                                                              radioGroup_genre_firstLine.check(checkedGenre);
+//                                                                              genreId = 5;
+//                                                                              break;
+//                                                                          case R.id.radioButton_Jazz:
+//                                                                              isCheckedRadioGroup_genre_first = true;
+//                                                                              onRadioGroup_genre_first();
+//                                                                              radioGroup_genre_firstLine.check(checkedGenre);
+//                                                                              genreId = 10;
+//                                                                              break;
+//                                                                      }
+//                                                                  }
+//                                                              }
+//
+//        );
+//        radioGroup_genre_secondLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//
+//                                                               {
+//                                                                   @Override
+//                                                                   public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
+//                                                                       switch (checkedGenre) {
+//                                                                           case R.id.radioButton_RapHiphop:
+//                                                                               isCheckedRadioGroup_genre_second = true;
+//                                                                               onRadioGroup_genre_second();
+//                                                                               radioGroup_genre_secondLine.check(checkedGenre);
+//                                                                               genreId = 4;
+//                                                                               break;
+//                                                                           case R.id.radioButton_NewAge:
+//                                                                               isCheckedRadioGroup_genre_second = true;
+//                                                                               onRadioGroup_genre_second();
+//                                                                               radioGroup_genre_secondLine.check(checkedGenre);
+//                                                                               genreId = 8;
+//                                                                               break;
+//                                                                           case R.id.radioButton_Pop:
+//                                                                               isCheckedRadioGroup_genre_second = true;
+//                                                                               onRadioGroup_genre_second();
+//                                                                               radioGroup_genre_secondLine.check(checkedGenre);
+//                                                                               genreId = 3;
+//                                                                               break;
+//                                                                           case R.id.radioButton_CCM:
+//                                                                               isCheckedRadioGroup_genre_second = true;
+//                                                                               onRadioGroup_genre_second();
+//                                                                               radioGroup_genre_secondLine.check(checkedGenre);
+//                                                                               genreId = 11;
+//                                                                               break;
+//                                                                       }
+//                                                                   }
+//                                                               }
+//
+//        );
+//        radioGroup_genre_thirdLine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//
+//                                                              {
+//                                                                  @Override
+//                                                                  public void onCheckedChanged(RadioGroup radioGroup, int checkedGenre) {
+//                                                                      switch (checkedGenre) {
+//                                                                          case R.id.radioButton_Electronica:
+//                                                                              isCheckedRadioGroup_genre_third = true;
+//                                                                              onRadioGroup_genre_third();
+//                                                                              radioGroup_genre_thirdLine.check(checkedGenre);
+//                                                                              genreId = 7;
+//                                                                              break;
+//                                                                          case R.id.radioButton_AcousticPork:
+//                                                                              isCheckedRadioGroup_genre_third = true;
+//                                                                              onRadioGroup_genre_third();
+//                                                                              radioGroup_genre_thirdLine.check(checkedGenre);
+//                                                                              genreId = 6;
+//                                                                              break;
+//                                                                      }
+//                                                                  }
+//                                                              }
+//
+//        );
+//    }
+//
+//
+//    private void onRadioGroup_position_first() {
+//        radioGroup_position_second.clearCheck();
+//        radioGroup_position_third.clearCheck();
+//        isCheckedRadioGroup_position_second = false;
+//        isCheckedRadioGroup_position_third = false;
+//        isCheckedRadioGroup_position_first = true;
+//    }
+//
+//    private void onRadioGroup_position_second() {
+//        radioGroup_position_first.clearCheck();
+//        radioGroup_position_third.clearCheck();
+//        isCheckedRadioGroup_position_first = false;
+//        isCheckedRadioGroup_position_third = false;
+//        isCheckedRadioGroup_position_second = true;
+//    }
+//
+//    private void onRadioGroup_position_third() {
+//        radioGroup_position_third.clearCheck();
+//        radioGroup_position_second.clearCheck();
+//        isCheckedRadioGroup_position_first = false;
+//        isCheckedRadioGroup_position_second = false;
+//        isCheckedRadioGroup_position_third = true;
+//    }
+//
+//    private void onRadioGroup_genre_first() {
+//        radioGroup_genre_secondLine.clearCheck();
+//        radioGroup_genre_thirdLine.clearCheck();
+//        isCheckedRadioGroup_genre_second = false;
+//        isCheckedRadioGroup_genre_third = false;
+//        isCheckedRadioGroup_genre_first = true;
+//    }
+//
+//    private void onRadioGroup_genre_second() {
+//        radioGroup_genre_firstLine.clearCheck();
+//        radioGroup_genre_thirdLine.clearCheck();
+//        isCheckedRadioGroup_genre_first = false;
+//        isCheckedRadioGroup_genre_third = false;
+//        isCheckedRadioGroup_genre_second = true;
+//    }
+//
+//    private void onRadioGroup_genre_third() {
+//        radioGroup_genre_firstLine.clearCheck();
+//        radioGroup_genre_secondLine.clearCheck();
+//        isCheckedRadioGroup_genre_first = false;
+//        isCheckedRadioGroup_genre_second = false;
+//        isCheckedRadioGroup_genre_third = true;
+//    }
 
 
     public String[] city = {

@@ -19,9 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +33,7 @@ import team.nuga.thelabel.fragment.SettingFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,YouTubePlayer.OnInitializedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
     public static final String MAINUSERINLABELS = "MainUserInLabels";
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     @BindView(R.id.drawer)
     NavigationView drawer;
+    YouTubePlayerSupportFragment youTubePlayer;
 
     private TextView headerUserName;
 
@@ -96,16 +95,16 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
 
 
-        User user = (User)getIntent().getSerializableExtra("LoginUser");
-        if (user==null){
+        User user = (User) getIntent().getSerializableExtra("LoginUser");
+        if (user == null) {
 
             mainUser = new User();
             mainUser.setUserName("이정호");
-        }else{
+        } else {
             mainUser = user;
         }
 
-        Toast.makeText(MainActivity.this, "로그인 유저 : "+user.getUserName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "로그인 유저 : " + user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
 
         bundle = new Bundle();
@@ -115,6 +114,8 @@ public class MainActivity extends AppCompatActivity
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
         headerUserName = (TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
         headerUserName.setText(mainUser.getUserName());
+
+
     }
 
 //    boolean backButtonClicked = false;
@@ -266,21 +267,4 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, MainActivity.REQUEST_UPLOAD);
     }
 
-    @Override
-    public void onInitializationSuccess //유튜브 초기화 성공
-    (YouTubePlayer.Provider provider, YouTubePlayer player,
-     boolean wasRestored) {
-        if (!wasRestored) {
-            player.cueVideo("nCgQDjiotG0");
-        }
-    }
-//    @BindView(R.id.youtube_view)
-    YouTubePlayerFragment youTubePlayerFragment;
-    @Override
-    public void onInitializationFailure
-            (YouTubePlayer.Provider provider,
-             YouTubeInitializationResult youTubeInitializationResult) {
-//        return (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
-
-    }
 }

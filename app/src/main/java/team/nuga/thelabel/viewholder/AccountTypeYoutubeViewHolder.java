@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -17,9 +20,11 @@ import team.nuga.thelabel.data.User;
 /**
  * Created by Tacademy on 2016-08-31.
  */
-public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder implements View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
+public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder implements  View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener{
     TextView titleYoutubeView;
     private ImageView imageViewMenu;
+   YouTubePlayerSupportFragment youTubePlayerSupportFragment;
+    YouTubePlayer youTubePlayer;
 
     @Override
     public boolean onLongClick(View view) {
@@ -78,6 +83,7 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
         itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);
         imageViewMenu.setOnClickListener(this); //imageMenu 클릭 시 메뉴 팝업메뉴가 뜨도록
+        youTubePlayer = (YouTubePlayer) itemView.findViewById(R.id.youtube_Player_cardview);
     }
 
     @Override
