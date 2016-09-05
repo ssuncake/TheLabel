@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.User;
 
 /**
  * Created by Tacademy on 2016-08-31.
@@ -89,7 +90,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
             popupMenu.show();
         }
     }
-   Contents contents;
+
     public void setMusicContents(Contents contents){
         this.contents = contents;
         titleMusicView.setText(contents.getContentsText());
@@ -98,4 +99,8 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 //        Log.w("뷰타입" , ""+contents.getContentsType());
 //
 //    }
+
+    public void applyData(User user, Contents contents) {
+        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+    }
 }

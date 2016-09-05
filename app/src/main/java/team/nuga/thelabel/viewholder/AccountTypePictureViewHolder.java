@@ -10,16 +10,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.User;
 
 /**
  * Created by Tacademy on 2016-08-31.
  */
 public class AccountTypePictureViewHolder extends ParentContentsViewHolder implements View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
-    TextView titlePictureView;
+    @BindView(R.id.textView_numlike)
+    TextView likeCount;
     ImageView imageViewPicture;
     private ImageView imageViewMenu;
+
+//    User user;
 
     @Override
     public boolean onLongClick(View view) {
@@ -95,10 +100,28 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
         }
 
     }
-    Contents contents;
+//    Contents contents;
 
-    public void setPictureContent(Contents contents) {
-        this.contents = contents;
-//        titlePictureView.setText(contents.getContentsText());
+
+
+//    public void setContents(Contents contents) {
+//
+//        super.setContents(contents);
+//        this.contents = contents;
+//        setLikeCount(contents);
+////        titlePictureView.setText(contents.getContentsText());
+//    }
+//
+//    public void setUser(User user){
+//        this.user = user;
+//        Log.e("유저 메인","뷰홀더 유저"+user.getUserName());
+//
+//    }
+
+    @Override
+    public void applyData(User user, Contents contents) {
+        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
+
+
 }

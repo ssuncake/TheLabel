@@ -17,7 +17,7 @@ import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
-import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultMyAccount;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -49,9 +49,9 @@ public class UserMainFragment extends Fragment {
         ButterKnife.bind(this,view);
 
         ContentsRequest contentsRequest = new ContentsRequest(getContext(),2,10);
-        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResult<Contents[]>>() {
+        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
             @Override
-            public void onSuccess(NetworkRequest<NetworkResult<Contents[]>> request, NetworkResult<Contents[]> result) {
+            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request,NetworkResultMyAccount result) {
                 Contents[] contentses = result.getData();
                 for(Contents c : contentses){
                     Log.e("게시글 ID",""+ c.getContentsID());
@@ -60,11 +60,15 @@ public class UserMainFragment extends Fragment {
                     Log.e("좋아요 개수",""+c.getLikeCount());
                    accountAdatper.add(c);
 
+
                 }
+                User user = result.getResult();
+
+                accountAdatper.setUser(user);
             }
 
             @Override
-            public void onFail(NetworkRequest<NetworkResult<Contents[]>> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e("유저메인 실패",errorMessage);
             }
         });

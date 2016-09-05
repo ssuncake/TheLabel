@@ -8,13 +8,12 @@ import java.lang.reflect.Type;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
-import team.nuga.thelabel.data.Contents;
-import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultMyAccount;
 
 /**
  * Created by Tacademy on 2016-08-31.
  */
-public class ContentsRequest extends AbstractRequest<NetworkResult<Contents[]>> {
+public class ContentsRequest extends AbstractRequest<NetworkResultMyAccount> {
 
     Request request;
     public ContentsRequest(Context context, int page, int count ){
@@ -33,7 +32,7 @@ public class ContentsRequest extends AbstractRequest<NetworkResult<Contents[]>> 
     }
     @Override
     protected Type getType() {
-        return new TypeToken<NetworkResult<Contents[]>>(){}.getType();
+        return new TypeToken<NetworkResultMyAccount>(){}.getType();
     }
 
     @Override
