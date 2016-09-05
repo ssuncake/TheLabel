@@ -26,7 +26,9 @@ public abstract class ParentContentsViewHolder extends RecyclerView.ViewHolder {
         applyData(user,contents);
     }
 
-
+    public void setProfile(User user){
+        this.user = user;
+    }
 
     public abstract void applyData(User user, Contents contents);
 

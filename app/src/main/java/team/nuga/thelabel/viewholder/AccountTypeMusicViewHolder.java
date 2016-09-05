@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -18,7 +20,10 @@ import team.nuga.thelabel.data.User;
  * Created by Tacademy on 2016-08-31.
  */
 public class AccountTypeMusicViewHolder extends ParentContentsViewHolder implements View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
-    TextView titleMusicView;
+    @BindView(R.id.textView_username)
+    TextView userName;
+    @BindView(R.id.textView_numlike)
+    TextView likeCount;
     private ImageView imageViewMenu;
 
 
@@ -66,6 +71,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     public AccountTypeMusicViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this,itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +99,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     public void setMusicContents(Contents contents){
         this.contents = contents;
-        titleMusicView.setText(contents.getContentsText());
     }
 //    public void setContents (Contents contents){
 //        Log.w("뷰타입" , ""+contents.getContentsType());
@@ -101,6 +106,8 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 //    }
 
     public void applyData(User user, Contents contents) {
-        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+//        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+        likeCount.setText(""+contents.getLikeCount());
+        userName.setText(user.getUserName());
     }
 }

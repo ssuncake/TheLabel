@@ -12,6 +12,7 @@ import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
+import team.nuga.thelabel.viewholder.AccountTypeProfileViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypeYoutubeViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 
@@ -43,12 +44,18 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         notifyDataSetChanged();
     }
 
-
     @Override
     public int getItemViewType(int position) {
         int viewType;
-        viewType = mcontentslist.get(position).getContentsType();
-        return viewType;
+
+        if(position == 0){  //viewType의 position
+            return -1;  // 0일경우 Music이 보이고 -1일경우는 Music, Picture, Youtube중에 없기 때문에 default인 Profile이 뜬다.
+        }
+        else {
+        viewType = mcontentslist.get(position-1).getContentsType(); //listview position
+//        viewType = mcontentslist.get(position).getContentsType();
+
+        return viewType;}
     }
 
     @Override
@@ -68,33 +75,24 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 AccountTypeYoutubeViewHolder accounttypeThree = new AccountTypeYoutubeViewHolder(viewThree);
                 return accounttypeThree;
             default:
-                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
-                AccountTypeYoutubeViewHolder accounttypeFour = new AccountTypeYoutubeViewHolder(viewFour);
+                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent,false);
+               AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
                 return accounttypeFour;
         }
     }
 
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
-//        if(holder instanceof AccountTypeMusicViewHolder){
-//
-//            ((AccountTypeMusicViewHolder)holder).setUser(user);
-//            ((AccountTypeMusicViewHolder)holder).setContents(mcontentslist.get(position));
-//        }
-//        else  if(holder instanceof AccountTypePictureViewHolder){
-//            ((AccountTypePictureViewHolder)holder).setUser(user);
-//            ((AccountTypePictureViewHolder)holder).setContents(mcontentslist.get(position));
-//        }
-//        else  if(holder instanceof AccountTypeYoutubeViewHolder){
-//            ((AccountTypeYoutubeViewHolder)holder).setUser(user);
-//            ((AccountTypeYoutubeViewHolder)holder).setContents(mcontentslist.get(position));
-//        }
+        if (position == 0) {
+            holder.setProfile(user);
+        }else {
+            holder.setData(user, mcontentslist.get(position - 1));
+        }
 
-        holder.setData(user,mcontentslist.get(position));
     }
     @Override
     public int getItemCount() {
-        return mcontentslist.size();
+        return mcontentslist.size()+1; //profileviewholder 추가
     }
 
 

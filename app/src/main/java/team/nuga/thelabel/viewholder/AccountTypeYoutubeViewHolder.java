@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -18,8 +20,12 @@ import team.nuga.thelabel.data.User;
  * Created by Tacademy on 2016-08-31.
  */
 public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder implements View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
-    TextView titleYoutubeView;
+    @BindView(R.id.textView_numlike)
+    TextView likeCount;
+    @BindView(R.id.textView_username)
+    TextView userName;
     private ImageView imageViewMenu;
+
 
     @Override
     public boolean onLongClick(View view) {
@@ -65,6 +71,7 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
 
     public AccountTypeYoutubeViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,10 +100,11 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
 
     public void setYoutubeContents(Contents contents){
         this.contents = contents;
-        titleYoutubeView.setText(contents.getContentsText());
     }
 
     public void applyData(User user, Contents contents) {
-        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+        likeCount.setText(""+contents.getLikeCount());
+        userName.setText(user.getUserName());
+//        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
 }

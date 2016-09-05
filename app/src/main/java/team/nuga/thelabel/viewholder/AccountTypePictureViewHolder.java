@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -21,9 +22,10 @@ import team.nuga.thelabel.data.User;
 public class AccountTypePictureViewHolder extends ParentContentsViewHolder implements View.OnClickListener, View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
     @BindView(R.id.textView_numlike)
     TextView likeCount;
+    @BindView(R.id.textView_username)
+    TextView userNmae;
     ImageView imageViewPicture;
     private ImageView imageViewMenu;
-
 //    User user;
 
     @Override
@@ -33,7 +35,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {     // popup 메뉴로 생긴 메소드 (popup menu에 들어가 있는 item 클릭시 호출 됨)
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.contents_change:
                 Toast.makeText(itemView.getContext(), "Contents Change", Toast.LENGTH_SHORT).show();
                 break;
@@ -73,6 +75,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     public AccountTypePictureViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this,itemView);
 //        titlePictureView = (TextView)itemView.findViewById(R.id.textView_username);
         imageViewPicture = (ImageView) itemView.findViewById(R.id.image_contnet_picture);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +106,6 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 //    Contents contents;
 
 
-
 //    public void setContents(Contents contents) {
 //
 //        super.setContents(contents);
@@ -120,7 +122,9 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     @Override
     public void applyData(User user, Contents contents) {
-        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+//        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
+        likeCount.setText(""+contents.getLikeCount());
+        userNmae.setText(user.getUserName());
     }
 
 

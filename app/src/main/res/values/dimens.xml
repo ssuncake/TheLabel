@@ -46,6 +46,8 @@
     <!--imageview 속성값-->
     <dimen name="imageview_marginTop">15dp</dimen>
     <dimen name="imageview_marginLeft">30dp</dimen>
+    <dimen name="imageview_width">100dp</dimen>
+    <dimen name="imageview_height">100dp</dimen>
     <!--textview 속성값-->
     <dimen name="textview_marginLeft">5dp</dimen>
 

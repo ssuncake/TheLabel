@@ -74,7 +74,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:id="@+id/imageView2"
-                    android:src="@drawable/play"
+                    android:src="@drawable/btn_play"
                     android:layout_marginLeft="32dp"
                     android:layout_marginStart="32dp"
                     android:layout_alignParentBottom="true"
