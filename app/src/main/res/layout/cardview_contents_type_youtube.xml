@@ -46,12 +46,12 @@
                     android:id="@+id/imageView_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginEnd="17dp"
                     android:layout_marginRight="17dp"
-                    android:src="@drawable/menu" />
+                    android:src="@drawable/menu"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
             </RelativeLayout>
 
@@ -62,41 +62,55 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cardView_Like_ShareButton_Size">
-                <ImageView
-                    android:src="@android:drawable/btn_star_big_on"
-                    android:layout_width="@dimen/cardView_LikeImage_size"
-                    android:layout_height="@dimen/cardView_LikeImage_size"
-                    android:id="@+id/imageView"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
                 <TextView
-                    android:text="좋아요 0개"
-                    android:textColor="@color/error_color"
-                    android:id="@+id/textView_likeText"
-                    android:textSize="@dimen/cardView_LikeImage_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/imageView"
-                    android:layout_toEndOf="@+id/imageView" />
-                <ImageButton
-                    android:id="@+id/imageButton_like_button_cardView"
-                    android:src="@android:drawable/btn_star_big_off"
-                    android:layout_width="@dimen/cardView_Like_ShareButton_Size"
-                    android:layout_height="@dimen/cardView_Like_ShareButton_Size"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/imageButton_share_cardView"
-                    android:layout_toStartOf="@+id/imageButton_share_cardView" />
-                <ImageButton
-                    android:src="@android:drawable/ic_menu_share"
-                    android:layout_width="@dimen/cardView_Like_ShareButton_Size"
-                    android:layout_height="@dimen/cardView_Like_ShareButton_Size"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/imageButton_share_cardView" />
+                    android:text="동영상 화면"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="♥좋아요"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/textView_Iike"
+                    android:textColor="@android:color/black" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView_numlike"
+                    android:layout_marginLeft="@dimen/textview_marginLeft"
+                    android:layout_alignBottom="@+id/textView_Iike"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_toRightOf="@+id/textView_Iike"
+                    android:layout_toEndOf="@+id/textView_Iike"
+                    android:text="4"
+                    android:layout_alignTop="@+id/textView_Iike" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="개"
+                    android:textSize="15sp"
+                    android:id="@+id/textView_like_count"
+                    android:textColor="@android:color/black"
+                    android:layout_alignTop="@+id/textView_numlike"
+                    android:layout_toRightOf="@+id/textView_numlike"
+                    android:layout_toEndOf="@+id/textView_numlike" />
             </RelativeLayout>
 
 

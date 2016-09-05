@@ -1,14 +1,18 @@
 package team.nuga.thelabel.viewholder;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.User;
 
 /**
  * Created by Tacademy on 2016-08-31.
@@ -24,7 +28,30 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return false;
+        switch (item.getItemId()){
+            case R.id.contents_change:
+                Toast.makeText(itemView.getContext(), "Contents Change", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.contents_delete:
+                new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("삭제 확인")
+                        .setMessage("이 게시물을 삭제하시겠습니까?")
+                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+                break;
+        }
+        return true;
     }
 
     public interface OnYoutubeContentsItemClick{
@@ -63,9 +90,13 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
         }
     }
 
-    Contents contents;
+
     public void setYoutubeContents(Contents contents){
         this.contents = contents;
         titleYoutubeView.setText(contents.getContentsText());
+    }
+
+    public void applyData(User user, Contents contents) {
+        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
 }

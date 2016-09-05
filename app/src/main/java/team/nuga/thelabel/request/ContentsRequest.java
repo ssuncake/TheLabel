@@ -8,20 +8,20 @@ import java.lang.reflect.Type;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
-import team.nuga.thelabel.data.Contents;
-import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultMyAccount;
 
 /**
  * Created by Tacademy on 2016-08-31.
  */
-public class ContentsRequest extends AbstractRequest<NetworkResult<Contents[]>> {
+public class ContentsRequest extends AbstractRequest<NetworkResultMyAccount> {
 
     Request request;
     public ContentsRequest(Context context, int page, int count ){
 //        String path = "users?page="+page+"&count="+count;
-        String path = "users?page=1&count=5";
+        String path = "users/me?page=1&count=5";
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment("users")
+                .addPathSegment("me")
                 .addQueryParameter("page",page+"")
                 .addQueryParameter("count",count+"")
                 .build();
@@ -32,7 +32,7 @@ public class ContentsRequest extends AbstractRequest<NetworkResult<Contents[]>> 
     }
     @Override
     protected Type getType() {
-        return new TypeToken<NetworkResult<Contents[]>>(){}.getType();
+        return new TypeToken<NetworkResultMyAccount>(){}.getType();
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypeYoutubeViewHolder;
@@ -31,8 +32,14 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
 //    private ArrayList<User> muserlist = new ArrayList<>();
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
+    User user;
     public void add(Contents contents){
         mcontentslist.add(contents);
+        notifyDataSetChanged();
+    }
+
+    public void setUser(User user){
+        this.user = user;
         notifyDataSetChanged();
     }
 
@@ -69,8 +76,21 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
-        holder.setContents(mcontentslist.get(position));
+//        if(holder instanceof AccountTypeMusicViewHolder){
+//
+//            ((AccountTypeMusicViewHolder)holder).setUser(user);
+//            ((AccountTypeMusicViewHolder)holder).setContents(mcontentslist.get(position));
+//        }
+//        else  if(holder instanceof AccountTypePictureViewHolder){
+//            ((AccountTypePictureViewHolder)holder).setUser(user);
+//            ((AccountTypePictureViewHolder)holder).setContents(mcontentslist.get(position));
+//        }
+//        else  if(holder instanceof AccountTypeYoutubeViewHolder){
+//            ((AccountTypeYoutubeViewHolder)holder).setUser(user);
+//            ((AccountTypeYoutubeViewHolder)holder).setContents(mcontentslist.get(position));
+//        }
 
+        holder.setData(user,mcontentslist.get(position));
     }
     @Override
     public int getItemCount() {

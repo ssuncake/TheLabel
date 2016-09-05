@@ -21,6 +21,19 @@ public class Contents implements Serializable{
     @SerializedName("filepath")
     private String contentsPath;
 
+    @SerializedName("numlike")
+    private int likeCount;
+
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+
     public String getContentsText() {
         return contentsText;
     }

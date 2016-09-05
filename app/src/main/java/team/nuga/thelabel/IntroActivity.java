@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.data.User;
 
 public class IntroActivity extends AppCompatActivity {
