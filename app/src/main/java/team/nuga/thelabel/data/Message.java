@@ -4,48 +4,44 @@ package team.nuga.thelabel.data;
  * Created by Tacademy on 2016-08-24.
  */
 public class Message {
-    private int messageId;
-    private int messageReceiverID;
-    private int messageSenderID;
-    private String messageText;
+    public static final int ME=100;
+    public static final int OTHER = 200;
+    public static final int DATE = 300;
 
-    public int getMessageId() {
-        return messageId;
+    private int MessageType;
+    private String message;
+    private int id;
+    private String date;
+
+    public int getMessageType() {
+        return MessageType;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setMessageType(int messageType) {
+        MessageType = messageType;
     }
 
-    public int getMessageReceiverID() {
-        return messageReceiverID;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessageReceiverID(int messageReceiverID) {
-        this.messageReceiverID = messageReceiverID;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public int getMessageSenderID() {
-        return messageSenderID;
+    public int getId() {
+        return id;
     }
 
-    public void setMessageSenderID(int messageSenderID) {
-        this.messageSenderID = messageSenderID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getMessageText() {
-        return messageText;
+    public String getDate() {
+        return date;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
-
-    public Message(int messageId, int messageReceiverID, int messageSenderID, String messageText) {
-
-        this.messageId = messageId;
-        this.messageReceiverID = messageReceiverID;
-        this.messageSenderID = messageSenderID;
-        this.messageText = messageText;
+    public void setDate(String date) {
+        this.date = date;
     }
 }

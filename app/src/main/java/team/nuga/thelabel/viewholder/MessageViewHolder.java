@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.User;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -24,6 +24,9 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     }
     public MessageViewHolder(final View itemView) {
         super(itemView);
+
+        userphotoView = (ImageView)itemView.findViewById(R.id.image_user);
+        usernameView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,13 +35,12 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-        userphotoView = (ImageView)itemView.findViewById(R.id.image_user);
-        usernameView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
+
     }
     User user;
 
     public void setUser(User user){
         this.user = user;
-        usernameView.setText(user.getUserName());
+       // usernameView.setText(user.getUserName());
     }
 }

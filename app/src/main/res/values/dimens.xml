@@ -59,4 +59,11 @@
     <dimen name="settingitem_leftmargin">20dp</dimen>
     <dimen name="settingitem_topmargin">5dp</dimen>
     <dimen name="settingitem_textsize">15sp</dimen>
+
+
+    <!--message setting -->
+    <dimen name="messageother_mainpadding">10dp</dimen>
+    <dimen name="messageother_imagesize">40dp</dimen>
+    <dimen name="message_text_margin">10dp</dimen>
+    <dimen name="message_date_margin">10dp</dimen>
 </resources>

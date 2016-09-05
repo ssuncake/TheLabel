@@ -14,4 +14,9 @@
     <color name="setting_background">#EEEEEE</color>
     <color name="setting_titletext">#333333</color>
     <color name="setting_itemtext">#000000</color>
+
+    <!--메세지에서 사용-->
+    <color name="message_dateline_background">#999999</color>
+    <color name="message_dateline_text">#333333</color>
+
 </resources>
