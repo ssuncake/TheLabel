@@ -60,8 +60,6 @@ public class UserMainFragment extends Fragment {
                     Log.e("파일타입", ""+c.getContentsType());
                     Log.e("좋아요 개수",""+c.getLikeCount());
                    accountAdatper.add(c);
-
-
                 }
 
             }

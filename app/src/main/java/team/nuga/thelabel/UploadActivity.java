@@ -54,7 +54,7 @@ public class UploadActivity extends AppCompatActivity {
     @OnClick(R.id.button_Upload_Complete)
     public void ClickComplete() {
         Intent data = new Intent();
-        data.putExtra(MainActivity.TABINDEX, MainFragment.NEWSFEEDTAB);
+        data.putExtra(MainActivity.TABINDEX, MainFragment.USERTAB);
         setResult(RESULT_OK, data);
         finish();
     }

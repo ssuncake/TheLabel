@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="team.nuga.thelabel">
-
+    <manifest package="jp.wasabeef.glide.transformations"></manifest>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -88,10 +88,6 @@
             android:name=".youtube.FragmentDemoActivity"
            android:exported="true"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme" />
         <activity android:name=".LabelMakeActivity" />
         <activity android:name=".LabelSettingActivity" />
         <activity

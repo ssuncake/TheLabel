@@ -7,16 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/cardView_margin"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/black">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:background="@color/color_white">
+        android:background="@color/color_white"
+        >
     <ImageView
-        android:layout_width="@dimen/imageview_width"
-        android:layout_height="@dimen/imageview_height"
-        android:id="@+id/imageView_account_profile"
-        android:src="@drawable/profile_girl"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView_user_profile"
         android:layout_marginLeft="40dp"
         android:layout_marginStart="50dp"
         android:layout_centerVertical="true"
@@ -31,7 +32,7 @@
             android:textSize="15sp"
             android:id="@+id/textView_profile_username"
             android:textColor="@android:color/black"
-            android:layout_alignTop="@+id/imageView_account_profile"
+            android:layout_below="@+id/imageView_setting"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -55,7 +56,7 @@
             android:id="@+id/textView_profile_description"
             android:textSize="15sp"
             android:textColor="@android:color/black"
-            android:layout_alignBottom="@+id/imageView_account_profile"
+            android:layout_alignBottom="@+id/imageView_user_profile"
             android:layout_alignLeft="@+id/textView_profile_username"
             android:layout_alignStart="@+id/textView_profile_username" />
 

@@ -124,10 +124,13 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
     public void applyData(User user, Contents contents) {
-        likeCount.setText("" + contents.getLikeCount());
-        userName.setText(user.getUserName());
-        conetentTime.setText(contents.getContentTime());
+        if (user != null) {
+            userName.setText(user.getUserName());
 //        Log.e("시간", "Time"+contents.getContentTime());
+        }
+        else if(contents!=null){
+            conetentTime.setText(contents.getContentTime());
+            likeCount.setText("" + contents.getLikeCount());
+        }
     }
-
 }

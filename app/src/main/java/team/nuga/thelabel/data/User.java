@@ -20,9 +20,13 @@ public class User implements Serializable{
     @SerializedName("password")
     private String userPassword;
 
+    @SerializedName("image_path")
+    private String imageUrl;
+
     private ArrayList<Label> userInLabelList;
 
     private String userSex;
+
     private String userProfile;
     private String userLocal;
     private Position userPosition;
@@ -69,4 +73,12 @@ public class User implements Serializable{
     public String getEmail() {
         return userEmail;
     }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }

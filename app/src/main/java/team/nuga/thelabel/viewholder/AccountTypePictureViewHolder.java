@@ -80,7 +80,6 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     public AccountTypePictureViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-
         CheckBox likeCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_like_off);
         likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -109,6 +108,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
         itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);
         imageViewMenu.setOnClickListener(this); //imageMenu 클릭 시 메뉴 팝업메뉴가 뜨도록
+        ImageView contentPicture = (ImageView)itemView.findViewById(R.id.image_contnet_picture);
     }
 
     @Override
@@ -121,6 +121,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
         }
 
     }
+
 //    Contents contents;
 
 
@@ -140,10 +141,12 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     @Override
     public void applyData(User user, Contents contents) {
+        if (user != null) {
+            userNmae.setText(user.getUserName());
+        } else if (contents != null) {
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
-        likeCount.setText("" + contents.getLikeCount());
-        userNmae.setText(user.getUserName());
-        conetentTime.setText(contents.getContentTime());
+            likeCount.setText("" + contents.getLikeCount());
+            conetentTime.setText(contents.getContentTime());
+        }
     }
-
 }

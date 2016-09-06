@@ -22,6 +22,7 @@ android {
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -43,4 +44,6 @@ dependencies {
     compile files('C:/Users/Bliss/AndroidStudioProjects/TheLabel/YouTubeAndroidPlayerApi.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile files('YouTubeAndroidPlayerApi.jar')
+    compile 'jp.wasabeef:glide-transformations:1.0.6'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.0'
 }

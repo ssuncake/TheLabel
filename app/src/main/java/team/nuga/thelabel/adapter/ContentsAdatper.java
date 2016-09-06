@@ -88,7 +88,6 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         }else {
             holder.setData(user, mcontentslist.get(position - 1));
         }
-
     }
     @Override
     public int getItemCount() {
