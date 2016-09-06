@@ -18,6 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import team.nuga.thelabel.data.CheckEmailResult;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.CheckNicknameRequest;
 
 public class SignUpEditActivity extends AppCompatActivity {
     @BindView(R.id.imageButton_uploadProfileImage)
@@ -57,20 +61,56 @@ public class SignUpEditActivity extends AppCompatActivity {
 
     @BindView(R.id.button_checkOverlap)
     Button button_checkOverlap; //닉네임 중복확인 버튼
-
-    boolean isDuplicated;
-
+    static final int AVAILABLE = 0;
+    static final int NOT_AVAILABLE = 1;
     @OnClick(R.id.button_checkOverlap)
     public void onClickCheckOverlap() {
-        if (isDuplicated == true) {
-            Toast.makeText(SignUpEditActivity.this, "이미 있는 닉네임이에요.. 다시 지어주세요♪", Toast.LENGTH_SHORT).show();
-        } else if (isDuplicated == false) {
-            Toast.makeText(SignUpEditActivity.this, "사용 가능합니다♪", Toast.LENGTH_SHORT).show();
-        }
+        String nickname = editText_userNickName.getText().toString();
+        CheckNicknameRequest nicknameRequest = new CheckNicknameRequest(this, nickname);
+        NetworkManager.getInstance().getNetworkData(nicknameRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
+            @Override
+            public void onSuccess(NetworkRequest<CheckEmailResult> request, CheckEmailResult result) {
+                if(result.getMatch()==AVAILABLE){
+                    Log.d("MATCH 값 ", ""+result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
+                    Toast.makeText(SignUpEditActivity.this, "사용해도 좋은 닉네임입니다♪", Toast.LENGTH_SHORT).show();
+                }else if(result.getMatch()==NOT_AVAILABLE){
+                    Log.d("MATCH 값 ", ""+result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
+                    Toast.makeText(SignUpEditActivity.this, "닉네임이 이미 있어요!!!!!!!!!!!!!!!!!!!!!!!ㅋ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<CheckEmailResult> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
     }
 
     @BindView(R.id.button_signUpComplete)
     Button button_signUpComplete; //가입완료 버튼
+//    @OnClick(R.id.button_signUpComplete)
+//            public void onsignUpComplete(){
+//
+////        SignUpRequest request = new SignUpRequest();
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultSignUp>() {
+//            @Override
+//            public void onSuccess(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, NetworkResultSignUp result) {
+//                if(result.getError()==null){
+//                    Toast.makeText(SignUpEditActivity.this, "가입 성공하셨어염 뿌우", Toast.LENGTH_SHORT).show();
+//                    result.getId();
+//                    result.getMessage();
+//                }else{
+//                    Log.e("에러", " 에러");
+//                    result.getError().getMessage();
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, int errorCode, String errorMessage, Throwable e) {
+//
+//            }
+//        });
+//    }
 
     int TOWNID = 0;
     int CITYID = 0;

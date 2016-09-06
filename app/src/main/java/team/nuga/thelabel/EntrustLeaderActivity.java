@@ -8,8 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.Random;
-
 import team.nuga.thelabel.adapter.EntrustLeaderAdapter;
 import team.nuga.thelabel.data.User;
 
@@ -35,16 +33,16 @@ public class EntrustLeaderActivity extends AppCompatActivity {
         listView.setAdapter(entrustLeaderAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         listView.setLayoutManager(manager);
-        initData();
+//        initData();
     }
-    private void initData(){
-        Random r = new Random();
-        for(int i=0; i<5; i++){
-            User u = new User();
-            u.setUserName("name"+i);
-            entrustLeaderAdapter.add(u);
-        }
-    }
+//    private void initData(){
+//        Random r = new Random();
+//        for(int i=0; i<5; i++){
+//            User u = new User(i);
+//            u.setUserName("name"+i);
+//            entrustLeaderAdapter.add(u);
+//        }
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

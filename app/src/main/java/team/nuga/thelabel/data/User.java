@@ -31,6 +31,7 @@ public class User implements Serializable{
     private HashSet<Integer> userLikeLabel;
     private boolean userNeed;
 
+
     public void addLabelList(Label label){
             if(userInLabelList==null){
                 userInLabelList = new ArrayList<Label>();
