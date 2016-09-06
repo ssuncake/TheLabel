@@ -7,6 +7,10 @@
     <color name="color_gray_2">#ffaaaaaa</color>
     <color name="color_gray_1">#ff777777</color>
 
+<!--회원가입 중복체크 색상-->
+    <color name="color_check_success">#FF009900</color>
+    <color name="color_check_fail">#FFff4081</color>
+
     <color name="maintitle_blue">#060928</color>
     <color name="text_color">#000000</color>
 

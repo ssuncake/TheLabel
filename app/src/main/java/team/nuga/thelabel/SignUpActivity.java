@@ -1,12 +1,15 @@
 package team.nuga.thelabel;
 
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +21,10 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.data.CheckEmailResult;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.CheckEmailRequest;
 
 public class SignUpActivity extends AppCompatActivity {
 //    @BindView(R.id.TextInput_signUp_password)
@@ -37,18 +44,59 @@ TextInputLayout inputLayout_email;
     @BindView(R.id.button_checkOverlap)
     Button button_emailCheck;
     @OnClick(R.id.button_checkOverlap)
-    public void onClickCheckOverlap(){
+    public void onClickCheckOverlap() {
         Toast.makeText(SignUpActivity.this, "중복확인 클릭..", Toast.LENGTH_SHORT).show();
+        String email = editText_email.getText().toString();
+        CheckEmailRequest emailRequest = new CheckEmailRequest(this, email);
+        NetworkManager.getInstance().getNetworkData(emailRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
+            @Override
+            public void onSuccess(NetworkRequest<CheckEmailResult> request, CheckEmailResult result) {
+                if(result.getMatch()==0){
+                    Log.d("Match 값 ",""+result.getMatch());
+                    Toast.makeText(SignUpActivity.this, "사용해도 좋아용", Toast.LENGTH_SHORT).show();
+                }else if(result.getMatch()==1){
+                    Log.d("Match 값 ",""+result.getMatch());
+                    Toast.makeText(SignUpActivity.this, "이미 가입하신거 같네용ㅋ", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<CheckEmailResult> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
     }
+
     @BindView(R.id.button_nextStep_signUp)
     Button button_nextstep;
+
+
+    boolean isSignUpSuccess = false;
     @OnClick(R.id.button_nextStep_signUp) //다음단계 버튼
-    public void onClcikNextStep(){
-//        submitForm();
-        Intent intent = new Intent(this, SignUpEditActivity.class );
-//        intent.putExtra()
-        startActivity(intent);
-//        finish();
+    public void onClcikNextStep() {
+        String email = editText_email.getText().toString();
+        signUpCheck();
+//        if(isSignUpSuccess){  User signUp_user = new User(email, password);
+//            Intent intent = new Intent(this, SignUpEditActivity.class);
+//            intent.putExtra("signUpInfo",signUp_user);
+//
+//            startActivity(intent);
+//        }
+
+
+    }
+
+    private void signUpCheck() {
+        String password = editText_password.getText().toString();
+        String passwodCheck = editText_passwordCheck.getText().toString();
+        if(password.equals(passwodCheck)){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                editText_password.setTextColor(getColor(R.color.color_check_success));
+            }
+        }
+
+        // 이메일중복체크, 비밀번호 동일 확인
     }
 
     @BindView(R.id.textView_serviceAgree)
@@ -59,12 +107,23 @@ TextInputLayout inputLayout_email;
     CheckBox checkBox_service;
     @BindView(R.id.checkBox_personal)
     CheckBox checkBox_personal;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle("이메일 입력 및 약관동의");
+        }
+
 
         editText_email.getFreezesText();
 

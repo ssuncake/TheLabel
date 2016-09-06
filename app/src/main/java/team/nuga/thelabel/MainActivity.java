@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -50,6 +48,8 @@ public class MainActivity extends AppCompatActivity
     public static final int REQUEST_SETTINGLABEL = 410;
 
 
+    private AppFunction appFunction;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle("     The label ");
-
         }
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.app_name, R.string.app_name);
@@ -115,8 +114,8 @@ public class MainActivity extends AppCompatActivity
         headerUserName.setText(mainUser.getUserName());
     }
 
-    boolean backButtonClicked = false;
-    Handler mHandler = new Handler(Looper.getMainLooper());
+//    boolean backButtonClicked = false;
+//    Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onBackPressed() {
@@ -124,21 +123,21 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
-            if (backButtonClicked == false) {
-                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
-                backButtonClicked = true;
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        backButtonClicked = false;
-                    }
-                },1000);
-            }
-            else if(backButtonClicked == true) {
-                Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
-                    super.onBackPressed();
-            }
+            appFunction.onBackPressed();
+//            if (backButtonClicked == false) {
+//                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+//                backButtonClicked = true;
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        backButtonClicked = false;
+//                    }
+//                },1000);
+//            }
+//            else if(backButtonClicked == true) {
+//                Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
+//                    super.onBackPressed();
+//            }
 
         }
 
