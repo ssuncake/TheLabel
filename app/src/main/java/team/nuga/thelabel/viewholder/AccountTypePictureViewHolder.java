@@ -6,6 +6,8 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,7 +80,21 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     public AccountTypePictureViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-//        titlePictureView = (TextView)itemView.findViewById(R.id.textView_username);
+
+        CheckBox likeCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_like_off);
+        likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheckd) {
+                if (isCheckd) {
+                    int likeCountAdd = contents.getLikeCount() + 1;
+                    likeCount.setText("" + likeCountAdd);
+
+                } else {
+                    likeCount.setText("" + contents.getLikeCount());
+                }
+            }
+        });
+
         imageViewPicture = (ImageView) itemView.findViewById(R.id.image_contnet_picture);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,4 +145,5 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
         userNmae.setText(user.getUserName());
         conetentTime.setText(contents.getContentTime());
     }
+
 }

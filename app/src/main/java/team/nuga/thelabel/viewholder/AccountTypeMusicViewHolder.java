@@ -7,13 +7,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.User;
@@ -28,9 +28,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     TextView likeCount;
     @BindView(R.id.textView_content_time)
     TextView conetentTime;
-    @BindView(R.id.imageView_like_off)
-    CheckBox likeOffImageView;
-
     private ImageView imageViewMenu;
 
 
@@ -41,7 +38,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.contents_change:
                 Toast.makeText(itemView.getContext(), "Contents Change", Toast.LENGTH_SHORT).show();
                 break;
@@ -67,25 +64,42 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         return true;
     }
 
-    public interface OnMusicContentsItemClick{
+    public interface OnMusicContentsItemClick {
         void onMusicContentItemClick(View view, Contents contents, int adapterPosition);
     }
 
     OnMusicContentsItemClick musicContentslist;
-    public void setOnMusicContentsItemClickListener(OnMusicContentsItemClick musiclistener){
+
+    public void setOnMusicContentsItemClickListener(OnMusicContentsItemClick musiclistener) {
         this.musicContentslist = musiclistener;
     }
 
     public AccountTypeMusicViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
+
+        CheckBox likeCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_like_off);
+        likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheckd) {
+                if (isCheckd) {
+                    int likeCountAdd = contents.getLikeCount() + 1;
+                    likeCount.setText("" + likeCountAdd);
+
+                } else {
+                    likeCount.setText("" + contents.getLikeCount());
+                }
+            }
+        });
+
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(musicContentslist!=null){
+                if (musicContentslist != null) {
                     musicContentslist.onMusicContentItemClick(view, contents, getAdapterPosition());
                 }
-                Log.v("Music","test success");
+                Log.v("Music", "test success");
             }
         });
         itemView.setOnClickListener(this); //popup listener
@@ -103,22 +117,17 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
             popupMenu.show();
         }
     }
-    @OnClick(R.id.imageView_like_off)
-    public void onLikeOffClick(){
-    }
 
-    public void setMusicContents(Contents contents){
+    public void setMusicContents(Contents contents) {
         this.contents = contents;
     }
-//    public void setContents (Contents contents){
-//        Log.w("뷰타입" , ""+contents.getContentsType());
-//
-//    }
+
 
     public void applyData(User user, Contents contents) {
-        likeCount.setText(""+contents.getLikeCount());
+        likeCount.setText("" + contents.getLikeCount());
         userName.setText(user.getUserName());
         conetentTime.setText(contents.getContentTime());
 //        Log.e("시간", "Time"+contents.getContentTime());
     }
+
 }

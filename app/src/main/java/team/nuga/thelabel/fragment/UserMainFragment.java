@@ -29,9 +29,7 @@ import team.nuga.thelabel.request.ContentsRequest;
 public class UserMainFragment extends Fragment {
     ContentsAdatper accountAdatper;
     User user;
-//    MusicContents musicContents;
-//    PictureContents pictureContents;
-//    YoutubeContents youtubeContents;
+
     @BindView(R.id.textView_UserMain_UsrName)
     TextView userName;
 
@@ -50,8 +48,12 @@ public class UserMainFragment extends Fragment {
         ContentsRequest contentsRequest = new ContentsRequest(getContext(),2,10);
         NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
             @Override
+
             public void onSuccess(NetworkRequest<NetworkResultMyAccount> request,NetworkResultMyAccount result) {
                 Contents[] contentses = result.getData();
+                User user = result.getResult();
+                Log.e("유저메인",user.getUserName());
+                accountAdatper.setUser(user);
                 for(Contents c : contentses){
                     Log.e("게시글 ID",""+ c.getContentsID());
                     Log.e("파일경로", ""+c.getContentsPath());
@@ -61,9 +63,7 @@ public class UserMainFragment extends Fragment {
 
 
                 }
-                User user = result.getResult();
 
-                accountAdatper.setUser(user);
             }
 
             @Override
@@ -99,4 +99,6 @@ public class UserMainFragment extends Fragment {
 //           }
 //       }
 //    }
+
+
 }

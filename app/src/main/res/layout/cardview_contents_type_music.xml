@@ -94,7 +94,7 @@
                     android:layout_alignParentStart="true" />
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,6 +103,7 @@
                     android:text="♥좋아요"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="25dp"
+                    android:layout_weight="1"
                     android:id="@+id/textView_Iike"
                     android:textColor="@android:color/black" />
 
@@ -118,6 +119,7 @@
                     android:layout_toRightOf="@+id/textView_Iike"
                     android:layout_toEndOf="@+id/textView_Iike"
                     android:text="4"
+                    android:gravity="left"
                     android:layout_alignTop="@+id/textView_Iike" />
 
                 <TextView
@@ -131,18 +133,14 @@
                     android:layout_alignTop="@+id/textView_numlike"
                     android:layout_toRightOf="@+id/textView_numlike"
                     android:layout_toEndOf="@+id/textView_numlike" />
-
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView_like_off"
+                    android:id="@+id/checkbox_like_off"
                    android:button="@drawable/user_main_fragment_like"
-                    android:clickable="true"
-                    android:layout_marginRight="58dp"
-                    android:layout_marginEnd="58dp"
-                    android:layout_alignTop="@+id/textView_like_count"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/imageView_share"
+                    android:layout_toStartOf="@+id/imageView_share" />
 
 
                 <ImageView
@@ -150,12 +148,12 @@
                     android:layout_height="25dp"
                     android:id="@+id/imageView_share"
                     android:src="@drawable/btn_share"
-                    android:layout_alignTop="@+id/imageView_like_off"
+                    android:layout_alignTop="@+id/checkbox_like_off"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="28dp"
                     android:layout_marginEnd="28dp" />
-            </RelativeLayout>
+                </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

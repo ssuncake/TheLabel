@@ -6,6 +6,8 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +76,21 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
     public AccountTypeYoutubeViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
+        CheckBox likeCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_like_off);
+        likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheckd) {
+                if (isCheckd) {
+                    int likeCountAdd = contents.getLikeCount() + 1;
+                    likeCount.setText("" + likeCountAdd);
+
+                } else {
+                    likeCount.setText("" + contents.getLikeCount());
+                }
+            }
+        });
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,4 +127,5 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
         conetentTime.setText(contents.getContentTime());
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
+
 }
