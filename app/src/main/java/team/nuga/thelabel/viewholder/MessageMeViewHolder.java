@@ -24,10 +24,9 @@ public class MessageMeViewHolder extends MessageParentViewHolder {
         ButterKnife.bind(this,itemView);
     }
 
-    public void setMessage(Message m){
+    public void setMessage(String m){
         if(m!=null){
-            message.setText(m.getMessage());
-            date.setText(m.getDate());
+            message.setText(m);
         }else{
             Log.d("메세지 me 뷰홀더","setMessage null");
         }

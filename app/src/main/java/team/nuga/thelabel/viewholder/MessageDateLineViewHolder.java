@@ -6,7 +6,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.Message;
 
 /**
  * Created by Tacademy on 2016-09-05.
@@ -23,7 +22,7 @@ public class MessageDateLineViewHolder extends MessageParentViewHolder {
     }
 
     @Override
-    public void setMessage(Message m) {
+    public void setMessage(String m) {
 
     }
 

@@ -27,7 +27,7 @@ public class SearchUserResultListAdapter extends RecyclerView.Adapter<SearchUser
 
     @Override
     public SearchUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_message_recycler, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_messagelist, parent, false);
         SearchUserViewHolder holder = new SearchUserViewHolder(view);
         holder.setOnSearchItemClickListener(this);
         return holder;

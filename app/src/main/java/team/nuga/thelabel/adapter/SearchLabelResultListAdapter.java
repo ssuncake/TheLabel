@@ -27,7 +27,7 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
 
     @Override
     public SearchLabelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_message_recycler, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_messagelist, parent, false);
         SearchLabelViewHolder holder = new SearchLabelViewHolder(view);
         holder.setOnSearchItemClickListener(this);
         return holder;

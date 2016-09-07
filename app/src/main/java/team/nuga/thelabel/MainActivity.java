@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     public static final int REQUEST_SETTINGLABEL = 410;
 
 
-    private AppFunction appFunction;
+
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     private User mainUser;
     private Bundle bundle;
 
-
+    private AppFunction appFunction;
     ActionBar actionBar;
 
     @Override
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        appFunction = new AppFunction(this);
+
 
 
         actionBar = getSupportActionBar();
@@ -203,7 +205,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.drawer_message) {
             actionBar.setTitle("메세지");
             drawer.setCheckedItem(R.id.drawer_message);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MessageListFragment()).commit();
+            Bundle b = new Bundle();
+            b.putSerializable(MainActivity.MAINUSER, mainUser);
+            MessageListFragment messageListFragment = new MessageListFragment();
+            messageListFragment.setArguments(b);
+            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, messageListFragment).commit();
         } else if (id == R.id.drawer_likeContents) {
             actionBar.setTitle("내가 좋아요한 게시물");
             drawer.setCheckedItem(R.id.drawer_likeContents);

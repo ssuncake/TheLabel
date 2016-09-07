@@ -18,7 +18,6 @@ public class Genre implements Serializable {
     public static final int JAZZ = 10;
     public static final int CCM = 11;
 
-
-
+    public static final String[] Ganre ={"선택안함","가요","팝","랩/힙합","락","어쿠스틱/포크","일렉","뉴에이지","R&B/Soul","재즈","CCM"};
 
 }

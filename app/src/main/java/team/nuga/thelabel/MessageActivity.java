@@ -1,5 +1,6 @@
 package team.nuga.thelabel;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,10 +12,14 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import team.nuga.thelabel.adapter.MessageMainAdapter;
-import team.nuga.thelabel.data.Message;
+import team.nuga.thelabel.adapter.MessageListCursorAdapter;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
 
 public class MessageActivity extends AppCompatActivity {
+    public static final String USER="dbuser";
+
+
     @BindView(R.id.toolBar_MessageMain)
     Toolbar toolbar;
     @BindView(R.id.editText_Message_InputText)
@@ -24,10 +29,23 @@ public class MessageActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_Message_Send)
     public void clickSend(){
-
+        String s = inputText.getText().toString();
+        if(sw){
+            DBManager.getInstance(myUser).addMessage(myUser,user,0,s);
+            sw = !sw;
+        }else{
+            DBManager.getInstance(myUser).addMessage(myUser,user,1,s);
+            sw = !sw;
+        }
+        updateMessage();
     }
 
-    MessageMainAdapter adapter;
+    User myUser;
+    User user;
+    MessageListCursorAdapter adapter;
+
+    boolean sw=false;
+
 
 
     @Override
@@ -36,19 +54,20 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         ButterKnife.bind(this);
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        adapter = new MessageMainAdapter();
-        message.setAdapter(adapter);
+        myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
+        user = (User)getIntent().getSerializableExtra(USER);
+        adapter = new MessageListCursorAdapter();
+        message.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         message.setLayoutManager(manager);
 
-        DummyMessage();
+
 
     }
     @Override
@@ -61,57 +80,75 @@ public class MessageActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateMessage() {
+        Cursor c = DBManager.getInstance(myUser).getChatMessage(user);
+        adapter.changeCursor(c);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateMessage();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.changeCursor(null);
+    }
+
     public void DummyMessage(){
-        Message m = new Message();
-        m.setMessageType(Message.ME);
-        m.setMessage("안녕하세요");
-        m.setDate("99999");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.ME);
-        m.setMessage("안녕하세요");
-        m.setDate("99999");
-        adapter.add(m);
-        m = new Message();
-        m.setMessageType(Message.OTHER);
-        m.setMessage("안녕");
-        m.setDate("88888");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.ME);
-        m.setMessage("zzzzzz");
-        m.setDate("22");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.OTHER);
-        m.setMessage("ㅎㅎㅎㅎㅎ");
-        m.setDate("222233");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.OTHER);
-        m.setMessage("ㄴㄴㄴㄴ");
-        m.setDate("2525");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.ME);
-        m.setMessage("ㄴㅇㄹㄴㄹ");
-        m.setDate("99999");
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.DATE);
-        adapter.add(m);
-
-        m = new Message();
-        m.setMessageType(Message.OTHER);
-        m.setMessage("ㄴㄴㄴㄴ");
-        m.setDate("2525");
-        adapter.add(m);
+//        Message m = new Message();
+//        m.setMessageType(Message.ME);
+//        m.setMessage("안녕하세요");
+//        m.setDate("99999");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.ME);
+//        m.setMessage("안녕하세요");
+//        m.setDate("99999");
+//        adapter.add(m);
+//        m = new Message();
+//        m.setMessageType(Message.OTHER);
+//        m.setMessage("안녕");
+//        m.setDate("88888");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.ME);
+//        m.setMessage("zzzzzz");
+//        m.setDate("22");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.OTHER);
+//        m.setMessage("ㅎㅎㅎㅎㅎ");
+//        m.setDate("222233");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.OTHER);
+//        m.setMessage("ㄴㄴㄴㄴ");
+//        m.setDate("2525");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.ME);
+//        m.setMessage("ㄴㅇㄹㄴㄹ");
+//        m.setDate("99999");
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.DATE);
+//        adapter.add(m);
+//
+//        m = new Message();
+//        m.setMessageType(Message.OTHER);
+//        m.setMessage("ㄴㄴㄴㄴ");
+//        m.setDate("2525");
+//        adapter.add(m);
 
     }
 }

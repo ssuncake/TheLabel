@@ -81,4 +81,19 @@ public class User implements Serializable{
         this.imageUrl = imageUrl;
     }
 
+
+    public int getUserID() {
+        return userID;
+    }
+    public long getLongUserID(){
+        return (long)userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 }

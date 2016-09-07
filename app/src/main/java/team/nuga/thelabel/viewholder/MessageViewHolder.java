@@ -39,8 +39,15 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     }
     User user;
 
+    public void setData(String name){
+        // 나중에 이미지도 설정
+        usernameView.setText(name);
+    }
+
     public void setUser(User user){
         this.user = user;
        // usernameView.setText(user.getUserName());
     }
+
+
 }
