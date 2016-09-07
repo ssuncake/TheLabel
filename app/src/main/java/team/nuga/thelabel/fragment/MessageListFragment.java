@@ -6,24 +6,28 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.MessageActivity;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.ChatContract;
+import team.nuga.thelabel.adapter.MessageMemberAdapter;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.DBManager;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.GetUserImageByIdRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,39 +35,78 @@ import team.nuga.thelabel.manager.DBManager;
 public class MessageListFragment extends Fragment {
 
     User user;
+    User otherUser;
+    int otherUserid;
 
+    User tempotherUser;
 
     @BindView(R.id.editText_messagedebug)
     EditText editText;
-    @BindView(R.id.listView_MessageList)
-    ListView listView;
+//    @BindView(R.id.listView_MessageList)
+//    ListView listView;
 
-    SimpleCursorAdapter adapter;
+    @BindView(R.id.recyclerView_MessageList)
+    RecyclerView recyclerView;
 
-    @OnItemClick(R.id.listView_MessageList)
-    public void onItemClick(int position, long id) {
-        Cursor cursor = (Cursor)listView.getItemAtPosition(position);
-        User user = new User();
-        user.setUserID((int)(cursor.getLong(cursor.getColumnIndex(ChatContract.ChatUser.OTHER_ID))));
+    MessageMemberAdapter adapter;
 
-        user.setUserName(cursor.getString(cursor.getColumnIndex(ChatContract.ChatUser.OTHER_NAME)));
-        Intent intent = new Intent(getContext(),MessageActivity.class);
-        intent.putExtra(MessageActivity.USER, user);
-        intent.putExtra(MainActivity.MAINUSER, this.user);
-        startActivity(intent);
-    }
+//    SimpleCursorAdapter adapter;
+
+//    @OnItemClick(R.id.listView_MessageList)
+//    public void onItemClick(int position, long id) {
+//        Cursor cursor = (Cursor)listView.getItemAtPosition(position);
+//        Log.e("MessageListFragment","클릭 position = "+position);
+//
+//        otherUserid = (int)(cursor.getLong(cursor.getColumnIndex(ChatContract.ChatUser.OTHER_ID)));
+//        Log.e("MessageListFragment","클릭 otherID = "+otherUserid);
+//        GetUserImageByIdRequest request = new GetUserImageByIdRequest(getActivity(),otherUserid);
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+//                otherUser = result.getUser();
+//                otherUser.setUserID(otherUserid);
+//                Log.e("MessageListFragment","아이디로 유저네임 이미지 얻어오기"+otherUser.getUserName()+" // "+otherUser.getImageUrl());
+//                Intent intent = new Intent(getContext(),MessageActivity.class);
+//                intent.putExtra(MessageActivity.USER, otherUser);
+//                intent.putExtra(MainActivity.MAINUSER, user);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+//                Log.e("MessageListFragment","프로토콜 7  "+errorMessage);
+//            }
+//        });
+//    }
 
     @OnClick(R.id.button_messagedebug)
     public void addUser(){
-        String un = editText.getText().toString()+" 테스트인원";
+       final int otherId  = Integer.parseInt(editText.getText().toString());
 
-        User user = new User();
-        user.setUserName(un);
-        user.setUserEmail("a@a.a");
-        user.setUserID(Integer.parseInt(editText.getText().toString()));
-        Log.e("더미유저추가","유저 이름 "+user.getUserName());
-        DBManager.getInstance(this.user).addMessage(this.user,user,1,user.getUserName()+1+" 으아아아");
-        DBManager.getInstance(this.user).addMessage(this.user,user,0,"오마나세상에");
+        GetUserImageByIdRequest request = new GetUserImageByIdRequest(getActivity(),otherId);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                tempotherUser = result.getUser();
+                tempotherUser.setUserID(otherId);
+                Log.e("MessageListFragment","아이디로 유저네임 이미지 얻어오기디버그용 "+tempotherUser.getUserName()+" // "+tempotherUser.getImageUrl());
+                Log.e("더미유저추가","유저 이름 "+tempotherUser.getUserName());
+
+
+                // 더미메세지
+                DBManager.getInstance(user).addMessage(user,tempotherUser,1," 으아아아");
+                DBManager.getInstance(user).addMessage(user,tempotherUser,0,"오마나세상에");
+                updateMessage();
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("MessageListFragment","프로토콜 7디버그"+errorMessage);
+            }
+        });
+
+
+
 
 
     }
@@ -78,9 +121,6 @@ public class MessageListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
         Log.e("메세지 리스트 프래그먼트 ","프래그먼트 전달 유저 : " +user.getLongUserID());
-        String[] from = {ChatContract.ChatUser.OTHER_NAME};
-        int[] to = {R.id.textView_MessageList_UserName};
-        adapter = new SimpleCursorAdapter(getContext(), R.layout.view_messagelist, null, from, to, 0);
     }
 
     @Override
@@ -90,40 +130,24 @@ public class MessageListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_message_list, container, false);
         ButterKnife.bind(this,view);
-        listView.setAdapter(adapter);
 
-        // 더미세팅 부분이빈다.
+        adapter = new MessageMemberAdapter();
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter.setOnAdapterItemClickListener(new MessageMemberAdapter.OnAdapterItemClickLIstener() {
+            @Override
+            public void onAdapterItemClick(View view,User suser, int position) {
+                Toast.makeText(getActivity(), position+"클릭", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),MessageActivity.class);
+                intent.putExtra(MessageActivity.USER, suser);
+                intent.putExtra(MainActivity.MAINUSER, user);
+                startActivity(intent);
+            }
+        });
 
-
-        User user = new User();
-        user.setUserName("힣핳훟");
-        user.setUserEmail("a@a.a");
-        user.setUserID(900);
-
-//        DBManager.getInstance(this.user).addUser(user);
-//        DBManager.getInstance(this.user).addMessage(this.user,user,1,user.getUserName()+1+" 으아아아");
-//        DBManager.getInstance(this.user).addMessage(this.user,user,0,"오마나세상에");
         return view;
-    }
-
-
-    private void initData(){
-
-//
-//        user = new User();
-//        user.setUserName("두원");
-//        user.setUserEmail("b@b.b");
-//        user.setUserID(602);
-//        DBManager.getInstance().addUser(user);
-//
-//        user = new User();
-//        user.setUserName("혜빈");
-//        user.setUserEmail("c@c.c");
-//        user.setUserID(702);
-//        DBManager.getInstance().addUser(user);
-
-
-
     }
 
 
@@ -138,6 +162,11 @@ public class MessageListFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.changeCursor(null);
+    }
+
+    private void updateMessage() {
+        Cursor c = DBManager.getInstance(user).getChatUser();
+        adapter.changeCursor(c);
     }
 
 

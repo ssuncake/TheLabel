@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class User implements Serializable {
-    private int userID;
+public class User implements Serializable{
+
+    private int id;
     @SerializedName("nickname")
     private String userName;
     @SerializedName("email")
@@ -20,22 +20,23 @@ public class User implements Serializable {
     @SerializedName("password")
     private String userPassword;
 
+    @SerializedName("imagepath")
+    private String imageUrl;
+
     public String getUserPassword() {
         return userPassword;
     }
 
-    @SerializedName("image_path")
-    private String imageUrl;
+
 
     private ArrayList<Label> userInLabelList;
 
     private String userSex;
+
     private String userProfile;
     private String userLocal;
     private Position userPosition;
     private Genre userGenre;
-    private HashSet<Integer> userLikeContents;
-    private HashSet<Integer> userLikeLabel;
     private boolean userNeed;
 
     public void addLabelList(Label label){
@@ -86,14 +87,14 @@ public class User implements Serializable {
 
 
     public int getUserID() {
-        return userID;
+        return id;
     }
     public long getLongUserID(){
-        return (long)userID;
+        return (long)id;
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.id = userID;
     }
 
     public void setUserEmail(String userEmail) {

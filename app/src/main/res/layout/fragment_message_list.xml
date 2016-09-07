@@ -7,12 +7,19 @@
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-
+<!--sds
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_MessageList"
         android:choiceMode="singleChoice" />
+        -->
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView_MessageList"
+        android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="match_parent"

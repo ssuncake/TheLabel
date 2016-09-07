@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -61,11 +62,16 @@ public class MessageActivity extends AppCompatActivity {
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
         user = (User)getIntent().getSerializableExtra(USER);
+
         adapter = new MessageListCursorAdapter();
+        Log.w("Message Activity","이미지 경로 "+user.getImageUrl());
+
+        adapter.setUserImagePath(user.getImageUrl());
         message.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         message.setLayoutManager(manager);
+
 
 
 
@@ -98,57 +104,4 @@ public class MessageActivity extends AppCompatActivity {
         adapter.changeCursor(null);
     }
 
-    public void DummyMessage(){
-//        Message m = new Message();
-//        m.setMessageType(Message.ME);
-//        m.setMessage("안녕하세요");
-//        m.setDate("99999");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.ME);
-//        m.setMessage("안녕하세요");
-//        m.setDate("99999");
-//        adapter.add(m);
-//        m = new Message();
-//        m.setMessageType(Message.OTHER);
-//        m.setMessage("안녕");
-//        m.setDate("88888");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.ME);
-//        m.setMessage("zzzzzz");
-//        m.setDate("22");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.OTHER);
-//        m.setMessage("ㅎㅎㅎㅎㅎ");
-//        m.setDate("222233");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.OTHER);
-//        m.setMessage("ㄴㄴㄴㄴ");
-//        m.setDate("2525");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.ME);
-//        m.setMessage("ㄴㅇㄹㄴㄹ");
-//        m.setDate("99999");
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.DATE);
-//        adapter.add(m);
-//
-//        m = new Message();
-//        m.setMessageType(Message.OTHER);
-//        m.setMessage("ㄴㄴㄴㄴ");
-//        m.setDate("2525");
-//        adapter.add(m);
-
-    }
 }

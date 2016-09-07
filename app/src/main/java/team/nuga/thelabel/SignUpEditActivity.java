@@ -190,13 +190,13 @@ public class SignUpEditActivity extends AppCompatActivity {
                     public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
                         result.getMessage();
                         result.getId();
-                        if(Debug.debugmode)Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
+                        Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
 
                     }
 
                     @Override
                     public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                        if(Debug.debugmode)Log.d("fail", errorMessage +", 코드: "+errorCode +" Throwable : "+ e);
+                        Log.d("fail", errorMessage +", 코드: "+errorCode +" Throwable : "+ e);
                     }
                 });
             }

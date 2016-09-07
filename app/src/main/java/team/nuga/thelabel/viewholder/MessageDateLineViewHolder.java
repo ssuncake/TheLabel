@@ -22,7 +22,7 @@ public class MessageDateLineViewHolder extends MessageParentViewHolder {
     }
 
     @Override
-    public void setMessage(String m) {
+    public void setMessage(String m,String date) {
 
     }
 

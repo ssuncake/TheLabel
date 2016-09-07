@@ -18,7 +18,7 @@ import team.nuga.thelabel.viewholder.MessageParentViewHolder;
  */
 public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParentViewHolder>{
 
-
+    String UserImagePath;
     Cursor cursor;
     public void changeCursor(Cursor c){
         if(cursor != null){
@@ -69,15 +69,18 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
         cursor.moveToPosition(position);
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_SEND : {
-                MessageMeViewHolder svh = (MessageMeViewHolder)holder;
+                MessageMeViewHolder mvh = (MessageMeViewHolder)holder;
                 String message = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_MESSAGE));
-                svh.setMessage(message);
+                String date = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
+                mvh.setMessage(message,date);
                 break;
             }
             case VIEW_TYPE_RECEIVE :{
-                MessageOtherViewHolder rvh = (MessageOtherViewHolder)holder;
+                MessageOtherViewHolder ovh = (MessageOtherViewHolder)holder;
                 String message = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_MESSAGE));
-                rvh.setMessage(message);
+                String date = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
+                ovh.setMessage(message,date);
+                ovh.setImage(UserImagePath);
                 break;
             }
         }
@@ -91,5 +94,9 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
         if(cursor==null)
             return 0;
         return cursor.getCount();
+    }
+
+    public void setUserImagePath(String path){
+        this.UserImagePath = path;
     }
 }

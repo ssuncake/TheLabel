@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity
             mainUser.setUserName("이정호");
         }else{
             mainUser = user;
+            Log.w("MainActivity","userId= " +user.getUserID()+"userName = "+user.getUserName()+"user impath ="+user.getUserName());
         }
 
         Toast.makeText(MainActivity.this, "로그인 유저 : "+user.getUserName(), Toast.LENGTH_SHORT).show();

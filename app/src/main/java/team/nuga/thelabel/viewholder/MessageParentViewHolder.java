@@ -11,6 +11,6 @@ public abstract class MessageParentViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    abstract public void setMessage(String m);
-    abstract public void setImage(String s);
+    abstract public void setMessage(String message,String date);
+    abstract public void setImage(String url);
 }

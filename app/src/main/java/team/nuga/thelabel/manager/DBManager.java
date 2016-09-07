@@ -24,8 +24,7 @@ public class DBManager extends SQLiteOpenHelper {
     public static DBManager getInstance(User user) { // 여기체크
         if(user!=null){
             mainUser = user;
-            user.setUserID(999);
-        Log.e("DBM 처음 유저","userid : "+user.getLongUserID());
+        Log.w("DBM getInstance","userid : "+user.getLongUserID());
         }
 
         if (instance == null) {
@@ -50,6 +49,7 @@ public class DBManager extends SQLiteOpenHelper {
                 ChatContract.ChatUser.ME_ID + " INTEGER," +
                 ChatContract.ChatUser.OTHER_ID + " INTEGER," +
                 ChatContract.ChatUser.OTHER_NAME + " TEXT," +
+                ChatContract.ChatUser.OTHER_IMAGE + " TEXT," +
                 ChatContract.ChatUser.COLUMN_LAST_MESSAGE_ID + " INTEGER);";
         db.execSQL(sql);
 
@@ -63,29 +63,29 @@ public class DBManager extends SQLiteOpenHelper {
 
         // 더미 데이터 삽입
 
-        values.clear();
-        values.put(ChatContract.ChatUser.ME_ID, 300);
-        values.put(ChatContract.ChatUser.OTHER_ID, 400);
-        values.put(ChatContract.ChatUser.OTHER_NAME, "더르미");
-        values.put(ChatContract.ChatUser.COLUMN_LAST_MESSAGE_ID,1);
-        Log.e("DBM add User","더미 추가");
-        db.insert(ChatContract.ChatUser.TABLE, null, values);
+//        values.clear();
+//        values.put(ChatContract.ChatUser.ME_ID, 300);
+//        values.put(ChatContract.ChatUser.OTHER_ID, 400);
+//        values.put(ChatContract.ChatUser.OTHER_NAME, "더르미");
+//        values.put(ChatContract.ChatUser.COLUMN_LAST_MESSAGE_ID,1);
+//        Log.e("DBM add User","더미 추가");
+//        db.insert(ChatContract.ChatUser.TABLE, null, values);
 
-        values.clear();
-        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
-        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 1);
-        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "우왓우왓우왓!");
-        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:00");
-        Log.e("DBM add User","더미메세지 추가");
-        db.insert(ChatContract.ChatMessage.TABLE, null, values);
-
-        values.clear();
-        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
-        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 0);
-        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "므아아아아");
-        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:01");
-        Log.e("DBM add User","더미메세지1 추가");
-        db.insert(ChatContract.ChatMessage.TABLE, null, values);
+//        values.clear();
+//        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
+//        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 1);
+//        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "우왓우왓우왓!");
+//        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:00");
+//        Log.e("DBM add User","더미메세지 추가");
+//        db.insert(ChatContract.ChatMessage.TABLE, null, values);
+//
+//        values.clear();
+//        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
+//        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 0);
+//        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "므아아아아");
+//        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:01");
+//        Log.e("DBM add User","더미메세지1 추가");
+//        db.insert(ChatContract.ChatMessage.TABLE, null, values);
     }
 
     @Override
@@ -125,6 +125,7 @@ public class DBManager extends SQLiteOpenHelper {
             values.put(ChatContract.ChatUser.ME_ID, mainUser.getLongUserID());
             values.put(ChatContract.ChatUser.OTHER_ID, user.getLongUserID());
             values.put(ChatContract.ChatUser.OTHER_NAME, user.getUserName());
+            values.put(ChatContract.ChatUser.OTHER_IMAGE, user.getImageUrl());
             Log.e("DBM add User","main : "+  mainUser.getLongUserID()+" + user : "+user.getUserID()+"// "+user.getUserName()+" 가 추가될껄");
             return db.insert(ChatContract.ChatUser.TABLE, null, values);
         }
@@ -166,7 +167,6 @@ public class DBManager extends SQLiteOpenHelper {
             String[] args = {"" + uid};
             db.update(ChatContract.ChatUser.TABLE, values, selection, args);
             db.setTransactionSuccessful();
-            Log.w("DBM 메세지추가","성공");
             return mid;
         } finally {
             db.endTransaction();
@@ -182,10 +182,10 @@ public class DBManager extends SQLiteOpenHelper {
                 ChatContract.ChatUser.ME_ID,
                 ChatContract.ChatUser.OTHER_ID,
                 ChatContract.ChatUser.OTHER_NAME,
+                ChatContract.ChatUser.OTHER_IMAGE,
                 ChatContract.ChatMessage.COLUMN_MESSAGE};
         String selection = ChatContract.ChatUser.ME_ID + " = ?";
         String[] args = {"" + mainUser.getUserID()};
-        Log.e("DBM getchatUser","mainUserid : "+mainUser.getUserID());
         String sort = ChatContract.ChatUser.OTHER_NAME + " COLLATE LOCALIZED ASC";
         SQLiteDatabase db = getReadableDatabase();
         return db.query(table, columns, selection, args, null, null, sort);
