@@ -11,7 +11,7 @@ import java.util.HashSet;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class User implements Serializable{
+public class User implements Serializable {
     private int userID;
     @SerializedName("nickname")
     private String userName;
@@ -20,18 +20,21 @@ public class User implements Serializable{
     @SerializedName("password")
     private String userPassword;
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
     @SerializedName("image_path")
     private String imageUrl;
 
     private ArrayList<Label> userInLabelList;
 
     private String userSex;
-
     private String userProfile;
     private String userLocal;
     private Position userPosition;
     private Genre userGenre;
-   private HashSet<Integer> userLikeContents;
+    private HashSet<Integer> userLikeContents;
     private HashSet<Integer> userLikeLabel;
     private boolean userNeed;
 
@@ -95,5 +98,9 @@ public class User implements Serializable{
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }

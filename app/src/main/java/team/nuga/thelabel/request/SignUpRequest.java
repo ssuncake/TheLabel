@@ -6,8 +6,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import team.nuga.thelabel.data.NetworkResult;
@@ -19,28 +19,38 @@ import team.nuga.thelabel.data.User;
  */
 public class SignUpRequest extends AbstractRequest<NetworkResult<User>> {
 
-    private static final String SIGNUP_REQUSET = "/users";
+    private static final String SIGNUP_REQUSET = "users";
 
     Request request;
     public SignUpRequest(Context context, String email, String password, String nickname,
                          int gender_id, int position_id, int genre_id, int city_id, int town_id) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(SIGNUP_REQUSET)
+                .addPathSegment(SIGNUP_REQUSET)
                 .build();
-        RequestBody body = new FormBody.Builder()
-                .add("email", email)
-                .add("password", password)
-                .add("nickname",nickname)
-                .add("gender_id", ""+gender_id)
-                .add("position_id",""+position_id)
-                .add("genre_id",""+genre_id)
-                .add("city_id", ""+city_id)
-                .add("town_id", ""+town_id)
+//        RequestBody body = new FormBody.Builder()
+//                .add("email", email)
+//                .add("password", password)
+//                .add("nickname",nickname)
+//                .add("gender", String.valueOf(gender_id))
+//                .add("position_id", String.valueOf(position_id))
+//                .add("genre_id", String.valueOf(genre_id))
+//                .add("city_id", String.valueOf(city_id))
+//                .add("town_id", String.valueOf(town_id))
+//                .build();
+        RequestBody body = new MultipartBody.Builder()
+                .addFormDataPart("email", email)
+                .addFormDataPart("password", password)
+                .addFormDataPart("nickname",nickname)
+                .addFormDataPart("gender", String.valueOf(gender_id))
+                .addFormDataPart("position_id", String.valueOf(position_id))
+                .addFormDataPart("genre_id", String.valueOf(genre_id))
+                .addFormDataPart("city_id", String.valueOf(city_id))
+                .addFormDataPart("town_id", String.valueOf(town_id))
                 .build();
-
         request = new Request.Builder()
                 .url(url)
                 .post(body)
+                .tag(context)
                 .build();
     }
 

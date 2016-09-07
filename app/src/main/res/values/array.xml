@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="positionlist">
+        <item>선택하지않음</item>
+        <item>보컬</item>
+        <item>기타</item>
+        <item>베이스</item>
+        <item>일렉기타</item>
+        <item>드럽</item>
+        <item>키보드</item>
+        <item>etc</item>
+    </string-array>
+    <string-array name="genrelist">
+        <item>선택하지않음</item>
+        <item>가요</item>
+        <item>팝</item>
+        <item>랩/힙합</item>
+        <item>락</item>
+        <item>어쿠스틱/포크</item>
+        <item>일렉트로니카</item>
+        <item>뉴에이지</item>
+        <item>R<![CDATA["&"]]>B/SOUL</item>
+        <item>재즈</item>
+        <item>CCM</item>
+    </string-array>
+</resources>

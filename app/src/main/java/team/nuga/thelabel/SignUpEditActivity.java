@@ -1,6 +1,7 @@
 package team.nuga.thelabel;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,9 +20,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import team.nuga.thelabel.data.CheckEmailResult;
+import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.CheckNicknameRequest;
+import team.nuga.thelabel.request.SignUpRequest;
 
 public class SignUpEditActivity extends AppCompatActivity {
     @BindView(R.id.imageButton_uploadProfileImage)
@@ -36,25 +40,27 @@ public class SignUpEditActivity extends AppCompatActivity {
     RadioGroup radioGroup_userSex;                  //성별
 
 
-    @BindView(R.id.radioGroup_position_first)       //포지션
-            RadioGroup radioGroup_position_first;
-    @BindView(R.id.radioGroup_position_second)
-    RadioGroup radioGroup_position_second;
-    @BindView(R.id.radioGroup_position_third)
-    RadioGroup radioGroup_position_third;
-
-
-    @BindView(R.id.radioGroup_genre_firstLine)
-    RadioGroup radioGroup_genre_firstLine;
-    @BindView(R.id.radioGroup_genre_secondLine)
-    RadioGroup radioGroup_genre_secondLine;
-    @BindView(R.id.radioGroup_genre_thirdLine)
-    RadioGroup radioGroup_genre_thirdLine;
-
     @BindView(R.id.spinner_city)
     Spinner spinner_city;
     @BindView(R.id.spinner_town)
     Spinner spinner_town;
+    @BindView(R.id.spinner_genre)
+    Spinner spinner_genre;
+
+    @OnItemSelected(value = R.id.spinner_genre, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    public void onGenreSelected(int position) {
+        genreId = position + 1;
+    }
+
+    @BindView(R.id.spinner_position)
+    Spinner spinner_position;
+
+    @OnItemSelected(value = R.id.spinner_position, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    public void onPositionSelected(int position) {
+        positionId = position + 1;
+    }
+
+
     @BindView(R.id.editText_signUp_userNickName)
     EditText editText_userNickName;
 
@@ -63,6 +69,7 @@ public class SignUpEditActivity extends AppCompatActivity {
     Button button_checkOverlap; //닉네임 중복확인 버튼
     static final int AVAILABLE = 0;
     static final int NOT_AVAILABLE = 1;
+
     @OnClick(R.id.button_checkOverlap)
     public void onClickCheckOverlap() {
         String nickname = editText_userNickName.getText().toString();
@@ -70,11 +77,11 @@ public class SignUpEditActivity extends AppCompatActivity {
         NetworkManager.getInstance().getNetworkData(nicknameRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
             @Override
             public void onSuccess(NetworkRequest<CheckEmailResult> request, CheckEmailResult result) {
-                if(result.getMatch()==AVAILABLE){
-                    Log.d("MATCH 값 ", ""+result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
+                if (result.getMatch() == AVAILABLE) {
+                    Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
                     Toast.makeText(SignUpEditActivity.this, "사용해도 좋은 닉네임입니다♪", Toast.LENGTH_SHORT).show();
-                }else if(result.getMatch()==NOT_AVAILABLE){
-                    Log.d("MATCH 값 ", ""+result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
+                } else if (result.getMatch() == NOT_AVAILABLE) {
+                    Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
                     Toast.makeText(SignUpEditActivity.this, "닉네임이 이미 있어요!!!!!!!!!!!!!!!!!!!!!!!ㅋ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -88,10 +95,17 @@ public class SignUpEditActivity extends AppCompatActivity {
 
     @BindView(R.id.button_signUpComplete)
     Button button_signUpComplete; //가입완료 버튼
+
+//    int gender;
+    //        String imageUrl;
+//    int position ;
+//    int genre;
+//    int city;
+//    int town;
 //    @OnClick(R.id.button_signUpComplete)
-//            public void onsignUpComplete(){
+//    public void onsignUpComplete(){
 //
-////        SignUpRequest request = new SignUpRequest();
+//        SignUpRequest request = new SignUpRequest();
 //        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultSignUp>() {
 //            @Override
 //            public void onSuccess(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, NetworkResultSignUp result) {
@@ -107,23 +121,20 @@ public class SignUpEditActivity extends AppCompatActivity {
 //
 //            @Override
 //            public void onFail(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, int errorCode, String errorMessage, Throwable e) {
-//
 //            }
 //        });
 //    }
 
-    int TOWNID = 0;
-    int CITYID = 0;
-    int USERSEX = 0;
-    String userNickName = null;
+//    @OnClick(R.id.button_signUpComplete)
+//    public void onsignUpComplete() {
+
+//    }
+
+    int townId = 0;
+    int cityId = 0;
+    int userGender = 0;
     int positionId = 1; //Default = 1 ; 선택안함
     int genreId = 1;  // Default = 1 ; 선택안함
-
-    @OnClick(R.id.button_signUpComplete)
-    public void onClicksignUpComplete() {
-        Log.e(" 가입 정보 값 ", "포지션ID값 : " + positionId + ", 장르 ID값 :" + genreId + ", 시/도 ID값 : " + CITYID +
-                ", 시/군/구 ID값 : " + TOWNID + " 성별 값:" + USERSEX + ",  닉네임 :" + userNickName);
-    }
 
 
     @Override
@@ -133,19 +144,70 @@ public class SignUpEditActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        Intent intent = getIntent();
+        User signUp = (User) intent.getSerializableExtra("signUpInfo");
+        String email = signUp.getEmail();
+        String password = signUp.getUserPassword();
+        if(Debug.debugmode)Log.d("인텐트값", "email -" + email + " , password - " + password);
 //        RadioGroupClick();
+        String[] positionList = getResources().getStringArray(R.array.positionlist);
+        String[] genreList = getResources().getStringArray(R.array.positionlist);
 
-        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, city);
+        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, cityList);
         spinner_cityAdapter.setDropDownViewResource(R.layout.spin);
         spinner_city.setAdapter(spinner_cityAdapter);
 
+        ArrayAdapter positionAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, positionList);
+        positionAdapter.setDropDownViewResource(R.layout.spin);
+        spinner_position.setAdapter(positionAdapter);
+        ArrayAdapter genreAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, genreList);
+        positionAdapter.setDropDownViewResource(R.layout.spin);
+        spinner_genre.setAdapter(genreAdapter);
+
+
+
+        button_signUpComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                User signUp = (User) intent.getSerializableExtra("signUpInfo");
+                String email = signUp.getEmail();
+                String password = signUp.getUserPassword();
+                if(Debug.debugmode)Log.e("인텐트값", "email -" + email + " , password - " + password);
+//        String nickname = editText_userNickName.getText().toString();
+                final String nickname = editText_userNickName.getText().toString();
+//        gender = userGender;
+                final int position_id = positionId;
+                final int gender_id = 1;
+                final int genre_id = genreId;
+                final int city_id = cityId;
+                final int town_id = townId;
+        Log.i(" 가입 정보 값 ", "포지션ID값 : " + position_id + ", 장르 ID값 :" + genre_id + ", 시/도 ID값 : " + city_id +
+                ", 시/군/구 ID값 : " + town_id + " 성별 값:" + gender_id + ",  닉네임 :" + nickname);
+                SignUpRequest request = new SignUpRequest(SignUpEditActivity.this , email, password, nickname, gender_id, position_id, genre_id, city_id, town_id);
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                        result.getMessage();
+                        result.getId();
+                        if(Debug.debugmode)Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
+
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                        if(Debug.debugmode)Log.d("fail", errorMessage +", 코드: "+errorCode +" Throwable : "+ e);
+                    }
+                });
+            }
+        });
 
     }
 
     @OnItemSelected(value = R.id.spinner_city, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onItemSelected(int position) {
         position = position + 1;
-        CITYID = position;
+        cityId = position;
         if (position == 1) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Town_Default);
             spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -153,7 +215,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    TOWNID = 1;
+                    townId = 1;
                 }
 
                 @Override
@@ -169,11 +231,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 1 + i;
+                        townId = 1 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -188,11 +250,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 25 + i;
+                        townId = 25 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -207,11 +269,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 70 + i;
+                        townId = 70 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -226,11 +288,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 88 + i;
+                        townId = 88 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -245,11 +307,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 98 + i;
+                        townId = 98 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -264,11 +326,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 113 + i;
+                        townId = 113 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -283,11 +345,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 129 + i;
+                        townId = 129 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -302,11 +364,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 130 + i;
+                        townId = 130 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -321,11 +383,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 135 + i;
+                        townId = 135 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -340,11 +402,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 160 + i;
+                        townId = 160 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -359,11 +421,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 183 + i;
+                        townId = 183 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -378,11 +440,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 191 + i;
+                        townId = 191 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -397,11 +459,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 207 + i;
+                        townId = 207 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -416,11 +478,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 212 + i;
+                        townId = 212 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -435,11 +497,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 228 + i;
+                        townId = 228 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -454,11 +516,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 250 + i;
+                        townId = 250 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -466,7 +528,7 @@ public class SignUpEditActivity extends AppCompatActivity {
                 }
             });
         } else if (position == 18) {
-            TOWNID = 1;
+            townId = 1;
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Jeju);
             spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             spinner_town.setAdapter(spinner_townAdapter);
@@ -474,11 +536,11 @@ public class SignUpEditActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i != 0) {
-                        TOWNID = 255 + i;
+                        townId = 255 + i;
                     } else {
-                        TOWNID = 1;
+                        townId = 1;
                     }
-                    Log.e("town ID", TOWNID + "" + spinner_town.getSelectedItem() + " position : " + i);
+                    Log.e("town ID", townId + "" + spinner_town.getSelectedItem() + " position : " + i);
                 }
 
                 @Override
@@ -730,7 +792,7 @@ public class SignUpEditActivity extends AppCompatActivity {
 //    }
 
 
-    public String[] city = {
+    public String[] cityList = {
             "선택하지않음", "서울특별시", "경기도", "강원도", "인천광역시",
             "충청북도", "충청남도", "세종특별시", "대전광역시", "경상북도",
             "경상남도", "대구광역시", "부산광역시", "울산광역시", "전라북도",
@@ -852,30 +914,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             "제주시", "서귀포시"
     };
 
-    public String[] position = {
-            String.valueOf(R.string.default_choice),                 //1 선택하지않음
-            String.valueOf(R.string.text_position_vocal),            //2 보컬
-            String.valueOf(R.string.text_position_guitar),           //3 기타
-            String.valueOf(R.string.text_position_base),             //4 베이스
-            String.valueOf(R.string.text_position_electricGuitar),   //5 일렉기타
-            String.valueOf(R.string.text_position_drum),             //6 드럼
-            String.valueOf(R.string.text_position_keyboard),         //7 키보드
-            String.valueOf(R.string.text_position_etc),              //8 etc...
-    };
 
 
-    public String[] genre = {
-            String.valueOf(R.string.default_choice),                //1 선택하지 않음
-            String.valueOf(R.string.text_genre_Song),               //2 가요
-            String.valueOf(R.string.text_genre_Pop),                //3 팝
-            String.valueOf(R.string.text_genre_RapHiphop),          //4 랩/힙합
-            String.valueOf(R.string.text_genre_Rock),               //5 락
-            String.valueOf(R.string.text_genre_AcousticPork),       //6 어쿠스틱/포크
-            String.valueOf(R.string.text_genre_Electronica),        //7 일렉트로니카
-            String.valueOf(R.string.text_genre_NewAge),             //8 뉴에이지
-            String.valueOf(R.string.text_genre_RnBSoul),            //9 R&B / Soul
-            String.valueOf(R.string.text_genre_Jazz),               //10 재즈
-            String.valueOf(R.string.text_genre_CCM),                //11 CCM
-    };
 
 }

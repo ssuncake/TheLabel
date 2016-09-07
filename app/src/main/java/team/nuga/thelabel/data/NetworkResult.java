@@ -5,6 +5,13 @@ package team.nuga.thelabel.data;
  */
 public class NetworkResult<T> {
     private String message;
+    private int id;
+    ErrorMessage errorMessage;
+
+    public int getId() {
+        return id;
+    }
+
     private T user;
     private T data;
     private T error;

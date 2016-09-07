@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -142,8 +143,8 @@ public class TestLoginActivity extends AppCompatActivity {
     }
 
 
-
-
+@BindView(R.id.seekBar_login)
+SeekBar progressBar;
 
 
 
@@ -154,7 +155,40 @@ public class TestLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_login);
         ButterKnife.bind(this);
+
+
+        progressBar.setMax(100);
+        progressBar.setProgress(50);
+        progressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+              if(i>99)  {moveToLogin();}
+                if(i<2){moteToSignUp();}
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+
     }
+
+    private void moteToSignUp() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void moveToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
     public void goMain(String email,String password){
         LoginRequest request = new LoginRequest(this,email,password);

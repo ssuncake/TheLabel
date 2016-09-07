@@ -15,13 +15,13 @@ import team.nuga.thelabel.manager.NetworkRequest;
 public abstract class AbstractRequest<T> extends NetworkRequest<T> {
 
 
-    private static final String SERVERADRESS = "ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com:4433";
+    private static final String SERVERADRESS = "ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com";
 
     protected HttpUrl.Builder getBaseUrlBuilder(){
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("https");
         builder.host("ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com");
-        builder.port(4433);
+
 
         return builder;
     }

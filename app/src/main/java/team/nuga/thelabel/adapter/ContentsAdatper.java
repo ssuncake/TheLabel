@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+
 import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
@@ -20,7 +23,8 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  * Created by Tacademy on 2016-08-30.
  */
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
-        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick {
+        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick,
+        YouTubePlayer.OnInitializedListener{
 //    List<User> userList = new ArrayList<>();
 //    List<Contents> contentsList = new ArrayList<>();
 //    MusicContents musicContents;
@@ -92,6 +96,16 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     @Override
     public int getItemCount() {
         return mcontentslist.size()+1; //profileviewholder 추가
+    }
+
+    @Override //youtube
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
     }
 
 
