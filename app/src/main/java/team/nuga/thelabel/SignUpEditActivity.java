@@ -1,8 +1,12 @@
 package team.nuga.thelabel;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,9 +15,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +30,7 @@ import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import team.nuga.thelabel.data.CheckEmailResult;
 import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -28,8 +38,19 @@ import team.nuga.thelabel.request.CheckNicknameRequest;
 import team.nuga.thelabel.request.SignUpRequest;
 
 public class SignUpEditActivity extends AppCompatActivity {
+
+   final int IMAGE_FROM_GALLERY = 101;
     @BindView(R.id.imageButton_uploadProfileImage)
     ImageButton imageButton_uploadProfileImage;
+    @OnClick(R.id.imageButton_uploadProfileImage)
+    public void onProfileImageUpload(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMAGE_FROM_GALLERY);
+    }
+    @BindView(R.id.ImageView_profileImage)
+    ImageView imageView_profileImage;
 
     @OnClick(R.id.imageButton_uploadProfileImage)
     public void setImageButton_uploadProfileImage() {
@@ -95,40 +116,40 @@ public class SignUpEditActivity extends AppCompatActivity {
 
     @BindView(R.id.button_signUpComplete)
     Button button_signUpComplete; //가입완료 버튼
+    @OnClick(R.id.button_signUpComplete)
+    public void onsignUpComplete() {
+        Intent intent = getIntent();
+        User signUp = (User) intent.getSerializableExtra("signUpInfo");
+        String email = signUp.getEmail();
+        String password = signUp.getUserPassword();
+        if(Debug.debugmode)Log.e("인텐트값", "email -" + email + " , password - " + password);
 
-//    int gender;
-    //        String imageUrl;
-//    int position ;
-//    int genre;
-//    int city;
-//    int town;
-//    @OnClick(R.id.button_signUpComplete)
-//    public void onsignUpComplete(){
-//
-//        SignUpRequest request = new SignUpRequest();
-//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultSignUp>() {
-//            @Override
-//            public void onSuccess(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, NetworkResultSignUp result) {
-//                if(result.getError()==null){
-//                    Toast.makeText(SignUpEditActivity.this, "가입 성공하셨어염 뿌우", Toast.LENGTH_SHORT).show();
-//                    result.getId();
-//                    result.getMessage();
-//                }else{
-//                    Log.e("에러", " 에러");
-//                    result.getError().getMessage();
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(team.nuga.thelabel.manager.NetworkRequest<NetworkResultSignUp> request, int errorCode, String errorMessage, Throwable e) {
-//            }
-//        });
-//    }
+        final String nickname = editText_userNickName.getText().toString();
 
-//    @OnClick(R.id.button_signUpComplete)
-//    public void onsignUpComplete() {
+        final int position_id = positionId;
+        final int gender_id = userGender;
+        final int genre_id = genreId;
+        final int city_id = cityId;
+        final int town_id = townId;
+        Log.i(" 가입 정보 값 ", "포지션ID값 : " + position_id + ", 장르 ID값 :" + genre_id + ", 시/도 ID값 : " + city_id +
+                ", 시/군/구 ID값 : " + town_id + " 성별 값:" + gender_id + ",  닉네임 :" + nickname);
+        SignUpRequest request = new SignUpRequest(SignUpEditActivity.this , email, password, nickname, gender_id, position_id, genre_id, city_id, town_id,imagefile);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                result.getMessage();
+                result.getId();
+                if(Debug.debugmode)Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
 
-//    }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                if(Debug.debugmode)Log.d("fail", errorMessage +", 코드: "+errorCode +" Throwable : "+ e);
+            }
+        });
+
+    }
 
     int townId = 0;
     int cityId = 0;
@@ -164,45 +185,50 @@ public class SignUpEditActivity extends AppCompatActivity {
         positionAdapter.setDropDownViewResource(R.layout.spin);
         spinner_genre.setAdapter(genreAdapter);
 
-
-
-        button_signUpComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = getIntent();
-                User signUp = (User) intent.getSerializableExtra("signUpInfo");
-                String email = signUp.getEmail();
-                String password = signUp.getUserPassword();
-                if(Debug.debugmode)Log.e("인텐트값", "email -" + email + " , password - " + password);
-//        String nickname = editText_userNickName.getText().toString();
-                final String nickname = editText_userNickName.getText().toString();
-//        gender = userGender;
-                final int position_id = positionId;
-                final int gender_id = 1;
-                final int genre_id = genreId;
-                final int city_id = cityId;
-                final int town_id = townId;
-        Log.i(" 가입 정보 값 ", "포지션ID값 : " + position_id + ", 장르 ID값 :" + genre_id + ", 시/도 ID값 : " + city_id +
-                ", 시/군/구 ID값 : " + town_id + " 성별 값:" + gender_id + ",  닉네임 :" + nickname);
-                SignUpRequest request = new SignUpRequest(SignUpEditActivity.this , email, password, nickname, gender_id, position_id, genre_id, city_id, town_id);
-                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
-                    @Override
-                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
-                        result.getMessage();
-                        result.getId();
-                        Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
-
-                    }
-
-                    @Override
-                    public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                        Log.d("fail", errorMessage +", 코드: "+errorCode +" Throwable : "+ e);
-                    }
-                });
-            }
-        });
-
     }
+
+File imagefile=null;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("log","activity");
+        Log.e("log"," requestCode : "+requestCode + "resultCode "+resultCode);
+        if(requestCode ==IMAGE_FROM_GALLERY){
+            Log.e("log","IMAGE_FROM_GALLERY");
+            if(resultCode== Activity.RESULT_OK)
+            {
+                Uri uri = data.getData();
+                Cursor c = getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA},null,null,null);
+        if(c.moveToNext()){
+            String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+            imagefile = new File(path);
+            Glide.with(this)
+                    .load(imagefile)
+                    .transform(new RoundImageTransform(this))
+                    .into(imageView_profileImage);
+        }
+
+//            Bitmap bitmap = null;
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),data.getData());
+//                    imagefile = new File(String.valueOf(data.getData()));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                Glide.with(this)
+//                        .load(data.getData())
+//                        .transform(new RoundImageTransform(this))
+//                        .into(imageView_profileImage);
+            }
+        }
+    }
+
+
+
+
+
+
+
 
     @OnItemSelected(value = R.id.spinner_city, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onItemSelected(int position) {

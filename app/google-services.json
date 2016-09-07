@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1014079359737",
+    "project_id": "blissun-1470720028711"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014079359737:android:93267e07f6ed6270",
+        "android_client_info": {
+          "package_name": "com.ssuncake.miniproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASx3Sk-9eKHdu7RMFxx1574L6ZRQR8_Qc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
