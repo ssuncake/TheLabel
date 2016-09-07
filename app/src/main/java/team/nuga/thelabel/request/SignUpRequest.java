@@ -27,16 +27,6 @@ public class SignUpRequest extends AbstractRequest<NetworkResult<User>> {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(SIGNUP_REQUSET)
                 .build();
-//        RequestBody body = new FormBody.Builder()
-//                .add("email", email)
-//                .add("password", password)
-//                .add("nickname",nickname)
-//                .add("gender", String.valueOf(gender_id))
-//                .add("position_id", String.valueOf(position_id))
-//                .add("genre_id", String.valueOf(genre_id))
-//                .add("city_id", String.valueOf(city_id))
-//                .add("town_id", String.valueOf(town_id))
-//                .build();
         RequestBody body = new MultipartBody.Builder()
                 .addFormDataPart("email", email)
                 .addFormDataPart("password", password)
