@@ -19,8 +19,7 @@ public class User implements Serializable{
     private String userEmail;
     @SerializedName("password")
     private String userPassword;
-
-    @SerializedName("imagepath")
+    @SerializedName("image_path")
     private String imageUrl;
 
     public String getUserPassword() {

@@ -45,7 +45,7 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
             profileUsername.setText(user.getUserName());
             Log.e("프로필 사진",user.getImageUrl());
             Glide.with(userProfilePicture.getContext())
-                    .load("http://blogpfthumb.phinf.naver.net/20131004_253/dlsdnd345_1380849789799ScRyM_JPEG/673_405960459519395_780704392_n.jpg")
+                    .load(user.getImageUrl())
                     .transform(new RoundImageTransform(userProfilePicture.getContext()))
                     .into(userProfilePicture);
         }

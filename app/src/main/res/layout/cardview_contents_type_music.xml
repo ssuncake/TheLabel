@@ -28,7 +28,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/imageView_profile"
                     android:layout_toRightOf="@+id/imageView_profile"
-                    android:text="Hani_exid"
+                    android:layout_marginLeft="5dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
@@ -53,11 +53,12 @@
                     android:layout_alignParentEnd="true" />
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text=""
                     android:textSize="10sp"
+                    android:gravity="right"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/textView_content_time"
                     android:textColor="@android:color/black"
                     android:layout_alignBottom="@+id/imageView_menu"
@@ -138,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/checkbox_like_off"
                    android:button="@drawable/user_main_fragment_like"
-                    android:layout_alignParentTop="true"
+                    android:layout_alignBottom="@+id/textView_numlike"
                     android:layout_toLeftOf="@+id/imageView_share"
                     android:layout_toStartOf="@+id/imageView_share" />
 

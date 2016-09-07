@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 
 /**
@@ -28,6 +31,8 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
     TextView userName;
     @BindView(R.id.textView_content_time)
     TextView conetentTime;
+    @BindView(R.id.imageView_profile)
+    ImageView profileImage;
     private ImageView imageViewMenu;
 
 
@@ -124,6 +129,10 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
     public void applyData(User user, Contents contents) {
         likeCount.setText(""+contents.getLikeCount());
         userName.setText(user.getUserName());
+        Glide.with(profileImage.getContext())
+                .load(user.getImageUrl())
+                .transform(new RoundImageTransform(profileImage.getContext()))
+                .into(profileImage);
         conetentTime.setText(contents.getContentTime());
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }

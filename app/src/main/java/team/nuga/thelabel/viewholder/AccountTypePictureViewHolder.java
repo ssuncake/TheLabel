@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 
 /**
@@ -28,6 +31,9 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
     TextView userNmae;
     @BindView(R.id.textView_content_time)
     TextView conetentTime;
+    @BindView(R.id.imageView_profile)
+    ImageView profileImage;
+    @BindView(R.id.image_contnet_picture)
     ImageView imageViewPicture;
     private ImageView imageViewMenu;
 //    User user;
@@ -94,7 +100,6 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
             }
         });
 
-        imageViewPicture = (ImageView) itemView.findViewById(R.id.image_contnet_picture);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +113,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
         itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);
         imageViewMenu.setOnClickListener(this); //imageMenu 클릭 시 메뉴 팝업메뉴가 뜨도록
-        ImageView contentPicture = (ImageView)itemView.findViewById(R.id.image_contnet_picture);
+
     }
 
     @Override
@@ -141,12 +146,17 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 
     @Override
     public void applyData(User user, Contents contents) {
-        if (user != null) {
             userNmae.setText(user.getUserName());
-        } else if (contents != null) {
+        Glide.with(profileImage.getContext())
+                .load(user.getImageUrl())
+                .transform(new RoundImageTransform(profileImage.getContext()))
+                .into(profileImage);
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
             likeCount.setText("" + contents.getLikeCount());
             conetentTime.setText(contents.getContentTime());
-        }
+            Glide.with(imageViewPicture.getContext())
+                    .load(contents.getContentsPath())
+                    .into(imageViewPicture);
+
     }
 }

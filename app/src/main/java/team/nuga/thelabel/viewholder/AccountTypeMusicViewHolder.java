@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 
 /**
@@ -28,7 +31,11 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     TextView likeCount;
     @BindView(R.id.textView_content_time)
     TextView conetentTime;
+    @BindView(R.id.imageView_profile)
+    ImageView profileImage;
+
     private ImageView imageViewMenu;
+
 
 
     @Override
@@ -124,13 +131,15 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
     public void applyData(User user, Contents contents) {
-        if (user != null) {
             userName.setText(user.getUserName());
+        Glide.with(profileImage.getContext())
+                .load(user.getImageUrl())
+                .transform(new RoundImageTransform(profileImage.getContext()))
+                .into(profileImage);
 //        Log.e("시간", "Time"+contents.getContentTime());
-        }
-        else if(contents!=null){
+
             conetentTime.setText(contents.getContentTime());
             likeCount.setText("" + contents.getLikeCount());
-        }
+
     }
 }

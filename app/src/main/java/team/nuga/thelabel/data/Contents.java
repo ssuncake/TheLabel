@@ -18,12 +18,12 @@ public class Contents implements Serializable{
     protected int contentsType;
     @SerializedName("id")
     private int contentsID;
-    @SerializedName("filepath")
+    @SerializedName("file_path")
     private String contentsPath;
 
     @SerializedName("numlike")
     private int likeCount;
-    @SerializedName("ctime")
+    @SerializedName("date")
     private String ContentTime;
 
 
