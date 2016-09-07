@@ -46,4 +46,9 @@ dependencies {
     compile files('YouTubeAndroidPlayerApi.jar')
     compile 'jp.wasabeef:glide-transformations:1.0.6'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.0'
+
 }
+
+
+
+
