@@ -1,20 +1,27 @@
 {
   "project_info": {
-    "project_number": "1014079359737",
-    "project_id": "blissun-1470720028711"
+    "project_number": "1086641623048",
+    "firebase_url": "https://the-label.firebaseio.com",
+    "project_id": "the-label",
+    "storage_bucket": "the-label.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1014079359737:android:93267e07f6ed6270",
+        "mobilesdk_app_id": "1:1086641623048:android:592dee2da1158833",
         "android_client_info": {
-          "package_name": "com.ssuncake.miniproject"
+          "package_name": "team.nuga.thelabel"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1086641623048-vojjtb5unlhl8o7qjsgbgt80jnn9fno5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyASx3Sk-9eKHdu7RMFxx1574L6ZRQR8_Qc"
+          "current_key": "AIzaSyCJ7gRSNpYCKnGqkSM60DEtt32WdYvB0F0"
         }
       ],
       "services": {
@@ -26,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
