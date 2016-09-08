@@ -24,7 +24,7 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  */
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
         implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick,
-        YouTubePlayer.OnInitializedListener{
+        YouTubePlayer.OnInitializedListener,AccountTypeProfileViewHolder.OnSettingImageClick{
 //    List<User> userList = new ArrayList<>();
 //    List<Contents> contentsList = new ArrayList<>();
 //    MusicContents musicContents;
@@ -69,6 +69,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
             case Contents.MUSIC:
                 ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent,false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
+                accounttypeOne.setOnMusicContentsItemClickListener(this);
                 return accounttypeOne;
             case Contents.PICTURE:
                 ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent,false);
@@ -81,6 +82,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
             default:
                 ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent,false);
                AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
+                accounttypeFour.setOnSettingImageClick(this);
                 return accounttypeFour;
         }
     }
@@ -109,6 +111,22 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     }
 
 
+
+    public interface OnSettingItemClickListener{ //SettingImage
+        public void onSettingItemClick(View view, int position);
+    }
+    OnSettingItemClickListener settingItemClickListener;
+    public void setOnSettingImageClickListener(OnSettingItemClickListener imageClickListener){
+        this.settingItemClickListener = imageClickListener;
+    }
+
+    @Override
+    public void onSettingImageClick(View view, int adapterPosition) {
+        if(settingItemClickListener!=null){
+            settingItemClickListener.onSettingItemClick(view, adapterPosition);
+        }
+    }
+
     public interface OnContentsItemClickListener {
         public void onContentsItemClick(View view, Contents user, int position);
     }
@@ -118,11 +136,17 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void setOnAdapterItemClickListener(OnContentsItemClickListener listener) {
         this.listener = listener;
     }
-
+    public interface OnPlayerItemClickListener {  //Player
+        public void onPlayerItemClick(View view, View parent,Contents contents, int position, boolean isChecked);
+    }
+    OnPlayerItemClickListener playerListener;
+    public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
+        this.playerListener = playerListener;
+    }
     @Override
-    public void onMusicContentItemClick(View view, Contents contents, int adapterPosition) {
-        if (listener != null) {
-            listener.onContentsItemClick(view, contents, adapterPosition);
+    public void onMusicContentItemClick(View view,View parent, Contents contents, int adapterPosition, boolean isChecked) {
+        if (playerListener != null) {
+            playerListener.onPlayerItemClick(view ,parent,contents,adapterPosition, isChecked);
         }
     }
 

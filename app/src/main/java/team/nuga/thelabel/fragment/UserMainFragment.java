@@ -1,7 +1,13 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
@@ -29,6 +39,22 @@ import team.nuga.thelabel.request.ContentsRequest;
 public class UserMainFragment extends Fragment {
     ContentsAdatper accountAdatper;
     User user;
+    MediaPlayer mPlayer;
+
+    enum PlayerState {
+        IDLE,
+        INITIALIED,
+        PREPARED,
+        STARTED,
+        PAUSED,
+        STOPPED,
+        ERROR,
+        RELEASED
+    }
+
+    AudioManager audioManager;
+    PlayerState mState;
+    SeekBar progressView;
 
     @BindView(R.id.textView_UserMain_UsrName)
     TextView userName;
@@ -73,30 +99,119 @@ public class UserMainFragment extends Fragment {
 //        userName.setText(user.getUserName()+" 의 계정입니다.");
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_user_main);
         accountAdatper = new ContentsAdatper();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        accountAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
+            @Override
+            public void onSettingItemClick(View view, int position) {
+                MainActivity mainActivity  = (MainActivity)getActivity();
+                mainActivity.goProfileSetting();
+            }
+        });
+
+        mPlayer = MediaPlayer.create(getContext(), Uri.parse("http://ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com/avs/whiparam.mp3"));
+        mState = PlayerState.PREPARED;
+        accountAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
+            @Override
+            public void onPlayerItemClick(View view, View parent, Contents contents, int position, boolean isChecked) {
+                progressView = (SeekBar) parent.findViewById(R.id.seekBar_Play);
+                audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+                progressView.setMax(mPlayer.getDuration());
+
+                if (isChecked==true) {
+                    Log.e("체크확인", "chekced");
+                    play();
+
+                } else {
+                    Log.e("노체크", "no checked");
+                    pause();
+
+                }
+
+                progressView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    int progress = -1;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        if (fromUser) {
+                            this.progress = progress;
+                        }
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        progress = -1;
+                        isSeeking = true;
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        if (progress != -1) {
+                            if (mState == PlayerState.STARTED) {
+                                mPlayer.seekTo(progress);
+                            }
+                        }
+                        isSeeking = false;
+                    }
+                });
+            }
+
+
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(accountAdatper);
-//        initData();
         return view;
+
     }
-//    public void initData(){
-//        Contents contents ;
-//       Random r = new Random();
-//        for(int i=0;i<10;i++)
-//       {
-//           if(r.nextInt()%3==0){
-//               contents = new MusicContents();
-//               accountAdatper.add(contents);
-//          }else if(r.nextInt()%3==1){
-//               contents = new PictureContents();
-//               accountAdatper.add(contents);
-//           }else{
-//               contents = new YoutubeContents();
-//               accountAdatper.add(contents);
-//           }
-//       }
-//    }
+
+    boolean isSeeking = false;
+    Handler mHandler = new Handler(Looper.getMainLooper());
+    Runnable progressRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mState == PlayerState.STARTED) {
+                if (!isSeeking) {
+                    int position = mPlayer.getCurrentPosition();
+                    progressView.setProgress(position);
+                }
+                mHandler.postDelayed(this, 100);
+            }
+        }
+    };
+
+    private void play() {
+        if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
+            try {
+                mPlayer.prepare();
+                mState = PlayerState.PREPARED;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
+            mPlayer.seekTo(progressView.getProgress());
+            mPlayer.start();
+            mState = PlayerState.STARTED;
+
+            mHandler.post(progressRunnable);
+        }
+
+    }
+
+    private void pause() {
+        if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
+            mPlayer.pause();
+            mState = PlayerState.PAUSED;
+        }
+
+    }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPlayer.release();
+        mState = PlayerState.RELEASED;
+        mPlayer = null;
+    }
 }

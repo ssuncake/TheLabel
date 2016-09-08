@@ -3,7 +3,6 @@ package team.nuga.thelabel.viewholder;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -70,9 +69,8 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         }
         return true;
     }
-
-    public interface OnMusicContentsItemClick {
-        void onMusicContentItemClick(View view, Contents contents, int adapterPosition);
+    public interface OnMusicContentsItemClick { //MediaPlayer 리스너
+        void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition,boolean isChecked);
     }
 
     OnMusicContentsItemClick musicContentslist;
@@ -81,9 +79,27 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         this.musicContentslist = musiclistener;
     }
 
-    public AccountTypeMusicViewHolder(View itemView) {
+    public interface OnPlayerItemClickListener {  //Player
+        public void onPlayerItemClick(View view, View parent,Contents contents, int position, boolean isChecked);
+    }
+    OnPlayerItemClickListener playerListener;
+    public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
+        this.playerListener = playerListener;
+    }
+    public AccountTypeMusicViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
+        CheckBox playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
+        playCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(musicContentslist!=null){
+                    musicContentslist.onMusicContentItemClick(compoundButton , itemView, contents, getAdapterPosition(),isChecked);
+                }
+            }
+        });
+
 
         CheckBox likeCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_like_off);
         likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -100,15 +116,15 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         });
 
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (musicContentslist != null) {
-                    musicContentslist.onMusicContentItemClick(view, contents, getAdapterPosition());
-                }
-                Log.v("Music", "test success");
-            }
-        });
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (musicContentslist != null) {
+//                    musicContentslist.onMusicContentItemClick(view, contents, getAdapterPosition());
+//                }
+//                Log.v("Music", "test success");
+//            }
+//        });
         itemView.setOnClickListener(this); //popup listener
         itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);

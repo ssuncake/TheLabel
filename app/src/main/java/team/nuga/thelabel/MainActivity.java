@@ -276,7 +276,14 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(UploadFragment.UPLOADMODE, mode);
         startActivityForResult(intent, MainActivity.REQUEST_UPLOAD);
     }
-
+    public void goProfileSetting(){
+        drawer.setCheckedItem(R.id.drawer_profile);
+        Bundle b = new Bundle();
+        b.putSerializable(MainActivity.MAINUSER, mainUser);
+        ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
+        profileSettingFragment.setArguments(b);
+        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+    }
 
     // 단말환경 check
 

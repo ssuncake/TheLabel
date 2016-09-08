@@ -1,7 +1,5 @@
 package team.nuga.thelabel.viewholder;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +9,6 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.RoundImageTransform;
@@ -26,15 +23,26 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
     @BindView(R.id.imageView_user_profile)
     ImageView userProfilePicture;
 
+    public  interface OnSettingImageClick{  // SettingImage 리스너
+        void onSettingImageClick(View view, int adapterPosition);
+    }
+
+    OnSettingImageClick imageSettinglist;
+
+    public void setOnSettingImageClick(OnSettingImageClick imageSettinglist){
+        this.imageSettinglist = imageSettinglist;
+    }
+
     public AccountTypeProfileViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        ImageView settingImage = (ImageView)itemView.findViewById(R.id.imageView_setting);
-        settingImage.setOnClickListener(new View.OnClickListener() {
+        ImageView settingimageView = (ImageView)itemView.findViewById(R.id.imageView_setting);
+        settingimageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(itemView.getContext(), MainActivity.class);
-                ((Activity)itemView.getContext()).startActivity(intent);
+                if(imageSettinglist!=null){
+                    imageSettinglist.onSettingImageClick(view, getAdapterPosition());
+                }
             }
         });
     }
