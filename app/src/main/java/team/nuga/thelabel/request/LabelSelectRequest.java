@@ -24,8 +24,8 @@ public class LabelSelectRequest extends AbstractRequest<NetworkResult<Label[]>> 
     Request request;
     public LabelSelectRequest(Context context) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(PATH)
-                .addQueryParameter("labelPage","true")
+                .addPathSegment(PATH)
+                .addPathSegment("me")
                 .build();
 
 

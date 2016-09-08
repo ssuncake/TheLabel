@@ -1,6 +1,8 @@
 package team.nuga.thelabel;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,6 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -270,6 +275,31 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(MainActivity.MAINUSER, mainUser);
         intent.putExtra(UploadFragment.UPLOADMODE, mode);
         startActivityForResult(intent, MainActivity.REQUEST_UPLOAD);
+    }
+
+
+    // 단말환경 check
+
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private boolean checkPlayServices(){
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if(resultCode != ConnectionResult.SUCCESS){
+            if(apiAvailability.isUserResolvableError(resultCode)){
+                Dialog dialog = apiAvailability.getErrorDialog(this,resultCode,PLAY_SERVICES_RESOLUTION_REQUEST);
+                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                });
+                dialog.show();
+            }else{
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
 
