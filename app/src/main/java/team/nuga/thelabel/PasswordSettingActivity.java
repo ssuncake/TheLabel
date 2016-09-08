@@ -40,34 +40,51 @@ public class PasswordSettingActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_passwordChange)
     public void onPasswordChageClick() {
-        if(Debug.debugmode)Log.e("버튼 "," 변경하기 버튼 클릭");
-        if (editText_newPassword.getText().toString().trim().isEmpty() == true) {
-            Log.i("비밀번호", " 불린값 true:" + editText_newPassword.getText().toString().trim().isEmpty());
-        } else if(editText_newPassword.getText().toString().trim().isEmpty() == false) {
-            Log.i("비밀번호", " 불린값 :" + editText_newPassword.getText().toString().trim().isEmpty());
-        }else{Log.i("eee","eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-            //1.(앱) 현재비밀번호와 새로 설정할 비밀번호를 다르게 했는지 체크
-            validateNewPassword();
-            //2.(앱) 새로설정할 비밀번호와 새확인비밀번호가 같은지 체크
-            validatecheckNewPassword();
+        if (Debug.debugmode) Log.e("버튼 ", " 변경하기 버튼 클릭");
+        if (editText_currentPassword.getText().toString().trim().isEmpty() == true) {///현재비번에 빈칸입력
+            textInputLayout_currentPassword.setError(getString(R.string.err_msg_password));
+        } else {
+            if (editText_newPassword.getText().toString().trim().isEmpty() == true) {///새 비번에 빈칸입력
+                editText_newPassword.setError(getString(R.string.err_msg_password));
+            } else {
+                if (editText_checkNewPassword.getText().toString().trim().isEmpty() == true) {///확인에 빈칸입력
+                    textInputLayout_checkNewPassword.setError(getString(R.string.err_msg_password));
+                } else {
+                    if (Debug.debugmode) Log.i("메세지", "빈칸없음!");
+                    //1.(앱) 현재비밀번호와 새로 설정할 비밀번호를 다르게 했는지 체크
+                    validateNewPassword();
+                    //2.(앱) 새로설정할 비밀번호와 새확인비밀번호가 같은지 체크
+                    validatecheckNewPassword();
 
-            String currentPassword = editText_currentPassword.getText().toString();
-            String newPassword = editText_newPassword.getText().toString();
-            PasswordChangeRequest request = new PasswordChangeRequest(currentPassword, newPassword);
-            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
-                @Override
-                public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                    String currentPassword = editText_currentPassword.getText().toString();
+                    String newPassword = editText_newPassword.getText().toString();
+                    PasswordChangeRequest request = new PasswordChangeRequest(currentPassword, newPassword);
+                    NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
+                        @Override
+                        public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                            int reCode = result.getResultCode();
+                            if (reCode== 1) { // 비밀번호 변경 성공
+                                Toast.makeText(PasswordSettingActivity.this, "비밀 번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if(reCode==2){
+                                textInputLayout_currentPassword.setError(getString(R.string.err_msg_currnet_password_check));
+                                requestFocus(editText_currentPassword);
+                            }else if(reCode==3){
+                                if(Debug.debugmode)Log.e("메세지","비밀번호 입력값 없음");
+                            }
+                        }
 
+                        @Override
+                        public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                            Toast.makeText(PasswordSettingActivity.this, "비밀번호 변경 안되셨어여... 네트워크 fail..", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    Toast.makeText(this, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
                 }
-
-                @Override
-                public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
-
-                }
-            });
-            Toast.makeText(this, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +104,6 @@ public class PasswordSettingActivity extends AppCompatActivity {
         editText_currentPassword.addTextChangedListener(new MyPassTextWatcher(editText_currentPassword));
         editText_newPassword.addTextChangedListener(new MyPassTextWatcher(editText_newPassword));
         editText_checkNewPassword.addTextChangedListener(new MyPassTextWatcher(editText_checkNewPassword));
-
 
 
     }
@@ -133,6 +149,7 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     break;
             }
         }
+
     }
 
 

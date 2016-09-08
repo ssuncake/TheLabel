@@ -40,8 +40,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
-        logo.setImageDrawable(getResources().getDrawable(R.drawable.intrologo));
-
+//        logo.setImageDrawable(getResources().getDrawable(R.drawable.intrologo));
         final Handler mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -60,10 +59,11 @@ public class IntroActivity extends AppCompatActivity {
                         }
 
 
-                        showLoginFragment();}
-                },1000);//로그인 1초 후 이동.
+//                        showLoginFragment();
+                    }
+                },2000);//로그인 1초 후 이동.
             }
-        },2000);
+        },3000);
     }
 
     public void signUpFragmentCall(){

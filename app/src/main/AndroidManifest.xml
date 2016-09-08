@@ -135,7 +135,6 @@
         <activity
             android:name=".TestLoginActivity"
             android:label="TheLabel" >
-
         </activity>
     </application>
 
