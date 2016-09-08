@@ -88,7 +88,6 @@
             android:hint="@string/hint_Email"
             android:inputType="textEmailAddress"
             android:singleLine="true">
-
             <requestFocus />
         </EditText>
     </android.support.design.widget.TextInputLayout>

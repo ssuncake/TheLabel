@@ -1,7 +1,5 @@
 package team.nuga.thelabel.request;
 
-import android.content.Context;
-
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -11,29 +9,32 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import team.nuga.thelabel.data.NetworkResult;
-
 import team.nuga.thelabel.data.User;
 
 
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class LoginRequest extends AbstractRequest<NetworkResult<User>> {
+public class PasswordChangeRequest extends AbstractRequest<NetworkResult> {
 
-    private static final String LOGINADDRESS = "auth/local/login";
+    private static final String USERS= "users";
+    private static final String ME = "me";
 
     Request request;
-    public LoginRequest(Context context,String email,String password) {
+    public PasswordChangeRequest(String password, String new_password) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(LOGINADDRESS)
+                .addPathSegment(USERS)
+                .addPathSegment(ME)
+                .addQueryParameter("pass","true")
                 .build();
         RequestBody body = new FormBody.Builder()
-                .add("email", email)
                 .add("password", password)
+                .add("new_password", new_password)
                 .build();
+
         request = new Request.Builder()
                 .url(url)
-                .post(body)
+                .put(body)
                 .build();
     }
 

@@ -7,6 +7,12 @@ public class NetworkResult<T> {
     private String message;
     private int id;
     ErrorMessage errorMessage;
+    int resultCode;
+
+    public int getResultCode() {
+        return resultCode;
+    }
+
 
     public int getId() {
         return id;

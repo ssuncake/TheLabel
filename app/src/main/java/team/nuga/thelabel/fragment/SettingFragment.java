@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.PasswordSettingActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.TestLoginActivity;
 import team.nuga.thelabel.data.NetworkResult;
@@ -44,6 +45,11 @@ public class SettingFragment extends Fragment {
             }
         });
 
+    }
+    @OnClick(R.id.view_Setting_item_account)
+    public void onAccountClick(){//비밀번호설정액티비티로 이동~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Intent intent = new Intent(getContext(), PasswordSettingActivity.class);
+        startActivity(intent);
     }
 
     public SettingFragment() {
