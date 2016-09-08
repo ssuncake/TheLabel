@@ -8,15 +8,19 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
+import team.nuga.thelabel.request.LoginRequest;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -38,9 +42,6 @@ public class IntroActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         logo.setImageDrawable(getResources().getDrawable(R.drawable.intrologo));
 
-
-
-
         final Handler mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -48,12 +49,17 @@ public class IntroActivity extends AppCompatActivity {
 
                 // 이부분에서 자동로그인이 성공하면 바로 이동가능하게 코드
                 //
-                //
-                //
                 moveUpLogo();
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(isAutoLogin()){
+                            processAutoLogin();
+                        }else{
+                            moveLoginActivity();
+                        }
+
+
                         showLoginFragment();}
                 },1000);//로그인 1초 후 이동.
             }
@@ -81,7 +87,40 @@ public class IntroActivity extends AppCompatActivity {
 logoAnimator.start();
         }
 
-private void showLoginFragment(){
+
+    //자동로그인
+    private boolean isAutoLogin() {
+        String email = PropertyManager.getInstance().getEmail();
+        return !TextUtils.isEmpty(email);
+    }
+
+    private void processAutoLogin() {
+        String email = PropertyManager.getInstance().getEmail();
+        if (!TextUtils.isEmpty(email)) {
+            String password = PropertyManager.getInstance().getPassword();
+//            String regid = PropertyManager.getInstance().getRegistrationId();
+            LoginRequest request = new LoginRequest(this, email, password);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                    User getLoginUser = result.getUser();
+                    moveMainActivity(getLoginUser);
+                }
+
+                @Override
+                public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                    moveLoginActivity();
+                }
+            });
+        }
+    }
+
+    private void moveLoginActivity() { //테스트로그인으로,
+        Intent intent = new Intent(IntroActivity.this, TestLoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void showLoginFragment(){
         container.setVisibility(View.VISIBLE);
         introFragmentManger = getSupportFragmentManager();
         introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();

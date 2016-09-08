@@ -215,7 +215,6 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
 //            inputLayout_email.s(false);
         }
-
         return true;
     }
 

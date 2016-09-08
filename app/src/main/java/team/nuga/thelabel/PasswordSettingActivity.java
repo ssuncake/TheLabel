@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.manager.NetworkManager;
@@ -39,11 +40,9 @@ public class PasswordSettingActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_passwordChange)
     public void onPasswordChageClick() {
-        //빈칸 입력 확인
-        Log.i("변경 클릭 ㅋ", "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
-        Log.i("비밀번호", " 불린값 :" + editText_newPassword.getText().toString().trim().isEmpty());
+        if(Debug.debugmode)Log.e("버튼 "," 변경하기 버튼 클릭");
         if (editText_newPassword.getText().toString().trim().isEmpty() == true) {
-            Log.i("비밀번호", " 불린값 :" + editText_newPassword.getText().toString().trim().isEmpty());
+            Log.i("비밀번호", " 불린값 true:" + editText_newPassword.getText().toString().trim().isEmpty());
         } else if(editText_newPassword.getText().toString().trim().isEmpty() == false) {
             Log.i("비밀번호", " 불린값 :" + editText_newPassword.getText().toString().trim().isEmpty());
         }else{Log.i("eee","eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -74,6 +73,8 @@ public class PasswordSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_setting);
+        ButterKnife.bind(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_impormation);
         setSupportActionBar(toolbar);
@@ -83,9 +84,10 @@ public class PasswordSettingActivity extends AppCompatActivity {
         textInputLayout_checkNewPassword = (TextInputLayout) findViewById(R.id.TextInput_newPasswordCheck);
         textInputLayout_newPassword = (TextInputLayout) findViewById(R.id.TextInput_newPassword);
         textInputLayout_currentPassword = (TextInputLayout) findViewById(R.id.TextInput_currentPassword);
-        editText_newPassword.addTextChangedListener(new MyTextWatcher(editText_newPassword));
-        editText_checkNewPassword.addTextChangedListener(new MyTextWatcher(editText_checkNewPassword));
-        editText_currentPassword.addTextChangedListener(new MyTextWatcher(editText_currentPassword));
+        editText_currentPassword.addTextChangedListener(new MyPassTextWatcher(editText_currentPassword));
+        editText_newPassword.addTextChangedListener(new MyPassTextWatcher(editText_newPassword));
+        editText_checkNewPassword.addTextChangedListener(new MyPassTextWatcher(editText_checkNewPassword));
+
 
 
     }
@@ -100,11 +102,11 @@ public class PasswordSettingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class MyTextWatcher implements TextWatcher {
+    private class MyPassTextWatcher implements TextWatcher {
 
         private View view;
 
-        private MyTextWatcher(View view) {
+        private MyPassTextWatcher(View view) {
             this.view = view;
         }
 
@@ -151,22 +153,26 @@ public class PasswordSettingActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private void validateNewPassword() {
+    private boolean validateNewPassword() {
         if (editText_currentPassword.getText().toString() != editText_checkNewPassword.getText().toString()) { //입력한 현재 비밀번호와 새비밀번호 다른지 체크
             clear_newPassword = true;
         } else {
             textInputLayout_newPassword.setError(getString(R.string.err_msg_currentAndNew_password_check)); //같으면 에러메세지 같다고 출력
             requestFocus(editText_currentPassword);
+            return false;
         }
+        return true;
     }
 
-    private void validatecheckNewPassword() {
+    private boolean validatecheckNewPassword() {
         if (editText_newPassword.getText().toString().equals(editText_checkNewPassword.getText().toString())) { //새비밀번호와 확인비밀번호 비교
             clear_checkPassword = true;
         } else {//새로 설정한 비밀번호가 새로설정한비밀번호 확인 과 다를경우
             textInputLayout_checkNewPassword.setError(getString(R.string.err_msg_checkNewAndNew_password_check));//새비밀번호와 다릅니다. 출력
             requestFocus(editText_checkNewPassword);
+            return false;
         }
+        return true;
     }
 
 

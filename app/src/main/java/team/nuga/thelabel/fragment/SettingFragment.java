@@ -18,6 +18,7 @@ import team.nuga.thelabel.TestLoginActivity;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
 import team.nuga.thelabel.request.LogoutRequest;
 
 /**
@@ -32,7 +33,8 @@ public class SettingFragment extends Fragment {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
                 Toast.makeText(getContext(), "정상적으로 로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-
+                PropertyManager.getInstance().setEmail(null);
+                PropertyManager.getInstance().setPassword(null);
                 Intent intent = new Intent(getContext(), TestLoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();

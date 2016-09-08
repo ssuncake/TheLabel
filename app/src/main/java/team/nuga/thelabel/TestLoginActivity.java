@@ -15,6 +15,7 @@ import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
 import team.nuga.thelabel.request.LoginRequest;
 
 public class TestLoginActivity extends AppCompatActivity {
@@ -139,6 +140,12 @@ public class TestLoginActivity extends AppCompatActivity {
     public void clicklogin(){
         String emain = inputid.getText().toString();
         String pass = inputpassword.getText().toString();
+
+        //자동로그인 기능 : 이메일 세팅
+        String regid = PropertyManager.getInstance().getRegistrationId();
+        PropertyManager.getInstance().setEmail(emain);
+        PropertyManager.getInstance().setPassword(pass);
+
         goMain(emain,pass);
     }
 
