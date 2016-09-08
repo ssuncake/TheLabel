@@ -41,7 +41,7 @@ MediaType jpeg = MediaType.parse("image/jpeg");
                 .addFormDataPart("city_id", String.valueOf(city_id))
                 .addFormDataPart("town_id", String.valueOf(town_id));
         if(file != null){
-            builder.addFormDataPart("imagepath",file.getName(),
+            builder.addFormDataPart("image",file.getName(),
                     RequestBody.create(jpeg,file));
         }
         RequestBody body = builder.build();
