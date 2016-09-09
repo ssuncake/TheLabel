@@ -33,6 +33,8 @@ import team.nuga.thelabel.wiget.LabelMainTop;
 public class LabelMainFragment extends Fragment {
 
 
+    public static final String LOGTAG = "LabelMainFragment ";
+    public static final String LEADERID = "leaderid";
     private String labelName;
     Label label;
     LabelMainListAdapter adapter;
@@ -47,7 +49,7 @@ public class LabelMainFragment extends Fragment {
 
     @OnClick(R.id.button_LabelMain_back)
     public void clickBackButton(){
-        team.nuga.thelabel.fragment.LabelContainerFragment parent  = (team.nuga.thelabel.fragment.LabelContainerFragment)getParentFragment();
+        LabelContainerFragment parent  = (LabelContainerFragment)getParentFragment();
         parent.backSelectLabel();
         // 레이블선택으로 돌아가기위해 역시 부모 프래그먼트를 얻어와 메소드를 실행
     }
@@ -61,7 +63,9 @@ public class LabelMainFragment extends Fragment {
     @OnClick(R.id.button_LabelMain_Memberlist)
     public void clickMemberList(){
         Intent intent = new Intent(getActivity(), MemberListActivity.class);
-        intent.putExtra(MainActivity.LABELID,label.getLabel_id());
+        intent.putExtra(MainActivity.LABELID,label.getLabelID());
+        intent.putExtra(LEADERID,label.getLabelLeaderID());
+        Log.w(LOGTAG,"전달해 주는 leaderid = "+label.getLabelLeaderID());
         startActivity(intent);
     }
 
@@ -85,52 +89,42 @@ public class LabelMainFragment extends Fragment {
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
-                Log.e("레이블 메인","page "+result.getPage()+"  count "+result.getCount());
 
-                label = result.getResult();
-                labelMainTop.setLabel(label);
+                if(result.isError()){
+                    Log.e(LOGTAG,"error : "+result.getError().getMessage());
+                }else{
+                    label = result.getResult();
+                    labelMainTop.setLabel(label);
+                    labelMainTop.setIsMyLabel(true);
+                    Log.w(LOGTAG," leaderid = "+label.getLabelLeaderID()+"labelneed :"+label.getLabelNeedPositionList().toString());
+                    adapter = new LabelMainListAdapter();
 
-                adapter = new LabelMainListAdapter();
-                memberRecycler.setAdapter(adapter);
-                LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-                manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                memberRecycler.setLayoutManager(manager);
-                members = result.getMember();
-                memberSetting();
+                    memberRecycler.setAdapter(adapter);
 
+                    LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+                    manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    memberRecycler.setLayoutManager(manager);
 
-//                dummyAddmember();
-
-
-
+                    members = result.getMember();
+                    memberSetting();
+                }
             }
 
             @Override
             public void onFail(NetworkRequest<NetworkResultLabeMain> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("레이블 메인","레이블 찾기 실패 : "+errorMessage);
+                Log.e(LOGTAG,"레이블 찾기 실패 : "+errorMessage);
             }
         });
-
-
-
 
         return view;
 
     }
 
-//    public void dummyAddmember(){
-//        for(int i=0;i<30;i++){
-//            User user = new User();
-//            user.setUserName("유저 "+i);
-//            adapter.addUser(user);
-//        }
-//    }
 
     public void memberSetting(){
         for(Member m : members)
             adapter.addUser(m);
     }
-
 
 
 }

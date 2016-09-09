@@ -1,8 +1,14 @@
 package team.nuga.thelabel;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,17 +18,35 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.ganfra.materialspinner.MaterialSpinner;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.fragment.MainFragment;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.LabelMakeRequest;
 
 public class LabelMakeActivity extends AppCompatActivity {
+
+    public static int REQEST_IMAGESETTING = 550;
+    public static final String LOGTAG = "LabelMakeActivity ";
 
     @BindView(R.id.textLayout_MakeLabel_InputName)
     TextInputLayout inputLayoutName;
@@ -36,23 +60,99 @@ public class LabelMakeActivity extends AppCompatActivity {
     MaterialSpinner spinner;
     @BindView(R.id.radioGroup_MakeLabel_Need)
     RadioGroup needSelect;
+    @BindView(R.id.imageView_MakeLabel_LabelImage)
+    ImageView labelImage;
 
     @BindView(R.id.relativeLayout_MakeLabel_needPosition)
     RelativeLayout needPosition;
+    @BindView(R.id.imageButton_LabelMake_ImageSetting)
+    ImageView imageSetting;
+
+
+    // 체크박스 부분
+    @BindView(R.id.checkBox_MakeLabel_vocal) // 2
+    CheckBox vocal;
+    @BindView(R.id.checkBox_MakeLabel_acoustic) // 3
+    CheckBox acoustic;
+    @BindView(R.id.checkBox_MakeLabel_base) // 4
+    CheckBox base;
+    @BindView(R.id.checkBox_MakeLabel_elec)  // 5
+    CheckBox elec;
+    @BindView(R.id.checkBox_MakeLabel_drum) // 6
+    CheckBox drum;
+    @BindView(R.id.checkBox_MakeLabel_piano) // 7
+            CheckBox keyboard;
+    @BindView(R.id.checkBox_MakeLabel_etc) // 8
+    CheckBox etc;
+
+
+
+    @OnClick(R.id.imageButton_LabelMake_ImageSetting)
+    public void imageSetting(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQEST_IMAGESETTING);
+    }
 
     @OnClick(R.id.button_LabelMake_Complete)
     public void completeMakeLabel(){
-        String name = editTextName.getText().toString();
-        String Text = editTextText.getText().toString();
-        int genreId = selectGanre;
+        inputLabelName = editTextName.getText().toString();
+        if(inputLabelName!= null){
+            inputText = editTextText.getText().toString();
+            if(inputPositions.size()==0 ) {
+                inputPositions.add(1);
+            }else if(inputPositions.size()==1){
+            }else{
+                if(inputPositions.get(0).equals(1)){
+                    inputPositions.remove((Object)Integer.valueOf(1));
+                }
+            }
+            Collections.sort(inputPositions);
+            if(selectGanre==0){
+                selectGanre=1;
+            }
+            Log.w(LOGTAG,"레이블 생성 : "+inputLabelName+" / "+selectGanre+" / "+inputText+" / 포지션 : "+inputPositions.toString()+" / "+imagefile.toString());
+
+            LabelMakeRequest request = new LabelMakeRequest(this,inputLabelName,selectGanre,inputText,imagefile,inputPositions);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                    if(result.isError()){
+                        Log.w(LOGTAG,"에러발생 : "+result.getError().getMessage());
+                    }else{
+                        Toast.makeText(LabelMakeActivity.this,result.getMessage().toString()+"",Toast.LENGTH_SHORT);
+                        Intent intent = new Intent();
+                        intent.putExtra(MainActivity.TABINDEX, MainFragment.LABELTAB);
+                        setResult(RESULT_OK,intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                    Log.w(LOGTAG,"레이블: "+errorMessage);
+                }
+            });
+        }else {
+            Toast.makeText(LabelMakeActivity.this, "이름을 입력하세요", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
 
     User user;
-    int selectGanre;
+
     String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
 
+
+    File imagefile = null;
+    String inputLabelName;
+
+    int selectGanre;
+    String inputText;
+    List<Integer> inputPositions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +160,13 @@ public class LabelMakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_label_make);
         user = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_LabelMake);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 
         //장르선택 스피너 부분
@@ -70,13 +177,11 @@ public class LabelMakeActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectGanre = 1+i;
-                Log.e("레이블 생성","장르 선택 : "+selectGanre);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 selectGanre = 1;
-                Log.e("레이블 생성","장르 선택 : "+selectGanre);
             }
         });
 
@@ -108,6 +213,72 @@ public class LabelMakeActivity extends AppCompatActivity {
             }
         });
 
+        vocal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(2);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(2));
+            }
+        });
+        acoustic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(3);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(3));
+            }
+        });
+        base.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(4);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(4));
+            }
+        });
+        elec.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(5);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(5));
+            }
+        });
+        drum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(6);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(6));
+            }
+        });
+        keyboard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(7);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(7));
+            }
+        });
+        etc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    inputPositions.add(8);
+                else
+                    inputPositions.remove((Object)Integer.valueOf(8));
+            }
+        });
+
+
+
     }
 
     // 니드포지션부분 클릭여부 결정
@@ -119,6 +290,24 @@ public class LabelMakeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQEST_IMAGESETTING){
+            if(resultCode == Activity.RESULT_OK){
+                Uri uri = data.getData();
+                Cursor c = getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+                if (c.moveToNext()) {
+                    String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                    imagefile = new File(path);
+                    Glide.with(this)
+                            .load(imagefile)
+                            .into(labelImage);
+                }
+
+            }
+        }
+    }
 
     //에딧 텍스트 이벤트 처리부분
     private class ErrorWatcher implements TextWatcher {
@@ -152,4 +341,6 @@ public class LabelMakeActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

@@ -20,12 +20,13 @@ public class LabelSelectRequest extends AbstractRequest<NetworkResult<Label[]>> 
 
 
     private static final String PATH = "labels";
+    private static final String PATH2 = "me";
 
     Request request;
     public LabelSelectRequest(Context context) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PATH)
-                .addPathSegment("me")
+                .addPathSegment(PATH2)
                 .build();
 
 

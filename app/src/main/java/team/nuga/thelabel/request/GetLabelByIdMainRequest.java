@@ -22,7 +22,7 @@ public class GetLabelByIdMainRequest extends AbstractRequest<NetworkResultLabeMa
     Request request;
     public GetLabelByIdMainRequest(Context context, int id) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(PATH+id+PATH2)
+                .addPathSegments(PATH+id)
                 .addQueryParameter("page","1")
                 .addQueryParameter("count","10")
                 .build();

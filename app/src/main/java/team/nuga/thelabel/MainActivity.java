@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final String NEWLEADER = "NewLeader";
     public static final String TABINDEX = "tabindex";
+    public static final String CONTAINERFRAGMENTTAG = "LabelContainer";
 
 
     public static final int REQUEST_LIKENOTIFICATION = 200;
@@ -249,8 +250,24 @@ public class MainActivity extends AppCompatActivity
                 int tabindex = data.getIntExtra(MainActivity.TABINDEX, 0);
                 goMainFragment(tabindex);
             }
+        } else if (requestCode == REQUEST_MAKELABEL) {
+            if (resultCode == Activity.RESULT_OK) {
+                int tabindex = data.getIntExtra(MainActivity.TABINDEX, 0);
+
+            }
         }
     }
+//
+//    public void refresh(){
+//        Fragment currentFragment = this.getSupportFragmentManager().findFragmentByTag("mainContainer");
+//        if (currentFragment instanceof MainFragment) {
+//            currentFragment.getChildFragmentManager().findFragmentByTag()
+//            FragmentTransaction fragTransaction =   this.getSupportFragmentManager().beginTransaction();
+//            fragTransaction.detach(currentFragment);
+//            fragTransaction.attach(currentFragment);
+//            fragTransaction.commit();}
+//    }
+
 
     public void goMainFragment(int tabIndex) // 메인 프래그먼트로 이동하며 인자로 받은 값 0~2탭으로 바로이동시켜줍니다.
     {
@@ -262,9 +279,13 @@ public class MainActivity extends AppCompatActivity
         }
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, mainFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.drawer_container, mainFragment,"mainContainer")
+                .commit();
 
     }
+
+
 
     public void drawerUserSetting(String name) {
         headerUserName.setText(name);

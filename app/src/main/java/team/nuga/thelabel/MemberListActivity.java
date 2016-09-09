@@ -13,14 +13,17 @@ import butterknife.ButterKnife;
 import team.nuga.thelabel.adapter.MemberListAdapter;
 import team.nuga.thelabel.data.Member;
 import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.fragment.LabelMainFragment;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.MemberListRequest;
 
 public class MemberListActivity extends AppCompatActivity {
 
+    public static final String LOGTAG = "MemberListActivity ";
     MemberListAdapter adapter;
     Member[] members;
+    int leaderId;
 
     @BindView(R.id.recycler_MemberList)
     RecyclerView recyclerView;
@@ -35,6 +38,8 @@ public class MemberListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         int id = getIntent().getIntExtra(MainActivity.LABELID,-1);
+        leaderId = getIntent().getIntExtra(LabelMainFragment.LEADERID,-1);
+        Log.w(LOGTAG,"전달받은 리더 id :"+leaderId);
 
         if(id != -1){
             MemberListRequest request = new MemberListRequest(this,id);
@@ -42,8 +47,13 @@ public class MemberListActivity extends AppCompatActivity {
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Member[]>>() {
                 @Override
                 public void onSuccess(NetworkRequest<NetworkResult<Member[]>> request, NetworkResult<Member[]> result) {
-                    members = result.getData();
-                    setRecyclerView(members);
+
+                    if(result.isError()){
+                        Log.e(LOGTAG,"id 입력 실패 "+result.getError().getMessage());
+                    }else{
+                        members = result.getUser();
+                        setRecyclerView(members);
+                    }
                 }
 
                 @Override
@@ -60,6 +70,7 @@ public class MemberListActivity extends AppCompatActivity {
 
     public void setRecyclerView(Member[] members){
         adapter = new MemberListAdapter();
+        adapter.setLederid(leaderId);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

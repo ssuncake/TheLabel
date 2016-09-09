@@ -6,73 +6,83 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView_LableMainTop_labelImage"
-        android:layout_gravity="center"
-        android:background="#BBBBBBFF" />
+        android:id="@+id/imageView_LabelMainTop_labelImage"
+        android:layout_gravity="center" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="가입 요청"
-        android:id="@+id/button_LabelMainTop_RequestJoin"
-        android:layout_gravity="right|top" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_LabelMainTop_Image"
+        android:background="@color/labelmain_topview_overray">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|top"
-        android:id="@+id/linearLayout_LabelMainTop_NeedPosition">
-
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Need"
-            android:id="@+id/textView_LabelMainTop_Need" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+            android:text="가입 요청"
+            android:id="@+id/button_LabelMainTop_RequestJoin"
+            android:layout_gravity="right|top" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout_LabelMainTop_Like">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView_LabelMainTop_Like" />
+            android:layout_gravity="left|top"
+            android:id="@+id/linearLayout_LabelMainTop_NeedPosition">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-999"
-                android:id="@+id/textView_LabelMainTop_Like" />
+                android:text="Need"
+                android:id="@+id/textView_LabelMainTop_Need" />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="레이블 이름"
-            android:id="@+id/textView_LabelMainTop_LabelName" />
+            android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="장르"
-            android:id="@+id/textView_LabelMainTop_Genre" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout_LabelMainTop_Like"
+                android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="등록된 소개글이 없습니다."
-            android:id="@+id/textView_LabelMainTop_Profile" />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_LabelMainTop_Like" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-999"
+                    android:id="@+id/textView_LabelMainTop_Like" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="레이블 이름"
+                android:id="@+id/textView_LabelMainTop_LabelName"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장르"
+                android:id="@+id/textView_LabelMainTop_Genre"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록된 소개글이 없습니다."
+                android:id="@+id/textView_LabelMainTop_Profile"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

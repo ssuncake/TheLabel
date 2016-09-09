@@ -18,6 +18,11 @@ import team.nuga.thelabel.viewholder.MemberListViewHolder;
 public class MemberListAdapter extends RecyclerView.Adapter<MemberListViewHolder> {
 
     List<Member> list = new ArrayList<>();
+    int leaderid;
+
+    public void setLederid(int id){
+        leaderid = id;
+    }
 
     public void add(Member m){
         list.add(m);
@@ -33,7 +38,10 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListViewHolder
 
     @Override
     public void onBindViewHolder(MemberListViewHolder holder, int position) {
-        holder.setMember(list.get(position));
+        if(list.get(position).getUser_id() == leaderid)
+            holder.setMember(list.get(position),true);
+        else
+            holder.setMember(list.get(position),false);
     }
 
     @Override

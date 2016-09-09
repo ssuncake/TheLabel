@@ -1,15 +1,22 @@
 package team.nuga.thelabel.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 우리집 on 2016-09-03.
  */
 public class Member {
+    @SerializedName("id")
     int user_id;
-    String user_nickname; // 레이블 메인에선 이거
-    String user_name; // 레이블 멤버 더보기에선 이건
 
-    String user_possition;
+    @SerializedName("nickname")
+    String user_nickname; // 레이블 메인에선 이거
+
+    @SerializedName("imagepath")
     String user_imagepath;
+
+    @SerializedName("position")
+    String user_possition;
 
     public int getUser_id() {
         return user_id;
@@ -27,7 +34,4 @@ public class Member {
         return user_imagepath;
     }
 
-    public String getUser_name() {
-        return user_name;
-    }
 }

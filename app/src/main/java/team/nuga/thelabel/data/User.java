@@ -1,11 +1,8 @@
 package team.nuga.thelabel.data;
 
-import android.util.Log;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -28,7 +25,7 @@ public class User implements Serializable{
 
 
 
-    private ArrayList<Label> userInLabelList;
+    private Label[] userInLabelList;
 
     private String userSex;
 
@@ -38,27 +35,12 @@ public class User implements Serializable{
     private Genre userGenre;
     private boolean userNeed;
 
-    public void addLabelList(Label label){
-            if(userInLabelList==null){
-                userInLabelList = new ArrayList<Label>();
-                userInLabelList.add(label);
-            }else{
-                if(userInLabelList.size() == 3)
-                {
-                    Log.e("레이블 추가", "최대 허용 할 수 있는 레이블 수 초과해서 add명령어 실행");
-                    return;
-                }else{
-                    int id = label.getLabelID();
-                    for(Label l : userInLabelList){
-                        if(l.getLabelID() == id ){
-                            Log.e("레이블 추가", "id가 같은 레이블존재");
-                            return;
-                        }
-                    }
-                    userInLabelList.add(label);
-                }
+    public Label[] getUserInLabelList() {
+        return userInLabelList;
+    }
 
-            }
+    public void setUserInLabelList(Label[] userInLabelList) {
+        this.userInLabelList = userInLabelList;
     }
 
     public String getUserName() {
@@ -69,9 +51,6 @@ public class User implements Serializable{
         this.userName = userName;
     }
 
-    public ArrayList<Label> getUserInLabelList() {
-        return userInLabelList;
-    }
 
     public String getEmail() {
         return userEmail;

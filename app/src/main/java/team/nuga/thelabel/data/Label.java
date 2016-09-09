@@ -3,7 +3,6 @@ package team.nuga.thelabel.data;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.HashSet;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -12,29 +11,47 @@ public class Label implements Serializable {
     @SerializedName("id")
     private int labelID; // 레이블 셀렉에서 이걸로사용
 
-    private int label_id; // 레이블 메인에선 이거사용용
-   private int labelILike;
+    @SerializedName("authority")
     private int labelLeaderID;
 
-    private boolean labelNeed;
-    @SerializedName("label_name")
+    @SerializedName("name")
     private String labelName;
+
     @SerializedName("text")
     private String labelProfile;
 
-
-    @SerializedName("need_position")
+    @SerializedName("needposition")
     private String[] labelNeedPositionList;
 
-    @SerializedName("label_genre")
+    @SerializedName("genre")
     private String labelGenre;
 
-    private HashSet<Integer> labelLikeUser;
+    @SerializedName("imagepath")
+    private String image_path;
+
+    private int labelILike;
+
+
+    public boolean isNeed(){
+       if(labelNeedPositionList.length==0 || labelNeedPositionList==null || labelNeedPositionList[0].equals("선택하지않음"))
+           return false;
+        return true;
+    }
+
+
 
     public int getLabelID() {
         return labelID;
     }
 
+
+    public int getLabelLeaderID() {
+        return labelLeaderID;
+    }
+
+    public void setLabelLeaderID(int labelLeaderID) {
+        this.labelLeaderID = labelLeaderID;
+    }
 
     public String getLabelName() {
         return labelName;
@@ -48,12 +65,41 @@ public class Label implements Serializable {
         return labelProfile;
     }
 
+    public void setLabelProfile(String labelProfile) {
+        this.labelProfile = labelProfile;
+    }
+
+    public String[] getLabelNeedPositionList() {
+        return labelNeedPositionList;
+    }
+
+    public void setLabelNeedPositionList(String[] labelNeedPositionList) {
+        this.labelNeedPositionList = labelNeedPositionList;
+    }
 
     public String getLabelGenre() {
         return labelGenre;
     }
 
-    public int getLabel_id() {
-        return label_id;
+    public void setLabelGenre(String labelGenre) {
+        this.labelGenre = labelGenre;
     }
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
+
+    public int getLabelILike() {
+        return labelILike;
+    }
+
+    public void setLabelILike(int labelILike) {
+        this.labelILike = labelILike;
+    }
+
+
 }

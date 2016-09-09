@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,7 +56,7 @@ public class LabelSettingActivity extends AppCompatActivity {
         startActivityForResult(intent,REQUEST_ENTRUSTLEADER);
     }
 
-    @OnClick(R.id.button_LabelSetting_Entrust)
+    @OnClick(R.id.button_LabelSetting_Fire)
     public void fireMember(){
         Intent intent = new Intent(this,FireMemberActivity.class);
         intent.putExtra(MainActivity.SELECTLABEL,label);
@@ -73,6 +75,11 @@ public class LabelSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label_setting);
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_LabelSetting);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         label=(Label)getIntent().getSerializableExtra(MainActivity.SELECTLABEL);
         int labelId = label.getLabelID();
@@ -122,5 +129,15 @@ public class LabelSettingActivity extends AppCompatActivity {
                     finish();
                 }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

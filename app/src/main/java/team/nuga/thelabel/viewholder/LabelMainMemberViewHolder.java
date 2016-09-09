@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
@@ -30,6 +32,8 @@ public class LabelMainMemberViewHolder extends RecyclerView.ViewHolder {
     public void setUser(Member member){
         memberName.setText(member.getUser_nickname());
         memberPosition.setText(member.getUser_possition());
-        //이미지 세팅
+        Glide.with(memberImage.getContext())
+                .load(member.getUser_imagepath())
+                .into(memberImage);
     }
 }

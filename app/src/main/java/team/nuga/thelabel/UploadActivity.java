@@ -110,7 +110,7 @@ public class UploadActivity extends AppCompatActivity {
         checkBox.setChecked(true);
         selectLabel.addView(checkBox);
 
-        if (user.getUserInLabelList() != null && user.getUserInLabelList().size() != 0) {
+        if (user.getUserInLabelList() != null && user.getUserInLabelList().length != 0) {
             for (Label l : user.getUserInLabelList()) {
                 String s = l.getLabelName();
                 checkBox = new CheckBox(this);

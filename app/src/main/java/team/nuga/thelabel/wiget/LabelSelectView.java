@@ -1,10 +1,13 @@
 package team.nuga.thelabel.wiget;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
@@ -29,10 +32,12 @@ public class LabelSelectView extends FrameLayout {
 
     public ImageView settingView;
     TextView labelTitleView;
+    public ImageView labelImage;
 
     public void init() {
         inflate(getContext(), R.layout.view_label_select, this);
         settingView = (ImageView) findViewById(R.id.imageview_label_select_setting);
+        labelImage = (ImageView) findViewById(R.id.imageView_label_select_Profile) ;
         settingView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +56,10 @@ public class LabelSelectView extends FrameLayout {
         this.label = label;
         settingView.setVisibility(VISIBLE);
         labelTitleView.setText(label.getLabelName());
+        Log.e("레이블 선택뷰","레이블 이미지 패스: "+label.getImage_path());
+        Glide.with(getContext())
+                .load(label.getImage_path())
+                .into(labelImage);
         isEmpty = false;
     }
 

@@ -176,6 +176,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
     public void resetMusic(){
+        contents.setPlayedMode(Contents.STOP);
         playCheckBox.setChecked(false);
         playSeekbar.setProgress(0);
     }

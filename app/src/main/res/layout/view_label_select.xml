@@ -6,11 +6,12 @@
     >
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView_label_select_Profile"
         android:src="@drawable/label_make"
-        android:background="@color/color_white" />
+        android:background="@color/color_white"
+        android:layout_gravity="center" />
 
     <ImageView
         android:layout_width="25dp"

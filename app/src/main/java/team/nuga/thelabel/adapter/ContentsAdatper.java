@@ -1,6 +1,7 @@
 package team.nuga.thelabel.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,8 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
+
+        Log.e("ContentAdapter","온바인드 뷰홀더 ->"+position);
         if (position == 0) {
             holder.setProfile(user);
 
@@ -157,6 +160,8 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void setOnAdapterItemClickListener(OnContentsItemClickListener listener) {
         this.listener = listener;
     }
+
+
     public interface OnPlayerItemClickListener {  //Player
         public void onPlayerItemClick(View view, View parent,Contents contents, int position, boolean isChecked);
     }
@@ -164,6 +169,9 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
         this.playerListener = playerListener;
     }
+
+
+
     @Override
     public void onMusicContentItemClick(View view,View parent, Contents contents, int adapterPosition, boolean isChecked) {
         if (playerListener != null) {

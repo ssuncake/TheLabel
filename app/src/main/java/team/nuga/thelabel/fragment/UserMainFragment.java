@@ -64,7 +64,7 @@ public class UserMainFragment extends Fragment {
     TextView userName;
 
     Contents[] contentses;
-    int musicPlayerNumeber;
+
 
     public UserMainFragment() {
         // Required empty public constructor
@@ -78,6 +78,7 @@ public class UserMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this,view);
 
+        mPlayer = new MediaPlayer();
         ContentsRequest contentsRequest = new ContentsRequest(getContext(),2,10);
         NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
             @Override
@@ -120,13 +121,13 @@ public class UserMainFragment extends Fragment {
 //        long currentDuration = mPlayer.getCurrentPosition();
         accountAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
-            public void onPlayerItemClick(View view, View parent, Contents contents, int position, boolean isChecked) {
-                progressView = (SeekBar) parent.findViewById(R.id.seekBar_Play);
-                currentTimeView = (TextView)parent.findViewById(R.id.textView_currentTime);
-                totalTimeView = (TextView)parent.findViewById(R.id.textView_totalTime);
+            public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position, boolean isChecked) {
+                progressView = (SeekBar) holderview.findViewById(R.id.seekBar_Play);
+                currentTimeView = (TextView)holderview.findViewById(R.id.textView_currentTime);
+                totalTimeView = (TextView)holderview.findViewById(R.id.textView_totalTime);
 
                 audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-                progressView.setMax(mPlayer.getDuration());
+
 
 //                if (isChecked==true) {
 //                    if(contents.getPlayedMode()==Contents.PLAY){
@@ -149,14 +150,17 @@ public class UserMainFragment extends Fragment {
                         Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
                         pause(contents);
                     }else if(contents.getPlayedMode() == Contents.PUASE){
-                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
+                        Log.w("뮤직플레이어","playMode -> PUASE / contentid = "+contents.getContentsID()+"/ position ="+position);
+
                         mPlayer.seekTo(contents.getPlayedTIme());
+                        progressView.setProgress(contents.getPlayedTIme());
                         mPlayer.start();
+                        contents.setPlayedMode(Contents.PLAY);
                         mState = PlayerState.STARTED;
 
                         mHandler.post(progressRunnable);
                     }else if(contents.getPlayedMode() == Contents.STOP){
-                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
+                        Log.w("뮤직플레이어","playMode -> STOP / contentid = "+contents.getContentsID()+"/ position ="+position);
                         resetPlayer(contents, contents.getContentsID(),position);
                         play(contents);
                     }
@@ -218,6 +222,7 @@ public class UserMainFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(accountAdatper);
+//        initData();
         return view;
 
     }
@@ -285,8 +290,9 @@ public class UserMainFragment extends Fragment {
 
 
     public void resetPlayer(Contents contents,int ContentsId, int position ){
-
-        mPlayer.reset();
+        if(mPlayer!=null){
+            mPlayer.reset();
+        }
         for(int i =0 ;i<accountAdatper.getItemCount();i++){
             RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
 
@@ -294,22 +300,24 @@ public class UserMainFragment extends Fragment {
                 ParentContentsViewHolder pvh = (ParentContentsViewHolder)holder;
                 if(pvh instanceof AccountTypeMusicViewHolder){
                     AccountTypeMusicViewHolder avh = (AccountTypeMusicViewHolder)pvh;
-                    Log.e("되라","position ="+position+" i = "+i);
+                    Log.e("보이는 홀더 리셋","position ="+position+" i = "+i);
                     avh.resetMusic();
                 }
             }
-
-            for(Contents c : contentses){
-                if(c.getContentsID() != ContentsId){
-                    c.setPlayedMode(Contents.STOP);
-                    c.setPlayedTIme(0);
-                }
-            }
-
         }
+
+        for(Contents c : contentses){
+            if(c.getContentsID() != ContentsId){
+                Log.e("컨텐츠 리스트 리셋","리셋하는 contentid ->"+c.getContentsID()+" / 지우면 안될 contentid = "+ContentsId);
+                c.setPlayedMode(Contents.STOP);
+                c.setPlayedTIme(0);
+            }
+        }
+
 //        musicPlayerNumeber = ContentsId;
 //        accountAdatper.setPlayedPosition(position);
         mPlayer=MediaPlayer.create(getContext(), Uri.parse(contents.getContentsPath()));
+        progressView.setMax(mPlayer.getDuration());
         mState = PlayerState.PREPARED;
     }
 }

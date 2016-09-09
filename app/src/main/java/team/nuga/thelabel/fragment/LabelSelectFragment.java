@@ -8,10 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +17,11 @@ import team.nuga.thelabel.LabelSettingActivity;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.LabelSelectRequest;
 import team.nuga.thelabel.wiget.LabelSelectView;
 
 /**
@@ -28,7 +29,8 @@ import team.nuga.thelabel.wiget.LabelSelectView;
  */
 public class LabelSelectFragment extends Fragment  {
 
-    List<Label> userlabellist;
+
+    public static final String LOGTAG = "LabelSelectFragment ";
 
 
     public LabelSelectFragment() {
@@ -42,7 +44,6 @@ public class LabelSelectFragment extends Fragment  {
 
     User user;
     Label[] labels;
-    Button[] buttons;
     LabelSelectView[] labelSelectViews = new LabelSelectView[3];
     LabelSelectView labelView;
 
@@ -54,10 +55,39 @@ public class LabelSelectFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_label_select, container, false);
         ButterKnife.bind(this, view);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         user = (User) getArguments().getSerializable(MainActivity.MAINUSER);
-        labels = (Label[]) getArguments().getSerializable(MainActivity.MAINUSERINLABELS);
+        LabelSelectRequest request = new LabelSelectRequest(getContext());
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<Label[]>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<Label[]>> request, NetworkResult<Label[]> result) {
 
+                if(result.isError()){
+                    Log.e(LOGTAG,""+result.getError().getMessage());
+                }else{
+                    labels = result.getLabel();
+                    if (labels != null) {
+                        user.setUserInLabelList(labels);
+                        Log.e(LOGTAG, "labels size : " + labels.length + " user labelsize : " + user.getUserInLabelList().length);
+                    }
+                    init();
+                }
 
+            }
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<Label[]>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("레이블 선택", "불러오기 실패 "+errorMessage);
+            }
+        });
+
+    }
+
+    public void init(){
         for (int i = 0; i < 3; i++) {
 
             labelView = new LabelSelectView(getContext(), i);
@@ -90,8 +120,8 @@ public class LabelSelectFragment extends Fragment  {
 
         for (int i = 0; i < 3; i++) {
             if(user.getUserInLabelList() != null) {
-                if (i < user.getUserInLabelList().size()) {
-                    labelSelectViews[i].setLabel(user.getUserInLabelList().get(i));
+                if (i < user.getUserInLabelList().length) {
+                    labelSelectViews[i].setLabel(labels[i]);
                 }
             }
         }
@@ -100,8 +130,6 @@ public class LabelSelectFragment extends Fragment  {
         linearLayout.addView(labelSelectViews[1]);
         linearLayout.addView(labelSelectViews[2]);
 
-
-        return view;
     }
 
     public void selectLabel(Label label) {

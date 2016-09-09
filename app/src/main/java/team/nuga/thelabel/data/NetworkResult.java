@@ -20,16 +20,17 @@ public class NetworkResult<T> {
 
     private T user;
     private T data;
-    private T error;
+
+    private ErrorMessage error;
     private T label;
 
 
 
     public boolean isError(){
         if(error==null)
-            return true;
-        else
             return false;
+        else
+            return true;
     }
     public String getMessage(){ return this.message;}
     public T getUser() {
@@ -43,4 +44,10 @@ public class NetworkResult<T> {
     public T getLabel() {
         return label;
     }
+
+    public ErrorMessage getError() {
+        return error;
+    }
+
+
 }

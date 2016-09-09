@@ -8,12 +8,31 @@
     tools:context="team.nuga.thelabel.LabelMakeActivity"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolBar_LabelMake"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_LabelMake"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/maintitle_blue"
+            android:minHeight="?attr/actionBarSize" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="레이블 만들기"
+            android:id="@+id/text_otheruser"
+            android:textColor="@color/color_white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -26,14 +45,20 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#aaaaff">
+                android:layout_height="200dp">
 
-                <ImageButton
-                    android:id="@+id/imageButton_LabelSetting_ImageSetting"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView_MakeLabel_LabelImage" />
+
+                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="right|bottom" />
+                    android:layout_gravity="right|bottom"
+                    android:id="@+id/imageButton_LabelMake_ImageSetting"
+                    android:src="@drawable/btn_gallery"
+                    android:scaleType="centerCrop"/>
             </FrameLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -195,7 +220,7 @@
 
                 <Button
                     android:id="@+id/button_LabelMake_Complete"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/makelabel_complete" />
