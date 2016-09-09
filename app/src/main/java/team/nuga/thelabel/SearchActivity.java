@@ -21,6 +21,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        fragmentTransaction.replace(R.id.search_content, new LikeNotificationFragment());
@@ -30,7 +31,7 @@ public class SearchActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("레이블찾기"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-       SearchViewpagerAdapter searchviewpagerAdapter = new SearchViewpagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        SearchViewpagerAdapter searchviewpagerAdapter = new SearchViewpagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(searchviewpagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

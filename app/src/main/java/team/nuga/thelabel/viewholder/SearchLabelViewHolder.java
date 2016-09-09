@@ -35,6 +35,6 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
     Label label;
     public void setLabel(Label label){
         this.label = label;
-        labelnameView.setText(label.getLabelName());
+//        labelnameView.setText(label.getLabelName());
     }
 }

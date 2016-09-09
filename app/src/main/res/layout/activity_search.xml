@@ -3,38 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="team.nuga.thelabel.SearchActivity">
 
-    <RelativeLayout
-        android:orientation="vertical"
+    <android.support.design.widget.TabLayout
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:id="@+id/search_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/maintitle_blue"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/search_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search_tablayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@color/maintitle_blue"
+    android:layout_height="?android:attr/actionBarSize">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:maxEms="16"
+        android:layout_marginRight="15dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/search_content">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/search_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/maintitle_blue"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="10dp"
-                android:hint="닉네임, 레이블, 포지션, 지역, 장르 검색"
-                android:id="@+id/editText">
-            </EditText>
+        android:hint="닉네임, 레이블, 포지션, 지역, 장르 선택"
+        android:layout_toRightOf="@+id/imageButton_back"
+        android:layout_toEndOf="@+id/imageButton_back" />
 
-        </android.support.design.widget.TabLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton_back"
+        android:src="@drawable/btn_left_arrow"
+        android:background="@color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/search_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/search_tablayout"/>
-
-    </RelativeLayout>
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/imageButton"
+        android:scaleType="fitCenter"
+        android:background="@color/transparent"
+        android:src="@drawable/btn_top_search"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
 </RelativeLayout>
+
+</RelativeLayout>
+

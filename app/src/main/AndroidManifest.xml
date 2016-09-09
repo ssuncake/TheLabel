@@ -3,20 +3,25 @@
     package="team.nuga.thelabel">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--gcm-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <permission android:name="team.nuga.thelabel.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
-    <uses-permission android:name="team.nuga.thelabel.permission.C2D_MESSAGE"/>
+    <!-- gcm -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="team.nuga.thelabel.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="team.nuga.thelabel.permission.C2D_MESSAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <manifest package="jp.wasabeef.glide.transformations"></manifest>
+
+    <manifest package="jp.wasabeef.glide.transformations" />
     <manifest package="com.yqritc.recyclerviewmultipleviewtypesadapter" />
 
     <application
@@ -26,34 +31,34 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <receiver android:name="com.google.android.gms.gcm.GcmReceiver"
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="team.nuga.thelabel"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="team.nuga.thelabel" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".gcm.MyGcmListenerService"
+        <service
+            android:name=".gcm.MyGcmListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-
-        <service android:name=".gcm.MyInstanceIDListenerService"
+        <service
+            android:name=".gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
         <service
             android:name=".gcm.RegistrationIntentService"
-            android:exported="false">
-        </service>
+            android:exported="false"></service>
 
         <activity
             android:name=".MainActivity"
@@ -68,7 +73,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MemberListActivity"
@@ -128,14 +132,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".youtube.FragmentDemoActivity"
-           android:exported="true"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity android:name=".LabelMakeActivity" />
         <activity android:name=".LabelSettingActivity" />
         <activity
             android:name=".TestLoginActivity"
-            android:label="TheLabel" >
-        </activity>
+            android:label="TheLabel"></activity>
     </application>
 
 </manifest>
