@@ -107,13 +107,11 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
 
-        Log.e("ContentAdapter","온바인드 뷰홀더 ->"+position);
+        Log.w("ContentAdapter","온바인드 뷰홀더 ->"+position);
         if (position == 0) {
             holder.setProfile(user);
-
         }else {
             holder.setData(user, mcontentslist.get(position - 1));
-
         }
     }
 
@@ -163,7 +161,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
 
     public interface OnPlayerItemClickListener {  //Player
-        public void onPlayerItemClick(View view, View parent,Contents contents, int position, boolean isChecked);
+        public void onPlayerItemClick(View view, View parent,Contents contents, int position);
     }
     OnPlayerItemClickListener playerListener;
     public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
@@ -173,9 +171,9 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
 
     @Override
-    public void onMusicContentItemClick(View view,View parent, Contents contents, int adapterPosition, boolean isChecked) {
+    public void onMusicContentItemClick(View view,View parent, Contents contents, int adapterPosition) {
         if (playerListener != null) {
-            playerListener.onPlayerItemClick(view ,parent,contents,adapterPosition, isChecked);
+            playerListener.onPlayerItemClick(view ,parent,contents,adapterPosition);
         }
     }
 

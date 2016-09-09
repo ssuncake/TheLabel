@@ -1,7 +1,6 @@
 package team.nuga.thelabel.fragment;
 
 
-import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -56,14 +55,21 @@ public class UserMainFragment extends Fragment {
 
     AudioManager audioManager;
     PlayerState mState;
-    SeekBar progressView;
+
     TextView currentTimeView, totalTimeView;
     RecyclerView recyclerView;
 
-    @BindView(R.id.textView_UserMain_UsrName)
-    TextView userName;
+
+    @BindView(R.id.seekBar_debug)
+    SeekBar progressView;
 
     Contents[] contentses;
+
+    int playingPosition = -1;
+    int clickPosition = -1;
+    Contents playedContents;
+
+    SeekBar holderProgressbar;
 
 
     public UserMainFragment() {
@@ -76,42 +82,44 @@ public class UserMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
 
-        mPlayer = new MediaPlayer();
-        ContentsRequest contentsRequest = new ContentsRequest(getContext(),2,10);
+//        mPlayer = new MediaPlayer();
+//        progressView = new SeekBar(getActivity());
+
+        ContentsRequest contentsRequest = new ContentsRequest(getContext(), 2, 10);
         NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
             @Override
 
-            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request,NetworkResultMyAccount result) {
+            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
                 contentses = result.getData();
 //                accountAdatper.setSize(contentses.length+1);
                 User user = result.getResult();
-                Log.e("유저메인",user.getUserName());
+                Log.e("유저메인", user.getUserName());
                 accountAdatper.setUser(user);
-                for(Contents c : contentses){
-                    Log.e("게시글 ID",""+ c.getContentsID());
-                    Log.e("파일경로", ""+c.getContentsPath());
-                    Log.e("파일타입", ""+c.getContentsType());
-                    Log.e("좋아요 개수",""+c.getLikeCount());
-                   accountAdatper.add(c);
+                for (Contents c : contentses) {
+                    Log.e("게시글 ID", "" + c.getContentsID());
+                    Log.e("파일경로", "" + c.getContentsPath());
+                    Log.e("파일타입", "" + c.getContentsType());
+                    Log.e("좋아요 개수", "" + c.getLikeCount());
+                    accountAdatper.add(c);
                 }
 
             }
 
             @Override
             public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("유저메인 실패",errorMessage);
+                Log.e("유저메인 실패", errorMessage);
             }
         });
 //        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
 //        userName.setText(user.getUserName()+" 의 계정입니다.");
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_user_main);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_user_main);
         accountAdatper = new ContentsAdatper();
         accountAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
             public void onSettingItemClick(View view, int position) {
-                MainActivity mainActivity  = (MainActivity)getActivity();
+                MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.goProfileSetting();
             }
         });
@@ -121,12 +129,9 @@ public class UserMainFragment extends Fragment {
 //        long currentDuration = mPlayer.getCurrentPosition();
         accountAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
-            public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position, boolean isChecked) {
-                progressView = (SeekBar) holderview.findViewById(R.id.seekBar_Play);
-                currentTimeView = (TextView)holderview.findViewById(R.id.textView_currentTime);
-                totalTimeView = (TextView)holderview.findViewById(R.id.textView_totalTime);
+            public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {
 
-                audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+//                audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
 
 //                if (isChecked==true) {
@@ -146,27 +151,56 @@ public class UserMainFragment extends Fragment {
 //
 //                }
 
-                    if(contents.getPlayedMode()==Contents.PLAY){
-                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
-                        pause(contents);
-                    }else if(contents.getPlayedMode() == Contents.PUASE){
-                        Log.w("뮤직플레이어","playMode -> PUASE / contentid = "+contents.getContentsID()+"/ position ="+position);
 
+//                currentTimeView = (TextView) holderview.findViewById(R.id.textView_currentTime);
+//                totalTimeView = (TextView) holderview.findViewById(R.id.textView_totalTime);
+
+
+                if (clickPosition == -1) {
+                    clickPosition = position;
+                } else {
+
+                }
+
+                if (contents.getPlayedMode() == Contents.PLAY) {
+                    Log.w("뮤직플레이어", "playMode : play ->pause / contentid = " + contents.getContentsID() + "/ position =" + position + " /playingPosition = " + playingPosition);
+                    pause(contents);
+
+                } else if (contents.getPlayedMode() == Contents.PUASE) {
+                    if (position == playingPosition) {
+                        Log.w("뮤직플레이어", "playMode : pause -> play / contentid = " + contents.getContentsID() + "/ position =" + position + " /playingPosition = " + playingPosition);
                         mPlayer.seekTo(contents.getPlayedTIme());
                         progressView.setProgress(contents.getPlayedTIme());
                         mPlayer.start();
                         contents.setPlayedMode(Contents.PLAY);
                         mState = PlayerState.STARTED;
-
                         mHandler.post(progressRunnable);
-                    }else if(contents.getPlayedMode() == Contents.STOP){
-                        Log.w("뮤직플레이어","playMode -> STOP / contentid = "+contents.getContentsID()+"/ position ="+position);
-                        resetPlayer(contents, contents.getContentsID(),position);
-                        play(contents);
                     }
+
+
+                    // Log.w("뮤직플레이어", "playMode : pause -> stop / contentid = " + contents.getContentsID() + "/ position =" + position +" /playingPosition = " + playingPosition);
+                } else if (contents.getPlayedMode() == Contents.STOP) {
+                    RecyclerView.ViewHolder rvh = recyclerView.findViewHolderForAdapterPosition(position);
+                    ParentContentsViewHolder pvh = (ParentContentsViewHolder) rvh;
+                    if (pvh instanceof AccountTypeMusicViewHolder) {
+                        AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder) pvh;
+                        holderProgressbar = mvh.getPlaySeekbar();
+                    }
+                    if (playingPosition == -1) { // 가장 첫실행
+                        Log.w("뮤직플레이어", "playMode : stop -> playfrist / contentid = " + contents.getContentsID() + "/ position =" + position + " /playingPosition = " + playingPosition);
+                        play(contents, position, holderview);
+                    } else if (position != playingPosition) { // 실행했던 플레이어의 포지션과 실행하려는 포지션이 틀릴때
+                        Log.w("뮤직플레이어", "playMode : stop -> playOther / contentid = " + contents.getContentsID() + "/ position =" + position + " /playingPosition = " + playingPosition);
+                        resetPlayer(contents, contents.getContentsID(), position);
+                        play(contents, position, holderview);
+                    } else { // 실행했던 플레이어의 포지션과 실행하려는 포지션이 같을때 -
+                        // 실행했던 플레이어는 stop으로 돌아가지 않는다.
+                    }
+                }
 
                 progressView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     int progress = -1;
+
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         if (fromUser) {
@@ -208,7 +242,7 @@ public class UserMainFragment extends Fragment {
 // Prepending 0 to seconds if it is one digit
                 if (seconds < 10) {
                     secondsString = "0" + seconds;
-                }   else {
+                } else {
                     secondsString = "" + seconds;
                 }
 
@@ -228,7 +262,6 @@ public class UserMainFragment extends Fragment {
     }
 
 
-
     boolean isSeeking = false;
     Handler mHandler = new Handler(Looper.getMainLooper());
     Runnable progressRunnable = new Runnable() {
@@ -238,7 +271,10 @@ public class UserMainFragment extends Fragment {
                 if (!isSeeking) {
                     int position = mPlayer.getCurrentPosition();
                     progressView.setProgress(position);
+                    playedContents.setPlayedTIme(position);
+                    holderProgressbar.setProgress(position);
 //                    currentTimeView.setText(position);
+
                 }
                 mHandler.postDelayed(this, 100);
             }
@@ -246,37 +282,42 @@ public class UserMainFragment extends Fragment {
         }
     };
 
-    private void play(Contents contents) {
-            if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
-                try {
-                    mPlayer.prepare();
-                    mState = PlayerState.PREPARED;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    private void play(Contents contents, int position, View holderview) {
 
-            if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
-                mPlayer.seekTo(progressView.getProgress());
-                mPlayer.start();
-                mState = PlayerState.STARTED;
-                contents.setPlayedMode(Contents.PLAY);
 
-                mHandler.post(progressRunnable);
+        mPlayer = MediaPlayer.create(getContext(), Uri.parse(contents.getContentsPath()));
+        progressView.setMax(mPlayer.getDuration());
+        holderProgressbar.setMax(mPlayer.getDuration());
+        mState = PlayerState.PREPARED;
 
+        if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
+            try {
+                mPlayer.prepare();
+                mState = PlayerState.PREPARED;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            if(mPlayer.isPlaying()){
-                currentTimeView.setText("current time");
-            }
+        }
+
+        if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
+            mPlayer.seekTo(progressView.getProgress());
+            mPlayer.start();
+            mState = PlayerState.STARTED;
+            contents.setPlayedMode(Contents.PLAY);
+            playedContents = contents;
+            playingPosition = position;
+            mHandler.post(progressRunnable);
+        }
+
     }
 
     private void pause(Contents contents) {
-            if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
-                mPlayer.pause();
-                mState = PlayerState.PAUSED;
-                contents.setPlayedMode(Contents.PUASE);
-                contents.setPlayedTIme(progressView.getProgress());
-            }
+        if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
+            mPlayer.pause();
+            mState = PlayerState.PAUSED;
+            contents.setPlayedMode(Contents.PUASE);
+            contents.setPlayedTIme(progressView.getProgress());
+        }
     }
 
 
@@ -289,35 +330,61 @@ public class UserMainFragment extends Fragment {
     }
 
 
-    public void resetPlayer(Contents contents,int ContentsId, int position ){
-        if(mPlayer!=null){
-            mPlayer.reset();
-        }
-        for(int i =0 ;i<accountAdatper.getItemCount();i++){
+    public void resetPlayer(Contents contents, int ContentsId, int position) {
+        mPlayer.reset();
+
+        for (int i = 0; i < accountAdatper.getItemCount(); i++) {
             RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
 
-            if(holder!=null && i!=position){
-                ParentContentsViewHolder pvh = (ParentContentsViewHolder)holder;
-                if(pvh instanceof AccountTypeMusicViewHolder){
-                    AccountTypeMusicViewHolder avh = (AccountTypeMusicViewHolder)pvh;
-                    Log.e("보이는 홀더 리셋","position ="+position+" i = "+i);
+            if (holder != null && i != position) {
+                ParentContentsViewHolder pvh = (ParentContentsViewHolder) holder;
+                Log.d("보이는 홀더 리셋", "position =" + position + " i = " + i);
+                if (pvh instanceof AccountTypeMusicViewHolder) {
+                    AccountTypeMusicViewHolder avh = (AccountTypeMusicViewHolder) pvh;
                     avh.resetMusic();
                 }
             }
         }
 
-        for(Contents c : contentses){
-            if(c.getContentsID() != ContentsId){
-                Log.e("컨텐츠 리스트 리셋","리셋하는 contentid ->"+c.getContentsID()+" / 지우면 안될 contentid = "+ContentsId);
+        for (Contents c : contentses) {
+            if (c.getContentsID() != ContentsId) {
+                Log.v("컨텐츠 리스트 리셋", "리셋하는 contentid ->" + c.getContentsID() + " / 지우면 안될 contentid = " + ContentsId);
                 c.setPlayedMode(Contents.STOP);
                 c.setPlayedTIme(0);
             }
         }
 
+        progressView.setProgress(0);
+        holderProgressbar.setProgress(0);
 //        musicPlayerNumeber = ContentsId;
 //        accountAdatper.setPlayedPosition(position);
-        mPlayer=MediaPlayer.create(getContext(), Uri.parse(contents.getContentsPath()));
-        progressView.setMax(mPlayer.getDuration());
-        mState = PlayerState.PREPARED;
+//        mPlayer=MediaPlayer.create(getContext(), Uri.parse(contents.getContentsPath()));
+//        progressView.setMax(mPlayer.getDuration());
+//        mState = PlayerState.PREPARED;
+    }
+
+    public void midiaRelese() {
+//        if(mPlayer!=null){
+//            mPlayer.reset();
+//        }
+//        for(int i=0 ;i<accountAdatper.getItemCount();i++){
+//            RecyclerView.ViewHolder rvh= recyclerView.findViewHolderForAdapterPosition(i);
+//            ParentContentsViewHolder pvh = (AccountTypePictureViewHolder)rvh;
+//            if(pvh instanceof AccountTypeMusicViewHolder){
+//                AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder)pvh;
+//                mvh.resetMusic();
+//            }
+//        }
+//
+//        progressView.setProgress(0);
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        progressView.setProgress(0);
     }
 }

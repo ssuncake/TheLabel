@@ -65,10 +65,30 @@ public class MainFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.main_fragment_account));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //어뎁터에 가짜 유저데이터를 넘겨줌.
+        final MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //어뎁터에 가짜 유저데이터를 넘겨줌.
 
         viewPager.setAdapter(mainViewpagerAdapter);                                                                       //getActivity().getSupportFragmentManager()을 사용해도 된다.
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout)); //tab과 viewpager가 같이 변환 될 수 있도록 해주는 메소드
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));//tab과 viewpager가 같이 변환 될 수 있도록 해주는 메소드
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position!=2){
+                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
+                    f.midiaRelese();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
 
 

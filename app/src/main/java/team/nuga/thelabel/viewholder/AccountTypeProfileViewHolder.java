@@ -1,6 +1,5 @@
 package team.nuga.thelabel.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,7 +50,6 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
     public void applyData(User user, Contents contents) {
         if(user !=null) {
             profileUsername.setText(user.getUserName());
-            Log.e("프로필 사진",user.getImageUrl());
             Glide.with(userProfilePicture.getContext())
                     .load(user.getImageUrl())
                     .transform(new RoundImageTransform(userProfilePicture.getContext()))

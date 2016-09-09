@@ -3,6 +3,7 @@ package team.nuga.thelabel.viewholder;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -37,6 +38,10 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     SeekBar playSeekbar;
 
     CheckBox playCheckBox;
+
+    public SeekBar getPlaySeekbar() {
+        return playSeekbar;
+    }
 
     private ImageView imageViewMenu;
 
@@ -75,7 +80,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         return true;
     }
     public interface OnMusicContentsItemClick { //MediaPlayer 리스너
-        void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition,boolean isChecked);
+        void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition);
     }
 
     OnMusicContentsItemClick musicContentslist;
@@ -95,13 +100,22 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         super(itemView);
         ButterKnife.bind(this, itemView);
 
+
         playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
         playCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+            }
+        });
+
+        playCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 if(musicContentslist!=null){
-                    musicContentslist.onMusicContentItemClick(compoundButton , itemView, contents, getAdapterPosition(),isChecked);
+                    musicContentslist.onMusicContentItemClick(view, itemView, contents, getAdapterPosition());
                 }
+
             }
         });
 
@@ -161,14 +175,20 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
             conetentTime.setText(contents.getContentTime());
             likeCount.setText("" + contents.getLikeCount());
-        if(contents.getPlayedMode()==Contents.PLAY ){
+        if(contents.getPlayedMode()==Contents.PLAY){
+            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"PLAY");
             playCheckBox.setChecked(true);
             playSeekbar.setProgress(contents.getPlayedTIme());
+
+
         }else if( contents.getPlayedMode() == Contents.PUASE){
+            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"PUASE");
             playCheckBox.setChecked(false);
             playSeekbar.setProgress(contents.getPlayedTIme());
         }else if(contents.getPlayedMode() == Contents.STOP){
-            resetMusic();
+            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"STOP");
+            playCheckBox.setChecked(false);
+            playSeekbar.setProgress(0);
         }
 
 
@@ -180,4 +200,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         playCheckBox.setChecked(false);
         playSeekbar.setProgress(0);
     }
+
+
 }

@@ -1,24 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.UserMainFragment">
+    tools:context=".fragment.UserMainFragment"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="user"
-        android:gravity="center_vertical|center_horizontal"
-        android:id="@+id/textView_UserMain_UsrName"
-        android:textColor="#FFFF00"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="71dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginTop="12dp" />
+        android:id="@+id/seekBar_debug"
+        android:layout_gravity="center_horizontal"
+        android:indeterminate="false" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -29,4 +22,4 @@
         android:layout_alignParentStart="true">
 
     </android.support.v7.widget.RecyclerView>
-</RelativeLayout>
+</LinearLayout>
