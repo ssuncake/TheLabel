@@ -42,8 +42,11 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
+//    int playedPosition;
 
-
+//    public void setPlayedPosition(int playedPosition) {
+//        this.playedPosition = playedPosition;
+//    }
 
     public void add(Contents contents){
         mcontentslist.add(contents);
@@ -104,7 +107,6 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
         if (position == 0) {
             holder.setProfile(user);
-
 
         }else {
             holder.setData(user, mcontentslist.get(position - 1));

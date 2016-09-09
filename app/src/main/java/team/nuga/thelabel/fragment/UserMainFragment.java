@@ -41,7 +41,7 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 public class UserMainFragment extends Fragment {
     ContentsAdatper accountAdatper;
     User user;
-    MediaPlayer mPlayer;
+    static MediaPlayer mPlayer;
 
     enum PlayerState {
         IDLE,
@@ -115,13 +115,9 @@ public class UserMainFragment extends Fragment {
             }
         });
 
-        mPlayer = MediaPlayer.create(getContext(), Uri.parse("http://ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com/avs/whiparam.mp3"));
-        mState = PlayerState.PREPARED;
 
 //        long totalDuration = mPlayer.getDuration();
 //        long currentDuration = mPlayer.getCurrentPosition();
-//        currentTimeView.setText(milliSecondsToTimer(currentDuration));
-//        totalTimeView.setText(milliSecondsToTimer(totalDuration));
         accountAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
             public void onPlayerItemClick(View view, View parent, Contents contents, int position, boolean isChecked) {
@@ -132,19 +128,38 @@ public class UserMainFragment extends Fragment {
                 audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
                 progressView.setMax(mPlayer.getDuration());
 
-                if (isChecked==true) {
-                    Log.e("체크확인", "chekced");
-                    resetPlayer(contents.getContentsPath(), contents.getContentsID(),position);
-                    Log.e("플레이",contents.getContentsPath());
-                    play(contents.getContentsID());
+//                if (isChecked==true) {
+//                    if(contents.getPlayedMode()==Contents.PLAY){
+//                        Log.e("뮤직플레이어","isChecked true -> play");
+//                    }else if(contents.getPlayedMode() == Contents.PUASE){
+//                        Log.e("뮤직플레이어","isChecked true -> puase");
+//                        mPlayer.seekTo(contents.getPlayedTIme());
+//                    }else if(contents.getPlayedMode() == Contents.STOP){
+//                        Log.e("뮤직플레이어","isChecked true -> stop");
+//                        resetPlayer(contents, contents.getContentsID(),position);
+//                        play();
+//                    }
+//                } else {
+//                    Log.e("뮤직플레이어","isChecked false");
+//                    pause(contents);
+//
+//                }
 
+                    if(contents.getPlayedMode()==Contents.PLAY){
+                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
+                        pause(contents);
+                    }else if(contents.getPlayedMode() == Contents.PUASE){
+                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
+                        mPlayer.seekTo(contents.getPlayedTIme());
+                        mPlayer.start();
+                        mState = PlayerState.STARTED;
 
-
-                } else {
-                    Log.e("노체크", "no checked");
-                    pause(contents.getContentsID());
-
-                }
+                        mHandler.post(progressRunnable);
+                    }else if(contents.getPlayedMode() == Contents.STOP){
+                        Log.w("뮤직플레이어","playMode -> play / contentid = "+contents.getContentsID()+"/ position ="+position);
+                        resetPlayer(contents, contents.getContentsID(),position);
+                        play(contents);
+                    }
 
                 progressView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     int progress = -1;
@@ -173,7 +188,31 @@ public class UserMainFragment extends Fragment {
                 });
             }
 
+            public String milliSecondsToTimer(long milliseconds) {
+                String finalTimerString = "";
+                String secondsString = "";
 
+// Convert total duration into time
+                int hours = (int) (milliseconds / (1000 * 60 * 60));
+                int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
+                int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+// Add hours if there
+                if (hours > 0) {
+                    finalTimerString = hours + ":";
+                }
+
+// Prepending 0 to seconds if it is one digit
+                if (seconds < 10) {
+                    secondsString = "0" + seconds;
+                }   else {
+                    secondsString = "" + seconds;
+                }
+
+                finalTimerString = finalTimerString + minutes + ":" + secondsString;
+
+// return timer string
+                return finalTimerString;
+            }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -183,31 +222,7 @@ public class UserMainFragment extends Fragment {
 
     }
 
-//    public String milliSecondsToTimer(long milliseconds) {
-//        String finalTimerString = "";
-//        String secondsString = "";
-//
-//// Convert total duration into time
-//        int hours = (int) (milliseconds / (1000 * 60 * 60));
-//        int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
-//        int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
-//// Add hours if there
-//        if (hours > 0) {
-//            finalTimerString = hours + ":";
-//        }
-//
-//// Prepending 0 to seconds if it is one digit
-//        if (seconds < 10) {
-//            secondsString = "0" + seconds;
-//        }   else {
-//            secondsString = "" + seconds;
-//        }
-//
-//        finalTimerString = finalTimerString + minutes + ":" + secondsString;
-//
-//// return timer string
-//        return finalTimerString;
-//    }
+
 
     boolean isSeeking = false;
     Handler mHandler = new Handler(Looper.getMainLooper());
@@ -218,14 +233,15 @@ public class UserMainFragment extends Fragment {
                 if (!isSeeking) {
                     int position = mPlayer.getCurrentPosition();
                     progressView.setProgress(position);
+//                    currentTimeView.setText(position);
                 }
                 mHandler.postDelayed(this, 100);
             }
+
         }
     };
 
-    private void play(int ContentsId) {
-        if(ContentsId == musicPlayerNumeber) {
+    private void play(Contents contents) {
             if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
                 try {
                     mPlayer.prepare();
@@ -239,19 +255,23 @@ public class UserMainFragment extends Fragment {
                 mPlayer.seekTo(progressView.getProgress());
                 mPlayer.start();
                 mState = PlayerState.STARTED;
+                contents.setPlayedMode(Contents.PLAY);
 
                 mHandler.post(progressRunnable);
+
             }
-        }
+            if(mPlayer.isPlaying()){
+                currentTimeView.setText("current time");
+            }
     }
 
-    private void pause(int ContentsId) {
-        if(ContentsId == musicPlayerNumeber) {
+    private void pause(Contents contents) {
             if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
                 mPlayer.pause();
                 mState = PlayerState.PAUSED;
+                contents.setPlayedMode(Contents.PUASE);
+                contents.setPlayedTIme(progressView.getProgress());
             }
-        }
     }
 
 
@@ -264,10 +284,12 @@ public class UserMainFragment extends Fragment {
     }
 
 
-    public void resetPlayer(String url,int ContentsId, int position ){
+    public void resetPlayer(Contents contents,int ContentsId, int position ){
+
         mPlayer.reset();
         for(int i =0 ;i<accountAdatper.getItemCount();i++){
             RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
+
             if(holder!=null && i!=position){
                 ParentContentsViewHolder pvh = (ParentContentsViewHolder)holder;
                 if(pvh instanceof AccountTypeMusicViewHolder){
@@ -276,9 +298,18 @@ public class UserMainFragment extends Fragment {
                     avh.resetMusic();
                 }
             }
+
+            for(Contents c : contentses){
+                if(c.getContentsID() != ContentsId){
+                    c.setPlayedMode(Contents.STOP);
+                    c.setPlayedTIme(0);
+                }
+            }
+
         }
-        musicPlayerNumeber = ContentsId;
-        mPlayer=MediaPlayer.create(getContext(), Uri.parse(url));
+//        musicPlayerNumeber = ContentsId;
+//        accountAdatper.setPlayedPosition(position);
+        mPlayer=MediaPlayer.create(getContext(), Uri.parse(contents.getContentsPath()));
         mState = PlayerState.PREPARED;
     }
 }

@@ -13,6 +13,15 @@ public class Contents implements Serializable{
     public static final int PICTURE = 1;
     public static final int YOUTUBE = 2;
 
+    public static final int PLAY = 10;
+    public static final int PUASE = 20;
+    public static final int STOP = 30;
+
+
+
+    int playedMode= STOP;
+    int playedTIme;
+
 
     @SerializedName("filetype")
     protected int contentsType;
@@ -79,8 +88,22 @@ public class Contents implements Serializable{
     }
 
 
-
+    public void setPlayedMode(int playedMode) {
+        this.playedMode = playedMode;
     }
+
+    public int getPlayedMode() {
+        return playedMode;
+    }
+
+    public int getPlayedTIme() {
+        return playedTIme;
+    }
+
+    public void setPlayedTIme(int playedTIme) {
+        this.playedTIme = playedTIme;
+    }
+}
 
 
 

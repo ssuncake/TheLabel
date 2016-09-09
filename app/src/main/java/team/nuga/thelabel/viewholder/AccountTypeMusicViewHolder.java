@@ -161,6 +161,16 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
             conetentTime.setText(contents.getContentTime());
             likeCount.setText("" + contents.getLikeCount());
+        if(contents.getPlayedMode()==Contents.PLAY ){
+            playCheckBox.setChecked(true);
+            playSeekbar.setProgress(contents.getPlayedTIme());
+        }else if( contents.getPlayedMode() == Contents.PUASE){
+            playCheckBox.setChecked(false);
+            playSeekbar.setProgress(contents.getPlayedTIme());
+        }else if(contents.getPlayedMode() == Contents.STOP){
+            resetMusic();
+        }
+
 
     }
 
