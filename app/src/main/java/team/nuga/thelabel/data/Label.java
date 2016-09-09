@@ -8,25 +8,25 @@ import java.io.Serializable;
  * Created by Tacademy on 2016-08-24.
  */
 public class Label implements Serializable {
-    @SerializedName("id")
+    @SerializedName("label_id")
     private int labelID; // 레이블 셀렉에서 이걸로사용
 
     @SerializedName("authority")
     private int labelLeaderID;
 
-    @SerializedName("name")
+    @SerializedName("label_name")
     private String labelName;
 
     @SerializedName("text")
     private String labelProfile;
 
-    @SerializedName("needposition")
+    @SerializedName("label_need_position")
     private String[] labelNeedPositionList;
 
-    @SerializedName("genre")
+    @SerializedName("label_genre")
     private String labelGenre;
 
-    @SerializedName("imagepath")
+    @SerializedName("label_image_path")
     private String image_path;
 
     private int labelILike;
@@ -38,12 +38,21 @@ public class Label implements Serializable {
         return true;
     }
 
-
-
     public int getLabelID() {
         return labelID;
     }
 
+    public void setLabelID(int labelID) {
+        this.labelID = labelID;
+    }
+
+    public int getLabelILike() {
+        return labelILike;
+    }
+
+    public void setLabelILike(int labelILike) {
+        this.labelILike = labelILike;
+    }
 
     public int getLabelLeaderID() {
         return labelLeaderID;
@@ -93,13 +102,6 @@ public class Label implements Serializable {
         this.image_path = image_path;
     }
 
-    public int getLabelILike() {
-        return labelILike;
-    }
-
-    public void setLabelILike(int labelILike) {
-        this.labelILike = labelILike;
-    }
 
 
 }

@@ -57,4 +57,8 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
             listener.onAdapterItemClick(view , label, position);
         }
     }
+
+//    public void setLabel(Label[] label){
+//        this.labelitems = labelitems;
+//    }
 }

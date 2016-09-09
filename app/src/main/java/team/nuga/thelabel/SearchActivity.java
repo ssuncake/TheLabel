@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.adapter.SearchViewpagerAdapter;
 
 public class SearchActivity extends AppCompatActivity {
@@ -14,6 +15,10 @@ public class SearchActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @BindView(R.id.search_viewpager)
     ViewPager viewPager;
+    @OnClick(R.id.imageButton_back)
+    public void BackButton(){
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
