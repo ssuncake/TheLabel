@@ -3,9 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="designColor">#FF4081</color>
+
     <color name="color_white">#ffffff</color>
     <color name="color_gray_2">#ffaaaaaa</color>
     <color name="color_gray_1">#ff777777</color>
+
+    <color name="color_gray_transparent">#70777777</color>
+
+
 
 <!--회원가입 중복체크 색상-->
     <color name="color_check_success">#FF009900</color>
