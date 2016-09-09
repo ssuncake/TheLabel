@@ -35,13 +35,23 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 //        notifyDataSetChanged();
 //    }
 
-//    private ArrayList<User> muserlist = new ArrayList<>();
+//    private ArrayList<User> muserlist = new ArrayList<>();\
+
+//    private List<ParentContentsViewHolder> holders;
+
+
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
+
+
+
     public void add(Contents contents){
         mcontentslist.add(contents);
+
         notifyDataSetChanged();
     }
+
+
 
     public void setUser(User user){
         this.user = user;
@@ -70,10 +80,12 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent,false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 accounttypeOne.setOnMusicContentsItemClickListener(this);
+
                 return accounttypeOne;
             case Contents.PICTURE:
                 ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent,false);
                 AccountTypePictureViewHolder accounttypeTwo = new AccountTypePictureViewHolder(viewTwo);
+
                 return accounttypeTwo;
             case Contents.YOUTUBE:
                 ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
@@ -83,6 +95,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent,false);
                AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
                 accounttypeFour.setOnSettingImageClick(this);
+
                 return accounttypeFour;
         }
     }
@@ -91,10 +104,16 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
         if (position == 0) {
             holder.setProfile(user);
+
+
         }else {
             holder.setData(user, mcontentslist.get(position - 1));
+
         }
     }
+
+    
+
     @Override
     public int getItemCount() {
         return mcontentslist.size()+1; //profileviewholder 추가
@@ -164,4 +183,13 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
             listener.onContentsItemClick(view, contents, adapterPosition);
         }
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+
+
+
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,10 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     TextView conetentTime;
     @BindView(R.id.imageView_profile)
     ImageView profileImage;
+    @BindView(R.id.seekBar_Play)
+    SeekBar playSeekbar;
+
+    CheckBox playCheckBox;
 
     private ImageView imageViewMenu;
 
@@ -90,7 +95,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         super(itemView);
         ButterKnife.bind(this, itemView);
 
-        CheckBox playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
+        playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
         playCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -157,5 +162,11 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
             conetentTime.setText(contents.getContentTime());
             likeCount.setText("" + contents.getLikeCount());
 
+    }
+
+
+    public void resetMusic(){
+        playCheckBox.setChecked(false);
+        playSeekbar.setProgress(0);
     }
 }

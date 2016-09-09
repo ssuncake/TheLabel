@@ -31,6 +31,8 @@ import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
+import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
+import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 
 
 /**
@@ -55,9 +57,14 @@ public class UserMainFragment extends Fragment {
     AudioManager audioManager;
     PlayerState mState;
     SeekBar progressView;
+    TextView currentTimeView, totalTimeView;
+    RecyclerView recyclerView;
 
     @BindView(R.id.textView_UserMain_UsrName)
     TextView userName;
+
+    Contents[] contentses;
+    int musicPlayerNumeber;
 
     public UserMainFragment() {
         // Required empty public constructor
@@ -76,7 +83,8 @@ public class UserMainFragment extends Fragment {
             @Override
 
             public void onSuccess(NetworkRequest<NetworkResultMyAccount> request,NetworkResultMyAccount result) {
-                Contents[] contentses = result.getData();
+                contentses = result.getData();
+//                accountAdatper.setSize(contentses.length+1);
                 User user = result.getResult();
                 Log.e("유저메인",user.getUserName());
                 accountAdatper.setUser(user);
@@ -97,7 +105,7 @@ public class UserMainFragment extends Fragment {
         });
 //        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
 //        userName.setText(user.getUserName()+" 의 계정입니다.");
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_user_main);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_user_main);
         accountAdatper = new ContentsAdatper();
         accountAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
@@ -109,20 +117,32 @@ public class UserMainFragment extends Fragment {
 
         mPlayer = MediaPlayer.create(getContext(), Uri.parse("http://ec2-52-78-137-47.ap-northeast-2.compute.amazonaws.com/avs/whiparam.mp3"));
         mState = PlayerState.PREPARED;
+
+//        long totalDuration = mPlayer.getDuration();
+//        long currentDuration = mPlayer.getCurrentPosition();
+//        currentTimeView.setText(milliSecondsToTimer(currentDuration));
+//        totalTimeView.setText(milliSecondsToTimer(totalDuration));
         accountAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
             public void onPlayerItemClick(View view, View parent, Contents contents, int position, boolean isChecked) {
                 progressView = (SeekBar) parent.findViewById(R.id.seekBar_Play);
+                currentTimeView = (TextView)parent.findViewById(R.id.textView_currentTime);
+                totalTimeView = (TextView)parent.findViewById(R.id.textView_totalTime);
+
                 audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
                 progressView.setMax(mPlayer.getDuration());
 
                 if (isChecked==true) {
                     Log.e("체크확인", "chekced");
-                    play();
+                    resetPlayer(contents.getContentsPath(), contents.getContentsID(),position);
+                    Log.e("플레이",contents.getContentsPath());
+                    play(contents.getContentsID());
+
+
 
                 } else {
                     Log.e("노체크", "no checked");
-                    pause();
+                    pause(contents.getContentsID());
 
                 }
 
@@ -163,6 +183,32 @@ public class UserMainFragment extends Fragment {
 
     }
 
+//    public String milliSecondsToTimer(long milliseconds) {
+//        String finalTimerString = "";
+//        String secondsString = "";
+//
+//// Convert total duration into time
+//        int hours = (int) (milliseconds / (1000 * 60 * 60));
+//        int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
+//        int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+//// Add hours if there
+//        if (hours > 0) {
+//            finalTimerString = hours + ":";
+//        }
+//
+//// Prepending 0 to seconds if it is one digit
+//        if (seconds < 10) {
+//            secondsString = "0" + seconds;
+//        }   else {
+//            secondsString = "" + seconds;
+//        }
+//
+//        finalTimerString = finalTimerString + minutes + ":" + secondsString;
+//
+//// return timer string
+//        return finalTimerString;
+//    }
+
     boolean isSeeking = false;
     Handler mHandler = new Handler(Looper.getMainLooper());
     Runnable progressRunnable = new Runnable() {
@@ -178,32 +224,34 @@ public class UserMainFragment extends Fragment {
         }
     };
 
-    private void play() {
-        if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
-            try {
-                mPlayer.prepare();
-                mState = PlayerState.PREPARED;
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void play(int ContentsId) {
+        if(ContentsId == musicPlayerNumeber) {
+            if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
+                try {
+                    mPlayer.prepare();
+                    mState = PlayerState.PREPARED;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
+                mPlayer.seekTo(progressView.getProgress());
+                mPlayer.start();
+                mState = PlayerState.STARTED;
+
+                mHandler.post(progressRunnable);
             }
         }
-
-        if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
-            mPlayer.seekTo(progressView.getProgress());
-            mPlayer.start();
-            mState = PlayerState.STARTED;
-
-            mHandler.post(progressRunnable);
-        }
-
     }
 
-    private void pause() {
-        if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
-            mPlayer.pause();
-            mState = PlayerState.PAUSED;
+    private void pause(int ContentsId) {
+        if(ContentsId == musicPlayerNumeber) {
+            if (mState == PlayerState.STARTED) { //pause는 start일때만 처리 해준다.
+                mPlayer.pause();
+                mState = PlayerState.PAUSED;
+            }
         }
-
     }
 
 
@@ -213,5 +261,24 @@ public class UserMainFragment extends Fragment {
         mPlayer.release();
         mState = PlayerState.RELEASED;
         mPlayer = null;
+    }
+
+
+    public void resetPlayer(String url,int ContentsId, int position ){
+        mPlayer.reset();
+        for(int i =0 ;i<accountAdatper.getItemCount();i++){
+            RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
+            if(holder!=null && i!=position){
+                ParentContentsViewHolder pvh = (ParentContentsViewHolder)holder;
+                if(pvh instanceof AccountTypeMusicViewHolder){
+                    AccountTypeMusicViewHolder avh = (AccountTypeMusicViewHolder)pvh;
+                    Log.e("되라","position ="+position+" i = "+i);
+                    avh.resetMusic();
+                }
+            }
+        }
+        musicPlayerNumeber = ContentsId;
+        mPlayer=MediaPlayer.create(getContext(), Uri.parse(url));
+        mState = PlayerState.PREPARED;
     }
 }
