@@ -181,7 +181,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         editText_email.getFreezesText();
 
-
+        checkBox_service.setButtonDrawable(R.drawable.oncheck_agreebutton);
+        checkBox_personal.setButtonDrawable(R.drawable.oncheck_agreebutton);
         inputLayout_email = (TextInputLayout) findViewById(R.id.TextInput_signUp_email);
         inputLayout_password = (TextInputLayout) findViewById(R.id.TextInput_signUp_password);
         inputLayout_password_check = (TextInputLayout) findViewById(R.id.TextInput_signUp_password_check);
