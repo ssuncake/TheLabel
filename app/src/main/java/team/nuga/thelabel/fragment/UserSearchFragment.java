@@ -59,6 +59,7 @@ public class UserSearchFragment extends Fragment {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
         listView.setAdapter(useradapter);
+
         initData();
         return view;
     }
@@ -69,7 +70,6 @@ public class UserSearchFragment extends Fragment {
         for (int i = 0; i<3; i++){
             User user = new User();
             user.setUserName("name "+i);
-
             useradapter.add(user);
         }
 
