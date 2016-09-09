@@ -6,7 +6,7 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_10sp">10sp</dimen>
 
 
     <!--카드뷰 속성 값들-->
@@ -18,13 +18,18 @@
     <dimen name="cardView_seekerBar_width">230dp</dimen>            <!--재생바 가로길이-->
 
     <!--회원가입 속성값들-->
+    <dimen name="signUp_spinner_width">120dp</dimen>
+    <dimen name="signUp_subtitle_first_width">50dp</dimen>
+    <dimen name="signUp_subtitle_second_width">40dp</dimen>
+    <dimen name="signUp_subtitle_start_margin">10dp</dimen>
+
+
     <dimen name="editText_nickName_height">40dp</dimen>
-    <dimen name="button_overlapCheck">48dp</dimen>                  <!--중복확인 버튼-->
-    <dimen name="TextSize_EditSignUp_subtitle">15dp</dimen>         <!--성별, 지역, 포지션, 장르-->
-    <dimen name="TextSize_EditSignUp_elementText">10dp</dimen>      <!--성별,지역....각 요소들 텍스트-->
+    <dimen name="button_overlapCheck">23dp</dimen>                  <!--중복확인 버튼-->
+    <dimen name="TextSize_EditSignUp_subtitle">12dp</dimen>         <!--성별, 지역, 포지션, 장르-->
+    <dimen name="TextSize_EditSignUp_elementText">15dp</dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->
     <dimen name="profileSize_120dp">120dp</dimen>
-    <dimen name="margin_signUp_subtitle">30dp
-    </dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
     <dimen name="margin_radiogroup_LeftRight">30dp
     </dimen>               <!-- 라디오그룹 Left Right 마진값 -->
     <dimen name="TextSize_radioButton">10dp</dimen>               <!--라디오버튼 텍스트 사이즈-->
@@ -46,6 +51,7 @@
     <!--imageview 속성값-->
     <dimen name="imageview_marginTop">15dp</dimen>
     <dimen name="imageview_marginLeft">30dp</dimen>
+    <dimen name="signUp_layout_margin">30dp</dimen>
     <dimen name="imageview_width">100dp</dimen>
     <dimen name="imageview_height">100dp</dimen>
     <!--textview 속성값-->

@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -27,10 +26,12 @@ public class IntroActivity extends AppCompatActivity {
     FragmentManager introFragmentManger;
 
     @BindView(R.id.imageView_Intro_LogoImage)
-    ImageView logo;int clickImage = 0;
+    ImageView logo;
 
-    @BindView(R.id.linearLayout_intro_main)
-    FrameLayout mainLayout;
+    int clickImage = 0;
+//
+//    @BindView(R.id.linearLayout_intro_main)
+//    FrameLayout mainLayout;
 
     @BindView(R.id.frameLayout_intro_container)
     FrameLayout container;
@@ -52,40 +53,40 @@ public class IntroActivity extends AppCompatActivity {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(isAutoLogin()){
+                        if (isAutoLogin()) {
                             processAutoLogin();
-                        }else{
+                        } else {
                             moveLoginActivity();
                         }
 
 
 //                        showLoginFragment();
                     }
-                },2000);//로그인 1초 후 이동.
+                }, 2000);//로그인 1초 후 이동.
             }
-        },3000);
+        }, 3000);
     }
 
-    public void signUpFragmentCall(){
-        Intent intent=new Intent(this, SignUpActivity.class);
+    public void signUpFragmentCall() {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
-    private void moveUpLogo(){
+    private void moveUpLogo() {
         float startY = logo.getY();
-        float endY = startY-getResources().getDimension(R.dimen.intro_movelogo);
-        final ValueAnimator logoAnimator = ValueAnimator.ofFloat(startY,endY);
+        float endY = startY - getResources().getDimension(R.dimen.intro_movelogo);
+        final ValueAnimator logoAnimator = ValueAnimator.ofFloat(startY, endY);
         logoAnimator.setEvaluator(new FloatEvaluator());
         logoAnimator.setDuration(1000);
         logoAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float y = (Float)valueAnimator.getAnimatedValue();
+                float y = (Float) valueAnimator.getAnimatedValue();
                 logo.setY(y);
             }
         });
-logoAnimator.start();
-        }
+        logoAnimator.start();
+    }
 
 
     //자동로그인
@@ -105,31 +106,39 @@ logoAnimator.start();
                 public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
                     User getLoginUser = result.getUser();
                     moveMainActivity(getLoginUser);
+
                 }
 
                 @Override
                 public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
                     moveLoginActivity();
+
                 }
             });
         }
     }
 
     private void moveLoginActivity() { //테스트로그인으로,
-        Intent intent = new Intent(IntroActivity.this, TestLoginActivity.class);
-        startActivity(intent);
+        if (Debug.debugmode) {
+            Intent i = new Intent(IntroActivity.this, TestLoginActivity.class);
+            startActivity(i);
+        } else { Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+        finish();
     }
 
-    private void showLoginFragment(){
-        container.setVisibility(View.VISIBLE);
-        introFragmentManger = getSupportFragmentManager();
-        introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();
-        }
+//    private void showLoginFragment(){
+//        container.setVisibility(View.VISIBLE);
+//        introFragmentManger = getSupportFragmentManager();
+//        introFragmentManger.beginTransaction().add(R.id.frameLayout_intro_container,new SignInFragment()).commit();
+//        }
 
-public void moveMainActivity(User user){
-        Intent intent = new Intent(IntroActivity.this,MainActivity.class);
-        intent.putExtra("LoginUser",user);
+    public void moveMainActivity(User user) {
+        Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+        intent.putExtra("LoginUser", user);
         startActivity(intent);
-        }
+        finish();
+    }
 
 }

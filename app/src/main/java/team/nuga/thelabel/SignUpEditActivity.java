@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -64,8 +66,32 @@ public class SignUpEditActivity extends AppCompatActivity {
     ImageView imageView_profileImage;
 
 
-    @BindView(R.id.radioGroup_userSex)
-    RadioGroup radioGroup_userSex;                  //성별
+    @BindView(R.id.radioGroup_userGender)
+    RadioGroup radioGroup_userGender;//성별
+    @BindView(R.id.radioButton_male)
+    RadioButton radioButton_male;
+    @BindView(R.id.radioButton_female)
+    RadioButton radioButton_female;
+
+    @BindView(R.id.textInput_nickname)
+    TextInputLayout textInputLayout_nickname;
+
+
+    public void onClickRadioGroup_userGender(){             //성별체크 라디오 버튼
+        radioGroup_userGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+                switch (checkedPosition){
+                    case R.id.radioButton_female:
+                        userGender = 2;
+                        break;
+                    case R.id.radioButton_male:
+                        userGender = 1;
+                        break;
+                }
+            }
+        });
+    }
 
 
     @BindView(R.id.spinner_city)
@@ -171,9 +197,11 @@ public class SignUpEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_sign_up);
+        setContentView(R.layout.activity_edit_sign_up);                 ////
 
         ButterKnife.bind(this);
+
+
 
         Intent intent = getIntent();
         User signUp = (User) intent.getSerializableExtra("signUpInfo");
@@ -181,13 +209,16 @@ public class SignUpEditActivity extends AppCompatActivity {
         String password = signUp.getUserPassword();
         if (Debug.debugmode) Log.d("인텐트값", "email -" + email + " , password - " + password);
 //        RadioGroupClick();
+        onClickRadioGroup_userGender();
+        radioButton_male.setButtonDrawable(R.drawable.oncheck_radiobutton);
+        radioButton_female.setButtonDrawable(R.drawable.oncheck_radiobutton);
+
         String[] positionList = getResources().getStringArray(R.array.positionlist);
         String[] genreList = getResources().getStringArray(R.array.positionlist);
 
         ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, cityList);
         spinner_cityAdapter.setDropDownViewResource(R.layout.spin);
         spinner_city.setAdapter(spinner_cityAdapter);
-
         ArrayAdapter positionAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, positionList);
         positionAdapter.setDropDownViewResource(R.layout.spin);
         spinner_position.setAdapter(positionAdapter);
@@ -219,12 +250,14 @@ public class SignUpEditActivity extends AppCompatActivity {
             Log.e("log", "IMAGE_FROM_GALLERY");
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
+                if(Debug.debugmode)Log.d("Uri 값 ",""+uri);
                 Cursor c = getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
                 if (c.moveToNext()) {
                     String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
                     imagefile = new File(path);
+
                     Glide.with(this)
-                            .load(imagefile)
+                            .load(uri)
                             .transform(new RoundImageTransform(this))
                             .into(imageView_profileImage);
                 }
@@ -258,7 +291,7 @@ public class SignUpEditActivity extends AppCompatActivity {
         cityId = position;
         if (position == 1) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Town_Default);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -273,7 +306,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 2) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Seoul);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -292,7 +325,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 3) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gyeonggi);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -311,7 +344,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 4) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gangwon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -330,7 +363,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 5) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Incheon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -349,7 +382,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 6) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -368,7 +401,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 7) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, ChungNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -387,7 +420,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 8) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Sejong);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -406,7 +439,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 9) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeJeon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -425,7 +458,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 10) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyongBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -444,7 +477,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 11) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, GyonNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -463,7 +496,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 12) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, DaeGu);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -482,7 +515,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 13) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Busan);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -501,7 +534,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 14) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Ulsan);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -520,7 +553,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 15) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -539,7 +572,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 16) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, JeonNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -558,7 +591,7 @@ public class SignUpEditActivity extends AppCompatActivity {
             });
         } else if (position == 17) {
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Gwangju);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -578,7 +611,7 @@ public class SignUpEditActivity extends AppCompatActivity {
         } else if (position == 18) {
             townId = 1;
             ArrayAdapter spinner_townAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, Jeju);
-            spinner_townAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

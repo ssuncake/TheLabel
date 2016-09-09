@@ -47,7 +47,7 @@ public class PasswordSettingActivity extends AppCompatActivity {
             if (editText_newPassword.getText().toString().trim().isEmpty() == true) {///새 비번에 빈칸입력
                 editText_newPassword.setError(getString(R.string.err_msg_password));
             } else {
-                if (editText_checkNewPassword.getText().toString().trim().isEmpty() == true) {///확인에 빈칸입력
+                if (editText_checkNewPassword.getText().toString().trim( ).isEmpty() == true) {///확인에 빈칸입력
                     textInputLayout_checkNewPassword.setError(getString(R.string.err_msg_password));
                 } else {
                     if (Debug.debugmode) Log.i("메세지", "빈칸없음!");

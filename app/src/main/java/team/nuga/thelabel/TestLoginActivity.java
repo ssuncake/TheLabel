@@ -25,6 +25,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="nam@gmail.com";
         String password="1101";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_2)
@@ -32,6 +34,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="gyu@gmail.com";
         String password="1102";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_3)
@@ -39,6 +43,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="soo@gmail.com";
         String password="1103";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_4)
@@ -46,6 +52,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="seul@gmail.com";
         String password="1104";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_5)
@@ -53,6 +61,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="moon@gmail.com";
         String password="1105";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_6)
@@ -60,12 +70,17 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="do@gmail.com";
         String password="1106";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
-    } @OnClick(R.id.button_testlogin_7)
+    }
+    @OnClick(R.id.button_testlogin_7)
     public void click7()
     {
         String email ="ki@gmail.com";
         String password="1107";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_8)
@@ -73,6 +88,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="ho@gmail.com";
         String password="1108";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_9)
@@ -80,12 +97,17 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="doo@gmail.com";
         String password="1109";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
-    } @OnClick(R.id.button_testlogin_10)
+    }
+    @OnClick(R.id.button_testlogin_10)
     public void click10()
     {
         String email ="bin@gmail.com";
         String password="1110";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_11)
@@ -93,12 +115,17 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="pcy@gmail.com";
         String password="1111";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
-    } @OnClick(R.id.button_testlogin_12)
+    }
+    @OnClick(R.id.button_testlogin_12)
     public void click12()
     {
         String email ="yumi@gmail.com";
         String password="1112";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_13)
@@ -106,6 +133,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="areum@gmail.com";
         String password="1113";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_14)
@@ -113,6 +142,8 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="hyun@gmail.com";
         String password="1114";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
     @OnClick(R.id.button_testlogin_15)
@@ -120,12 +151,16 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="lee4@gmail.com";
         String password="1115";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     } @OnClick(R.id.button_testlogin_16)
     public void click16()
     {
         String email ="ko@gmail.com";
         String password="1116";
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
         goMain(email,password);
     }
 
