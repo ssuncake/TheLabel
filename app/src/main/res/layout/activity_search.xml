@@ -6,7 +6,7 @@
 
     tools:context="team.nuga.thelabel.SearchActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,14 +16,25 @@
             android:id="@+id/search_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/maintitle_blue"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="10dp"
+                android:hint="닉네임, 레이블, 포지션, 지역, 장르 검색"
+                android:id="@+id/editText">
+            </EditText>
+
+        </android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/search_viewpager"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_below="@id/search_tablayout"/>
-    </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

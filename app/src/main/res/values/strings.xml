@@ -109,9 +109,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="text_password_current">현재 비밀번호</string>
-    <string name="text_password_change">새 비밀번호</string>
-    <string name="text_password_change_check">새 비밀번호 확인</string>
+    <string name="text_password_current">   현재 비밀번호</string>
+    <string name="text_password_change">   새 비밀번호</string>
+    <string name="text_password_change_check">   새 비밀번호 확인</string>
 
 
 

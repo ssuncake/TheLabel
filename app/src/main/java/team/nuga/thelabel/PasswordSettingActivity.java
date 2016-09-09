@@ -1,5 +1,7 @@
 package team.nuga.thelabel;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -34,9 +35,12 @@ public class PasswordSettingActivity extends AppCompatActivity {
     EditText editText_newPassword;
     @BindView(R.id.editText_password_change_check)
     EditText editText_checkNewPassword;
-
+    @OnClick(R.id.imageButton_back)
+    public void onBackClick(){
+        finish();
+    }
     @BindView(R.id.button_passwordChange)
-    Button button_passwordChange;
+    ImageButton button_passwordChange;
 
     @OnClick(R.id.button_passwordChange)
     public void onPasswordChageClick() {
@@ -96,7 +100,7 @@ public class PasswordSettingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_impormation);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textInputLayout_checkNewPassword = (TextInputLayout) findViewById(R.id.TextInput_newPasswordCheck);
         textInputLayout_newPassword = (TextInputLayout) findViewById(R.id.TextInput_newPassword);
@@ -104,19 +108,21 @@ public class PasswordSettingActivity extends AppCompatActivity {
         editText_currentPassword.addTextChangedListener(new MyPassTextWatcher(editText_currentPassword));
         editText_newPassword.addTextChangedListener(new MyPassTextWatcher(editText_newPassword));
         editText_checkNewPassword.addTextChangedListener(new MyPassTextWatcher(editText_checkNewPassword));
-
+        int color = Color.parseColor("#FF4081");
+        editText_checkNewPassword.setHintTextColor(color);
+        editText_checkNewPassword.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                onBackPressed();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private class MyPassTextWatcher implements TextWatcher {
 

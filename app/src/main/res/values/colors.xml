@@ -28,5 +28,7 @@
 
     <!--레이블 메인 에서사용-->
     <color name="labelmain_topview_overray">#55000000</color>
-
+    
+    <!--투명색-->
+    <color name="transparent">#00000000</color>
 </resources>
