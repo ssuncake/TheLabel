@@ -21,6 +21,7 @@ public class Contents implements Serializable{
 
     int playedMode= STOP;
     int playedTIme;
+    int playTimeMax;
 
 
     @SerializedName("filetype")
@@ -33,15 +34,23 @@ public class Contents implements Serializable{
     @SerializedName("numlike")
     private int likeCount;
     @SerializedName("date")
-    private String ContentTime;
+    private String ContentCreatedDate;
 
-
-    public String getContentTime() {
-        return ContentTime;
+    public int getPlayTimeMax() {
+        return playTimeMax;
     }
 
-    public void setContentTime(String contentTime) {
-        ContentTime = contentTime;
+
+    public void setPlayTimeMax(int playTimeMax) {
+        this.playTimeMax = playTimeMax;
+    }
+
+    public String getContentCreateDate() {
+        return ContentCreatedDate;
+    }
+
+    public void setContentCreateDate(String contentCreateDate) {
+        ContentCreatedDate = contentCreateDate;
     }
 
 

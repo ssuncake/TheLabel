@@ -153,7 +153,7 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
                 .into(profileImage);
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
             likeCount.setText("" + contents.getLikeCount());
-            conetentTime.setText(contents.getContentTime());
+            conetentTime.setText(contents.getContentCreateDate());
             Glide.with(imageViewPicture.getContext())
                     .load(contents.getContentsPath())
                     .into(imageViewPicture);

@@ -102,12 +102,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
         playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
-        playCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-
-            }
-        });
 
         playCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +109,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 if(musicContentslist!=null){
                     musicContentslist.onMusicContentItemClick(view, itemView, contents, getAdapterPosition());
                 }
-
             }
         });
 
@@ -135,15 +128,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         });
 
 
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (musicContentslist != null) {
-//                    musicContentslist.onMusicContentItemClick(view, contents, getAdapterPosition());
-//                }
-//                Log.v("Music", "test success");
-//            }
-//        });
         itemView.setOnClickListener(this); //popup listener
         itemView.setOnLongClickListener(this);  //popup listener
         imageViewMenu = (ImageView) itemView.findViewById(R.id.imageView_menu);
@@ -160,9 +144,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         }
     }
 
-    public void setMusicContents(Contents contents) {
-        this.contents = contents;
-    }
 
 
     public void applyData(User user, Contents contents) {
@@ -171,9 +152,9 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 .load(user.getImageUrl())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
-//        Log.e("시간", "Time"+contents.getContentTime());
+        playSeekbar.setMax(contents.getPlayTimeMax());
 
-            conetentTime.setText(contents.getContentTime());
+            conetentTime.setText(contents.getContentCreateDate());
             likeCount.setText("" + contents.getLikeCount());
         if(contents.getPlayedMode()==Contents.PLAY){
             Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"PLAY");
@@ -199,6 +180,14 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         contents.setPlayedMode(Contents.STOP);
         playCheckBox.setChecked(false);
         playSeekbar.setProgress(0);
+    }
+
+    public void setSeekbarPlaytime(){
+        playSeekbar.setProgress(contents.getPlayedTIme());
+    }
+
+    public void setSeekBarMax(){
+        playSeekbar.setMax(contents.getPlayTimeMax());
     }
 
 

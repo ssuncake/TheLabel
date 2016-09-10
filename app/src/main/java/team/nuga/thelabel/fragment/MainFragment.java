@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
     @BindView(R.id.main_viewpager)
     ViewPager viewPager;
 
-    public User dummyUser;
+    public User user;
 
     public MainFragment() {
         // Required empty public constructor
@@ -56,7 +56,7 @@ public class MainFragment extends Fragment {
 
 
 
-        dummyUser =(User)getArguments().getSerializable(MainActivity.MAINUSER); // 메인 액티비티로부터 받아온 더미유저를 사용
+        user =(User)getArguments().getSerializable(MainActivity.MAINUSER); // 메인 액티비티로부터 받아온 더미유저를 사용
 
 
 
@@ -65,7 +65,7 @@ public class MainFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.main_fragment_account));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),dummyUser); //어뎁터에 가짜 유저데이터를 넘겨줌.
+        final MainViewpagerAdapter mainViewpagerAdapter = new MainViewpagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(), user); //어뎁터에 가짜 유저데이터를 넘겨줌.
 
         viewPager.setAdapter(mainViewpagerAdapter);                                                                       //getActivity().getSupportFragmentManager()을 사용해도 된다.
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));//tab과 viewpager가 같이 변환 될 수 있도록 해주는 메소드
@@ -77,7 +77,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position!=2){
+                if(position==0){
                     UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
                     f.midiaRelese();
                 }

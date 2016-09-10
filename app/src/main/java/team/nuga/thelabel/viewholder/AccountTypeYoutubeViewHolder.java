@@ -133,7 +133,7 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
                 .load(user.getImageUrl())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
-        conetentTime.setText(contents.getContentTime());
+        conetentTime.setText(contents.getContentCreateDate());
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
 
