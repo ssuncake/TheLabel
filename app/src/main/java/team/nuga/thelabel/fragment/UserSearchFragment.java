@@ -16,6 +16,7 @@ import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.request.UserTextSearchRequest;
 
 /**
  * A simple {@link Fragment} subclass.

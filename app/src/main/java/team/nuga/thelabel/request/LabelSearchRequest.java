@@ -14,12 +14,13 @@ import team.nuga.thelabel.data.NetworkResultLabelSearch;
  * Created by Tacademy on 2016-09-09.
  */
 public class LabelSearchRequest extends AbstractRequest<NetworkResultLabelSearch> {
+    private static final String path = "labels";
     Request request;
-    public LabelSearchRequest(Context context, int page, int count, int search, int position_id, int genre_id){
-        String path = "labels?search=true&page=1&count=10&position_id=&genre_id=";
+    public LabelSearchRequest(Context context, int page, int count, int position_id, int genre_id){
+
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment("labels")
-                .addPathSegment("search")
+                .addPathSegment(path)
+                .addQueryParameter("search", "true")
                 .addQueryParameter("page",page+"")
                 .addQueryParameter("count",count+"")
                 .addQueryParameter("position_id",position_id+"")
