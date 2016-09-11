@@ -69,14 +69,14 @@
     <string name="default_choice">선택하지않음</string>
 
     <string name="hint_nicknameEdit">      닉네임 (한글, 영문, 숫자, 특수문자 2-8자리 이내) </string>
-    <string name="text_usersex">성별</string>
-    <string name="text_male">남자</string>
-    <string name="text_female">여자</string>
+    <string name="text_usersex">성&#160;&#160;별</string>
+    <string name="text_male">&#160;&#160;&#160;남&#160;자</string>
+    <string name="text_female">&#160;&#160;&#160;여&#160;자</string>
     <string name="text_location">지역</string>
     <string name="text_city">시/도</string>
     <string name="text_city_detail">시/군/구</string>
     <string name="text_Position">포지션</string>
-    <string name="text_Genre">장르</string>
+    <string name="text_Genre">장&#160;&#160;르</string>
 
 
     <string name="text_SignUpComplete">가입완료</string>

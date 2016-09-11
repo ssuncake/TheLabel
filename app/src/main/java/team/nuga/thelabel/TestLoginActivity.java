@@ -205,7 +205,7 @@ SeekBar progressBar;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
               if(i>99)  {moveToLogin();}
-                if(i<2){moteToSignUp();}
+                if(i<1){moteToSignUp();}
             }
 
             @Override

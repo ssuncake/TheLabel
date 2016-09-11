@@ -2,8 +2,11 @@ package team.nuga.thelabel;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -27,7 +30,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -214,7 +220,7 @@ public class SignUpEditActivity extends AppCompatActivity {
         radioButton_female.setButtonDrawable(R.drawable.oncheck_radiobutton);
 
         String[] positionList = getResources().getStringArray(R.array.positionlist);
-        String[] genreList = getResources().getStringArray(R.array.positionlist);
+        String[] genreList = getResources().getStringArray(R.array.genrelist);
 
         ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spin, cityList);
         spinner_cityAdapter.setDropDownViewResource(R.layout.spin);
@@ -250,33 +256,35 @@ public class SignUpEditActivity extends AppCompatActivity {
             Log.e("log", "IMAGE_FROM_GALLERY");
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
-                if(Debug.debugmode)Log.d("Uri 값 ",""+uri);
-                Cursor c = getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+                Bitmap savebitmap  = null;
+                InputStream inputStream = null;
+                try {
+                    inputStream = getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                savebitmap = BitmapFactory.decodeStream(inputStream);
+                Uri bitmapUri = writeToTempImageAndGetPathUri(this, savebitmap);
+
+                Cursor c = getContentResolver().query(bitmapUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
                 if (c.moveToNext()) {
                     String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
                     imagefile = new File(path);
-
                     Glide.with(this)
                             .load(uri)
                             .transform(new RoundImageTransform(this))
                             .into(imageView_profileImage);
                 }
-
-//            Bitmap bitmap = null;
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),data.getData());
-//                    imagefile = new File(String.valueOf(data.getData()));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                Glide.with(this)
-//                        .load(data.getData())
-//                        .transform(new RoundImageTransform(this))
-//                        .into(imageView_profileImage);
             }
         }
     }
 
+    public static Uri writeToTempImageAndGetPathUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);

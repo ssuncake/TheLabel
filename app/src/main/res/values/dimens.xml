@@ -18,22 +18,21 @@
     <dimen name="cardView_seekerBar_width">230dp</dimen>            <!--재생바 가로길이-->
 
     <!--회원가입 속성값들-->
-    <dimen name="signUp_spinner_width">120dp</dimen>
-    <dimen name="signUp_subtitle_first_width">50dp</dimen>
-    <dimen name="signUp_subtitle_second_width">40dp</dimen>
+    <dimen name="signUp_spinner_width">200dp</dimen>
+    <dimen name="signUp_subtitle_first_width">40dp</dimen>
+    <dimen name="signUp_subtitle_second_width">50dp</dimen>
     <dimen name="signUp_subtitle_start_margin">10dp</dimen>
 
 
     <dimen name="editText_nickName_height">40dp</dimen>
+    <dimen name="local_height">20dp</dimen>                         <!-- 시/도 , 시/군/구 height 통합용 -->
+
     <dimen name="button_overlapCheck">23dp</dimen>                  <!--중복확인 버튼-->
-    <dimen name="TextSize_EditSignUp_subtitle">12dp</dimen>         <!--성별, 지역, 포지션, 장르-->
-    <dimen name="TextSize_EditSignUp_elementText">15dp
-    </dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->
+    <dimen name="TextSize_EditSignUp_subtitle">10dp</dimen>         <!--성별, 시/도, 시/군/구, 지역, 포지션, 장르-->
+    <dimen name="TextSize_EditSignUp_elementText">14dp</dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->
     <dimen name="profileSize_120dp">120dp</dimen>
-    <dimen name="margin_signUp_subtitle">30dp
-    </dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
-    <dimen name="margin_radiogroup_LeftRight">30dp
-    </dimen>               <!-- 라디오그룹 Left Right 마진값 -->
+    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_radiogroup_LeftRight">30dp</dimen>               <!-- 라디오그룹 Left Right 마진값 -->
     <dimen name="TextSize_radioButton">10dp</dimen>               <!--라디오버튼 텍스트 사이즈-->
 
 

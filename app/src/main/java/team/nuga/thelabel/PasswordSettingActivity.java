@@ -109,8 +109,11 @@ public class PasswordSettingActivity extends AppCompatActivity {
         editText_newPassword.addTextChangedListener(new MyPassTextWatcher(editText_newPassword));
         editText_checkNewPassword.addTextChangedListener(new MyPassTextWatcher(editText_checkNewPassword));
         int color = Color.parseColor("#FF4081");
-        editText_checkNewPassword.setHintTextColor(color);
-        editText_checkNewPassword.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        int colorB = Color.parseColor("#FF000000");
+        editText_checkNewPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
+        editText_newPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
+        editText_currentPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
+        textInputLayout_checkNewPassword.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
     }
 
