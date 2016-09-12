@@ -42,7 +42,7 @@ public class Contents implements Serializable{
     @SerializedName("imagepath")
     private String writerImage;
 
-    int date;
+    String date;
 
 
 
