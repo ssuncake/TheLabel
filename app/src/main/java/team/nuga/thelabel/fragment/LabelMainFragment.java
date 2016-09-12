@@ -37,7 +37,6 @@ import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
-import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 import team.nuga.thelabel.wiget.LabelMainTop;
 
@@ -378,16 +377,26 @@ public class LabelMainFragment extends Fragment {
         if(mPlayer!=null){
             mPlayer.reset();
         }
-        for(int i=0 ;i<contentsAdatper.getItemCount();i++){
-            RecyclerView.ViewHolder rvh= contentsRecycler.findViewHolderForAdapterPosition(i);
-            ParentContentsViewHolder pvh = (AccountTypePictureViewHolder)rvh;
-            if(pvh instanceof AccountTypeMusicViewHolder){
-                AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder)pvh;
-                mvh.resetMusic();
+        if(contentsAdatper!=null){
+            for(int i = 0; i< contentsAdatper.getItemCount(); i++){
+                RecyclerView.ViewHolder rvh= contentsRecycler.findViewHolderForAdapterPosition(i);
+                ParentContentsViewHolder pvh = (ParentContentsViewHolder)rvh;
+                if(pvh instanceof AccountTypeMusicViewHolder){
+                    AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder)pvh;
+                    mvh.resetMusic();
+                }
             }
+
         }
-        mainProgressView.setProgress(0);
+        if(mainProgressView!=null){
+            mainProgressView.setProgress(0);
+        }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mediaStop();
+    }
 
 }

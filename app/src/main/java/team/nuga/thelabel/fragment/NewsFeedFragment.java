@@ -26,7 +26,6 @@ import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
-import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 
 
@@ -298,16 +297,22 @@ public class NewsFeedFragment extends Fragment {
         if(mPlayer!=null){
             mPlayer.reset();
         }
-        for(int i = 0; i< contentsAdatper.getItemCount(); i++){
-            RecyclerView.ViewHolder rvh= contentsRecycerView.findViewHolderForAdapterPosition(i);
-            ParentContentsViewHolder pvh = (AccountTypePictureViewHolder)rvh;
-            if(pvh instanceof AccountTypeMusicViewHolder){
-                AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder)pvh;
-                mvh.resetMusic();
+        if(contentsAdatper!=null){
+            for(int i = 0; i< contentsAdatper.getItemCount(); i++){
+                RecyclerView.ViewHolder rvh= contentsRecycerView.findViewHolderForAdapterPosition(i);
+                ParentContentsViewHolder pvh = (ParentContentsViewHolder)rvh;
+                if(pvh instanceof AccountTypeMusicViewHolder){
+                    AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder)pvh;
+                    mvh.resetMusic();
+                }
             }
+
+        }
+        if(mainProgressView!=null){
+            mainProgressView.setProgress(0);
         }
 
-        mainProgressView.setProgress(0);
+
 
     }
 
