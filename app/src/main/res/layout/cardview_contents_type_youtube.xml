@@ -71,14 +71,20 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="동영상 화면"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
+                <com.google.android.youtube.player.YouTubeThumbnailView
+                    android:id="@+id/youtubePlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.youtube.player.YouTubeThumbnailView>
+                <ImageView
+                    android:src="@drawable/btn_gallery"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/imageView_youtubeClick" />
+
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

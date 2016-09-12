@@ -132,9 +132,7 @@ public class UserMainFragment extends Fragment {
                         AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder) pvh;
                         musicHolderList.add(mvh);
                     }
-
                 }
-
                 if (contents.getPlayedMode() == Contents.PLAY) {
                     Log.w("뮤직플레이어", "playMode : play ->pause / contentid = " + contents.getContentsID() + "/ position =" + position + " /playingPosition = " + playingPosition);
                     pause(contents);

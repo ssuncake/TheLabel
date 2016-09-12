@@ -1,8 +1,6 @@
 package team.nuga.thelabel;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -21,9 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,8 +48,6 @@ public class MainActivity extends AppCompatActivity
     public static final int REQUEST_UPLOAD = 300;
     public static final int REQUEST_MAKELABEL = 400;
     public static final int REQUEST_SETTINGLABEL = 410;
-
-
 
 
     @BindView(R.id.toolbar)

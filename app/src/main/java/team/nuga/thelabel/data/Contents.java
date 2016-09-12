@@ -42,9 +42,15 @@ public class Contents implements Serializable{
     @SerializedName("imagepath")
     private String writerImage;
 
+    private String fileCode;
 
+    public String getFileCode() {
+        return fileCode;
+    }
 
-
+    public void setFileCode(String fileCode) {
+        this.fileCode = fileCode;
+    }
 
     public String getWriterName() {
         return writerName;

@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-
 import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
@@ -24,23 +21,18 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  * Created by Tacademy on 2016-08-30.
  */
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
-        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick,
-        YouTubePlayer.OnInitializedListener,AccountTypeProfileViewHolder.OnSettingImageClick{
-
+        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeThumnailClickListener, AccountTypeProfileViewHolder.OnSettingImageClick {
 
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
 
-    public void add(Contents contents){
+    public void add(Contents contents) {
         mcontentslist.add(contents);
-
         notifyDataSetChanged();
     }
 
-
-
-    public void setUser(User user){
-        if(user != null){
+    public void setUser(User user) {
+        if (user != null) {
             this.user = user;
             notifyDataSetChanged();
         }
@@ -53,51 +45,52 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
             viewType = mcontentslist.get(position).getContentsType();
             return viewType;
         } else {
-            if(position == 0){  //viewType의 position
+            if (position == 0) {  //viewType의 position
                 return -1;  // 0일경우 Music이 보이고 -1일경우는 Music, Picture, Youtube중에 없기 때문에 default인 Profile이 뜬다.
             } else {
-                viewType = mcontentslist.get(position-1).getContentsType(); //listview position
+                viewType = mcontentslist.get(position - 1).getContentsType(); //listview position
                 return viewType;
             }
         }
-
-
     }
 
     @Override
     public ParentContentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        switch (viewType){
+        switch (viewType) {
             case Contents.MUSIC:
-                ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent,false);
+                ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent, false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 accounttypeOne.setOnMusicContentsItemClickListener(this);
                 return accounttypeOne;
             case Contents.PICTURE:
-                ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent,false);
+                ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent, false);
                 AccountTypePictureViewHolder accounttypeTwo = new AccountTypePictureViewHolder(viewTwo);
                 return accounttypeTwo;
             case Contents.YOUTUBE:
-                ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
+                ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent, false);
                 AccountTypeYoutubeViewHolder accounttypeThree = new AccountTypeYoutubeViewHolder(viewThree);
+                accounttypeThree.setonYoutubeThumnailClickListener(this);
                 return accounttypeThree;
             default:
-                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent,false);
-               AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
+                ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent, false);
+                AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
                 accounttypeFour.setOnSettingImageClick(this);
                 return accounttypeFour;
         }
     }
 
     @Override
-    public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
-        if(user==null){
+    public void onBindViewHolder(final ParentContentsViewHolder holder, int position) {
+
+
+        if (user == null) {
             holder.setData(mcontentslist.get(position));
         } else {
-            Log.w("ContentAdapter","온바인드 뷰홀더 ->"+position);
+            Log.w("ContentAdapter", "온바인드 뷰홀더 ->" + position);
             if (position == 0) {
                 holder.setProfile(user);
-            }else {
+            } else {
                 holder.setData(mcontentslist.get(position - 1));
             }
         }
@@ -105,41 +98,45 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     }
 
-    
 
     @Override
     public int getItemCount() {
-        if(user ==null){
-           return mcontentslist.size(); //profileviewholder 추가
-        }else{
-            return mcontentslist.size()+1; //profileviewholder 추가
+        if (user == null) {
+            return mcontentslist.size(); //profileviewholder 추가
+        } else {
+            return mcontentslist.size() + 1; //profileviewholder 추가
         }
 
     }
 
-    @Override //youtube
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-    }
-
     @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
+    public void onYoutubeThumnailClickListener(View view, Contents contents, int position) {
+        if(youtubeThumListener != null){
+            youtubeThumListener.onYoutubeThumnailClickListener(view, contents, position);
+        }
     }
 
 
+    public interface OnYoutubeThumnailClickListener { // 유튜브
+        public void onYoutubeThumnailClickListener(View view, Contents contents , int position);
+    }
+    OnYoutubeThumnailClickListener youtubeThumListener;
+    public void setonYoutubeThumnailClickListener(OnYoutubeThumnailClickListener thumnailClickListener) {
+        this.youtubeThumListener = thumnailClickListener;
+    }
 
-    public interface OnSettingItemClickListener{ //SettingImage
+
+    public interface OnSettingItemClickListener { //SettingImage
         public void onSettingItemClick(View view, int position);
     }
     OnSettingItemClickListener settingItemClickListener;
-    public void setOnSettingImageClickListener(OnSettingItemClickListener imageClickListener){
+    public void setOnSettingImageClickListener(OnSettingItemClickListener imageClickListener) {
         this.settingItemClickListener = imageClickListener;
     }
 
     @Override
     public void onSettingImageClick(View view, int adapterPosition) {
-        if(settingItemClickListener!=null){
+        if (settingItemClickListener != null) {
             settingItemClickListener.onSettingItemClick(view, adapterPosition);
         }
     }
@@ -156,19 +153,20 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
 
     public interface OnPlayerItemClickListener {  //Player
-        public void onPlayerItemClick(View view, View parent,Contents contents, int position);
+        public void onPlayerItemClick(View view, View parent, Contents contents, int position);
     }
+
     OnPlayerItemClickListener playerListener;
+
     public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
         this.playerListener = playerListener;
     }
 
 
-
     @Override
-    public void onMusicContentItemClick(View view,View parent, Contents contents, int adapterPosition) {
+    public void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition) {
         if (playerListener != null) {
-            playerListener.onPlayerItemClick(view ,parent,contents,adapterPosition);
+            playerListener.onPlayerItemClick(view, parent, contents, adapterPosition);
         }
     }
 
@@ -180,19 +178,12 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     }
 
-    @Override
-    public void onYoutubeContentsItemClick(View view, Contents contents, int adapterPosition) {
-        if (listener != null) {
-            listener.onContentsItemClick(view, contents, adapterPosition);
-        }
-    }
+
 
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
     }
-
-
 
 
 }
