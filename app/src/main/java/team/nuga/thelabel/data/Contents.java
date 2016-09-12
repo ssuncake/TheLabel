@@ -28,7 +28,7 @@ public class Contents implements Serializable{
     protected int contentsType;
     @SerializedName("id")
     private int contentsID;
-    @SerializedName("file_path")
+    @SerializedName("filepath")
     private String contentsPath;
 
     @SerializedName("numlike")
@@ -41,6 +41,10 @@ public class Contents implements Serializable{
 
     @SerializedName("imagepath")
     private String writerImage;
+
+    int date;
+
+
 
 
     public String getWriterName() {
