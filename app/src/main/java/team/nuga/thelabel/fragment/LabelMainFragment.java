@@ -376,6 +376,10 @@ public class LabelMainFragment extends Fragment {
     public void mediaStop() {
         if(mPlayer!=null){
             mPlayer.reset();
+            mPlayer=null;
+        }
+        if(mHandler !=null){
+            mHandler.removeCallbacks(progressRunnable);
         }
         if(contentsAdatper!=null){
             for(int i = 0; i< contentsAdatper.getItemCount(); i++){

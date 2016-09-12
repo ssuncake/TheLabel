@@ -25,6 +25,10 @@ import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.NewsFeedContents;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.NewsFeedRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 
@@ -33,6 +37,8 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  * A simple {@link Fragment} subclass.
  */
 public class NewsFeedFragment extends Fragment {
+
+    private static final String LOGTAG = "NewsFeedFragment ";
 
     enum PlayerState {
         IDLE,
@@ -49,6 +55,7 @@ public class NewsFeedFragment extends Fragment {
 
     ContentsAdatper contentsAdatper;
     MediaPlayer mPlayer;
+    Contents[] meetcontentses;
     Contents[] contentses;
 
     int playingPosition = -1;
@@ -78,6 +85,41 @@ public class NewsFeedFragment extends Fragment {
             public void onSettingItemClick(View view, int position) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.goProfileSetting();
+            }
+        });
+
+        NewsFeedRequest request = new NewsFeedRequest(getActivity(),1,10,10);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NewsFeedContents>() {
+            @Override
+            public void onSuccess(NetworkRequest<NewsFeedContents> request, NewsFeedContents result) {
+
+                if(result.isError()){
+                    Log.e(LOGTAG,"error : "+result.getError().getMessage());}
+                else{
+                    meetcontentses = result.getMeetpost();
+                    for(Contents c : meetcontentses){
+                        Log.d("게시글 ID", "" + c.getContentsID());
+                        Log.d("파일경로", "" + c.getContentsPath());
+                        Log.d("파일타입", "" + c.getContentsType());
+                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        contentsAdatper.add(c);
+                    }
+                    contentses = result.getPost();
+                    for(Contents c : contentses){
+                        Log.d("게시글 ID", "" + c.getContentsID());
+                        Log.d("파일경로", "" + c.getContentsPath());
+                        Log.d("파일타입", "" + c.getContentsType());
+                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        contentsAdatper.add(c);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NewsFeedContents> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e(LOGTAG,"뉴스피드 네트워크 받아오기 실패 "+errorMessage);
             }
         });
 
@@ -296,6 +338,10 @@ public class NewsFeedFragment extends Fragment {
     public void mediaStop() {
         if(mPlayer!=null){
             mPlayer.reset();
+            mPlayer=null;
+        }
+        if(mHandler !=null){
+            mHandler.removeCallbacks(progressRunnable);
         }
         if(contentsAdatper!=null){
             for(int i = 0; i< contentsAdatper.getItemCount(); i++){

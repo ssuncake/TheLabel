@@ -7,26 +7,25 @@ public class NewsFeedContents {
     int page;
     int count;
     int meet;
-    Contents[] meetdata;
-    Contents[] data;
+    Contents[] meetpost;
+    Contents[] post;
+    ErrorMessage error;
 
-    public int getPage() {
-        return page;
+    public Contents[] getMeetpost() {
+        return meetpost;
     }
 
-    public int getCount() {
-        return count;
+    public Contents[] getPost() {
+        return post;
     }
 
-    public int getMeet() {
-        return meet;
+    public boolean isError(){
+        if(error == null)
+            return false;
+        return true;
     }
 
-    public Contents[] getMeetdata() {
-        return meetdata;
-    }
-
-    public Contents[] getData() {
-        return data;
+    public ErrorMessage getError() {
+        return error;
     }
 }
