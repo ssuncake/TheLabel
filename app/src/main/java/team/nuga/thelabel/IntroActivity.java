@@ -2,16 +2,21 @@ package team.nuga.thelabel;
 
 import android.animation.FloatEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -22,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.gcm.RegistrationIntentService;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.manager.PropertyManager;
@@ -50,7 +56,31 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
-//        logo.setImageDrawable(getResources().getDrawable(R.drawable.intrologo));
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                doRealStart();
+            }
+        };
+        setUpIfNeeded();
+
+
+    }
+
+    private void setUpIfNeeded(){
+        if (checkPlayServices()) {
+            String regId = PropertyManager.getInstance().getRegistrationId();
+            if (!regId.equals("")) {
+                doRealStart();
+            } else {
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+        }
+    }
+
+    private void doRealStart(){
         final Handler mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -108,7 +138,8 @@ public class IntroActivity extends AppCompatActivity {
         String email = PropertyManager.getInstance().getEmail();
         if (!TextUtils.isEmpty(email)) {
             String password = PropertyManager.getInstance().getPassword();
-//            String regid = PropertyManager.getInstance().getRegistrationId();
+            String regid = PropertyManager.getInstance().getRegistrationId();
+            Log.e("로그인관련","레지아이디 "+regid);
             LoginRequest request = new LoginRequest(this, email, password);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
                 @Override
@@ -151,6 +182,17 @@ public class IntroActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PLAY_SERVICES_RESOLUTION_REQUEST &&
+                resultCode == Activity.RESULT_OK) {
+            setUpIfNeeded();
+            return;
+        }
+    }
+
+
     // GCM 관련 단말 상태 체크
 
     private boolean checkPlayServices(){
@@ -173,6 +215,19 @@ public class IntroActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(RegistrationIntentService.REGISTRATION_COMPLETE));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
     }
 
 }

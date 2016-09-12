@@ -28,6 +28,7 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.manager.PropertyManager;
 
 public class RegistrationIntentService extends IntentService {
 
@@ -47,7 +48,8 @@ public class RegistrationIntentService extends IntentService {
             InstanceID instanceID = InstanceID.getInstance(this);
             String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-            //PropertyManager.getInstance().setRegistrationId(token);
+            Log.e(TAG, "GCM 레지스트레이션 토큰 "+ token);
+            PropertyManager.getInstance().setRegistrationId(token);
             // Subscribe to topic channels
             subscribeTopics(token);
         } catch (Exception e) {
