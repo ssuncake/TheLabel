@@ -11,26 +11,24 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import team.nuga.thelabel.data.NetworkResult;
-
 import team.nuga.thelabel.data.User;
 
 
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class LoginRequest extends AbstractRequest<NetworkResult<User>> {
+public class TestMessageRequest extends AbstractRequest<NetworkResult<User>> {
 
     private static final String LOGINADDRESS = "auth/local/login";
 
     Request request;
-    public LoginRequest(Context context,String email,String password,String regid) {
+    public TestMessageRequest(Context context) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegments(LOGINADDRESS)
+                .addPathSegments("messages")
                 .build();
         RequestBody body = new FormBody.Builder()
-                .add("email", email)
-                .add("password", password)
-                .add("regId",regid)
+                .add("user_id", 2+"")
+                .add("message", "테스트")
                 .build();
         request = new Request.Builder()
                 .url(url)

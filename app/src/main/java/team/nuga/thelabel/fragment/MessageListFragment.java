@@ -51,8 +51,6 @@ public class MessageListFragment extends Fragment {
     public void addUser(){
        final int otherId  = Integer.parseInt(editText.getText().toString());
 
-
-
         GetUserImageByIdRequest request = new GetUserImageByIdRequest(getActivity(),otherId);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
             @Override

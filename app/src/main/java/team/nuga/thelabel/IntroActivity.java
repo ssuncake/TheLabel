@@ -140,7 +140,7 @@ public class IntroActivity extends AppCompatActivity {
             String password = PropertyManager.getInstance().getPassword();
             String regid = PropertyManager.getInstance().getRegistrationId();
             Log.e("로그인관련","레지아이디 "+regid);
-            LoginRequest request = new LoginRequest(this, email, password);
+            LoginRequest request = new LoginRequest(this, email, password, regid);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
                 @Override
                 public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {

@@ -26,7 +26,7 @@ public class GetUserImageByIdRequest extends AbstractRequest<NetworkResult<User>
         public GetUserImageByIdRequest(Context context, int userId) {
             HttpUrl url = getBaseUrlBuilder()
                     .addPathSegment(USER)
-                    .addPathSegment(userId+ME)
+                    .addPathSegment(userId+"")
                     .addQueryParameter("message","true")
                     .build();
             request = new Request.Builder()

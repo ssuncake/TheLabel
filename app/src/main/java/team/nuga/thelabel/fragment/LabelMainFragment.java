@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SeekBar;
 
 import java.io.IOException;
@@ -32,10 +33,13 @@ import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.Member;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.NetworkResultLabeMain;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
+import team.nuga.thelabel.request.TestMessageRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 import team.nuga.thelabel.wiget.LabelMainTop;
@@ -49,6 +53,7 @@ public class LabelMainFragment extends Fragment {
     public static final String LOGTAG = "LabelMainFragment ";
     public static final String LEADERID = "leaderid";
 
+    User user;
     Label label;
     LabelMainListAdapter adapter;
     Member[] members;
@@ -84,6 +89,8 @@ public class LabelMainFragment extends Fragment {
     RecyclerView memberRecycler;
     @BindView(R.id.recyclerView_LabelMain_Contetns)
     RecyclerView contentsRecycler;
+    @BindView(R.id.button_LabelMain_goSetting)
+    Button goLabelSetting;
 
     @OnClick(R.id.button_LabelMain_back)
     public void clickBackButton(){
@@ -107,6 +114,23 @@ public class LabelMainFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.button_testtest)
+    public void testMessage(){
+        TestMessageRequest request = new TestMessageRequest(getActivity());
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+
+                Log.e("안녕","메세지 성공");
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("안녕","메세지 실패"+errorMessage);
+            }
+        });
+    }
+
 
 
     public LabelMainFragment() {
@@ -120,8 +144,17 @@ public class LabelMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_label_main, container, false);
         ButterKnife.bind(this,view);
 
-        int id = getArguments().getInt(MainActivity.LABELID);
-        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),id);
+        int leaderId = getArguments().getInt(MainActivity.LABELID);
+        User user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+
+        int userid = user.getUserID();
+        goLabelSetting.setVisibility(View.INVISIBLE);
+        if(leaderId==userid){
+
+            goLabelSetting.setVisibility(View.VISIBLE);
+        }
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),leaderId);
+
 
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override

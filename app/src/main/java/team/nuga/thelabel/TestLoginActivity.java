@@ -25,9 +25,11 @@ public class TestLoginActivity extends AppCompatActivity {
     {
         String email ="nam@gmail.com";
         String password="1101";
+
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_2)
     public void click2()
@@ -36,7 +38,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1102";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_3)
     public void click3()
@@ -45,7 +48,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1103";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_4)
     public void click4()
@@ -54,8 +58,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1104";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
-    }
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);    }
     @OnClick(R.id.button_testlogin_5)
     public void click5()
     {
@@ -63,7 +67,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1105";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_6)
     public void click6()
@@ -72,7 +77,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1106";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_7)
     public void click7()
@@ -81,7 +87,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1107";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_8)
     public void click8()
@@ -90,7 +97,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1108";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_9)
     public void click9()
@@ -99,7 +107,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1109";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_10)
     public void click10()
@@ -108,7 +117,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1110";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_11)
     public void click11()
@@ -117,7 +127,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1111";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_12)
     public void click12()
@@ -126,7 +137,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1112";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_13)
     public void click13()
@@ -135,7 +147,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1113";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_14)
     public void click14()
@@ -144,7 +157,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1114";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
     @OnClick(R.id.button_testlogin_15)
     public void click15()
@@ -153,7 +167,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1115";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     } @OnClick(R.id.button_testlogin_16)
     public void click16()
     {
@@ -161,7 +176,8 @@ public class TestLoginActivity extends AppCompatActivity {
         String password="1116";
         PropertyManager.getInstance().setEmail(email);
         PropertyManager.getInstance().setPassword(password);
-        goMain(email,password);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
 
 
@@ -173,15 +189,16 @@ public class TestLoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_testlogin)
     public void clicklogin(){
-        String emain = inputid.getText().toString();
-        String pass = inputpassword.getText().toString();
+        String email = inputid.getText().toString();
+        String password = inputpassword.getText().toString();
 
         //자동로그인 기능 : 이메일 세팅
         String regid = PropertyManager.getInstance().getRegistrationId();
-        PropertyManager.getInstance().setEmail(emain);
-        PropertyManager.getInstance().setPassword(pass);
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
 
-        goMain(emain,pass);
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
     }
 
 
@@ -232,8 +249,8 @@ SeekBar progressBar;
     }
 
 
-    public void goMain(String email,String password){
-        LoginRequest request = new LoginRequest(this,email,password);
+    public void goMain(String email,String password, String regid){
+        LoginRequest request = new LoginRequest(this,email,password,regid);
 
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>(){
             @Override

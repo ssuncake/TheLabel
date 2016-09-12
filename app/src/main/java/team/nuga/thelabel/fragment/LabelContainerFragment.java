@@ -55,6 +55,7 @@ public class LabelContainerFragment extends Fragment {
 
         Bundle bundle = new Bundle();
         bundle.putInt(MainActivity.LABELID,label.getLabelID());
+        bundle.putSerializable(MainActivity.MAINUSER,user);
         LabelMainFragment selectedLabelFragment = new LabelMainFragment();
         selectedLabelFragment.setArguments(bundle);
         getChildFragmentManager().beginTransaction().replace(R.id.frameLayout_LabelContainer,selectedLabelFragment).addToBackStack(null).commit();

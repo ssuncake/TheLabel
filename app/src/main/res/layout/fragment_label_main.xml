@@ -77,14 +77,14 @@
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="레이블 세팅"
                 android:id="@+id/button_LabelMain_goSetting"
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="레이블 선택으로 돌아가기"
                 android:id="@+id/button_LabelMain_back"

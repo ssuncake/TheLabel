@@ -181,7 +181,6 @@ public class SignUpEditActivity extends AppCompatActivity {
                 result.getId();
                 if (Debug.debugmode)
                     Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
-
             }
 
             @Override
