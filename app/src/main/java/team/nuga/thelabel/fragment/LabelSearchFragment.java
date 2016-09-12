@@ -20,6 +20,7 @@ import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.NetworkResultLabelSearch;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.LabelSearchRequest;
 
 /**
  * A simple {@link Fragment} subclass.

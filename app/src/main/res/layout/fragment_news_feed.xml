@@ -13,6 +13,14 @@
         android:text="newsfeed"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#ff0000" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_newsfeed_main"
+        android:layout_gravity="center_horizontal"
+        android:indeterminate="false" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_newsfeed"
         android:layout_width="match_parent"

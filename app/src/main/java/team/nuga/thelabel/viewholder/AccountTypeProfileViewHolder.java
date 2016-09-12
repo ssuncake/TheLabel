@@ -47,7 +47,7 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
     }
 
     @Override
-    public void applyData(User user, Contents contents) {
+    public void applyUser(User user) {
         if(user !=null) {
             profileUsername.setText(user.getUserName());
             Glide.with(userProfilePicture.getContext())
@@ -55,5 +55,11 @@ public class AccountTypeProfileViewHolder extends ParentContentsViewHolder {
                     .transform(new RoundImageTransform(userProfilePicture.getContext()))
                     .into(userProfilePicture);
         }
+    }
+
+
+    @Override
+    public void applyData(Contents contents) {
+
     }
 }

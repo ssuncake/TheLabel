@@ -79,7 +79,7 @@ public class MainFragment extends Fragment {
             public void onPageSelected(int position) {
                 if(position==0){
                     UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
-                    f.midiaRelese();
+                    f.mediaStop();
                 }
             }
 

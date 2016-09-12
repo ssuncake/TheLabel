@@ -8,25 +8,25 @@ import java.io.Serializable;
  * Created by Tacademy on 2016-08-24.
  */
 public class Label implements Serializable {
-    @SerializedName("label_id")
+    @SerializedName("id")
     private int labelID; // 레이블 셀렉에서 이걸로사용
 
     @SerializedName("authority")
     private int labelLeaderID;
 
-    @SerializedName("label_name")
+    @SerializedName("name")
     private String labelName;
 
     @SerializedName("text")
     private String labelProfile;
 
-    @SerializedName("label_need_position")
+    @SerializedName("needposition")
     private String[] labelNeedPositionList;
 
-    @SerializedName("label_genre")
+    @SerializedName("genre")
     private String labelGenre;
 
-    @SerializedName("label_image_path")
+    @SerializedName("imagepath")
     private String image_path;
 
     private int labelILike;

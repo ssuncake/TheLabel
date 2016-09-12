@@ -20,16 +20,17 @@ public abstract class ParentContentsViewHolder extends RecyclerView.ViewHolder {
 //            descriptionView = (TextView)itemView.findViewById(R.id.textView_profile_description);
     }
 
-    public void setData(User user,Contents contents) {
-        this.user = user;
+    public void setData(Contents contents) {
         this.contents = contents;
-        applyData(user,contents);
+        applyData(contents);
     }
 
     public void setProfile(User user){
         this.user = user;
-        applyData(user ,null);
+        applyUser(user);
     }
 
-    public abstract void applyData(User user, Contents contents);
+    public abstract void applyData(Contents contents);
+
+    public abstract void applyUser(User user);
 }

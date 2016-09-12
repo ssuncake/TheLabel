@@ -146,10 +146,10 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
 
-    public void applyData(User user, Contents contents) {
-            userName.setText(user.getUserName());
+    public void applyData(Contents contents) {
+        userName.setText(contents.getWriterName());
         Glide.with(profileImage.getContext())
-                .load(user.getImageUrl())
+                .load(contents.getWriterImage())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
         playSeekbar.setMax(contents.getPlayTimeMax());
@@ -175,6 +175,10 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     }
 
+    @Override
+    public void applyUser(User user) {
+
+    }
 
     public void resetMusic(){
         contents.setPlayedMode(Contents.STOP);

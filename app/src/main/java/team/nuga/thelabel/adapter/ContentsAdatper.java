@@ -26,28 +26,10 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
         implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeContentsItemClick,
         YouTubePlayer.OnInitializedListener,AccountTypeProfileViewHolder.OnSettingImageClick{
-//    List<User> userList = new ArrayList<>();
-//    List<Contents> contentsList = new ArrayList<>();
-//    MusicContents musicContents;
-//    PictureContents pictureContents;
-//    YoutubeContents youtubeContents;
-////    public void add(User user){
-//        muserlist.add(user);
-//        notifyDataSetChanged();
-//    }
-
-//    private ArrayList<User> muserlist = new ArrayList<>();\
-
-//    private List<ParentContentsViewHolder> holders;
 
 
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
-//    int playedPosition;
-
-//    public void setPlayedPosition(int playedPosition) {
-//        this.playedPosition = playedPosition;
-//    }
 
     public void add(Contents contents){
         mcontentslist.add(contents);
@@ -58,22 +40,28 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
 
     public void setUser(User user){
-        this.user = user;
-        notifyDataSetChanged();
+        if(user != null){
+            this.user = user;
+            notifyDataSetChanged();
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
         int viewType;
-
-        if(position == 0){  //viewType의 position
-            return -1;  // 0일경우 Music이 보이고 -1일경우는 Music, Picture, Youtube중에 없기 때문에 default인 Profile이 뜬다.
+        if (user == null) {
+            viewType = mcontentslist.get(position).getContentsType();
+            return viewType;
+        } else {
+            if(position == 0){  //viewType의 position
+                return -1;  // 0일경우 Music이 보이고 -1일경우는 Music, Picture, Youtube중에 없기 때문에 default인 Profile이 뜬다.
+            } else {
+                viewType = mcontentslist.get(position-1).getContentsType(); //listview position
+                return viewType;
+            }
         }
-        else {
-        viewType = mcontentslist.get(position-1).getContentsType(); //listview position
-//        viewType = mcontentslist.get(position).getContentsType();
 
-        return viewType;}
+
     }
 
     @Override
@@ -84,12 +72,10 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent,false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 accounttypeOne.setOnMusicContentsItemClickListener(this);
-
                 return accounttypeOne;
             case Contents.PICTURE:
                 ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent,false);
                 AccountTypePictureViewHolder accounttypeTwo = new AccountTypePictureViewHolder(viewTwo);
-
                 return accounttypeTwo;
             case Contents.YOUTUBE:
                 ViewGroup viewThree = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_youtube, parent,false);
@@ -99,27 +85,36 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewFour = (ViewGroup) layoutInflater.inflate(R.layout.cardview_account_type_profile, parent,false);
                AccountTypeProfileViewHolder accounttypeFour = new AccountTypeProfileViewHolder(viewFour);
                 accounttypeFour.setOnSettingImageClick(this);
-
                 return accounttypeFour;
         }
     }
 
     @Override
     public void onBindViewHolder(ParentContentsViewHolder holder, int position) {
-
-        Log.w("ContentAdapter","온바인드 뷰홀더 ->"+position);
-        if (position == 0) {
-            holder.setProfile(user);
-        }else {
-            holder.setData(user, mcontentslist.get(position - 1));
+        if(user==null){
+            holder.setData(mcontentslist.get(position));
+        } else {
+            Log.w("ContentAdapter","온바인드 뷰홀더 ->"+position);
+            if (position == 0) {
+                holder.setProfile(user);
+            }else {
+                holder.setData(mcontentslist.get(position - 1));
+            }
         }
+
+
     }
 
     
 
     @Override
     public int getItemCount() {
-        return mcontentslist.size()+1; //profileviewholder 추가
+        if(user ==null){
+           return mcontentslist.size(); //profileviewholder 추가
+        }else{
+            return mcontentslist.size()+1; //profileviewholder 추가
+        }
+
     }
 
     @Override //youtube

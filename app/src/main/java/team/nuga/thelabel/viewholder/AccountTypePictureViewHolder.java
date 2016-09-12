@@ -145,10 +145,10 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
 //    }
 
     @Override
-    public void applyData(User user, Contents contents) {
-            userNmae.setText(user.getUserName());
+    public void applyData(Contents contents) {
+            userNmae.setText(contents.getWriterName());
         Glide.with(profileImage.getContext())
-                .load(user.getImageUrl())
+                .load(contents.getWriterImage())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
 //        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
@@ -157,6 +157,12 @@ public class AccountTypePictureViewHolder extends ParentContentsViewHolder imple
             Glide.with(imageViewPicture.getContext())
                     .load(contents.getContentsPath())
                     .into(imageViewPicture);
+
+    }
+
+
+    @Override
+    public void applyUser(User user) {
 
     }
 }

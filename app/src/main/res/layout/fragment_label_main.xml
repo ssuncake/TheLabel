@@ -63,6 +63,13 @@
                 android:background="@color/maintitle_blue"
                 />
 
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar_LabelMain_contents"
+                android:layout_gravity="center_horizontal"
+                android:indeterminate="false" />
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/labelmain_contents_heigh"

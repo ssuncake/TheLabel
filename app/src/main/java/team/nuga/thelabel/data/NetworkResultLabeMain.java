@@ -1,5 +1,7 @@
 package team.nuga.thelabel.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 우리집 on 2016-09-03.
  */
@@ -8,6 +10,7 @@ public class NetworkResultLabeMain {
     String count;
     Label label;
     Member[] member;
+    @SerializedName("post")
     Contents[] data;
     ErrorMessage error;
 

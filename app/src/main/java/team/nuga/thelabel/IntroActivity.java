@@ -2,6 +2,9 @@ package team.nuga.thelabel;
 
 import android.animation.FloatEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +28,9 @@ import team.nuga.thelabel.manager.PropertyManager;
 import team.nuga.thelabel.request.LoginRequest;
 
 public class IntroActivity extends AppCompatActivity {
+
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     FragmentManager introFragmentManger;
 
@@ -139,6 +148,31 @@ public class IntroActivity extends AppCompatActivity {
         intent.putExtra("LoginUser", user);
         startActivity(intent);
         finish();
+    }
+
+
+    // GCM 관련 단말 상태 체크
+
+    private boolean checkPlayServices(){
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if(resultCode != ConnectionResult.SUCCESS){
+            if(apiAvailability.isUserResolvableError(resultCode)){
+                Dialog dialog = apiAvailability.getErrorDialog(this,resultCode,PLAY_SERVICES_RESOLUTION_REQUEST);
+                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                });
+                dialog.show();
+            }else{
+
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
 }

@@ -126,15 +126,20 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
         this.contents = contents;
     }
 
-    public void applyData(User user, Contents contents) {
+
+    @Override
+    public void applyData( Contents contents) {
         likeCount.setText(""+contents.getLikeCount());
-        userName.setText(user.getUserName());
+        userName.setText(contents.getWriterName());
         Glide.with(profileImage.getContext())
-                .load(user.getImageUrl())
+                .load(contents.getWriterImage())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
         conetentTime.setText(contents.getContentCreateDate());
-//        Log.e("유저메인 뷰홀더","user : "+user.getUserName()+"Content : "+contents.getLikeCount());
     }
 
+    @Override
+    public void applyUser(User user) {
+
+    }
 }

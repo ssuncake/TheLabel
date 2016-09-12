@@ -308,27 +308,7 @@ public class MainActivity extends AppCompatActivity
 
     // 단말환경 check
 
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private boolean checkPlayServices(){
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if(resultCode != ConnectionResult.SUCCESS){
-            if(apiAvailability.isUserResolvableError(resultCode)){
-                Dialog dialog = apiAvailability.getErrorDialog(this,resultCode,PLAY_SERVICES_RESOLUTION_REQUEST);
-                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        finish();
-                    }
-                });
-                dialog.show();
-            }else{
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
+
 
 
 

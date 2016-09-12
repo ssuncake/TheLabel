@@ -36,6 +36,21 @@ public class Contents implements Serializable{
     @SerializedName("date")
     private String ContentCreatedDate;
 
+    @SerializedName("nickname")
+    private String writerName;
+
+    @SerializedName("imagepath")
+    private String writerImage;
+
+
+    public String getWriterName() {
+        return writerName;
+    }
+
+    public String getWriterImage() {
+        return writerImage;
+    }
+
     public int getPlayTimeMax() {
         return playTimeMax;
     }
