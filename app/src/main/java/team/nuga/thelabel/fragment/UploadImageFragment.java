@@ -45,7 +45,6 @@ public class UploadImageFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            bundle = null;
         }else {
             imageView.setImageResource(R.drawable.profile_girl);
         }
