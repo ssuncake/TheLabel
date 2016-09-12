@@ -25,9 +25,6 @@ import com.google.android.gms.gcm.GcmListenerService;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
-    public static final String ACTION_CHAT = "com.begentgroup.miniproject.action.chatmessage";
-    public static final String EXTRA_CHAT_USER = "chatuser";
-    public static final String EXTRA_RESULT = "result";
 
     LocalBroadcastManager mLBM;
     @Override

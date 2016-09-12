@@ -19,7 +19,6 @@ import team.nuga.thelabel.data.User;
  */
 public class TestMessageRequest extends AbstractRequest<NetworkResult<User>> {
 
-    private static final String LOGINADDRESS = "auth/local/login";
 
     Request request;
     public TestMessageRequest(Context context) {
@@ -27,8 +26,8 @@ public class TestMessageRequest extends AbstractRequest<NetworkResult<User>> {
                 .addPathSegments("messages")
                 .build();
         RequestBody body = new FormBody.Builder()
-                .add("user_id", 2+"")
-                .add("message", "테스트")
+                .add("user_id", 3+"")
+                .add("message", "test!!!!!!!!!!!!!")
                 .build();
         request = new Request.Builder()
                 .url(url)

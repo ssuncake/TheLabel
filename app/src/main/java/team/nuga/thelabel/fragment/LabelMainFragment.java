@@ -33,13 +33,11 @@ import team.nuga.thelabel.adapter.LabelMainListAdapter;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.Member;
-import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.NetworkResultLabeMain;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
-import team.nuga.thelabel.request.TestMessageRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 import team.nuga.thelabel.wiget.LabelMainTop;
@@ -114,22 +112,7 @@ public class LabelMainFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.button_testtest)
-    public void testMessage(){
-        TestMessageRequest request = new TestMessageRequest(getActivity());
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
 
-                Log.e("안녕","메세지 성공");
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("안녕","메세지 실패"+errorMessage);
-            }
-        });
-    }
 
 
 
