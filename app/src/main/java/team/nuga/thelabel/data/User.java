@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Tacademy on 2016-08-24.
  */
 public class User implements Serializable{
-
+    //내계정 유저
     private int id;
     @SerializedName("nickname")
     private String userName;
@@ -18,6 +18,23 @@ public class User implements Serializable{
     private String userPassword;
     @SerializedName("image_path")
     private String imageUrl;
+    @SerializedName("user_id")
+    private int userID;
+
+
+    //Search User 부분
+    @SerializedName("user_nickname")
+    private String searchUserName;
+    @SerializedName("user_image_path")
+    private String searchUserImage;
+    @SerializedName("user_position")
+    private String searchUserPosition;
+    @SerializedName("user_genre")
+    private String searchUserGenre;
+    @SerializedName("user_city")
+    private String searchUserCity;
+    @SerializedName("user_town")
+    private String searchUserTown;
 
     public String getUserPassword() {
         return userPassword;
@@ -82,4 +99,50 @@ public class User implements Serializable{
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+    public String getSearchUserName() {
+        return searchUserName;
+    }
+
+    public void setSearchUserName(String searchUserName) {
+        this.searchUserName = searchUserName;
+    }
+    public String getSearchUserImage() {
+        return searchUserImage;
+    }
+
+    public void setSearchUserImage(String searchUserImage) {
+        this.searchUserImage = searchUserImage;
+    }
+    public String getSearchUserPosition() {
+        return searchUserPosition;
+    }
+
+    public void setSearchUserPosition(String searchUserPosition) {
+        this.searchUserPosition = searchUserPosition;
+    }
+
+    public String getSearchUserTown() {
+        return searchUserTown;
+    }
+
+    public void setSearchUserTown(String searchUserTown) {
+        this.searchUserTown = searchUserTown;
+    }
+
+    public String getSearchUserCity() {
+        return searchUserCity;
+    }
+
+    public void setSearchUserCity(String searchUserCity) {
+        this.searchUserCity = searchUserCity;
+    }
+
+    public String getSearchUserGenre() {
+        return searchUserGenre;
+    }
+
+    public void setSearchUserGenre(String searchUserGenre) {
+        this.searchUserGenre = searchUserGenre;
+    }
+
 }

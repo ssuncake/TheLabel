@@ -16,13 +16,12 @@ import team.nuga.thelabel.data.NetworkResultUserSearch;
 public class UserTextSearchRequest extends AbstractRequest<NetworkResultUserSearch> {
     private static final String path = "users";
     Request request;
-//    users?nameSearch=true&page=1&count=10&text=o&sort=
     public UserTextSearchRequest(Context context,int page, int count, String text, String sort){
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(path)
                 .addQueryParameter("nameSearch","true")
-                .addQueryParameter("page",page+"")
-                .addQueryParameter("count", count+"")
+                .addQueryParameter("page",""+page)
+                .addQueryParameter("count", ""+count)
                 .addQueryParameter("text",text)
                 .addQueryParameter("sort",sort)
                 .build();

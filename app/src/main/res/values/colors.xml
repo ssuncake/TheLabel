@@ -37,4 +37,8 @@
     
     <!--투명색-->
     <color name="transparent">#00000000</color>
+
+    <!--검색 페이지에서 정렬 background-->
+    <color name="search">#E5E5E5</color>
+    <color name="search_position_city_town">#8B8B8B</color>
 </resources>

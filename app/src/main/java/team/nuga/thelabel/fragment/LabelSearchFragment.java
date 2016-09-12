@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,6 @@ import team.nuga.thelabel.OtherLabelActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchLabelResultListAdapter;
 import team.nuga.thelabel.data.Label;
-import team.nuga.thelabel.data.NetworkResultLabelSearch;
-import team.nuga.thelabel.manager.NetworkManager;
-import team.nuga.thelabel.manager.NetworkRequest;
-import team.nuga.thelabel.request.LabelSearchRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,21 +34,21 @@ public class LabelSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_label_search, container, false);
-        LabelSearchRequest labelSearchRequest = new LabelSearchRequest(getActivity(),2,10,1,1);
-        NetworkManager.getInstance().getNetworkData(labelSearchRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
-                Label[] label = result.getResult();
-                for(Label l : label){
-                    Log.e("레이블 이름 : ",l.getLabelName());
-                }
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResultLabelSearch> request, int errorCode, String errorMessage, Throwable e) {
-
-            }
-        });
+//        LabelSearchRequest labelSearchRequest = new LabelSearchRequest(getActivity(),2);
+//        NetworkManager.getInstance().getNetworkData(labelSearchRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
+//                Label[] label = result.getResult();
+//                for(Label l : label){
+//                    Log.e("레이블 이름 : ",l.getLabelName());
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<NetworkResultLabelSearch> request, int errorCode, String errorMessage, Throwable e) {
+//
+//            }
+//        });
 
         listView = (RecyclerView)view.findViewById(R.id.recyclerview_label_search);
         labeladapter = new SearchLabelResultListAdapter();

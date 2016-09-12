@@ -10,12 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Random;
-
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
+import team.nuga.thelabel.data.NetworkResultUserSearch;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.UserTextSearchRequest;
 
 /**
@@ -34,45 +35,41 @@ public class UserSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
-        listView =(RecyclerView)view.findViewById(R.id.recyclerview_user_search);
+
+        listView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
         useradapter = new SearchUserResultListAdapter();
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
-                Intent intent = new Intent(getActivity(),OtherUserActivity.class);
-                intent.putExtra("name",position+"님의 계정입니다.");
+                Intent intent = new Intent(getActivity(), OtherUserActivity.class);
+                intent.putExtra("name", position + "님의 계정입니다.");
                 startActivity(intent);
+            }
+        });
 
-//                switch(position){
-//                    case 0:
-//                        Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent);
-//                    case 1:
-//                        Intent intent1 = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent1);
-//                    case 2:
-//                        Intent intent2 = new Intent(getActivity(), OtherUserActivity.class);
-//                        startActivity(intent2);
-//                }
+        String searchText = "o";
+        String sort="";
+        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 20, searchText,sort);
+        NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
+                User[] user = result.getResult();
+                for (User u : user) {
+                    useradapter.add(u);
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
+
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
         listView.setAdapter(useradapter);
-
-        initData();
         return view;
     }
 
 
-    private void initData(){
-        Random r = new Random();
-        for (int i = 0; i<3; i++){
-            User user = new User();
-            user.setUserName("name "+i);
-            useradapter.add(user);
-        }
-
-    }
 }

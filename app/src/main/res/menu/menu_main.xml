@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/toolbar_notification"
         android:title="notification"
-        android:icon="@android:drawable/ic_popup_reminder"
+        android:icon="@drawable/btn_top_alert"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/toolbar_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/btn_top_search"
         android:title="search"
         app:showAsAction="ifRoom" />
 </menu>

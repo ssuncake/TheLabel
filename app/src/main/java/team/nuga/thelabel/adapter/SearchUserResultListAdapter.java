@@ -19,7 +19,7 @@ import team.nuga.thelabel.viewholder.SearchUserViewHolder;
 public class SearchUserResultListAdapter extends RecyclerView.Adapter<SearchUserViewHolder>
         implements SearchUserViewHolder.OnSearchUserItemClickListener {
     List<User> useritems = new ArrayList<>();
-
+    User user;
     public void add(User user) {
         useritems.add(user);
         notifyDataSetChanged();
@@ -27,7 +27,7 @@ public class SearchUserResultListAdapter extends RecyclerView.Adapter<SearchUser
 
     @Override
     public SearchUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_messagelist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_user, parent, false);
         SearchUserViewHolder holder = new SearchUserViewHolder(view);
         holder.setOnSearchItemClickListener(this);
         return holder;
@@ -42,6 +42,7 @@ public class SearchUserResultListAdapter extends RecyclerView.Adapter<SearchUser
     public int getItemCount() {
         return useritems.size();
     }
+
 
     public interface OnAdapterItemClickListener {
         public void onAdapterItemClick(View view, User user, int position);

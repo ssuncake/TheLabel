@@ -6,7 +6,7 @@ package team.nuga.thelabel.data;
 public class NetworkResultUserSearch {
     int page;
     int count;
-    User[] users;
+    User[] result;
 
     public int getPage() {
         return page;
@@ -24,11 +24,11 @@ public class NetworkResultUserSearch {
         this.count = count;
     }
 
-    public User[] getUsers() {
-        return users;
+    public User[] getResult() {
+        return result;
     }
 
-    public void setUsers(User[] users) {
-        this.users = users;
+    public void setResult(User[] result) {
+        this.result = result;
     }
 }
