@@ -85,6 +85,7 @@ public class LabelSelectFragment extends Fragment  {
             }
         });
 
+
     }
 
     public void init(){
@@ -121,31 +122,35 @@ public class LabelSelectFragment extends Fragment  {
         for (int i = 0; i < 3; i++) {
             if(user.getUserInLabelList() != null) {
                 if (i < user.getUserInLabelList().length) {
-        labelSelectViews[i].setLabel(labels[i]);
+                    labelSelectViews[i].setLabel(labels[i]);
+                }
+            }
         }
-        }
+
+        if(linearLayout.getChildCount()!=0){
+            linearLayout.removeAllViews();
         }
 
         linearLayout.addView(labelSelectViews[0]);
         linearLayout.addView(labelSelectViews[1]);
         linearLayout.addView(labelSelectViews[2]);
 
-        }
+    }
 
-public void selectLabel(Label label) {
+    public void selectLabel(Label label) {
         LabelContainerFragment parent = (LabelContainerFragment) getParentFragment();
         parent.selectLabel(label);
 
         //프레그먼트 교체가 부모프레그먼트에서 이루어져야 하기때문에 부모 프래그먼트를 getParentFragment로 호출하여
         // selectLabel을 호출한다.
-        }
+    }
 
-public void makeLabel() {
+    public void makeLabel() {
         Intent intent = new Intent(getActivity(), LabelMakeActivity.class);
         intent.putExtra(MainActivity.MAINUSER, user);
         startActivityForResult(intent, MainActivity.REQUEST_MAKELABEL);
-        }
+    }
 
 
 
-        }
+}

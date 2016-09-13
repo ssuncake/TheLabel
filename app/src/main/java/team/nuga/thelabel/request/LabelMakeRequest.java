@@ -1,6 +1,7 @@
 package team.nuga.thelabel.request;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -37,7 +38,8 @@ public class LabelMakeRequest extends AbstractRequest<NetworkResult<User>> {
                 .addFormDataPart("text", text);
         if(positions !=null){
             for(int s : positions){
-                builder.addFormDataPart("need_position_id", String.valueOf(genre));
+                Log.e("레이블 생성",s+"");
+                builder.addFormDataPart("need_position_id", s+"");
             }
         }
         if(file != null){

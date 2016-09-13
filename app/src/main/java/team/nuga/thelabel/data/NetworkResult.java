@@ -8,6 +8,10 @@ public class NetworkResult<T> {
     private int id;
     ErrorMessage errorMessage;
     int resultCode;
+    private T user;
+    private T data;
+    private ErrorMessage error;
+    private T label;
 
     public int getResultCode() {
         return resultCode;
@@ -18,11 +22,7 @@ public class NetworkResult<T> {
         return id;
     }
 
-    private T user;
-    private T data;
 
-    private ErrorMessage error;
-    private T label;
 
 
 

@@ -37,7 +37,10 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserMainFragment extends Fragment{
+public class UserMainFragment extends Fragment {
+
+    public static final String LOGTAG = "UserMainFragemnt ";
+
     ContentsAdatper contentsAdatper;
     MediaPlayer mPlayer;
 
@@ -92,10 +95,10 @@ public class UserMainFragment extends Fragment{
                 User user = result.getResult();
                 contentsAdatper.setUser(user);
                 for (Contents c : contentses) {
-                    Log.d("게시글 ID", "" + c.getContentsID());
-                    Log.d("파일경로", "" + c.getContentsPath());
-                    Log.d("파일타입", "" + c.getContentsType());
-                    Log.d("좋아요 개수", "" + c.getLikeCount());
+                    Log.d(LOGTAG,"게시글 ID " + c.getContentsID());
+                    Log.d(LOGTAG,"파일경로 "+ c.getContentsPath());
+                    Log.d(LOGTAG,"파일타입 " + c.getContentsType());
+                    Log.d(LOGTAG,"좋아요 개수 " + c.getLikeCount());
                     contentsAdatper.add(c);
                 }
 
@@ -105,7 +108,7 @@ public class UserMainFragment extends Fragment{
 
             @Override
             public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("유저메인 실패", errorMessage);
+                Log.e(LOGTAG,"네트워크 실패" + errorMessage);
             }
         });
 

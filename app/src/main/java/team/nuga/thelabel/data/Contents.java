@@ -17,8 +17,6 @@ public class Contents implements Serializable{
     public static final int PUASE = 20;
     public static final int STOP = 30;
 
-
-
     int playedMode= STOP;
     int playedTIme;
     int playTimeMax;
@@ -33,6 +31,7 @@ public class Contents implements Serializable{
 
     @SerializedName("numlike")
     private int likeCount;
+
     @SerializedName("date")
     private String ContentCreatedDate;
 
