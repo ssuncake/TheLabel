@@ -37,7 +37,7 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserMainFragment extends Fragment {
+public class UserMainFragment extends Fragment{
     ContentsAdatper contentsAdatper;
     MediaPlayer mPlayer;
 

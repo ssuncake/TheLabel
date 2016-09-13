@@ -40,4 +40,6 @@ public class UserTextSearchRequest extends AbstractRequest<NetworkResultUserSear
     public Request getRequest() {
         return request;
     }
+
+
 }

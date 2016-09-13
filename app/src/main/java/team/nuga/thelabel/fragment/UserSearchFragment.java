@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,33 +43,47 @@ public class UserSearchFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-                intent.putExtra("name", position + "님의 계정입니다.");
+                intent.putExtra("name", user.getSearchUserName() + "님의 계정입니다.");
                 startActivity(intent);
             }
         });
 
-        String searchText = "o";
+        Bundle bundle = getArguments();
+        String searchText = bundle.getString("searchText");
         String sort="";
-        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 20, searchText,sort);
-        NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
-                User[] user = result.getResult();
-                for (User u : user) {
-                    useradapter.add(u);
-                }
-            }
 
-            @Override
-            public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
+        //String searchText = "o";
 
-            }
-        });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
         listView.setAdapter(useradapter);
         return view;
+    }
+
+    public void a(String inputText){
+        if (inputText != null) {
+            UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, inputText,"genre");
+            NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
+                    User[] user = result.getResult();
+                    if(user == null){
+                        Log.e("네트워크","유저 널");
+                    }else{
+                        Log.e("네트워크",user.length+"");
+                    }
+                    for (User u : user) {
+
+                        useradapter.add(u);
+                    }
+                }
+                @Override
+                public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
+
+                }
+            });
+        }
     }
 
 

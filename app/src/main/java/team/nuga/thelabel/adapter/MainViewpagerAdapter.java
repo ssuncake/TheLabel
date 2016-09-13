@@ -26,6 +26,8 @@ public class MainViewpagerAdapter extends FragmentStatePagerAdapter {
         bundle = new Bundle();
     }
 
+
+
     @Override
     public Fragment getItem(int position) {
         switch (position){

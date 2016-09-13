@@ -113,7 +113,6 @@ public class PasswordSettingActivity extends AppCompatActivity {
         editText_checkNewPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
         editText_newPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
         editText_currentPassword.getBackground().setColorFilter(colorB, PorterDuff.Mode.SRC_IN);
-        textInputLayout_checkNewPassword.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
     }
 

@@ -16,7 +16,7 @@ import team.nuga.thelabel.data.User;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class SearchUserViewHolder extends RecyclerView.ViewHolder {
+public class SearchUserViewHolder extends RecyclerView.ViewHolder{
     @BindView(R.id.image_search_userimage)
     ImageView userphotoView;
     @BindView(R.id.textView_search_userName)
@@ -36,6 +36,15 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
     }
 
+//    public interface OnTextSearchUserItemClick{
+//        public void onTextUserSearchItemClick(View view, User user, int position);
+//    }
+//    OnTextSearchUserItemClick searchListener;
+//    public void setOnTextSearchUserItemClickListener(OnTextSearchUserItemClick searchListener){
+//        this.searchListener = searchListener;
+//    }
+//
+
     public SearchUserViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -49,7 +58,6 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
         });
     }
     User user;
-
     public void setUser(User user){
         this.user = user;
         usernameView.setText(user.getSearchUserName());

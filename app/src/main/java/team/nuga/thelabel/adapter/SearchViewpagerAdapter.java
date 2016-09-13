@@ -1,5 +1,6 @@
 package team.nuga.thelabel.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,10 +14,13 @@ import team.nuga.thelabel.fragment.UserSearchFragment;
  */
 public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
     int numtabs;
+    Bundle bundle;
+    String searchText;
 
-    public SearchViewpagerAdapter(FragmentManager fm, int tabCount) {
+    public SearchViewpagerAdapter(FragmentManager fm, int tabCount,String searchText) {
         super(fm);
         this.numtabs =tabCount;
+        this.searchText = searchText;
     }
 
     @Override
@@ -24,6 +28,9 @@ public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0:
                 UserSearchFragment tab1 = new UserSearchFragment();
+                bundle = new Bundle();
+                bundle.putString("searchText", searchText );
+                tab1.setArguments(bundle);
                 return tab1;
             case 1:
                 LabelSearchFragment tab2 = new LabelSearchFragment();
