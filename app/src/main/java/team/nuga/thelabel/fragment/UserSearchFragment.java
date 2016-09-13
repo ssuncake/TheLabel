@@ -4,6 +4,7 @@ package team.nuga.thelabel.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,7 +27,7 @@ import team.nuga.thelabel.request.UserTextSearchRequest;
 public class UserSearchFragment extends Fragment {
     RecyclerView listView;
     SearchUserResultListAdapter useradapter;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     public UserSearchFragment() {
         // Required empty public constructor
     }
@@ -60,7 +61,7 @@ public class UserSearchFragment extends Fragment {
         listView.setAdapter(useradapter);
         return view;
     }
-
+//    String searchText = "o";
     public void a(String inputText){
         if (inputText != null) {
             UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, inputText,"genre");
@@ -74,9 +75,8 @@ public class UserSearchFragment extends Fragment {
                         Log.e("네트워크",user.length+"");
                     }
                     for (User u : user) {
-
                         useradapter.add(u);
-                    }
+                        }
                 }
                 @Override
                 public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {

@@ -45,7 +45,9 @@ public class UserMainFragment extends Fragment {
     MediaPlayer mPlayer;
 
     User user;
-
+    boolean isLastItem;
+    private static int PAGE;
+    private static String COUNT="10";
 
     enum PlayerState {
         IDLE,
@@ -57,6 +59,7 @@ public class UserMainFragment extends Fragment {
         ERROR,
         RELEASED
     }
+
     PlayerState mState;
 
     @BindView(R.id.recyclerview_user_main)
@@ -85,33 +88,32 @@ public class UserMainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this, view);
-
-        ContentsRequest contentsRequest = new ContentsRequest(getContext(), 2, 10);
-        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
-            @Override
-
-            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
-                contentses = result.getData();
-                User user = result.getResult();
-                contentsAdatper.setUser(user);
-                for (Contents c : contentses) {
-                    Log.d(LOGTAG,"게시글 ID " + c.getContentsID());
-                    Log.d(LOGTAG,"파일경로 "+ c.getContentsPath());
-                    Log.d(LOGTAG,"파일타입 " + c.getContentsType());
-                    Log.d(LOGTAG,"좋아요 개수 " + c.getLikeCount());
-                    contentsAdatper.add(c);
-                }
-
-
-
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(LOGTAG,"네트워크 실패" + errorMessage);
-            }
-        });
-
+        PAGE =1;
+//        ContentsRequest contentsRequest = new ContentsRequest(getContext(), 2, 10);
+//        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
+//            @Override
+//
+//            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
+//                contentses = result.getData();
+//                User user = result.getResult();
+//                contentsAdatper.setUser(user);
+//                for (Contents c : contentses) {
+//                    Log.d("게시글 ID", "" + c.getContentsID());
+//                    Log.d("파일경로", "" + c.getContentsPath());
+//                    Log.d("파일타입", "" + c.getContentsType());
+//                    Log.d("좋아요 개수", "" + c.getLikeCount());
+//                    contentsAdatper.add(c);
+//                }
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
+//                Log.e("유저메인 실패", errorMessage);
+//            }
+//        });
 
         contentsAdatper = new ContentsAdatper();
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
@@ -128,7 +130,7 @@ public class UserMainFragment extends Fragment {
             public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {
 
 
-                for(int i = 0; i< contentsAdatper.getItemCount() ; i++){
+                for (int i = 0; i < contentsAdatper.getItemCount(); i++) {
                     RecyclerView.ViewHolder rvh = contentsRecycerView.findViewHolderForAdapterPosition(i);
                     ParentContentsViewHolder pvh = (ParentContentsViewHolder) rvh;
                     if (pvh instanceof AccountTypeMusicViewHolder) {
@@ -222,18 +224,58 @@ public class UserMainFragment extends Fragment {
             }
         });
 
-
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+       final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         contentsRecycerView.setLayoutManager(linearLayoutManager);
         contentsRecycerView.setHasFixedSize(true);
         contentsRecycerView.setAdapter(contentsAdatper);
-//        initData();
+        addItem(""+PAGE,COUNT);
+        contentsRecycerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    addItem(""+PAGE,COUNT);
+                }
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int totalItemCount = linearLayoutManager.getItemCount();
+                int lastVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                if(totalItemCount>0 && lastVisibleItemPosition !=RecyclerView.NO_POSITION &&(totalItemCount-1<=lastVisibleItemPosition)){
+                    isLastItem =true;
+                }else {
+                    isLastItem =false;
+                }
+            }
+        });
         return view;
 
     }
 
+    public void addItem(String page, String count) {
+        ContentsRequest contentsRequest = new ContentsRequest(getContext(), page, count);
+        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
+            @Override
+
+            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
+                contentses = result.getData();
+                User user = result.getResult();
+                contentsAdatper.setUser(user);
+                for (Contents c : contentses) {
+                    contentsAdatper.add(c);
+                }
+                PAGE +=1;
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("유저메인 실패", errorMessage);
+            }
+        });
+
+    }
 
     boolean isSeeking = false;
     Handler mHandler = new Handler(Looper.getMainLooper());
@@ -246,9 +288,8 @@ public class UserMainFragment extends Fragment {
                     mainProgressView.setProgress(position);
                     playedContents.setPlayedTIme(position);
 
-                    for(AccountTypeMusicViewHolder hv : musicHolderList)
-                    {
-                       hv.setSeekbarPlaytime();
+                    for (AccountTypeMusicViewHolder hv : musicHolderList) {
+                        hv.setSeekbarPlaytime();
                     }
 
                 }
@@ -265,12 +306,12 @@ public class UserMainFragment extends Fragment {
         mainProgressView.setMax(mPlayer.getDuration());
 
         contents.setPlayTimeMax(mPlayer.getDuration());
-            RecyclerView.ViewHolder rvh = contentsRecycerView.findViewHolderForAdapterPosition(position);
-            ParentContentsViewHolder pvh = (ParentContentsViewHolder) rvh;
-            if (pvh instanceof AccountTypeMusicViewHolder) {
-                AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder) pvh;
-                mvh.setSeekBarMax();
-            }
+        RecyclerView.ViewHolder rvh = contentsRecycerView.findViewHolderForAdapterPosition(position);
+        ParentContentsViewHolder pvh = (ParentContentsViewHolder) rvh;
+        if (pvh instanceof AccountTypeMusicViewHolder) {
+            AccountTypeMusicViewHolder mvh = (AccountTypeMusicViewHolder) pvh;
+            mvh.setSeekBarMax();
+        }
 
         mState = PlayerState.PREPARED;
 
