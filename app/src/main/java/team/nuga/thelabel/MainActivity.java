@@ -46,8 +46,10 @@ public class MainActivity extends AppCompatActivity
 
     public static final int REQUEST_LIKENOTIFICATION = 200;
     public static final int REQUEST_UPLOAD = 300;
+    public static final int REQUEST_MUSICUPLOAD = 310;
     public static final int REQUEST_MAKELABEL = 400;
     public static final int REQUEST_SETTINGLABEL = 410;
+
 
 
     @BindView(R.id.toolbar)

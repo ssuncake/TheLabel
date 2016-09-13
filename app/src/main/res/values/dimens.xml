@@ -28,11 +28,15 @@
     <dimen name="local_height">20dp</dimen>                         <!-- 시/도 , 시/군/구 height 통합용 -->
 
     <dimen name="button_overlapCheck">23dp</dimen>                  <!--중복확인 버튼-->
-    <dimen name="TextSize_EditSignUp_subtitle">10dp</dimen>         <!--성별, 시/도, 시/군/구, 지역, 포지션, 장르-->
-    <dimen name="TextSize_EditSignUp_elementText">14dp</dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->
+    <dimen name="TextSize_EditSignUp_subtitle">10dp
+    </dimen>         <!--성별, 시/도, 시/군/구, 지역, 포지션, 장르-->
+    <dimen name="TextSize_EditSignUp_elementText">14dp
+    </dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->
     <dimen name="profileSize_120dp">120dp</dimen>
-    <dimen name="margin_signUp_subtitle">30dp</dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
-    <dimen name="margin_radiogroup_LeftRight">30dp</dimen>               <!-- 라디오그룹 Left Right 마진값 -->
+    <dimen name="margin_signUp_subtitle">30dp
+    </dimen>               <!--성별, 지역, 포지션, 장르 leftmargin-->
+    <dimen name="margin_radiogroup_LeftRight">30dp
+    </dimen>               <!-- 라디오그룹 Left Right 마진값 -->
     <dimen name="TextSize_radioButton">10dp</dimen>               <!--라디오버튼 텍스트 사이즈-->
 
 
@@ -73,4 +77,10 @@
     <dimen name="messageother_imagesize">40dp</dimen>
     <dimen name="message_text_margin">10dp</dimen>
     <dimen name="message_date_margin">10dp</dimen>
+
+    <!--UploadFragment 속성값들-->
+    <dimen name="upload_icon_size">60dp</dimen>
+    <dimen name="upload_list_padding">10dp</dimen>
+    <dimen name="upload_list_itemleftmargin">20dp</dimen>
+    <dimen name="upload_text_size">30sp</dimen>
 </resources>

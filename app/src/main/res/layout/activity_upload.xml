@@ -5,18 +5,20 @@
     android:layout_height="match_parent"
 
     tools:context=".UploadActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolBar_Upload"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@color/maintitle_blue" />
 
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
 
         <FrameLayout
             android:id="@+id/upload_content"
@@ -41,7 +43,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.22">
 
         <ImageView
             android:layout_width="50dp"
@@ -55,13 +58,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="유저 이름"
                 android:id="@+id/textView_Upload_UserName" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText_Upload_InputText"
                 android:text="설명글"
@@ -69,15 +72,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout_Upload_SelectLabel">
-
-    </LinearLayout>
-
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -87,6 +81,12 @@
 
     </RadioGroup>
 
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup_UploadSelectRadio"></RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"

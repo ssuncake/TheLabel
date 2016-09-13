@@ -13,6 +13,7 @@
     <permission
         android:name="team.nuga.thelabel.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="team.nuga.thelabel.permission.C2D_MESSAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -57,7 +58,7 @@
         </service>
         <service
             android:name=".gcm.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
@@ -137,7 +138,8 @@
         <activity android:name=".LabelSettingActivity" />
         <activity
             android:name=".TestLoginActivity"
-            android:label="TheLabel"></activity>
+            android:label="TheLabel" />
+        <activity android:name=".MusicListActivity"></activity>
     </application>
 
 </manifest>

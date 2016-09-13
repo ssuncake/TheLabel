@@ -130,7 +130,7 @@ public class UserMainFragment extends Fragment {
             public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {
 
 
-                for (int i = 0; i < contentsAdatper.getItemCount(); i++) {
+                for(int i = 0; i< contentsAdatper.getItemCount() ; i++){
                     RecyclerView.ViewHolder rvh = contentsRecycerView.findViewHolderForAdapterPosition(i);
                     ParentContentsViewHolder pvh = (ParentContentsViewHolder) rvh;
                     if (pvh instanceof AccountTypeMusicViewHolder) {

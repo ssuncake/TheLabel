@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     tools:context="team.nuga.thelabel.fragment.UploadMusicFragment"
     android:orientation="horizontal">
 
@@ -10,6 +10,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="음악 업로드"
+        android:text="이곳을 클릭해서 음악을 선택해 주세요"
         android:id="@+id/textView_MusicUpload_FilePath" />
 </LinearLayout>

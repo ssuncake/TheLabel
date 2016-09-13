@@ -1,29 +1,84 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team.nuga.thelabel.fragment.UploadFragment">
+    tools:context="team.nuga.thelabel.fragment.UploadFragment"
+    android:orientation="vertical"
+    android:background="#ffffff">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="음원 업로드"
-        android:id="@+id/button_Upload_MusicUpload"
-        android:layout_gravity="left|top" />
+        android:id="@+id/linearLayout_UploadFragment_MusicUpload"
+        android:padding="@dimen/upload_list_padding">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진 업로드"
-        android:id="@+id/button_Upload_PhotoUpload"
-        android:layout_gravity="left|center_vertical" />
+        <ImageView
+            android:layout_width="@dimen/upload_icon_size"
+            android:layout_height="@dimen/upload_icon_size"
+            android:id="@+id/imageView_UploadFragment_MusicIcon"
+            android:src="@drawable/btn_add"
+            android:layout_marginRight="@dimen/upload_list_itemleftmargin" />
 
-    <Button
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_music"
+            android:id="@+id/textView_UploadFragment_Music"
+            android:textSize="@dimen/upload_text_size"
+            android:layout_gravity="center_vertical"
+            android:textColor="#ff0000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="유튜브업로드"
-        android:id="@+id/button_Upload_YoutubeUpload"
-        android:layout_gravity="left|bottom" />
-</FrameLayout>
+        android:id="@+id/linearLayout_UploadFragment_PictureUpload"
+        android:padding="@dimen/upload_list_padding">
+
+        <ImageView
+            android:layout_width="@dimen/upload_icon_size"
+            android:layout_height="@dimen/upload_icon_size"
+            android:id="@+id/imageView_UploadFragment_PictureIcon"
+            android:src="@drawable/btn_add"
+            android:layout_marginRight="@dimen/upload_list_itemleftmargin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_picture"
+            android:id="@+id/textView_UploadFragment_Picture"
+            android:textSize="@dimen/upload_text_size"
+            android:layout_gravity="center_vertical"
+            android:textColor="#ff0000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout_UploadFragment_YoutubeUpload"
+        android:padding="@dimen/upload_list_padding">
+
+        <ImageView
+            android:layout_width="@dimen/upload_icon_size"
+            android:layout_height="@dimen/upload_icon_size"
+            android:id="@+id/imageView_UploadFragment_YoutubeIcon"
+            android:src="@drawable/btn_add"
+            android:layout_marginRight="@dimen/upload_list_itemleftmargin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_youtube"
+            android:id="@+id/textView_UploadFragment_Youtube"
+            android:textSize="@dimen/upload_text_size"
+            android:layout_gravity="center_vertical"
+            android:textColor="#ff0000" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -39,9 +39,10 @@ public class UploadImageFragment extends Fragment {
         if(bundle!=null){
             try {    String dataUri = bundle.getString("dataUri");
                 Uri uri = Uri.parse(dataUri);
+                Log.e("gallery","이미지버튼으로부터 가져오기 성공"+uri.toString());
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),uri);
                 imageView.setImageBitmap(bitmap);
-                Log.e("gallery","이미지버튼으로부터 가져오기 성공");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

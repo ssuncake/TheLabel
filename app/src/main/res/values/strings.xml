@@ -197,4 +197,10 @@
     <string name="setting_item_copyright">저작권 보호 요청 및 정책</string>
     <string name="setting_item_version">버전정보</string>
     <string name="setting_item_logout">로그아웃</string>
+
+
+    <!--UploadFrgment 에서 사용-->
+    <string name="upload_music">음원 업로드</string>
+    <string name="upload_picture">사진 업로드</string>
+    <string name="upload_youtube">유튜브 업로드</string>
 </resources>

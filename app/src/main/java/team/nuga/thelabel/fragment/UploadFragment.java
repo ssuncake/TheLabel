@@ -24,17 +24,17 @@ public class UploadFragment extends Fragment {
 
 
 
-    @OnClick(R.id.button_Upload_MusicUpload)
+    @OnClick(R.id.linearLayout_UploadFragment_MusicUpload)
     public void ClickMusicUpload(){
         MainActivity mainActivity = (MainActivity)getActivity();
         mainActivity.startUploadActivity(UploadActivity.MUSIC);
     }
-    @OnClick(R.id.button_Upload_PhotoUpload)
+    @OnClick(R.id.linearLayout_UploadFragment_PictureUpload)
     public void ClickPhotoUpload(){
         MainActivity mainActivity = (MainActivity)getActivity();
         mainActivity.startUploadActivity(UploadActivity.PHOTO);
     }
-    @OnClick(R.id.button_Upload_YoutubeUpload)
+    @OnClick(R.id.linearLayout_UploadFragment_YoutubeUpload)
     public void ClickYoutubeUpload(){
         MainActivity mainActivity = (MainActivity)getActivity();
         mainActivity.startUploadActivity(UploadActivity.YOUTUBE);
