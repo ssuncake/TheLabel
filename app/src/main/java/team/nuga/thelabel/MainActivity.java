@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.LikeNotification;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.fragment.MainFragment;
 import team.nuga.thelabel.fragment.MessageListFragment;
@@ -30,11 +32,15 @@ import team.nuga.thelabel.fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.fragment.ProfileSettingFragment;
 import team.nuga.thelabel.fragment.SettingFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.ProfileGetRequest;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String PROFILEUSER = "ProfileUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
     public static final String MAINUSERINLABELS = "MainUserInLabels";
     public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용 레이블객체를 직접 이동
     public static final String LABELID = "labelId"; // 레이블의 아이디만 전달할때 이용
@@ -184,8 +190,8 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
-
+    ContentsAdatper contentsAdatper ;
+    User profile_getUser;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
@@ -197,14 +203,29 @@ public class MainActivity extends AppCompatActivity
             UploadFragment uploadFragment = new UploadFragment();
             uploadFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, uploadFragment).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
-        } else if (id == R.id.drawer_profile) {
+        } else if (id == R.id.drawer_profile) {         ///프로필 설정 이동
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
-            Bundle b = new Bundle();
-            b.putSerializable(MainActivity.MAINUSER, mainUser);
-            ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
-            profileSettingFragment.setArguments(b);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+
+
+            ProfileGetRequest request = new ProfileGetRequest(this);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                    profile_getUser = result.getUser();
+                    Bundle b = new Bundle();
+                    b.putSerializable(MainActivity.PROFILEUSER, profile_getUser);
+                    ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
+                    profileSettingFragment.setArguments(b);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+                }
+                @Override
+                public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                    if(Debug.debugmode)Toast.makeText(MainActivity.this, "유저 가져오기 실패", Toast.LENGTH_SHORT).show();
+//                    b.putSerializable(MainActivity.MAINUSER, mainUser);
+                }
+            });
+
         } else if (id == R.id.drawer_message) {
             actionBar.setTitle("메세지");
             drawer.setCheckedItem(R.id.drawer_message);

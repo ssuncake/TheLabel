@@ -7,8 +7,8 @@ import java.io.Serializable;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class User implements Serializable{
-    //내계정 유저
+public class User implements Serializable {
+    //내계정 유저 기본정보
     private int id;
     @SerializedName("nickname")
     private String userName;
@@ -21,6 +21,75 @@ public class User implements Serializable{
     @SerializedName("user_id")
     private int userID;
 
+    //프로필 기본정보
+    @SerializedName("text")
+    private String User_intro_text;//유저의 자기소개 //140자 제한
+
+    @SerializedName("position")
+    private int postition; //포지션
+    @SerializedName("genre")
+    private int genre;//장르
+    @SerializedName("city")
+    private int city;
+    @SerializedName("town")
+    private int town;
+    @SerializedName("gender")
+    private int user_gender;
+
+    public String getUser_intro_text() {
+        return User_intro_text;
+    }
+
+    public void setUser_intro_text(String user_intro_text) {
+        User_intro_text = user_intro_text;
+    }
+
+    public int getPostition() {
+        return postition;
+    }
+
+    public void setPostition(int postition) {
+        this.postition = postition;
+    }
+
+    public int getGenre() {
+        return genre;
+    }
+
+    public void setGenre(int genre) {
+        this.genre = genre;
+    }
+
+    public int getCity() {
+        return city;
+    }
+
+    public void setCity(int city) {
+        this.city = city;
+    }
+
+    public int getTown() {
+        return town;
+    }
+
+    public void setTown(int town) {
+        this.town = town;
+    }
+
+    public int getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(int user_gender) {
+        this.user_gender = user_gender;
+    }
+    public String getText() {
+        return User_intro_text;
+    }
+
+    public void setText(String text) {
+        this.User_intro_text = text;
+    }
 
     //Search User 부분
     @SerializedName("user_nickname")
@@ -36,20 +105,21 @@ public class User implements Serializable{
     @SerializedName("user_town")
     private String searchUserTown;
 
+
+
+
     public String getUserPassword() {
         return userPassword;
     }
 
 
-
     private Label[] userInLabelList;
 
-    private String userSex;
 
     private String userProfile;
     private String userLocal;
-    private Position userPosition;
-    private Genre userGenre;
+//    private Position userPosition;
+//    private Genre userGenre;
     private boolean userNeed;
 
     public Label[] getUserInLabelList() {
@@ -72,6 +142,7 @@ public class User implements Serializable{
     public String getEmail() {
         return userEmail;
     }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -84,8 +155,9 @@ public class User implements Serializable{
     public int getUserID() {
         return id;
     }
-    public long getLongUserID(){
-        return (long)id;
+
+    public long getLongUserID() {
+        return (long) id;
     }
 
     public void setUserID(int userID) {
@@ -99,6 +171,7 @@ public class User implements Serializable{
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
     public String getSearchUserName() {
         return searchUserName;
     }
@@ -106,6 +179,7 @@ public class User implements Serializable{
     public void setSearchUserName(String searchUserName) {
         this.searchUserName = searchUserName;
     }
+
     public String getSearchUserImage() {
         return searchUserImage;
     }
@@ -113,6 +187,7 @@ public class User implements Serializable{
     public void setSearchUserImage(String searchUserImage) {
         this.searchUserImage = searchUserImage;
     }
+
     public String getSearchUserPosition() {
         return searchUserPosition;
     }

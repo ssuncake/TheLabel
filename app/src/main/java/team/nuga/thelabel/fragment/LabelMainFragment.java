@@ -155,8 +155,6 @@ public class LabelMainFragment extends Fragment {
                     members = result.getMember();
                     for(Member m : members)
                         adapter.addUser(m);
-
-
                     contentses = result.getData();
                     for (Contents c : contentses) {
                         Log.d("게시글 ID", "" + c.getContentsID());
