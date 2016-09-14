@@ -2,16 +2,26 @@ package team.nuga.thelabel.fragment;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
@@ -27,7 +37,9 @@ import team.nuga.thelabel.request.UserTextSearchRequest;
 public class UserSearchFragment extends Fragment {
     RecyclerView listView;
     SearchUserResultListAdapter useradapter;
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    EditText searchTitle;
+    @BindView(R.id.imageButton_search)
+    ImageButton searchButton;
     public UserSearchFragment() {
         // Required empty public constructor
     }
@@ -37,8 +49,11 @@ public class UserSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
-
+        ButterKnife.bind(this,view);
+        int color = Color.parseColor("#060928");
         listView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
+        searchTitle = (EditText)view.findViewById(R.id.editText_search);
+        searchTitle.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         useradapter = new SearchUserResultListAdapter();
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
@@ -48,43 +63,36 @@ public class UserSearchFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        Bundle bundle = getArguments();
-        String searchText = bundle.getString("searchText");
-        String sort="";
-
-        //String searchText = "o";
-
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
         listView.setAdapter(useradapter);
         return view;
     }
-//    String searchText = "o";
-    public void a(String inputText){
-        if (inputText != null) {
-            UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, inputText,"genre");
+    String searchText;
+    @OnClick(R.id.imageButton_search)
+    public void searchButton(){
+            searchText = searchTitle.getText().toString();
+            UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, searchText, "");
             NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
                 @Override
                 public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
                     User[] user = result.getResult();
-                    if(user == null){
-                        Log.e("네트워크","유저 널");
-                    }else{
-                        Log.e("네트워크",user.length+"");
+                    if (user == null) {
+                        Log.e("네트워크", "유저 널");
+                    } else {
+                        Log.e("네트워크", user.length + "");
                     }
                     for (User u : user) {
                         useradapter.add(u);
-                        }
+                    }
                 }
+
                 @Override
                 public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
 
                 }
             });
         }
-    }
-
 
 }

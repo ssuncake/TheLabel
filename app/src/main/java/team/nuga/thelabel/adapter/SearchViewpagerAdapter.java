@@ -17,10 +17,9 @@ public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
     Bundle bundle;
     String searchText;
 
-    public SearchViewpagerAdapter(FragmentManager fm, int tabCount,String searchText) {
+    public SearchViewpagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
         this.numtabs =tabCount;
-        this.searchText = searchText;
     }
 
     @Override
@@ -28,9 +27,9 @@ public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0:
                 UserSearchFragment tab1 = new UserSearchFragment();
-                bundle = new Bundle();
-                bundle.putString("searchText", searchText );
-                tab1.setArguments(bundle);
+//                bundle = new Bundle();
+//                bundle.putString("searchText", searchText );
+//                tab1.setArguments(bundle);
                 return tab1;
             case 1:
                 LabelSearchFragment tab2 = new LabelSearchFragment();

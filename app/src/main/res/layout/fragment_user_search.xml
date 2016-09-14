@@ -6,9 +6,39 @@
     tools:context="team.nuga.thelabel.fragment.UserSearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <RelativeLayout
-        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_search"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:maxEms="16"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentTop="true"
+            android:textSize="15sp"
+            android:hint="닉네임, 레이블, 포지션, 지역, 장르 선택"
+            android:textColorHint="@color/maintitle_blue"
+            android:layout_toRightOf="@+id/imageButton_back"
+            android:layout_toEndOf="@+id/imageButton_back"
+            android:textColor="#060928" />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/imageButton_search"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"
+            android:src="@drawable/btn_top_search_blue"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/editText_search"
+            android:layout_alignEnd="@+id/editText_search" />
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/search">
