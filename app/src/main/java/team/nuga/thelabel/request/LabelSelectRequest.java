@@ -16,9 +16,6 @@ import team.nuga.thelabel.data.NetworkResult;
  * Created by Tacademy on 2016-08-30.
  */
 public class LabelSelectRequest extends AbstractRequest<NetworkResult<Label[]>> {
-
-
-
     private static final String PATH = "labels";
     private static final String PATH2 = "me";
 
@@ -35,8 +32,6 @@ public class LabelSelectRequest extends AbstractRequest<NetworkResult<Label[]>> 
                 .tag(context)
                 .build();
     }
-
-
 
     @Override
     protected Type getType() {

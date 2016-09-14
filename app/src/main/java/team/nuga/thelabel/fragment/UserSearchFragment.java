@@ -35,11 +35,12 @@ import team.nuga.thelabel.request.UserTextSearchRequest;
  * A simple {@link Fragment} subclass.
  */
 public class UserSearchFragment extends Fragment {
-    RecyclerView listView;
+    RecyclerView userListView;
     SearchUserResultListAdapter useradapter;
-    EditText searchTitle;
-    @BindView(R.id.imageButton_search)
-    ImageButton searchButton;
+    EditText userSearchText;
+    @BindView(R.id.imageButton_user_search)
+    ImageButton userSearchButton;
+
     public UserSearchFragment() {
         // Required empty public constructor
     }
@@ -49,11 +50,11 @@ public class UserSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         int color = Color.parseColor("#060928");
-        listView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
-        searchTitle = (EditText)view.findViewById(R.id.editText_search);
-        searchTitle.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        userListView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
+        userSearchText = (EditText) view.findViewById(R.id.editText_user_search);
+        userSearchText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         useradapter = new SearchUserResultListAdapter();
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
@@ -65,34 +66,31 @@ public class UserSearchFragment extends Fragment {
         });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
-        listView.setLayoutManager(manager);
-        listView.setAdapter(useradapter);
+        userListView.setLayoutManager(manager);
+        userListView.setAdapter(useradapter);
         return view;
     }
+
     String searchText;
-    @OnClick(R.id.imageButton_search)
-    public void searchButton(){
-            searchText = searchTitle.getText().toString();
-            UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, searchText, "");
-            NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
-                @Override
-                public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
-                    User[] user = result.getResult();
-                    if (user == null) {
-                        Log.e("네트워크", "유저 널");
-                    } else {
-                        Log.e("네트워크", user.length + "");
-                    }
-                    for (User u : user) {
-                        useradapter.add(u);
-                    }
-                }
 
-                @Override
-                public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
-
+    @OnClick(R.id.imageButton_user_search)
+    public void userSearchButton() {
+        searchText = userSearchText.getText().toString();
+        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, searchText, "");
+        NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
+                User[] user = result.getResult();
+                for (User u : user) {
+                    useradapter.add(u);
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
+    }
 
 }

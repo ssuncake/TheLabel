@@ -35,16 +35,6 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
     public void setOnSearchItemClickListener(OnSearchUserItemClickListener listener){
         this.listener = listener;
     }
-
-//    public interface OnTextSearchUserItemClick{
-//        public void onTextUserSearchItemClick(View view, User user, int position);
-//    }
-//    OnTextSearchUserItemClick searchListener;
-//    public void setOnTextSearchUserItemClickListener(OnTextSearchUserItemClick searchListener){
-//        this.searchListener = searchListener;
-//    }
-//
-
     public SearchUserViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);

@@ -10,27 +10,75 @@ import java.io.Serializable;
 public class Label implements Serializable {
     @SerializedName("id")
     private int labelID; // 레이블 셀렉에서 이걸로사용
-
     @SerializedName("authority")
     private int labelLeaderID;
-
     @SerializedName("name")
     private String labelName;
-
     @SerializedName("text")
     private String labelProfile;
-
     @SerializedName("needposition")
     private String[] labelNeedPositionList;
-
     @SerializedName("genre")
     private String labelGenre;
-
     @SerializedName("imagepath")
     private String image_path;
-
     private int labelILike;
 
+
+//    텍스트 레이블 검색
+    @SerializedName("label_id")
+    private int searchLabelId;
+    @SerializedName("label_name")
+    private String searchLabelName;
+    @SerializedName("label_image_path")
+    private String searchLabelImage;
+    @SerializedName("label_genre")
+    private String searchLabelGenre;
+
+    @SerializedName("label_need_position")
+    private String searchLabelPosition;
+
+
+
+    public String getSearchLabelPosition() {
+        return searchLabelPosition;
+    }
+
+    public void setSearchLabelPosition(String searchLabelPosition) {
+        this.searchLabelPosition = searchLabelPosition;
+    }
+
+    public int getSearchLabelId() {
+        return searchLabelId;
+    }
+
+    public void setSearchLabelId(int searchLabelId) {
+        this.searchLabelId = searchLabelId;
+    }
+
+    public String getSearchLabelName() {
+        return searchLabelName;
+    }
+
+    public void setSearchLabelName(String searchLabelName) {
+        this.searchLabelName = searchLabelName;
+    }
+
+    public String getSearchLabelImage() {
+        return searchLabelImage;
+    }
+
+    public void setSearchLabelImage(String searchLabelImage) {
+        this.searchLabelImage = searchLabelImage;
+    }
+
+    public String getSearchLabelGenre() {
+        return searchLabelGenre;
+    }
+
+    public void setSearchLabelGenre(String searchLabelGenre) {
+        this.searchLabelGenre = searchLabelGenre;
+    }
 
     public boolean isNeed(){
        if(labelNeedPositionList.length==0 || labelNeedPositionList==null || labelNeedPositionList[0].equals("선택하지않음"))
