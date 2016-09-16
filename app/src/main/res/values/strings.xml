@@ -203,4 +203,13 @@
     <string name="upload_music">음원 업로드</string>
     <string name="upload_picture">사진 업로드</string>
     <string name="upload_youtube">유튜브 업로드</string>
+
+    <!--UploadActivity 사용-->
+    <string name="upload_public">전체 공개</string>
+    <string name="upload_label">레이블 공개</string>
+    <string name="upload_private">비공개</string>
+    <string name="upload_UploadWhereTitle">올릴 장소 선택</string>
+    <string name="upload_UploadOpenTitle">공개 설정</string>
+    <string name="upload_upload_exec">업로드 하기</string>
+
 </resources>

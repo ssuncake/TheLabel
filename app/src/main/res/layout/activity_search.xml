@@ -45,6 +45,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="검색"
         android:textSize="15sp"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView_search_title"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

@@ -25,12 +25,11 @@ public class UploadImageContentRequest extends AbstractRequest<NetworkResult> {
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("filetype", "" + filetype)
+                .addFormDataPart("file", "" + file)
                 .addFormDataPart("filetitle", filetitle)
                 .addFormDataPart("opento", "" + opento)
-                .addFormDataPart("text", text);
-        if (opento == 1) {
-            builder.addFormDataPart("label_id", "" + label_id);
-        }
+                .addFormDataPart("text", text)
+                .addFormDataPart("label_id", "" + label_id);
 
         if (file != null) {
             builder.addFormDataPart("file", file.getName(),

@@ -17,7 +17,7 @@ import team.nuga.thelabel.data.NetworkResult;
 public class UploadMusicContentRequest extends AbstractRequest<NetworkResult> {
 
     private static final String UPLOAD = "posts";
-    MediaType Mp3 = MediaType.parse("image/jpeg");
+    MediaType Mp3 = MediaType.parse("mp3");
     Request request;
 
     public UploadMusicContentRequest(Context context, int filetype, File file, String filetitle, int label_id, int opento, String text) {
@@ -27,13 +27,12 @@ public class UploadMusicContentRequest extends AbstractRequest<NetworkResult> {
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("filetype", "" + filetype)
-                .addFormDataPart("file", "" + file)
                 .addFormDataPart("filetitle", filetitle)
                 .addFormDataPart("label_id", "" + label_id)
-                .addFormDataPart("opento", String.valueOf(opento))
+                .addFormDataPart("opento", ""+ opento)
                 .addFormDataPart("text", text);
         if (file != null) {
-            builder.addFormDataPart("image", file.getName(),
+            builder.addFormDataPart("file", file.getName(),
                     RequestBody.create(Mp3, file));
         }
         RequestBody body = builder.build();
