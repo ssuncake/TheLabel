@@ -25,6 +25,7 @@ import butterknife.OnClick;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
+import team.nuga.thelabel.data.ClearEditText;
 import team.nuga.thelabel.data.NetworkResultUserSearch;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
@@ -37,7 +38,8 @@ import team.nuga.thelabel.request.UserTextSearchRequest;
 public class UserSearchFragment extends Fragment {
     RecyclerView userListView;
     SearchUserResultListAdapter useradapter;
-    EditText userSearchText;
+//    EditText userSearchText;
+    ClearEditText clearEditText;
     @BindView(R.id.imageButton_user_search)
     ImageButton userSearchButton;
 
@@ -53,8 +55,8 @@ public class UserSearchFragment extends Fragment {
         ButterKnife.bind(this, view);
         int color = Color.parseColor("#060928");
         userListView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
-        userSearchText = (EditText) view.findViewById(R.id.editText_user_search);
-        userSearchText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        clearEditText = (ClearEditText) view.findViewById(R.id.CustomView_claerEditText_user);
+        clearEditText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         useradapter = new SearchUserResultListAdapter();
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
@@ -75,7 +77,7 @@ public class UserSearchFragment extends Fragment {
 
     @OnClick(R.id.imageButton_user_search)
     public void userSearchButton() {
-        searchText = userSearchText.getText().toString();
+        searchText = clearEditText.getText().toString();
         UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, searchText, "");
         NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
             @Override

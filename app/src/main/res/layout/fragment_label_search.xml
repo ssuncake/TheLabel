@@ -9,34 +9,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_label_search"
-            android:singleLine="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:maxEms="16"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentTop="true"
-            android:textSize="15sp"
-            android:hint="레이블 이름 검색"
-            android:textColorHint="@color/maintitle_blue"
-            android:layout_toRightOf="@+id/imageButton_back"
-            android:layout_toEndOf="@+id/imageButton_back"
-            android:textColor="#060928" />
 
         <ImageButton
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:id="@+id/imageButton_label_search"
             android:scaleType="fitCenter"
             android:background="@color/transparent"
             android:src="@drawable/btn_top_search_blue"
             android:layout_centerVertical="true"
-            android:layout_alignRight="@+id/editText_label_search"
-            android:layout_alignEnd="@+id/editText_label_search" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+        <team.nuga.thelabel.data.ClearEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CustomView_claerEditText_label"
+            android:hint="레이블 검색"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:maxEms="16"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentTop="true"
+            android:textSize="15sp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

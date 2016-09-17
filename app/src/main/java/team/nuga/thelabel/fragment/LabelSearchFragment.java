@@ -22,6 +22,7 @@ import butterknife.OnClick;
 import team.nuga.thelabel.OtherLabelActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchLabelResultListAdapter;
+import team.nuga.thelabel.data.ClearEditText;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.NetworkResultLabelSearch;
 import team.nuga.thelabel.data.User;
@@ -36,7 +37,8 @@ import team.nuga.thelabel.request.LabelTextSelectRequest;
 public class LabelSearchFragment extends Fragment {
     RecyclerView labelListView;
     SearchLabelResultListAdapter labeladapter;
-    EditText labelSearchText;
+//    EditText labelSearchText;
+    ClearEditText clearEditText;
     @BindView(R.id.imageButton_label_search)
     ImageButton labelSearchButton;
 
@@ -52,8 +54,10 @@ public class LabelSearchFragment extends Fragment {
         ButterKnife.bind(this,view);
         int color = Color.parseColor("#060928");
         labelListView = (RecyclerView)view.findViewById(R.id.recyclerview_label_search);
-        labelSearchText = (EditText) view.findViewById(R.id.editText_label_search);
-        labelSearchText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+//        labelSearchText = (EditText) view.findViewById(R.id.editText_label_search);
+//        labelSearchText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        clearEditText = (ClearEditText) view.findViewById(R.id.CustomView_claerEditText_label);
+        clearEditText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         labeladapter = new SearchLabelResultListAdapter();
         labeladapter.setOnAdapterItemClickListener(new SearchLabelResultListAdapter.OnAdapterItemClickListener() {
             @Override
@@ -72,7 +76,7 @@ public class LabelSearchFragment extends Fragment {
     String searchText;
     @OnClick(R.id.imageButton_label_search)
     public void labelSearchButton(){
-        searchText = labelSearchText.getText().toString();
+        searchText = clearEditText.getText().toString();
         LabelTextSelectRequest labelTextSelectRequest = new LabelTextSelectRequest(getContext(),1,10,searchText,"");
         NetworkManager.getInstance().getNetworkData(labelTextSelectRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
             @Override
