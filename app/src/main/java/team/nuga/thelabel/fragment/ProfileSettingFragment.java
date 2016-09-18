@@ -1,19 +1,31 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +35,7 @@ import team.nuga.thelabel.Debug;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.CheckEmailResult;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -34,19 +47,33 @@ import team.nuga.thelabel.request.CheckNicknameRequest;
 public class ProfileSettingFragment extends Fragment {
 
 
-    User user= null;
+    User user = null;
+    @BindView(R.id.textInput_nickname)
+    TextInputLayout textinput_nickname;
     @BindView(R.id.editText_signUp_userNickName)
     EditText editText_userNickName;
     @BindView(R.id.ImageView_profileImage)
     ImageView imageView_profileImage;
 
+    public void inProfileImageView() {
+        String imageUrl = user.getImageUrl();
+        Glide.with(this)
+                .load(imageUrl)
+                .transform(new RoundImageTransform(getContext()))
+                .into(imageView_profileImage);
+    }
+
     @BindView(R.id.button_checkOverlap)
     Button button_checkOverlap; //닉네임 중복확인 버튼
+
     static final int AVAILABLE = 0;
     static final int NOT_AVAILABLE = 1;
+    boolean nicknameCheck = false;
+    private String nickname;
+
     @OnClick(R.id.button_checkOverlap)//중복확인 버튼
     public void onClickCheckOverlap() {
-        String nickname = editText_userNickName.getText().toString();
+        nickname = editText_userNickName.getText().toString();
         CheckNicknameRequest nicknameRequest = new CheckNicknameRequest(getContext(), nickname);
         NetworkManager.getInstance().getNetworkData(nicknameRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
             @Override
@@ -54,84 +81,230 @@ public class ProfileSettingFragment extends Fragment {
                 if (result.getMatch() == AVAILABLE) {
                     Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
                     Toast.makeText(getContext(), "사용해도 좋은 닉네임입니다♪", Toast.LENGTH_SHORT).show();
+                    nicknameCheck = true;
                 } else if (result.getMatch() == NOT_AVAILABLE) {
                     Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
-                    Toast.makeText(getContext(), "닉네임이 이미 있어요!!!!!!!!!!!!!!!!!!!!!!!ㅋ", Toast.LENGTH_SHORT).show();
+                    editText_userNickName.setError("cccc");
+                    nicknameCheck = false;
                 }
             }
 
             @Override
             public void onFail(NetworkRequest<CheckEmailResult> request, int errorCode, String errorMessage, Throwable e) {
-
+                Toast.makeText(getContext(), "네트워크 확인..", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-//    @OnClick(R.id.button_ProfileSetting_Complete)
-//    public void ClickComplete(){
+
+    @BindView(R.id.radioGroup_ProfileSetting_need)
+    RadioGroup radioGroup_need;
+    @BindView(R.id.radioButton_needOn)
+    RadioButton radioButton_needOn;
+    @BindView(R.id.radioButton_needOff)
+    RadioButton radioButton_needOff;
+
+    int need = 0; //Default = 0; 선택 안함
+
+    public void onClickRadioGroup_need()   //NEED 체크 라디오 버튼
+    {
+        radioGroup_need.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+                switch (checkedPosition) {
+                    case R.id.radioButton_needOn:
+                        need = 1;
+                        if (Debug.debugmode)
+                            Toast.makeText(getContext(), "need On", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radioButton_needOff:
+                        need = 0;
+                        if (Debug.debugmode)
+                            Toast.makeText(getContext(), "need OFF", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        if (user.getNeed() == 0) {
+            radioButton_needOff.setChecked(true);
+        } else if (user.getNeed() == 1) {
+            radioButton_needOn.setChecked(true);
+            need = 1;
+        }
+    }
+
+    @OnClick(R.id.imageButton_profileSet)
+    public void ClickComplete() //수정완료버튼
+    {
+        Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
+        if (Debug.debugmode)
+            Log.i("profile Info", "---------------------------------------------------");
 ////        String inputUserName= inputName.getText().toString();
-////        user.setUserName(inputUserName);
-//        if(Debug.debugmode)Log.i(" 유저 정보1 ", " 닉네임 : "+user.getUserName()+", 사용자 ID"+user.getUserID());
-//        if(Debug.debugmode)Log.i(" 유저 정보2 ", " 자기소개 :"+user.getText()+", 이미지Url:"+user.getImageUrl()+
-//                ", 포지션:"+user.getPostition()+", 장르:"+user.getGenre()+", 시/도 :"+user.getCity()+", 시군구"+user.getTown());
+//        user.setUserName(inputUserName);
+        if (Debug.debugmode)
+            Log.i(" 유저 정보1 ", " 닉네임 : " + nickname + ", 사용자 ID" + user.getUserID());
+        if (Debug.debugmode) Log.i(" 유저 정보2 ", " 자기소개 :" + textInputEditText_introText.getText());
+        if (Debug.debugmode) Log.i(" 유저 정보3 ", " 이미지Url:" + user.getImageUrl());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId + ", 시군구:" + townId + ", Need :" + need);
 ////        MainActivity mainActivity = (MainActivity)getActivity();
 ////        mainActivity.drawerUserSetting(inputUserName);
 ////        mainActivity.goMainFragment(MainFragment.USERTAB);
-//    }
+    }
 
 
     public ProfileSettingFragment() {
         // Required empty public constructor
     }
 
-    @BindView(R.id.spinner_city)
-    Spinner spinner_city;
-    @BindView(R.id.spinner_town)
-    Spinner spinner_town;
+    @BindView(R.id.textView_userProfileEmail)
+    TextView textView_userEmail;
+    @BindView(R.id.textInput_introText)
+    TextInputLayout textInputLayout_introtext;
+    @BindView(R.id.editText_introText)
+    TextInputEditText textInputEditText_introText;
 
-    @BindView(R.id.spinner_genre)
+    @BindView(R.id.spinner_genre_profile)
     Spinner spinner_genre;
 
-    @OnItemSelected(value = R.id.spinner_genre, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    @OnItemSelected(value = R.id.spinner_genre_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onGenreSelected(int position) {
         genreId = position + 1;
     }
 
-    @BindView(R.id.spinner_position)
+    @BindView(R.id.spinner_position_profile)
     Spinner spinner_position;
 
-    @OnItemSelected(value = R.id.spinner_position, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    @OnItemSelected(value = R.id.spinner_position_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onPositionSelected(int position) {
         positionId = position + 1;
     }
+
+    public static int LIMITTED_TEXTLINE = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_setting, container, false);
-        ButterKnife.bind(this,view);
-        user = (User)getArguments().getSerializable(MainActivity.PROFILEUSER);
-        if(Debug.debugmode)Log.i("세팅프래그먼트","진입");
-        if(Debug.debugmode)Log.i("세팅프래그먼트",""+user.getUserID());
-//        if(Debug.debugmode)Log.i(" 유저 정보1 ", " 닉네임 : "+user.getUserName()+", 사용자 ID"+user.getUserID());
-//        if(Debug.debugmode)Log.i(" 유저 정보2 ", " 자기소개 :"+user.getText()+", 이미지Url:"+user.getImageUrl()+
-//                ", 포지션:"+user.getPostition()+", 장르:"+user.getGenre()+", 시/도 :"+user.getCity()+", 시군구"+user.getTown());
+        ButterKnife.bind(this, view);
+
+        user = (User) getArguments().getSerializable(MainActivity.PROFILEUSER);
+        if (Debug.debugmode)
+            Log.i(" 유저 정보1 ", " 닉네임 : " + user.getUserName() + ", 사용자 ID" + user.getUserID());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보2 ", " 자기소개 :" + user.getText() + ", 이미지Url:" + user.getImageUrl());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보3 ", " 포지션:" + user.getPostition() + ", 장르:" + user.getGenre());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보4 ", " 시/도 :" + user.getCity() + ", 시군구 :" + user.getTown() + ", Need :" + user.getNeed());
+
+        String[] positionList = getResources().getStringArray(R.array.positionlist);
+        String[] genreList = getResources().getStringArray(R.array.genrelist);
+
+        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, cityList);
+        spinner_cityAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_city.setAdapter(spinner_cityAdapter);
+        ArrayAdapter positionAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, positionList);
+        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_position.setAdapter(positionAdapter);
+        ArrayAdapter genreAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, genreList);
+        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_genre.setAdapter(genreAdapter);
+        int color = Color.parseColor("#ffffffff");
+        textInputEditText_introText.addTextChangedListener(introTextWatcher);
+        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        textInputEditText_introText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    Toast.makeText(getContext(), "Action Done", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+        textInputLayout_introtext.setCounterEnabled(true);
+        textInputLayout_introtext.setCounterMaxLength(60);
+
+        editText_userNickName.addTextChangedListener(nicknameWatcher);
+        textView_userEmail.setText(user.getEmail());
+        onClickRadioGroup_need();
 
         return view;
     }
+
+
+    TextWatcher nicknameWatcher = new TextWatcher() {
+        String before = "";
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            before = charSequence.toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length() > 8) {
+                editText_userNickName.setText(before);
+                editText_userNickName.setSelection(textInputEditText_introText.length());
+                editText_userNickName.setError("2~8자로 입력해주세요");
+            } else if (editable.length() < 2) {
+                editText_userNickName.setError("2~8자로 입력해주세요");
+            }
+
+
+        }
+    };
+
+    TextWatcher introTextWatcher = new TextWatcher() {
+        String before = "";
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            before = charSequence.toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length() > 60) {
+                textInputLayout_introtext.setError("error");
+            } else {
+                textInputLayout_introtext.setError(null);
+            }
+            if (textInputEditText_introText.getLineCount() > LIMITTED_TEXTLINE) { //라인수 제한
+                textInputEditText_introText.setText(before);
+                textInputEditText_introText.setSelection(textInputEditText_introText.length());
+            }
+        }
+    };
+
+
     int townId = 0;
     int cityId = 0;
-    int userGender = 0;
     int positionId = 1; //Default = 1 ; 선택안함
     int genreId = 1;  // Default = 1 ; 선택안함
 
-    @OnItemSelected(value = R.id.spinner_city, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    @BindView(R.id.spinner_city_profile)
+    Spinner spinner_city;
+    @BindView(R.id.spinner_town_profile)
+    Spinner spinner_town;
+
+    @OnItemSelected(value = R.id.spinner_city_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onItemSelected(int position) {
         position = position + 1;
         cityId = position;
         if (position == 1) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Town_Default);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Town_Default);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -141,12 +314,11 @@ public class ProfileSettingFragment extends Fragment {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
         } else if (position == 2) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Seoul);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Seoul);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -164,8 +336,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 3) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Gyeonggi);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Gyeonggi);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -183,8 +355,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 4) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Gangwon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Gangwon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -202,8 +374,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 5) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Incheon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Incheon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -221,8 +393,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 6) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, ChungBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, ChungBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -240,8 +412,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 7) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, ChungNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, ChungNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -259,8 +431,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 8) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Sejong);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Sejong);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -278,8 +450,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 9) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, DaeJeon);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, DaeJeon);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -297,8 +469,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 10) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, GyongBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, GyongBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -316,8 +488,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 11) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, GyonNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, GyonNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -335,8 +507,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 12) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, DaeGu);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, DaeGu);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -354,8 +526,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 13) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Busan);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Busan);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -373,8 +545,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 14) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Ulsan);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Ulsan);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -392,8 +564,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 15) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, JeonBook);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, JeonBook);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -411,8 +583,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 16) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, JeonNam);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, JeonNam);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -430,8 +602,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         } else if (position == 17) {
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Gwangju);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Gwangju);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -450,8 +622,8 @@ public class ProfileSettingFragment extends Fragment {
             });
         } else if (position == 18) {
             townId = 1;
-            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin, Jeju);
-            spinner_townAdapter.setDropDownViewResource(R.layout.spin);
+            ArrayAdapter spinner_townAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, Jeju);
+            spinner_townAdapter.setDropDownViewResource(R.layout.spin_profile);
             spinner_town.setAdapter(spinner_townAdapter);
             spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -471,7 +643,6 @@ public class ProfileSettingFragment extends Fragment {
         }
 
     }
-
 
 
     public String[] cityList = {

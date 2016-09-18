@@ -134,24 +134,10 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            appFunction.onBackPressed();
-//            if (backButtonClicked == false) {
-//                Toast.makeText(MainActivity.this, "한번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
-//                backButtonClicked = true;
-//                mHandler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        backButtonClicked = false;
-//                    }
-//                },1000);
-//            }
-//            else if(backButtonClicked == true) {
-//                Toast.makeText(MainActivity.this, "앱이 종료되었습니다.", Toast.LENGTH_SHORT).show();
-//                    super.onBackPressed();
-//            }
+            appFunction.appFinished();
+
 
         }
-
 
     }
 

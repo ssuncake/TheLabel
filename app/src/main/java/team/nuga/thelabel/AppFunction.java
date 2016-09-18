@@ -18,7 +18,7 @@ public class AppFunction {
         this.activity = context;
     }
 
-    public void onBackPressed() {
+    public void appFinished() {
         if (System.currentTimeMillis() > backKeyPressedTime + BACK_PRESSED_TIME) {
             backKeyPressedTime = System.currentTimeMillis();
             showGuide();

@@ -2,15 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_gray_1"
     android:orientation="vertical"
-    android:background="@color/color_white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     tools:context="team.nuga.thelabel.fragment.ProfileSettingFragment">
 
     <RelativeLayout
-        android:layout_marginTop="?android:attr/actionBarSize"
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/textView_userProfileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/color_gray_1"
+            android:text="email" />
 
         <View
             android:id="@+id/view"
@@ -54,12 +64,13 @@
         android:layout_below="@+id/relativeLayout">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/view2"
+            android:id="@+id/textInput_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:textColorHint="@color/designColor">
 
             <EditText
                 android:id="@+id/editText_signUp_userNickName"
@@ -67,36 +78,66 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:hint="닉네임변경"
+                android:textColor="@color/designColor" />
 
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/button_checkOverlap"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="중복확인" />
+            android:layout_alignParentTop="true"
+            android:background="@color/designColor"
+            android:text="중복확인"
+            android:textColor="@color/color_white" />
 
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout2"
-        android:id="@+id/relativeLayout3">
+        android:layout_below="@+id/relativeLayout2">
 
-        <EditText
-            android:hint="소개글"
-            android:id="@+id/editText"
+        <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignBottom="@+id/textInput_introText"
+            android:background="@drawable/rounded_rectangle_10dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInput_introText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_radiogroup_LeftRight"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/designColor">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editText_introText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/margin_radiogroup_LeftRight"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="소개글"
+                android:minLines="3"
+                android:maxLines="3"
+                android:textColor="@color/designColor" />
+        </android.support.design.widget.TextInputLayout>
+
 
     </RelativeLayout>
 
@@ -109,16 +150,17 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout3"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout2">
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spinner_heightSize"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -130,10 +172,11 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="포지션"
+                android:textColor="@color/designColor"
                 android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <Spinner
-                android:id="@+id/spinner_position"
+                android:id="@+id/spinner_position_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="6" />
@@ -141,7 +184,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spinner_heightSize"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -153,10 +196,11 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/text_Genre"
+                android:textColor="@color/designColor"
                 android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <Spinner
-                android:id="@+id/spinner_genre"
+                android:id="@+id/spinner_genre_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="6" />
@@ -166,7 +210,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spinner_heightSize"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -174,14 +218,15 @@
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="@dimen/signUp_subtitle_second_width"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/local_height"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/text_city"
+                android:textColor="@color/designColor"
                 android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <Spinner
-                android:id="@+id/spinner_city"
+                android:id="@+id/spinner_city_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="6" />
@@ -190,7 +235,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spinner_heightSize"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -198,14 +243,15 @@
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="@dimen/signUp_subtitle_second_width"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/local_height"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/text_city_detail"
+                android:textColor="@color/designColor"
                 android:textSize="@dimen/TextSize_EditSignUp_subtitle" />
 
             <Spinner
-                android:id="@+id/spinner_town"
+                android:id="@+id/spinner_town_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="6" />
@@ -213,77 +259,87 @@
 
 
     </LinearLayout>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout2"
 
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="NEED"
-        android:textSize="14dp"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/textView3" />
+        android:layout_below="@+id/linearLayout2">
 
-    <RadioGroup
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:id="@+id/radioGroup"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:layout_weight="1"
-            android:id="@+id/radioButton2" />
         <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ON"/>
+            android:id="@+id/textView3"
+            android:layout_width="@dimen/signUp_subtitle_second_width"
+            android:layout_height="@dimen/local_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="NEED"
+            android:textColor="@color/designColor"
+            android:textSize="14dp" />
 
-        <RadioButton
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New RadioButton"
-            android:id="@+id/radioButton"            />
-            <TextView
-                android:layout_weight="1"
+        <RadioGroup
+            android:id="@+id/radioGroup_ProfileSetting_need"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/radioButton_needOn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OFF"/>
-    </RadioGroup>
-</RelativeLayout>
+                android:layout_weight="1"
+                android:button="@drawable/oncheck_radiobutton"
+                android:text="ON"
+                android:textColor="@color/designColor" />
 
-    <TextView
+
+            <RadioButton
+                android:id="@+id/radioButton_needOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/oncheck_radiobutton"
+                android:text="OFF"
+                android:textColor="@color/designColor" />
+
+        </RadioGroup>
+    </RelativeLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="수정하기"
-        android:textSize="40dp"
-        android:gravity="center"
-        android:textColor="@color/designColor"
         android:layout_alignParentBottom="true"
-     />
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_rectangle"
-        android:id="@+id/imageButton_profileSet"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="34dp">
+
+        <ImageButton
+            android:id="@+id/imageButton_profileSet"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/rounded_rectangle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="설정완료"
+            android:textColor="@color/designColor"
+            android:textSize="30dp" />
+    </FrameLayout>
+
 
     <!-- TODO: Update blank fragment layout -->
 

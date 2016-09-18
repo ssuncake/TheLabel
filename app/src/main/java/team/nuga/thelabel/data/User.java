@@ -24,16 +24,26 @@ public class User implements Serializable {
     //프로필 기본정보
     @SerializedName("text")
     private String User_intro_text;//유저의 자기소개 //140자 제한
+    @SerializedName("need")
+    private int need;
 
-    @SerializedName("position")
+    public int getNeed() {
+        return need;
+    }
+
+    public void setNeed(int need) {
+        this.need = need;
+    }
+
+    @SerializedName("position_id")
     private int postition; //포지션
-    @SerializedName("genre")
+    @SerializedName("genre_id")
     private int genre;//장르
-    @SerializedName("city")
+    @SerializedName("city_id")
     private int city;
-    @SerializedName("town")
+    @SerializedName("town_id")
     private int town;
-    @SerializedName("gender")
+    @SerializedName("gender_id")
     private int user_gender;
 
     public String getUser_intro_text() {

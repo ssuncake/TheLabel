@@ -38,6 +38,8 @@
     <dimen name="margin_radiogroup_LeftRight">30dp
     </dimen>               <!-- 라디오그룹 Left Right 마진값 -->
     <dimen name="TextSize_radioButton">10dp</dimen>               <!--라디오버튼 텍스트 사이즈-->
+    <dimen name="spinner_heightSize">40dp</dimen>               <!--회원가입 스피너 4개 각 세로 길이-->
+
 
 
     <!--User IntroActivity-->

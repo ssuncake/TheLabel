@@ -269,6 +269,7 @@ public class SignUpEditActivity extends AppCompatActivity {
                 if (c.moveToNext()) {
                     String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
                     imagefile = new File(path);
+
                     Glide.with(this)
                             .load(uri)
                             .transform(new RoundImageTransform(this))

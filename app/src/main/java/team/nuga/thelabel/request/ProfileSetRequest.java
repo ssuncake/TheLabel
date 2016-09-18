@@ -24,7 +24,7 @@ public class ProfileSetRequest extends AbstractRequest<NetworkResult> {
 MediaType jpeg = MediaType.parse("image/jpeg");
     Request request;
     public ProfileSetRequest(Context context, String nickname,int gender_id, int position_id,
-                             int genre_id,String text, int city_id, int town_id, File file) {
+                             int genre_id,String text, int city_id, int town_id, File file,int need) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PROFILESET)
                 .addPathSegment("me")
@@ -38,7 +38,8 @@ MediaType jpeg = MediaType.parse("image/jpeg");
                 .addFormDataPart("position_id", String.valueOf(position_id))
                 .addFormDataPart("genre_id", String.valueOf(genre_id))
                 .addFormDataPart("city_id", String.valueOf(city_id))
-                .addFormDataPart("town_id", String.valueOf(town_id));
+                .addFormDataPart("town_id", String.valueOf(town_id))
+                .addFormDataPart("need",""+need);
         if(file != null){
             builder.addFormDataPart("image",file.getName(),
                     RequestBody.create(jpeg,file));
