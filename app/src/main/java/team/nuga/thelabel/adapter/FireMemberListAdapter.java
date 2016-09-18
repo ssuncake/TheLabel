@@ -17,6 +17,11 @@ import team.nuga.thelabel.viewholder.FireMemberViewHolder;
  */
 public class FireMemberListAdapter extends RecyclerView.Adapter<FireMemberViewHolder>implements FireMemberViewHolder.OnFireMemberListItemClickListener {
     List<User> useritems = new ArrayList<>();
+    int mainUserid = -1;
+
+    public void setMainUserid(int mainUserid) {
+        this.mainUserid = mainUserid;
+    }
 
     public void add(User user) {
         useritems.add(user);
@@ -33,7 +38,10 @@ public class FireMemberListAdapter extends RecyclerView.Adapter<FireMemberViewHo
 
     @Override
     public void onBindViewHolder(FireMemberViewHolder holder, int position) {
-        holder.setUser(useritems.get(position));
+        if(mainUserid!=-1){
+            holder.setUser(useritems.get(position));
+        }
+
     }
 
     @Override

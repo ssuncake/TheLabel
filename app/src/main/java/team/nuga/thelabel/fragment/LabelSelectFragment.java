@@ -105,13 +105,13 @@ public class LabelSelectFragment extends Fragment  {
             labelSelectViews[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.e("레이블 클릭", "뷰클릭");
+                    Log.d("레이블 클릭", "뷰클릭");
                     LabelSelectView l = (LabelSelectView) view;
                     if (l.getEmpty()) {
-                        Log.e("레이블 클릭", "엠티 : " + l.getEmpty());
+                        Log.d("레이블 클릭", "엠티 : " + l.getEmpty());
                         makeLabel();
                     } else {
-                        Log.e("레이블 클릭", "레이블 이름 " + l.getLabel().getLabelName());
+                        Log.d("레이블 클릭", "레이블 이름 " + l.getLabel().getLabelName());
                         selectLabel(l.getLabel());
                     }
                 }
@@ -122,7 +122,8 @@ public class LabelSelectFragment extends Fragment  {
         for (int i = 0; i < 3; i++) {
             if(user.getUserInLabelList() != null) {
                 if (i < user.getUserInLabelList().length) {
-                    labelSelectViews[i].setLabel(labels[i]);
+                    labelSelectViews[i].setLabel(labels[i],user.getUserID());
+
                 }
             }
         }

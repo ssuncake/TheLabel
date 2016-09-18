@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.mainactivity_toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;

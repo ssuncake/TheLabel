@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="175dp"
-    android:paddingBottom="5dp"
-    android:layout_weight="1"
-    >
+<merge xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:id="@+id/imageView_label_select_Profile"
         android:src="@drawable/label_make"
-        android:background="@color/color_white"
-        android:layout_gravity="center" />
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fraamLayout_labelselect_gradient"></FrameLayout>
 
     <ImageView
         android:layout_width="25dp"
@@ -29,14 +32,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="레이블을 만들어보세요"
         android:id="@+id/textview_label_select"
         android:textColor="@color/cardview_dark_background"
-        android:gravity="center"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="bottom|center"
+        android:textSize="@dimen/labemselect_labelname"
+        android:textIsSelectable="false" />
 
 
-</FrameLayout>
+</merge>

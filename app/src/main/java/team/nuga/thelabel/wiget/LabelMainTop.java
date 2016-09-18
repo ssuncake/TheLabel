@@ -72,6 +72,7 @@ public class LabelMainTop extends LinearLayout {
                 for(String s : label.getLabelNeedPositionList()){
                     TextView temp = new TextView(getContext());
                     temp.setText(s);
+                    temp.setBackgroundResource(R.drawable.white_rectangle);
                     needPositionLayout.addView(temp);
                     Log.e(LOGTAG,"에드뷰 성공"+temp);
                 }
@@ -82,8 +83,7 @@ public class LabelMainTop extends LinearLayout {
             labelName.setText(label.getLabelName());
             labelGanre.setText(label.getLabelGenre());
             labelText.setText(label.getLabelProfile());
-
-
+//            amountLike.setText(label.getLabelILike());
             Glide.with(labelImage.getContext())
                     .load(label.getImage_path())
                     .into(labelImage);

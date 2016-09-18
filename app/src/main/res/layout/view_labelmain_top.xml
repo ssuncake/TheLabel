@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layout_LabelMainTop_Image"
-        android:background="@color/labelmain_topview_overray">
+        android:background="@color/labelmain_topview_overray"
+        android:layout_gravity="right|center_vertical">
 
         <Button
             android:layout_width="wrap_content"
@@ -27,13 +28,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|top"
-            android:id="@+id/linearLayout_LabelMainTop_NeedPosition">
+            android:id="@+id/linearLayout_LabelMainTop_NeedPosition"
+            android:layout_margin="@dimen/labelmaintop_needmargin">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Need"
-                android:id="@+id/textView_LabelMainTop_Need" />
+                android:id="@+id/textView_LabelMainTop_Need"
+                android:textColor="@color/labelmaintopview_textcolor"
+                android:background="@drawable/white_rectangle" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,7 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-999"
-                    android:id="@+id/textView_LabelMainTop_Like" />
+                    android:id="@+id/textView_LabelMainTop_Like"
+                    android:textColor="@color/labelmaintopview_textcolor" />
             </LinearLayout>
 
             <TextView
@@ -67,21 +72,26 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="레이블 이름"
                 android:id="@+id/textView_LabelMainTop_LabelName"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/labelmaintopview_textcolor"
+                android:textSize="@dimen/labelmaintop_labelnamesize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="장르"
                 android:id="@+id/textView_LabelMainTop_Genre"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/maintopview_position"
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="등록된 소개글이 없습니다."
                 android:id="@+id/textView_LabelMainTop_Profile"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/labelmaintopview_textcolor" />
         </LinearLayout>
     </FrameLayout>
 

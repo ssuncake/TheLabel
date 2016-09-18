@@ -22,6 +22,9 @@ public class Label implements Serializable {
     private String labelGenre;
     @SerializedName("imagepath")
     private String image_path;
+
+    private int genre_id;
+
     private int labelILike;
 
 
@@ -151,5 +154,7 @@ public class Label implements Serializable {
     }
 
 
-
+    public int getGenre_id() {
+        return genre_id;
+    }
 }

@@ -49,6 +49,13 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!--label Select-->
+    <dimen name="labemselect_labelname">20sp</dimen>
+
+
+    <!--label mainTopView-->
+<dimen name="labelmaintop_labelnamesize">30dp</dimen>
+    <dimen name="labelmaintop_needmargin">10dp</dimen>
     <!--label main 속성값-->
     <dimen name="labelmain_title">30dp</dimen>
     <dimen name="labelmain_contents_heigh">500dp</dimen>
@@ -87,5 +94,10 @@
     <!--UploadActivity-->
     <dimen name="upload_profile_size">75dp</dimen>
     <dimen name="upload_itmes_allmargin">5dp</dimen>
+
+    <!--label make-->
+    <dimen name="labelmake_checkmargin">5dp</dimen>
+    <dimen name="labelmake_checkwidth">120dp</dimen>
+    <dimen name="labelmake_checkheight">30dp</dimen>
 
 </resources>

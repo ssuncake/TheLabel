@@ -36,7 +36,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/labelmain_memberlist"
                     android:id="@+id/textView_LabelMain_MemberTitle"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/labelmaintopview_textcolor" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -61,7 +63,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@color/maintitle_blue"
-                />
+                android:textColor="@color/labelmaintopview_textcolor" />
 
             <SeekBar
                 android:layout_width="match_parent"

@@ -1,6 +1,8 @@
 package team.nuga.thelabel.wiget;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,14 +32,16 @@ public class LabelSelectView extends FrameLayout {
         init();
     }
 
-    public ImageView settingView;
+    ImageView settingView;
     TextView labelTitleView;
-    public ImageView labelImage;
+    ImageView labelImage;
+    FrameLayout gradient;
 
     public void init() {
         inflate(getContext(), R.layout.view_label_select, this);
         settingView = (ImageView) findViewById(R.id.imageview_label_select_setting);
         labelImage = (ImageView) findViewById(R.id.imageView_label_select_Profile) ;
+        gradient = (FrameLayout) findViewById(R.id.fraamLayout_labelselect_gradient);
         settingView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,14 +56,24 @@ public class LabelSelectView extends FrameLayout {
 
 
 
-    public void setLabel(Label label) {
+    public void setLabel(Label label,int userId) {
+
         this.label = label;
-        settingView.setVisibility(VISIBLE);
+        if(label.getLabelLeaderID() == userId){
+            settingView.setVisibility(VISIBLE);
+        }
+        gradient.setBackgroundResource(R.drawable.gradation);
         labelTitleView.setText(label.getLabelName());
+        labelTitleView.setTypeface(null, Typeface.BOLD);
+        labelTitleView.setTextColor(Color.WHITE);
+
         Log.e("레이블 선택뷰","레이블 이미지 패스: "+label.getImage_path());
+
         Glide.with(getContext())
                 .load(label.getImage_path())
+                .fitCenter()
                 .into(labelImage);
+
         isEmpty = false;
     }
 

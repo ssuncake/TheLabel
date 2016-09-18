@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import team.nuga.thelabel.data.Label;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 
 public class LabelSettingActivity extends AppCompatActivity {
@@ -67,6 +68,7 @@ public class LabelSettingActivity extends AppCompatActivity {
 
     Label label;
     Label newLabel;
+    User user;
     int selectGanre;
     String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
 

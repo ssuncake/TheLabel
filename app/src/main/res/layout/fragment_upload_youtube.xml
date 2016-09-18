@@ -6,11 +6,9 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="IWANTYouTubeUpload"
-        android:id="@+id/button_youtubeUpload"
+        android:id="@+id/editText_youtubeUpload"
         android:layout_gravity="center_horizontal|top" />
-
 </FrameLayout>

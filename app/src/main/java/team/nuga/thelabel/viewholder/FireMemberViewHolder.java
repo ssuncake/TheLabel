@@ -5,8 +5,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.User;
 
@@ -14,8 +19,14 @@ import team.nuga.thelabel.data.User;
  * Created by Tacademy on 2016-08-29.
  */
 public class FireMemberViewHolder extends RecyclerView.ViewHolder {
+    @BindView(R.id.textView_MemberList_Name)
     TextView firememberView;
+    @BindView(R.id.button_subfiremember)
     Button firememberbutton;
+    @BindView(R.id.image_fireMember)
+    ImageView firememberProfile;
+
+
 
     public interface OnFireMemberListItemClickListener{
         void onUserItemClick(View view, User user, int adapterPosition);
@@ -27,6 +38,7 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
     }
     public FireMemberViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this,itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +54,13 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 new AlertDialog.Builder(view.getContext())
                         .setMessage("홍길동 님에게"+"\n"+"탈퇴시키겠습니까?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("네, 탈퇴시키겠습니다.", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton("아니요, 취소하겠습니다.", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -54,7 +72,10 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
     }
     User user;
     public void setUser(User user){
-        this.user = user;
-        firememberView.setText(user.getUserName());
+            this.user = user;
+            firememberView.setText(user.getUserName());
+            Glide.with(firememberProfile.getContext())
+                    .load(user.getImageUrl())
+                    .into(firememberProfile);
     }
 }

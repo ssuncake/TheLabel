@@ -45,6 +45,7 @@ import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.UploadImageContentRequest;
 import team.nuga.thelabel.request.UploadMusicContentRequest;
+import team.nuga.thelabel.request.UploadYoutubeContentRequest;
 
 public class UploadActivity extends AppCompatActivity {
     public final static String LOGTAG = "UploadActivity ";
@@ -69,6 +70,7 @@ public class UploadActivity extends AppCompatActivity {
     File musicFile;
 
     String musicTitle;
+    String youtubeLastsgment;
 
 
 
@@ -120,15 +122,27 @@ public class UploadActivity extends AppCompatActivity {
                 });
                 break;
             case YOUTUBE:
+                UploadYoutubeContentRequest request2 = new UploadYoutubeContentRequest(this,2,youtubeLastsgment,"", labelId,opento,inputText);
+                NetworkManager.getInstance().getNetworkData(request2, new NetworkManager.OnResultListener<NetworkResult>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                        if(Debug.debugmode)Log.d(LOGTAG,"유튜브 업로드  = "+youtubeLastsgment.toString()+" title = "+""+" 올릴레이블 ="+labelId+" 공개범위 = "+opento );
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                        Log.e("err","errcode"+errorCode+", errMessage :"+errorMessage+ ", e :"+e);
+                    }
+                });
 
                 break;
             case MUSIC:
                 UploadMusicContentRequest request1 = new UploadMusicContentRequest(this,0,musicFile,musicTitle,labelId,opento,inputText);
-                if(Debug.debugmode)Log.e(LOGTAG,"음악파일 업로드  = "+musicFile.toString()+" title = "+musicTitle+" 올릴레이블 ="+labelId+" 공개범위 = "+opento+" 입력 텍스트"+inputText );
+
                 NetworkManager.getInstance().getNetworkData(request1, new NetworkManager.OnResultListener<NetworkResult>() {
                     @Override
                     public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
-                        Log.e(LOGTAG,"성공 " +result.getMessage());
+                        if(Debug.debugmode)Log.d(LOGTAG,"음악파일 업로드  = "+musicFile.toString()+" title = "+musicTitle+" 올릴레이블 ="+labelId+" 공개범위 = "+opento );
                         Toast.makeText(UploadActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 

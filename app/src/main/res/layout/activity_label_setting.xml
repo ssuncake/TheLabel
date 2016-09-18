@@ -53,27 +53,45 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#aaaaff">
+                android:background="#aaaaff"
+                android:layout_marginBottom="10dp">
 
-                <ImageButton
-                    android:id="@+id/imageButton_LabelSetting_ImageSetting"
+                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="right|bottom" />
+                    android:layout_gravity="right|bottom"
+                    android:id="@+id/imageButton_LabelSetting_ImageSetting"
+                    android:src="@drawable/btn_gallery"
+                    android:scaleType="centerCrop"/>
             </FrameLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textLayout_LabelSetting_InputName"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <EditText
-                    android:id="@+id/editText_LabelSetting_InputName"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textLayout_LabelSetting_InputName"
+                    android:layout_width="301dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/makelabel_inputName"
-                    android:inputType="text" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginBottom="10dp">
+
+                    <EditText
+                        android:id="@+id/editText_LabelSetting_InputName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/makelabel_inputName"
+                        android:inputType="text"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="중복확인"
+                    android:id="@+id/button_LabelSetting_Check"
+                    android:background="@drawable/labelposition_rectangle" />
+            </LinearLayout>
 
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -83,12 +101,16 @@
                 android:layout_gravity="center_horizontal"
                 app:ms_enableFloatingLabel="false"
                 app:ms_floatingLabelText="@string/makelabel_inpputGenre"
-                app:ms_hint="@string/makelabel_inpputGenre" />
+                app:ms_hint="@string/makelabel_inpputGenre"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textLayout_LabelSetting_InputText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="5dp">
 
                 <EditText
                     android:id="@+id/editText_LabelSetting_InputText"
@@ -102,13 +124,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textView_LabelSetting_Need"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/makelabel_need" />
+                    android:text="@string/makelabel_need"
+                    android:layout_marginTop="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -119,7 +143,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/radioGroup_LabelSetting_Need"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
 
                         <RadioButton
                             android:id="@+id/radioButton_LabelSetting_On"
@@ -136,6 +161,14 @@
                             android:text="OFF" />
                     </RadioGroup>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/makelabel_needtext"
+                        android:id="@+id/textView8"
+                        android:layout_marginBottom="7dp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -143,69 +176,97 @@
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_vocal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_vocal" />
+                            android:text="@string/text_position_vocal"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_marginLeft="@dimen/labelmake_checkmargin"
+                            android:paddingLeft="7dp" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_base"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_base" />
+                            android:text="@string/text_position_base"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_alignTop="@+id/checkBox_LabelSetting_vocal"
+                            android:layout_toRightOf="@+id/checkBox_LabelSetting_vocal"
+                            android:layout_toEndOf="@+id/checkBox_LabelSetting_vocal"
+                            android:paddingLeft="7dp" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_piano"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_below="@+id/checkBox_LabelSetting_vocal"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_piano" />
+                            android:text="@string/text_position_piano"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_below="@+id/checkBox_LabelSetting_base"
+                            android:layout_alignLeft="@+id/checkBox_LabelSetting_vocal"
+                            android:layout_alignStart="@+id/checkBox_LabelSetting_vocal"
+                            android:layout_marginTop="@dimen/labelmake_checkmargin"
+                            android:paddingLeft="7dp" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_drum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignLeft="@+id/checkBox_LabelSetting_base"
-                            android:layout_alignStart="@+id/checkBox_LabelSetting_base"
-                            android:layout_below="@+id/checkBox_LabelSetting_base"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_drum" />
+                            android:text="@string/text_position_drum"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:paddingLeft="7dp"
+                            android:layout_alignTop="@+id/checkBox_LabelSetting_piano"
+                            android:layout_alignLeft="@+id/checkBox_LabelSetting_base"
+                            android:layout_alignStart="@+id/checkBox_LabelSetting_base" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_acoustic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_below="@+id/checkBox_LabelSetting_drum"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_acoustic" />
+                            android:text="@string/text_position_acoustic"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_below="@+id/checkBox_LabelSetting_piano"
+                            android:layout_alignLeft="@+id/checkBox_LabelSetting_piano"
+                            android:layout_alignStart="@+id/checkBox_LabelSetting_piano"
+                            android:layout_marginTop="@dimen/labelmake_checkmargin"
+                            android:paddingLeft="7dp" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_etc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_below="@+id/checkBox_LabelSetting_acoustic"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
                             android:checked="false"
-                            android:text="@string/text_position_etc" />
+                            android:text="@string/text_position_etc"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_below="@+id/checkBox_LabelSetting_acoustic"
+                            android:layout_alignLeft="@+id/checkBox_LabelSetting_acoustic"
+                            android:layout_alignStart="@+id/checkBox_LabelSetting_acoustic"
+                            android:layout_marginTop="@dimen/labelmake_checkmargin"
+                            android:paddingLeft="7dp" />
 
                         <CheckBox
                             android:id="@+id/checkBox_LabelSetting_elec"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/labelmake_checkwidth"
+                            android:layout_height="@dimen/labelmake_checkheight"
+                            android:checked="false"
+                            android:text="@string/text_position_electricGuitar"
+                            android:background="@drawable/labelselectposition_check"
+                            android:button="@null"
+                            android:layout_alignTop="@+id/checkBox_LabelSetting_acoustic"
                             android:layout_alignLeft="@+id/checkBox_LabelSetting_drum"
                             android:layout_alignStart="@+id/checkBox_LabelSetting_drum"
-                            android:layout_below="@+id/checkBox_LabelSetting_drum"
-                            android:checked="false"
-                            android:text="@string/text_position_electricGuitar" />
+                            android:paddingLeft="7dp" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -221,34 +282,64 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settinglabel_member_manage"
-                    android:id="@+id/textView_LabelSetting_BottomTitle" />
+                    android:id="@+id/textView_LabelSetting_BottomTitle"
+                    android:background="#a6a6a6"
+                    android:textColor="@color/color_white"
+                    android:padding="5dp"
+                    android:paddingLeft="2dp" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:text="@string/settinglabel_entrust"
-                    android:id="@+id/button_LabelSetting_Entrust" />
+                    android:id="@+id/button_LabelSetting_Entrust"
+                    android:gravity="center_vertical"
+                    android:padding="10dp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#a6a6a6"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:text="@string/settinglabel_finemember"
-                    android:id="@+id/button_LabelSetting_Fire" />
+                    android:id="@+id/button_LabelSetting_Fire"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#a6a6a6"/>
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
 
-                <Button
-                    android:id="@+id/button_LabelSetting_Complete"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/makelabel_complete"
+                    android:id="@+id/textView_LabelSetting_completetext"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorAccent" />
+
+                <ImageButton
+                    android:id="@+id/button_LabelSetting_Complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/settinglabel_complete" />
-            </LinearLayout>
+
+                    android:background="@drawable/rounded_rectangle" />
+
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -15,6 +15,16 @@ public class Position implements Serializable {
     public static final int KEYBOARD = 7;
     public static final int ETC = 8;
 
-    public static final String[] position = {"선택안함","보컬","기타","베이스","일렉기타","드럼","키보드","Etc"};
+    public static final String[] POSITIONS = {"선택안함","보컬","기타","베이스","일렉기타","드럼","키보드","Etc"};
+    
+    private int id;
+    private String position;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getPosition() {
+        return position;
+    }
 }

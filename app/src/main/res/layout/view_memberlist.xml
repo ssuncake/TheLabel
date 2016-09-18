@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="리더"
         android:id="@+id/textView_MemberList_Leader"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorAccent"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
