@@ -17,11 +17,9 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +38,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -114,13 +113,13 @@ public class ProfileSettingFragment extends Fragment {
             Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId +
                     ", 시군구:" + townId + ", Need :" + need);
         ProfileSetRequest request = new ProfileSetRequest(getContext(), nickname, user.getUser_gender()
-                ,positionId,genreId, text,cityId,townId,imagefile,need);
+                , positionId, genreId, text, cityId, townId, imagefile, need);
         //성별 변경... 추가해야되는??
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
                 Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
-                MainActivity mainActivity = (MainActivity)getActivity();
+                MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
                 mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
             }
@@ -128,7 +127,7 @@ public class ProfileSettingFragment extends Fragment {
             @Override
             public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
-                if(Debug.debugmode)Log.e("Profile Setting Fail ",errorMessage+errorCode);
+                if (Debug.debugmode) Log.e("Profile Setting Fail ", errorMessage + errorCode);
             }
         });
 ////        String inputUserName= inputName.getText().toString();
@@ -630,7 +629,34 @@ public class ProfileSettingFragment extends Fragment {
         spinner_position.setSelection(user.getPostition() - 1);
         spinner_genre.setSelection(user.getGenre() - 1);
         spinner_city.setSelection(user.getCity() - 1);
+        if(user.getTown()>1)townSetting();
+        spinner_town.setSelection(current_townId);
+    }
+    int current_townId =0;
+    public void townSetting(){
+        String[][] town = new String[][] {Town_Default,Seoul, Gyeonggi, Gangwon, Incheon,
+                ChungBook, ChungNam, Sejong, DaeJeon, GyongBook,
+                GyonNam, DaeGu, Busan, Ulsan, JeonBook,
+                JeonNam, Gwangju, Jeju
+        };
+        int sum = 1;
+        int townSum =1;
 
+        int userTownId = user.getTown();
+        for(int i = 1; i<town.length;i++){
+            townSum += town[i-1].length;
+            townSum -=1;
+            for(int j=0; j<town[i].length;j++){
+                if(j!=0){
+                    sum++;
+                    current_townId = sum-townSum;
+                    if(Debug.debugmode)Log.i("town ","sum :"+sum+", townSum :"+townSum+", 현재 타운 값"+ current_townId);
+                    if(userTownId-sum == 0){
+
+                    }
+                }
+            }
+        }
     }
 
 
@@ -652,9 +678,6 @@ public class ProfileSettingFragment extends Fragment {
         if (Debug.debugmode)
             Log.i(" 유저 정보4 ", " 시/도 :" + user.getCity() + ", 시군구 :" + user.getTown() + ", Need :" + user.getNeed());
 
-        String[] positionList = getResources().getStringArray(R.array.positionlist);
-        String[] genreList = getResources().getStringArray(R.array.genrelist);
-
         ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, cityList);
         spinner_cityAdapter.setDropDownViewResource(R.layout.spin_profile);
         spinner_city.setAdapter(spinner_cityAdapter);
@@ -664,19 +687,21 @@ public class ProfileSettingFragment extends Fragment {
         ArrayAdapter genreAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, genreList);
         positionAdapter.setDropDownViewResource(R.layout.spin_profile);
         spinner_genre.setAdapter(genreAdapter);
+
         int color = Color.parseColor("#ffffffff");
+
         textInputEditText_introText.addTextChangedListener(introTextWatcher);
-        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        textInputEditText_introText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    Toast.makeText(getContext(), "Action Done", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+//        textInputEditText_introText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                if (i == EditorInfo.IME_ACTION_DONE) {
+//                    Toast.makeText(getContext(), "Action Done", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         textInputLayout_introtext.setCounterEnabled(true);
         textInputLayout_introtext.setCounterMaxLength(60);
 
@@ -686,7 +711,6 @@ public class ProfileSettingFragment extends Fragment {
         preUserInfoSetting();
         return view;
     }
-
 
     TextWatcher nicknameWatcher = new TextWatcher() {
         String before = "";
@@ -741,133 +765,54 @@ public class ProfileSettingFragment extends Fragment {
         }
     };
 
-
     int townId = 0;
     int cityId = 0;
     int positionId = 1; //Default = 1 ; 선택안함
     int genreId = 1;  // Default = 1 ; 선택안함
 
 
-    public String[] cityList = {
-            "선택하지않음", "서울특별시", "경기도", "강원도", "인천광역시",
-            "충청북도", "충청남도", "세종특별시", "대전광역시", "경상북도",
-            "경상남도", "대구광역시", "부산광역시", "울산광역시", "전라북도",
-            "전라남도", "광주광역시", "제주특별자치도"
-    };
+    @BindArray(R.array.positionlist)
+    public String[] positionList;
+    @BindArray(R.array.genrelist)
+    public String[] genreList;
+    @BindArray(R.array.cityList)
+    public String[] cityList;
+    @BindArray(R.array.townDefault)
+    public String[] Town_Default;
+    @BindArray(R.array.서울시)
+    public String[] Seoul;
+    @BindArray(R.array.경기도)
+    public String[] Gyeonggi;
+    @BindArray(R.array.강원도)
+    public String[] Gangwon ;
+    @BindArray(R.array.인천광역시)
+    public String[] Incheon ;
+    @BindArray(R.array.충청북도)
+    public String[] ChungBook ;
+    @BindArray(R.array.충청남도)
+    public String[] ChungNam;
+    @BindArray(R.array.세종시)
+    public String[] Sejong ;
+    @BindArray(R.array.대전광역시)
+    public String[] DaeJeon ;
+    @BindArray(R.array.경상북도)
+    public String[] GyongBook ;
+    @BindArray(R.array.경상남도)
+    public String[] GyonNam;
+    @BindArray(R.array.대구광역시)
+    public String[] DaeGu ;
+    @BindArray(R.array.부산광역시)
+    public String[] Busan;
+    @BindArray(R.array.울산광역시)
+    public String[] Ulsan;
+    @BindArray(R.array.전라북도)
+    public String[] JeonBook;
+    @BindArray(R.array.전라남도)
+    public String[] JeonNam ;
+    @BindArray(R.array.광주광역시)
+    public String[] Gwangju;
+    @BindArray(R.array.제주도)
+    public String[] Jeju;
 
-    public String[] Town_Default = {
-            "선택하지않음"
-    };
-
-
-    // 선택하지않음 = 1
-    // 서울시특별시 = 2
-    public String[] Seoul = {"선택하지않음",
-            "강남구", "강동구", "강서구", "강북구", "관악구",
-            "광진구", "구로구", "금천구", "노원구", "도봉구",
-            "동대문구", "동작구", "마포구", "서대문구", "서초구",
-            "성동구", "성북구", "송파구", "양천구", "영등포구",
-            "용산구", "은평구", "중량구", "중구"
-    };
-    // 경기도 = 3
-    public String[] Gyeonggi = {"선택하지않음",
-            "가평군", "고양시 덕양구", "고양시 일산동구", "고양시 일산서구", "과천시",
-            "광명시", "광주시", "구리시", "군포시", "김포시",
-            "남양주시", "동두천시", "부천시", "부천시 소사구", "부천시 오정구",
-            "부천시 원미구", "성남시 분당구", "성남시 수정구", "성남시 중원구", "수원시 권선구",
-            "수원시 영통구", "수원시 장안구", "수원시 팔달구", "시흥시", "안산시 단원구",
-            "안산시 상록구", "안성시", "안양시 동안구", "안양시 만안구", "양주시",
-            "양평군", "여주시", "연천군", "오산시", "용인시 기흥구",
-            "용인시 수지구", "용인시 처인구", "의왕시", "의정부시", "이천시",
-            "파주시", "평택시", "포천시", "하남시", "화성시",
-    };
-    //강원도 = 4
-    public String[] Gangwon = {"선택하지않음",
-            "강릉시", "고성군", "삼척시", "동해시", "속초시",
-            "양양군", "양구군", "영월군", "원주시", "인제군",
-            "정선군", "철원군", "춘천시", "태백시", "평창군",
-            "화천군", "홍천군", "횡성군"
-    };
-    //인천광역시 = 5
-    public String[] Incheon = {"선택하지않음",
-            "중구", "동구", "남구", "연수구", "남동구",
-            "부평구", "계양구", "서구", "강화군", "옹진군"
-    };
-    //충청북도 = 6
-    public String[] ChungBook = {"선택하지않음",
-            "청주시", "청주시 상당구", "청주시 서원구", "청주시 흥덕구", "청주시 청원구",
-            "충주시", "제천시", "보은군", "옥천군", "영동군",
-            "진천군", "괴산군", "음성군", "단양군", "증평군"
-    };
-    //충청남도 = 7
-    public String[] ChungNam = {"선택하지않음",
-            "천안시 동남구", "천안시 서북구", "공주시", "보령시", "아산시",
-            "서산시", "논산시", "계룡시", "당진시", "금산군",
-            "부여군", "서천군", "청양군", "홍성군", "예산군",
-            "태안군"
-    };
-    //세종특별자치시 = 8
-    public String[] Sejong = {"선택하지않음",
-            "세종시"
-    };
-    //대전 = 9
-    public String[] DaeJeon = {"선택하지않음",
-            "중구", "동구", "서구", "유성구", "대덕구"
-    };
-    //경상북도 = 10
-    public String[] GyongBook = {"선택하지않음",
-            "포항시", "포항시 남구", "포항시 북구", "경주시", "김천시",
-            "안동시", "구미시", "영주시", "영천시", "상주시",
-            "문경시", "경산시", "군위군", "의성군", "청송군",
-            "영양군", "영덕군", "청도군", "고령군", "성주군",
-            "칠곡군", "예천군", "봉화군", "울진군", "울릉군",
-    };
-    //경상남도 = 11
-    public String[] GyonNam = {"선택하지않음",
-            "창원시", "창원시 의창구", "창원시 성산구", "창원시 마산합포구", "창원시 마산회권구",
-            "창원시 진해구", "진주시", "통영시", "사천시", "김해시",
-            "밀양시", "거제시", "양산시", "의령군", "함안군",
-            "창녕군", "고성군", "남해군", "하동군", "산청군",
-            "함양군", "거창군", "합천군"
-    };
-    //대구 = 12
-    public String[] DaeGu = {"선택하지않음",
-            "중구", "동구", "서구", "남구", "북구",
-            "수성구", "달서구", "달성군"
-    };
-    //부산 = 13
-    public String[] Busan = {"선택하지않음",
-            "중구", "서구", "동구", "영도구", "부산진구",
-            "동래구", "남구", "북구", "해운대구", "사하구",
-            "금정구", "강서구", "연제구", "수영구", "사상구",
-            "기장군"
-    };
-    //울산 = 14
-    public String[] Ulsan = {"선택하지않음",
-            "중구", "남구", "동구", "북구", "울주군"
-    };
-    //전라북도 = 15
-    public String[] JeonBook = {"선택하지않음",
-            "전주시", "전주시 완산구", "전주시 덕진구", "군산시", "익산시",
-            "정읍시", "남원시", "김제시", "완주군", "진안군",
-            "무주군", "장수군", "임실군", "순창군", "고창군",
-            "부안군"
-    };
-    //전라남도 = 16
-    public String[] JeonNam = {"선택하지않음",
-            "목포시", "여수시", "순천시", "나주시", "광양시",
-            "담양군", "곡성군", "구례군", "고흥군", "보성군",
-            "화순군", "장흥군", "강진군", "해남군", "영양군",
-            "무안군", "함평군", "영광군", "장성군", "완도군",
-            "진도군", "신안군"
-    };
-    //광주 = 17
-    public String[] Gwangju = {"선택하지않음",
-            "동구", "서구", "남구", "북구", "광산구"
-    };
-    //제주특별자치도 = 18
-    public String[] Jeju = {"선택하지않음",
-            "제주시", "서귀포시"
-    };
 
 }
