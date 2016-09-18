@@ -48,7 +48,7 @@ public class ClearEditText extends AppCompatEditText implements View.OnTouchList
     }
 
     public void init() {
-        Drawable tempDrawable = ContextCompat.getDrawable(getContext(), R.drawable.icn_remove_blue);
+        Drawable tempDrawable = ContextCompat.getDrawable(getContext(), R.drawable.icn_remove);
         clearDrawable = DrawableCompat.wrap(tempDrawable);
 //        DrawableCompat.setTintList(clearDrawable.getHintTextColors());
         clearDrawable.setBounds(0, 0, clearDrawable.getIntrinsicWidth(), clearDrawable.getIntrinsicHeight());

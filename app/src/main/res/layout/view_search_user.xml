@@ -19,13 +19,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:id="@+id/textView_search_userName"
         android:layout_alignTop="@+id/image_search_userimage"
         android:layout_toRightOf="@+id/image_search_userimage"
         android:layout_toEndOf="@+id/image_search_userimage"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textColor="@android:color/black" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:layout_marginTop="5dp"
         android:textColor="@color/search_position_city_town"
         android:id="@+id/textView_search_user_position"
@@ -47,7 +47,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="시"
         android:id="@+id/textView_search_user_city"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/search_position_city_town"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="도"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/search_position_city_town"
         android:id="@+id/textView_search_user_town"
         android:layout_alignTop="@+id/textView_search_user_city"
@@ -69,6 +69,21 @@
         android:layout_toEndOf="@+id/textView_search_user_city"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="5dp" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="need"
+        android:id="@+id/textView_search_user_need"
+        android:background="@color/PINK_400"
+        android:textColor="@color/color_white"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="6dp"
+        android:layout_alignBottom="@+id/textView_search_user_town"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

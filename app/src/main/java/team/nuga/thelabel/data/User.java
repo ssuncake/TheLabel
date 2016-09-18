@@ -46,61 +46,6 @@ public class User implements Serializable {
     @SerializedName("gender_id")
     private int user_gender;
 
-    public String getUser_intro_text() {
-        return User_intro_text;
-    }
-
-    public void setUser_intro_text(String user_intro_text) {
-        User_intro_text = user_intro_text;
-    }
-
-    public int getPostition() {
-        return postition;
-    }
-
-    public void setPostition(int postition) {
-        this.postition = postition;
-    }
-
-    public int getGenre() {
-        return genre;
-    }
-
-    public void setGenre(int genre) {
-        this.genre = genre;
-    }
-
-    public int getCity() {
-        return city;
-    }
-
-    public void setCity(int city) {
-        this.city = city;
-    }
-
-    public int getTown() {
-        return town;
-    }
-
-    public void setTown(int town) {
-        this.town = town;
-    }
-
-    public int getUser_gender() {
-        return user_gender;
-    }
-
-    public void setUser_gender(int user_gender) {
-        this.user_gender = user_gender;
-    }
-    public String getText() {
-        return User_intro_text;
-    }
-
-    public void setText(String text) {
-        this.User_intro_text = text;
-    }
-
     //Search User 부분
     @SerializedName("user_nickname")
     private String searchUserName;
@@ -114,9 +59,16 @@ public class User implements Serializable {
     private String searchUserCity;
     @SerializedName("user_town")
     private String searchUserTown;
+    @SerializedName("user_need")
+    private int searchUserNeed;
 
+    public int getSearchUserNeed() {
+        return searchUserNeed;
+    }
 
-
+    public void setSearchUserNeed(int searchUserNeed) {
+        this.searchUserNeed = searchUserNeed;
+    }
 
     public String getUserPassword() {
         return userPassword;
@@ -228,6 +180,60 @@ public class User implements Serializable {
 
     public void setSearchUserGenre(String searchUserGenre) {
         this.searchUserGenre = searchUserGenre;
+    }
+    public String getUser_intro_text() {
+        return User_intro_text;
+    }
+
+    public void setUser_intro_text(String user_intro_text) {
+        User_intro_text = user_intro_text;
+    }
+
+    public int getPostition() {
+        return postition;
+    }
+
+    public void setPostition(int postition) {
+        this.postition = postition;
+    }
+
+    public int getGenre() {
+        return genre;
+    }
+
+    public void setGenre(int genre) {
+        this.genre = genre;
+    }
+
+    public int getCity() {
+        return city;
+    }
+
+    public void setCity(int city) {
+        this.city = city;
+    }
+
+    public int getTown() {
+        return town;
+    }
+
+    public void setTown(int town) {
+        this.town = town;
+    }
+
+    public int getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(int user_gender) {
+        this.user_gender = user_gender;
+    }
+    public String getText() {
+        return User_intro_text;
+    }
+
+    public void setText(String text) {
+        this.User_intro_text = text;
     }
 
 }

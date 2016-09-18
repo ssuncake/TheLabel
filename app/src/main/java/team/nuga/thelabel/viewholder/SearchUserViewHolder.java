@@ -1,11 +1,14 @@
 package team.nuga.thelabel.viewholder;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,8 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
     TextView userCity;
     @BindView(R.id.textView_search_user_town)
     TextView userTown;
+    @BindView(R.id.textView_search_user_need)
+    TextView isNeed;
 
     public interface OnSearchUserItemClickListener{
         public void onUserItemClick(View view, User user, int position);
@@ -48,15 +53,24 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
         });
     }
     User user;
-    public void setUser(User user){
+    public void setUser(User user) {
         this.user = user;
         usernameView.setText(user.getSearchUserName());
         Glide.with(userphotoView.getContext())
                 .load(user.getSearchUserImage())
                 .transform(new RoundImageTransform(userphotoView.getContext()))
                 .into(userphotoView);
-        userPosition.setText("#"+user.getSearchUserPosition());
-        userCity.setText("#"+user.getSearchUserCity());
+        userPosition.setText("#" + user.getSearchUserPosition());
+        userCity.setText("#" + user.getSearchUserCity());
         userTown.setText(user.getSearchUserTown());
+        int need = user.getSearchUserNeed();
+        switch (need){
+            case 0:
+                isNeed.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                isNeed.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }
