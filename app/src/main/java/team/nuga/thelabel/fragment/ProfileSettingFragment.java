@@ -54,23 +54,8 @@ public class ProfileSettingFragment extends Fragment {
     EditText editText_userNickName;
     @BindView(R.id.ImageView_profileImage)
     ImageView imageView_profileImage;
-
-    public void inProfileImageView() {
-        String imageUrl = user.getImageUrl();
-        Glide.with(this)
-                .load(imageUrl)
-                .transform(new RoundImageTransform(getContext()))
-                .into(imageView_profileImage);
-    }
-
     @BindView(R.id.button_checkOverlap)
     Button button_checkOverlap; //닉네임 중복확인 버튼
-
-    static final int AVAILABLE = 0;
-    static final int NOT_AVAILABLE = 1;
-    boolean nicknameCheck = false;
-    private String nickname;
-
     @OnClick(R.id.button_checkOverlap)//중복확인 버튼
     public void onClickCheckOverlap() {
         nickname = editText_userNickName.getText().toString();
@@ -95,44 +80,6 @@ public class ProfileSettingFragment extends Fragment {
             }
         });
     }
-
-
-    @BindView(R.id.radioGroup_ProfileSetting_need)
-    RadioGroup radioGroup_need;
-    @BindView(R.id.radioButton_needOn)
-    RadioButton radioButton_needOn;
-    @BindView(R.id.radioButton_needOff)
-    RadioButton radioButton_needOff;
-
-    int need = 0; //Default = 0; 선택 안함
-
-    public void onClickRadioGroup_need()   //NEED 체크 라디오 버튼
-    {
-        radioGroup_need.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
-                switch (checkedPosition) {
-                    case R.id.radioButton_needOn:
-                        need = 1;
-                        if (Debug.debugmode)
-                            Toast.makeText(getContext(), "need On", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.radioButton_needOff:
-                        need = 0;
-                        if (Debug.debugmode)
-                            Toast.makeText(getContext(), "need OFF", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
-        if (user.getNeed() == 0) {
-            radioButton_needOff.setChecked(true);
-        } else if (user.getNeed() == 1) {
-            radioButton_needOn.setChecked(true);
-            need = 1;
-        }
-    }
-
     @OnClick(R.id.imageButton_profileSet)
     public void ClickComplete() //수정완료버튼
     {
@@ -153,9 +100,13 @@ public class ProfileSettingFragment extends Fragment {
     }
 
 
-    public ProfileSettingFragment() {
-        // Required empty public constructor
-    }
+    @BindView(R.id.radioGroup_ProfileSetting_need)
+    RadioGroup radioGroup_need;
+    @BindView(R.id.radioButton_needOn)
+    RadioButton radioButton_needOn;
+    @BindView(R.id.radioButton_needOff)
+    RadioButton radioButton_needOff;
+
 
     @BindView(R.id.textView_userProfileEmail)
     TextView textView_userEmail;
@@ -163,135 +114,18 @@ public class ProfileSettingFragment extends Fragment {
     TextInputLayout textInputLayout_introtext;
     @BindView(R.id.editText_introText)
     TextInputEditText textInputEditText_introText;
-
     @BindView(R.id.spinner_genre_profile)
     Spinner spinner_genre;
-
     @OnItemSelected(value = R.id.spinner_genre_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onGenreSelected(int position) {
         genreId = position + 1;
     }
-
     @BindView(R.id.spinner_position_profile)
     Spinner spinner_position;
-
     @OnItemSelected(value = R.id.spinner_position_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onPositionSelected(int position) {
         positionId = position + 1;
     }
-
-    public static int LIMITTED_TEXTLINE = 3;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_setting, container, false);
-        ButterKnife.bind(this, view);
-
-        user = (User) getArguments().getSerializable(MainActivity.PROFILEUSER);
-        if (Debug.debugmode)
-            Log.i(" 유저 정보1 ", " 닉네임 : " + user.getUserName() + ", 사용자 ID" + user.getUserID());
-        if (Debug.debugmode)
-            Log.i(" 유저 정보2 ", " 자기소개 :" + user.getText() + ", 이미지Url:" + user.getImageUrl());
-        if (Debug.debugmode)
-            Log.i(" 유저 정보3 ", " 포지션:" + user.getPostition() + ", 장르:" + user.getGenre());
-        if (Debug.debugmode)
-            Log.i(" 유저 정보4 ", " 시/도 :" + user.getCity() + ", 시군구 :" + user.getTown() + ", Need :" + user.getNeed());
-
-        String[] positionList = getResources().getStringArray(R.array.positionlist);
-        String[] genreList = getResources().getStringArray(R.array.genrelist);
-
-        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, cityList);
-        spinner_cityAdapter.setDropDownViewResource(R.layout.spin_profile);
-        spinner_city.setAdapter(spinner_cityAdapter);
-        ArrayAdapter positionAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, positionList);
-        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
-        spinner_position.setAdapter(positionAdapter);
-        ArrayAdapter genreAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, genreList);
-        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
-        spinner_genre.setAdapter(genreAdapter);
-        int color = Color.parseColor("#ffffffff");
-        textInputEditText_introText.addTextChangedListener(introTextWatcher);
-        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        textInputEditText_introText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    Toast.makeText(getContext(), "Action Done", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
-        textInputLayout_introtext.setCounterEnabled(true);
-        textInputLayout_introtext.setCounterMaxLength(60);
-
-        editText_userNickName.addTextChangedListener(nicknameWatcher);
-        textView_userEmail.setText(user.getEmail());
-        onClickRadioGroup_need();
-
-        return view;
-    }
-
-
-    TextWatcher nicknameWatcher = new TextWatcher() {
-        String before = "";
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            before = charSequence.toString();
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if (editable.length() > 8) {
-                editText_userNickName.setText(before);
-                editText_userNickName.setSelection(textInputEditText_introText.length());
-                editText_userNickName.setError("2~8자로 입력해주세요");
-            } else if (editable.length() < 2) {
-                editText_userNickName.setError("2~8자로 입력해주세요");
-            }
-
-
-        }
-    };
-
-    TextWatcher introTextWatcher = new TextWatcher() {
-        String before = "";
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            before = charSequence.toString();
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if (editable.length() > 60) {
-                textInputLayout_introtext.setError("error");
-            } else {
-                textInputLayout_introtext.setError(null);
-            }
-            if (textInputEditText_introText.getLineCount() > LIMITTED_TEXTLINE) { //라인수 제한
-                textInputEditText_introText.setText(before);
-                textInputEditText_introText.setSelection(textInputEditText_introText.length());
-            }
-        }
-    };
-
-
-    int townId = 0;
-    int cityId = 0;
-    int positionId = 1; //Default = 1 ; 선택안함
-    int genreId = 1;  // Default = 1 ; 선택안함
 
     @BindView(R.id.spinner_city_profile)
     Spinner spinner_city;
@@ -643,6 +477,192 @@ public class ProfileSettingFragment extends Fragment {
         }
 
     }
+
+
+
+    static final int AVAILABLE = 0;
+    static final int NOT_AVAILABLE = 1;
+    boolean nicknameCheck = false;
+    private String nickname;
+
+
+
+
+
+    int need = 0; //Default = 0; 선택 안함
+    public void inProfileImageView() {
+        String imageUrl = user.getImageUrl();
+        Glide.with(this)
+                .load(imageUrl)
+                .transform(new RoundImageTransform(getContext()))
+                .into(imageView_profileImage);
+    }
+    public void onClickRadioGroup_need()   //NEED 체크 라디오 버튼
+    {
+        radioGroup_need.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedPosition) {
+                switch (checkedPosition) {
+                    case R.id.radioButton_needOn:
+                        need = 1;
+                        if (Debug.debugmode)
+                            Toast.makeText(getContext(), "need On", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radioButton_needOff:
+                        need = 0;
+                        if (Debug.debugmode)
+                            Toast.makeText(getContext(), "need OFF", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        if (user.getNeed() == 0) {
+            radioButton_needOff.setChecked(true);
+        } else if (user.getNeed() == 1) {
+            radioButton_needOn.setChecked(true);
+            need = 1;
+        }
+    }
+
+
+
+    public ProfileSettingFragment() {
+        // Required empty public constructor
+    }
+
+    public void preUserInfoSetting(){
+        if (Debug.debugmode)
+            Log.i(" 유저 정보1 ", " 닉네임 : " + user.getUserName() + ", 사용자 ID" + user.getUserID());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보2 ", " 자기소개 :" + user.getText() + ", 이미지Url:" + user.getImageUrl());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보3 ", " 포지션:" + user.getPostition() + ", 장르:" + user.getGenre());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보4 ", " 시/도 :" + user.getCity() + ", 시군구 :" + user.getTown() + ", Need :" + user.getNeed());
+        editText_userNickName.setText(user.getUserName());
+        textInputEditText_introText.setText(user.getText());
+        inProfileImageView();
+        spinner_position.setSelection(user.getPostition()-1);
+        spinner_genre.setSelection(user.getGenre()-1);
+        spinner_city.setSelection(user.getCity()-1);
+
+    }
+
+
+    public static int LIMITTED_TEXTLINE = 3;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile_setting, container, false);
+        ButterKnife.bind(this, view);
+
+        user = (User) getArguments().getSerializable(MainActivity.PROFILEUSER);
+        if (Debug.debugmode)
+            Log.i(" 유저 정보1 ", " 닉네임 : " + user.getUserName() + ", 사용자 ID" + user.getUserID());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보2 ", " 자기소개 :" + user.getText() + ", 이미지Url:" + user.getImageUrl());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보3 ", " 포지션:" + user.getPostition() + ", 장르:" + user.getGenre());
+        if (Debug.debugmode)
+            Log.i(" 유저 정보4 ", " 시/도 :" + user.getCity() + ", 시군구 :" + user.getTown() + ", Need :" + user.getNeed());
+
+        String[] positionList = getResources().getStringArray(R.array.positionlist);
+        String[] genreList = getResources().getStringArray(R.array.genrelist);
+
+        ArrayAdapter spinner_cityAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, cityList);
+        spinner_cityAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_city.setAdapter(spinner_cityAdapter);
+        ArrayAdapter positionAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, positionList);
+        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_position.setAdapter(positionAdapter);
+        ArrayAdapter genreAdapter = new ArrayAdapter(getContext(), R.layout.spin_profile, genreList);
+        positionAdapter.setDropDownViewResource(R.layout.spin_profile);
+        spinner_genre.setAdapter(genreAdapter);
+        int color = Color.parseColor("#ffffffff");
+        textInputEditText_introText.addTextChangedListener(introTextWatcher);
+        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        textInputEditText_introText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    Toast.makeText(getContext(), "Action Done", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+        textInputLayout_introtext.setCounterEnabled(true);
+        textInputLayout_introtext.setCounterMaxLength(60);
+
+        editText_userNickName.addTextChangedListener(nicknameWatcher);
+        textView_userEmail.setText(user.getEmail());
+        onClickRadioGroup_need();
+        preUserInfoSetting();
+        return view;
+    }
+
+
+    TextWatcher nicknameWatcher = new TextWatcher() {
+        String before = "";
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            before = charSequence.toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length() > 8) {
+                editText_userNickName.setText(before);
+                editText_userNickName.setSelection(textInputEditText_introText.length());
+                editText_userNickName.setError("2~8자로 입력해주세요");
+            } else if (editable.length() < 2) {
+                editText_userNickName.setError("2~8자로 입력해주세요");
+            }
+
+
+        }
+    };
+
+    TextWatcher introTextWatcher = new TextWatcher() {
+        String before = "";
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            before = charSequence.toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length() > 60) {
+                textInputLayout_introtext.setError("error");
+            } else {
+                textInputLayout_introtext.setError(null);
+            }
+            if (textInputEditText_introText.getLineCount() > LIMITTED_TEXTLINE) { //라인수 제한
+                textInputEditText_introText.setText(before);
+                textInputEditText_introText.setSelection(textInputEditText_introText.length());
+            }
+        }
+    };
+
+
+    int townId = 0;
+    int cityId = 0;
+    int positionId = 1; //Default = 1 ; 선택안함
+    int genreId = 1;  // Default = 1 ; 선택안함
+
+
 
 
     public String[] cityList = {
