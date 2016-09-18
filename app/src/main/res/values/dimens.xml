@@ -88,10 +88,10 @@
     <dimen name="message_date_margin">10dp</dimen>
 
     <!--UploadFragment 속성값들-->
-    <dimen name="upload_icon_size">60dp</dimen>
+    <dimen name="upload_icon_size">40dp</dimen>
     <dimen name="upload_list_padding">10dp</dimen>
     <dimen name="upload_list_itemleftmargin">20dp</dimen>
-    <dimen name="upload_text_size">30sp</dimen>
+    <dimen name="upload_text_size">15sp</dimen>
 
     <!--UploadActivity-->
     <dimen name="upload_profile_size">75dp</dimen>

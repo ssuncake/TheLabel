@@ -202,9 +202,9 @@
 
 
     <!--UploadFrgment 에서 사용-->
-    <string name="upload_music">음원 업로드</string>
-    <string name="upload_picture">사진 업로드</string>
-    <string name="upload_youtube">유튜브 업로드</string>
+    <string name="upload_music">음원</string>
+    <string name="upload_picture">사진</string>
+    <string name="upload_youtube">유튜브</string>
 
     <!--UploadActivity 사용-->
     <string name="upload_public">전체 공개</string>
