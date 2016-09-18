@@ -40,6 +40,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/profile_girl" />
 
                 <ImageView
@@ -74,8 +75,8 @@
                 <com.google.android.youtube.player.YouTubeThumbnailView
                     android:id="@+id/youtubePlayer_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="match_parent"
+                    >
                 </com.google.android.youtube.player.YouTubeThumbnailView>
                 <ImageView
                     android:src="@drawable/btn_gallery"
@@ -88,34 +89,43 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="♥좋아요"
+                    android:text="좋아요"
                     android:layout_marginLeft="29dp"
                     android:id="@+id/textView_Iike"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="29dp" />
+                    android:layout_marginStart="30dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_like"
+                    android:src="@drawable/icn_like"
+                    android:layout_alignBottom="@+id/textView_Iike"
+                    android:layout_toLeftOf="@+id/textView_numlike"
+                    android:layout_toStartOf="@+id/textView_numlike"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="2dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:id="@+id/textView_numlike"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="@dimen/textview_marginLeft"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
+                    android:text="4"
+                    android:layout_alignTop="@+id/textView_Iike"
                     android:layout_toRightOf="@+id/textView_Iike"
                     android:layout_toEndOf="@+id/textView_Iike"
-                    android:text="4"
-
-                    android:layout_alignTop="@+id/textView_Iike" />
+                    android:layout_marginStart="8dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,8 +146,8 @@
                     android:button="@drawable/user_main_fragment_like"
                     android:layout_alignParentTop="true"
                     android:layout_toLeftOf="@+id/imageView_share"
-                    android:layout_toStartOf="@+id/imageView_share" />
-
+                    android:layout_toStartOf="@+id/imageView_share"
+                    android:layout_marginTop="14dp"/>
 
                 <ImageView
                     android:layout_width="25dp"

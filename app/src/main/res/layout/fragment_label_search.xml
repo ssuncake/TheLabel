@@ -30,6 +30,7 @@
             android:singleLine="true"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginBottom="7dp"
             android:maxEms="16"
             android:textColor="@color/maintitle_blue"
             android:layout_marginRight="40dp"
@@ -39,7 +40,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/search">
+        android:background="@color/BLUE_GREY_50">
 
         <TextView
             android:layout_width="wrap_content"

@@ -33,13 +33,14 @@
             android:maxEms="16"
             android:textColor="@color/maintitle_blue"
             android:layout_marginRight="40dp"
+            android:layout_marginBottom="7dp"
             android:layout_alignParentTop="true"
             android:textSize="15sp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/search">
+        android:background="@color/BLUE_GREY_50">
 
         <TextView
             android:layout_width="wrap_content"

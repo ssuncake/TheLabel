@@ -6,6 +6,16 @@ package team.nuga.thelabel.data;
 public class NetworkResultUserSearch {
     User[] result;
 
+    User[] user;
+
+    public User[] getUser() {
+        return user;
+    }
+
+    public void setUser(User[] user) {
+        this.user = user;
+    }
+
     public User[] getResult() {
         return result;
     }

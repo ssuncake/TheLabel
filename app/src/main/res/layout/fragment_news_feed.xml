@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.NewsFeedFragment"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/BLUE_GREY_50">
 
     <!-- TODO: Update blank fragment layout -->
 

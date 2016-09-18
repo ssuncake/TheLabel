@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="160dp"
             android:background="@color/color_white"
             android:orientation="vertical">
 
@@ -70,6 +70,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_vertical">
 
                 <SeekBar
@@ -80,55 +81,57 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginLeft="56dp"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginStart="56dp" />
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="60dp"
+                    android:thumb="@drawable/img_play"/>
 
                 <CheckBox
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:id="@+id/checkbox_player"
                     android:button="@drawable/user_main_fragment_play"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView_currentTime"
-                    android:layout_alignBottom="@+id/checkbox_player"
-                    android:layout_toRightOf="@+id/checkbox_player"
-                    android:layout_toEndOf="@+id/checkbox_player"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
-                    android:textColor="@android:color/black" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                    <!--android:text="Small Text"-->
+                    <!--android:id="@+id/textView_currentTime"-->
+                    <!--android:layout_alignBottom="@+id/checkbox_player"-->
+                    <!--android:layout_toRightOf="@+id/checkbox_player"-->
+                    <!--android:layout_toEndOf="@+id/checkbox_player"-->
+                    <!--android:layout_marginLeft="12dp"-->
+                    <!--android:layout_marginStart="12dp"-->
+                    <!--android:textColor="@android:color/black" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView_totalTime"
-                    android:layout_alignTop="@+id/textView_currentTime"
-                    android:layout_alignRight="@+id/seekBar_Play"
-                    android:layout_alignEnd="@+id/seekBar_Play"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:textColor="@android:color/black" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                    <!--android:text="Small Text"-->
+                    <!--android:id="@+id/textView_totalTime"-->
+                    <!--android:layout_alignTop="@+id/textView_currentTime"-->
+                    <!--android:layout_alignRight="@+id/seekBar_Play"-->
+                    <!--android:layout_alignEnd="@+id/seekBar_Play"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:layout_marginEnd="16dp"-->
+                    <!--android:textColor="@android:color/black" />-->
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="♥좋아요"
+                    android:text="좋아요"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="25dp"
                     android:layout_weight="1"
@@ -166,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/checkbox_like_off"
                     android:button="@drawable/user_main_fragment_like"
-                    android:layout_alignBottom="@+id/textView_numlike"
+                    android:layout_marginTop="22dp"
                     android:layout_toLeftOf="@+id/imageView_share"
                     android:layout_toStartOf="@+id/imageView_share" />
 
@@ -181,6 +184,18 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="28dp"
                     android:layout_marginEnd="28dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_like"
+                    android:src="@drawable/icn_like"
+                    android:layout_alignBottom="@+id/textView_Iike"
+                    android:layout_toLeftOf="@+id/textView_numlike"
+                    android:layout_toStartOf="@+id/textView_numlike"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="2dp"/>
 
             </RelativeLayout>
         </LinearLayout>
