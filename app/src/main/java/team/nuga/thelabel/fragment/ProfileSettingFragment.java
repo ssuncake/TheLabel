@@ -1,8 +1,16 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -27,6 +35,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,11 +48,13 @@ import team.nuga.thelabel.Debug;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.CheckEmailResult;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.CheckNicknameRequest;
+import team.nuga.thelabel.request.ProfileSetRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,8 +69,10 @@ public class ProfileSettingFragment extends Fragment {
     EditText editText_userNickName;
     @BindView(R.id.ImageView_profileImage)
     ImageView imageView_profileImage;
+
     @BindView(R.id.button_checkOverlap)
     Button button_checkOverlap; //닉네임 중복확인 버튼
+
     @OnClick(R.id.button_checkOverlap)//중복확인 버튼
     public void onClickCheckOverlap() {
         nickname = editText_userNickName.getText().toString();
@@ -80,25 +97,42 @@ public class ProfileSettingFragment extends Fragment {
             }
         });
     }
+
     @OnClick(R.id.imageButton_profileSet)
     public void ClickComplete() //수정완료버튼
     {
-        Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
+
         if (Debug.debugmode)
             Log.i("profile Info", "---------------------------------------------------");
-////        String inputUserName= inputName.getText().toString();
-//        user.setUserName(inputUserName);
+
         if (Debug.debugmode)
             Log.i(" 유저 정보1 ", " 닉네임 : " + nickname + ", 사용자 ID" + user.getUserID());
         if (Debug.debugmode) Log.i(" 유저 정보2 ", " 자기소개 :" + textInputEditText_introText.getText());
+        String text = textInputEditText_introText.getText().toString();
         if (Debug.debugmode) Log.i(" 유저 정보3 ", " 이미지Url:" + user.getImageUrl());
         if (Debug.debugmode)
-            Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId + ", 시군구:" + townId + ", Need :" + need);
-////        MainActivity mainActivity = (MainActivity)getActivity();
-////        mainActivity.drawerUserSetting(inputUserName);
-////        mainActivity.goMainFragment(MainFragment.USERTAB);
-    }
+            Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId +
+                    ", 시군구:" + townId + ", Need :" + need);
+        ProfileSetRequest request = new ProfileSetRequest(getContext(), nickname, user.getUser_gender()
+                ,positionId,genreId, text,cityId,townId,imagefile,need);
+        //성별 변경... 추가해야되는??
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
+                MainActivity mainActivity = (MainActivity)getActivity();
+                mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
+                mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
+            }
 
+            @Override
+            public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                if(Debug.debugmode)Log.e("Profile Setting Fail ",errorMessage+errorCode);
+            }
+        });
+////        String inputUserName= inputName.getText().toString();
+    }
 
     @BindView(R.id.radioGroup_ProfileSetting_need)
     RadioGroup radioGroup_need;
@@ -107,21 +141,24 @@ public class ProfileSettingFragment extends Fragment {
     @BindView(R.id.radioButton_needOff)
     RadioButton radioButton_needOff;
 
-
     @BindView(R.id.textView_userProfileEmail)
     TextView textView_userEmail;
     @BindView(R.id.textInput_introText)
     TextInputLayout textInputLayout_introtext;
     @BindView(R.id.editText_introText)
     TextInputEditText textInputEditText_introText;
+
     @BindView(R.id.spinner_genre_profile)
     Spinner spinner_genre;
+
     @OnItemSelected(value = R.id.spinner_genre_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onGenreSelected(int position) {
         genreId = position + 1;
     }
+
     @BindView(R.id.spinner_position_profile)
     Spinner spinner_position;
+
     @OnItemSelected(value = R.id.spinner_position_profile, callback = OnItemSelected.Callback.ITEM_SELECTED)
     public void onPositionSelected(int position) {
         positionId = position + 1;
@@ -479,17 +516,13 @@ public class ProfileSettingFragment extends Fragment {
     }
 
 
-
     static final int AVAILABLE = 0;
     static final int NOT_AVAILABLE = 1;
     boolean nicknameCheck = false;
     private String nickname;
 
-
-
-
-
     int need = 0; //Default = 0; 선택 안함
+
     public void inProfileImageView() {
         String imageUrl = user.getImageUrl();
         Glide.with(this)
@@ -497,6 +530,7 @@ public class ProfileSettingFragment extends Fragment {
                 .transform(new RoundImageTransform(getContext()))
                 .into(imageView_profileImage);
     }
+
     public void onClickRadioGroup_need()   //NEED 체크 라디오 버튼
     {
         radioGroup_need.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -525,12 +559,63 @@ public class ProfileSettingFragment extends Fragment {
     }
 
 
-
     public ProfileSettingFragment() {
         // Required empty public constructor
     }
 
-    public void preUserInfoSetting(){
+    int IMAGE_FROM_GALLERY = 101;
+
+    @OnClick(R.id.imageButton_uploadProfileImage) //이미지 업로드 버튼
+    public void onProfileImageUpload() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMAGE_FROM_GALLERY);
+    }
+
+    File imagefile;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("log", "activity");
+        Log.e("log", " requestCode : " + requestCode + "resultCode " + resultCode);
+        if (requestCode == IMAGE_FROM_GALLERY) {
+            Log.e("log", "IMAGE_FROM_GALLERY");
+            if (resultCode == Activity.RESULT_OK) {
+                Uri uri = data.getData();
+                Bitmap savebitmap;
+                InputStream inputStream = null;
+                try {
+                    inputStream = getContext().getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                savebitmap = BitmapFactory.decodeStream(inputStream);
+                Uri bitmapUri = writeToTempImageAndGetPathUri(getContext(), savebitmap);
+
+                Cursor c = getContext().getContentResolver().query(bitmapUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+                if (c.moveToNext()) {
+                    String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                    imagefile = new File(path);
+
+                    Glide.with(this)
+                            .load(uri)
+                            .transform(new RoundImageTransform(getContext()))
+                            .into(imageView_profileImage);
+                }
+            }
+        }
+    }
+
+    public static Uri writeToTempImageAndGetPathUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public void preUserInfoSetting() {
         if (Debug.debugmode)
             Log.i(" 유저 정보1 ", " 닉네임 : " + user.getUserName() + ", 사용자 ID" + user.getUserID());
         if (Debug.debugmode)
@@ -542,9 +627,9 @@ public class ProfileSettingFragment extends Fragment {
         editText_userNickName.setText(user.getUserName());
         textInputEditText_introText.setText(user.getText());
         inProfileImageView();
-        spinner_position.setSelection(user.getPostition()-1);
-        spinner_genre.setSelection(user.getGenre()-1);
-        spinner_city.setSelection(user.getCity()-1);
+        spinner_position.setSelection(user.getPostition() - 1);
+        spinner_genre.setSelection(user.getGenre() - 1);
+        spinner_city.setSelection(user.getCity() - 1);
 
     }
 
@@ -661,8 +746,6 @@ public class ProfileSettingFragment extends Fragment {
     int cityId = 0;
     int positionId = 1; //Default = 1 ; 선택안함
     int genreId = 1;  // Default = 1 ; 선택안함
-
-
 
 
     public String[] cityList = {
