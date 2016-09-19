@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.data.SearchLabel;
 import team.nuga.thelabel.viewholder.SearchLabelViewHolder;
 
 /**
@@ -18,9 +18,9 @@ import team.nuga.thelabel.viewholder.SearchLabelViewHolder;
  */
 public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLabelViewHolder>
                 implements SearchLabelViewHolder.OnSearchLabelItemClickListener{
-    List<Label> labelitems = new ArrayList<>();
-    Label label;
-    public void add(Label label) {
+    List<SearchLabel> labelitems = new ArrayList<>();
+    SearchLabel label;
+    public void add(SearchLabel label) {
         labelitems.add(label);
         notifyDataSetChanged();
     }
@@ -45,7 +45,7 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
     }
 
     public interface OnAdapterItemClickListener {
-        public void onAdapterItemClick(View view, Label user, int position);
+        public void onAdapterItemClick(View view, SearchLabel label, int position);
     }
 
     OnAdapterItemClickListener listener;
@@ -53,7 +53,7 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
         this.listener = listener;
     }
     @Override
-    public void onLabelItemClick(View view, Label label, int position) {
+    public void onLabelItemClick(View view, SearchLabel label, int position) {
         if(listener!=null){
             listener.onAdapterItemClick(view , label, position);
         }

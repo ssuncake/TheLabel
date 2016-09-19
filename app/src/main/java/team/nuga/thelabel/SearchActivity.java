@@ -2,11 +2,8 @@ package team.nuga.thelabel;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -14,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.adapter.SearchViewpagerAdapter;
-import team.nuga.thelabel.fragment.UserSearchFragment;
 
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_tablayout)
@@ -62,5 +58,4 @@ public class SearchActivity extends AppCompatActivity {
         });
 
     }
-
 }

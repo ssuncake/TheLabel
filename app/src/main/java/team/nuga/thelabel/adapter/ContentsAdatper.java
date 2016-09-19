@@ -82,8 +82,6 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     @Override
     public void onBindViewHolder(final ParentContentsViewHolder holder, int position) {
-
-
         if (user == null) {
             holder.setData(mcontentslist.get(position));
         } else {

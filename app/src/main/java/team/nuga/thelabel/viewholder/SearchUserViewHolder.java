@@ -1,20 +1,17 @@
 package team.nuga.thelabel.viewholder;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.RoundImageTransform;
-import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.data.SearchUser;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -34,7 +31,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
     TextView isNeed;
 
     public interface OnSearchUserItemClickListener{
-        public void onUserItemClick(View view, User user, int position);
+        public void onUserItemClick(View view, SearchUser user, int position);
     }
     OnSearchUserItemClickListener listener;
     public void setOnSearchItemClickListener(OnSearchUserItemClickListener listener){
@@ -52,8 +49,8 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
-    User user;
-    public void setUser(User user) {
+    SearchUser user;
+    public void setUser(SearchUser user) {
         this.user = user;
         usernameView.setText(user.getSearchUserName());
         Glide.with(userphotoView.getContext())

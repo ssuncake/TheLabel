@@ -40,8 +40,9 @@ public class Contents implements Serializable{
 
     @SerializedName("imagepath")
     private String writerImage;
+    @SerializedName("fileCode")
+  private String fileCode;
 
-    private String fileCode;
 
     public String getFileCode() {
         return fileCode;
@@ -50,6 +51,7 @@ public class Contents implements Serializable{
     public void setFileCode(String fileCode) {
         this.fileCode = fileCode;
     }
+
 
     public String getWriterName() {
         return writerName;

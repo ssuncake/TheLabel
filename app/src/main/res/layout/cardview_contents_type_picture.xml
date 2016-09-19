@@ -102,12 +102,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView_like"
                     android:src="@drawable/icn_like"
-                    android:layout_alignBottom="@+id/textView_Iike"
-                    android:layout_toLeftOf="@+id/textView_numlike"
-                    android:layout_toStartOf="@+id/textView_numlike"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="3dp"/>
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="2dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -6,22 +6,28 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class OtherLabelActivity extends AppCompatActivity {
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+public class OtherLabelActivity extends AppCompatActivity {
+    @OnClick(R.id.imageButton_back)
+    public void backButton(){
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_label);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_otherlabel);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         TextView text = (TextView) findViewById(R.id.text_otherlabel);
@@ -68,15 +74,5 @@ public class OtherLabelActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }

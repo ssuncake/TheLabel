@@ -11,10 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +20,10 @@ import team.nuga.thelabel.OtherLabelActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchLabelResultListAdapter;
 import team.nuga.thelabel.data.ClearEditText;
-import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.NetworkResultLabelSearch;
-import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.data.SearchLabel;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
-import team.nuga.thelabel.request.LabelSearchRequest;
 import team.nuga.thelabel.request.LabelTextSelectRequest;
 
 /**
@@ -61,9 +56,9 @@ public class LabelSearchFragment extends Fragment {
         labeladapter = new SearchLabelResultListAdapter();
         labeladapter.setOnAdapterItemClickListener(new SearchLabelResultListAdapter.OnAdapterItemClickListener() {
             @Override
-            public void onAdapterItemClick(View view, Label user, int position) {
+            public void onAdapterItemClick(View view, SearchLabel label, int position) {
                 Intent intent = new Intent(getActivity(),OtherLabelActivity.class);
-                intent.putExtra("other",position+"님의 계정입니다.");
+                intent.putExtra("other",label.getSearchLabelName());
                 startActivity(intent);
             }
         });
@@ -81,8 +76,8 @@ public class LabelSearchFragment extends Fragment {
         NetworkManager.getInstance().getNetworkData(labelTextSelectRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
-                Label[] label = result.getResult();
-                for (Label l : label) {
+                SearchLabel[] label = result.getLabel();
+                for (SearchLabel l : label) {
                     labeladapter.add(l);
                 }
             }

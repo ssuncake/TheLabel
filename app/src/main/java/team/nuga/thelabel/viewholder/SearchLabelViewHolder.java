@@ -1,6 +1,5 @@
 package team.nuga.thelabel.viewholder;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,9 +9,8 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.data.RoundImageTransform;
+import team.nuga.thelabel.data.SearchLabel;
 
 /**
  * Created by Tacademy on 2016-08-26.
@@ -28,7 +26,7 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
     TextView labelGenre;
 
     public interface OnSearchLabelItemClickListener{
-        public void onLabelItemClick(View view, Label label, int position);
+        public void onLabelItemClick(View view, SearchLabel label, int position);
     }
     OnSearchLabelItemClickListener listener;
     public void setOnSearchItemClickListener(OnSearchLabelItemClickListener listener){
@@ -46,8 +44,8 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    Label label;
-    public void setLabel(Label label){
+    SearchLabel label;
+    public void setLabel(SearchLabel label){
         this.label = label;
         labelNameView.setText(label.getSearchLabelName());
         labelGenre.setText(label.getSearchLabelGenre());

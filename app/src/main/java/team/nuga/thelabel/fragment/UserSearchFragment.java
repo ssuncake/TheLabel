@@ -4,19 +4,13 @@ package team.nuga.thelabel.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import butterknife.BindView;
@@ -27,7 +21,7 @@ import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
 import team.nuga.thelabel.data.ClearEditText;
 import team.nuga.thelabel.data.NetworkResultUserSearch;
-import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.data.SearchUser;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.UserTextSearchRequest;
@@ -60,12 +54,16 @@ public class UserSearchFragment extends Fragment {
         useradapter = new SearchUserResultListAdapter();
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
-            public void onAdapterItemClick(View view, User user, int position) {
+            public void onAdapterItemClick(View view, SearchUser user, int position) {
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-                intent.putExtra("name", user.getSearchUserName() + "님의 계정입니다.");
+                intent.putExtra("name", user.getSearchUserName());
+                intent.putExtra("genre", user.getSearchUserGenre());
+                intent.putExtra("imagePath",user.getSearchUserImage());
                 startActivity(intent);
             }
+
         });
+
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         userListView.setLayoutManager(manager);
@@ -82,8 +80,8 @@ public class UserSearchFragment extends Fragment {
         NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
-                User[] user = result.getResult();
-                for (User u : user) {
+                SearchUser[] user = result.getUser();
+                for (SearchUser u : user) {
                     useradapter.add(u);
                 }
             }

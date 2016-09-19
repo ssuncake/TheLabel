@@ -51,8 +51,8 @@ public class UserMainFragment extends Fragment {
 
     User user;
     boolean isLastItem;
-    private static int PAGE;
-    private static String COUNT="10";
+    private static int PAGE; //페이지
+    private static String COUNT="10"; //카운트 수
 
     enum PlayerState {
         IDLE,
@@ -94,32 +94,6 @@ public class UserMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this, view);
         PAGE =1;
-//        ContentsRequest contentsRequest = new ContentsRequest(getContext(), 2, 10);
-//        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
-//            @Override
-//
-//            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
-//                contentses = result.getData();
-//                User user = result.getResult();
-//                contentsAdatper.setUser(user);
-//                for (Contents c : contentses) {
-//                    Log.d("게시글 ID", "" + c.getContentsID());
-//                    Log.d("파일경로", "" + c.getContentsPath());
-//                    Log.d("파일타입", "" + c.getContentsType());
-//                    Log.d("좋아요 개수", "" + c.getLikeCount());
-//                    contentsAdatper.add(c);
-//                }
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
-//                Log.e("유저메인 실패", errorMessage);
-//            }
-//        });
-
         contentsAdatper = new ContentsAdatper();
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
@@ -305,7 +279,6 @@ public class UserMainFragment extends Fragment {
                     for (AccountTypeMusicViewHolder hv : musicHolderList) {
                         hv.setSeekbarPlaytime();
                     }
-
                 }
                 mHandler.postDelayed(this, 100);
             }
