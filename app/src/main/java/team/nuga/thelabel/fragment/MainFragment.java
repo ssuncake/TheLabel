@@ -77,22 +77,22 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==0){
-                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
-                    f.mediaStop();
+//                if(position==0){
+//                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
+//                    f.mediaStop();
 //                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
 //                    f1.mediaStop();
-                }else if(position==1){
-                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
-                    f2.mediaStop();
-                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
-                    f.mediaStop();
-                }else if(position==2){
-                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
-                    f2.mediaStop();
+//                }else if(position==1){
+//                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
+//                    f2.mediaStop();
+//                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
+//                    f.mediaStop();
+//                }else if(position==2){
+//                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
+//                    f2.mediaStop();
 //                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
 //                    f1.mediaStop();
-                }
+//                }
             }
 
             @Override

@@ -90,6 +90,7 @@ public class MyGcmListenerService extends GcmListenerService {
                                 try {
                                     Log.e("GCM test addmessage ","내아이디 : "+messagetemp.getUser_id()+" 너아이디 : "+other.getUserID()+" date : "+messagetemp.getDate()+" // "+Utils.convertStringToTime(messagetemp.getDate()));
                                     DBManager.getInstance().addMessage(messagetemp.getUser_id(),other,ChatContract.ChatMessage.TYPE_RECEIVE, messagetemp.getText(),Utils.convertStringToTime(messagetemp.getDate()));
+                                 //   messageUpdateCallBack.messageUpdate();
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -105,11 +106,17 @@ public class MyGcmListenerService extends GcmListenerService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
         }
+    }
 
+    public interface UpdateCallback{
+        public void messageUpdate();
+    }
+
+    private UpdateCallback messageUpdateCallBack;
+
+    public void setMessageUpdateCallBack(UpdateCallback updateCallBack){
+        this.messageUpdateCallBack = updateCallBack;
     }
 
 

@@ -15,9 +15,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.adapter.MessageListCursorAdapter;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageActivity extends AppCompatActivity implements MyGcmListenerService.UpdateCallback{
     public static final String USER="dbuser";
 
 
@@ -46,8 +47,7 @@ public class MessageActivity extends AppCompatActivity {
     MessageListCursorAdapter adapter;
 
     boolean sw=false;
-
-
+    MyGcmListenerService cals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,8 @@ public class MessageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        cals.setMessageUpdateCallBack(this);
+
 
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
@@ -104,4 +106,8 @@ public class MessageActivity extends AppCompatActivity {
         adapter.changeCursor(null);
     }
 
+    @Override
+    public void messageUpdate() {
+        updateMessage();
+    }
 }
