@@ -1,7 +1,5 @@
 package team.nuga.thelabel.request;
 
-import android.content.Context;
-
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -20,20 +18,21 @@ import team.nuga.thelabel.data.NetworkResult;
  */
 public class ProfileSetRequest extends AbstractRequest<NetworkResult> {
 
-    private static final String PROFILESET = "users";
+//    private static final String PROFILESET = "users/me";
 MediaType jpeg = MediaType.parse("image/jpeg");
     Request request;
-    public ProfileSetRequest(Context context, String nickname,int gender_id, int position_id,
-                             int genre_id,String text, int city_id, int town_id, File file,int need) {
+    public ProfileSetRequest(String nickname, int position_id,
+                             int genre_id,String text, int city_id,
+                             int town_id, File file,int need) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(PROFILESET)
+                .addPathSegment("users")
                 .addPathSegment("me")
                 .build();
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("pass","true")
                 .addFormDataPart("nickname",nickname)
-                .addFormDataPart("gender", String.valueOf(gender_id))
+//                .addFormDataPart("gender", String.valueOf(gender_id))
                 .addFormDataPart("text",text)
                 .addFormDataPart("position_id", String.valueOf(position_id))
                 .addFormDataPart("genre_id", String.valueOf(genre_id))
@@ -47,8 +46,7 @@ MediaType jpeg = MediaType.parse("image/jpeg");
         RequestBody body = builder.build();
         request = new Request.Builder()
                 .url(url)
-                .post(body)
-                .tag(context)
+                .put(body)
                 .build();
     }
 

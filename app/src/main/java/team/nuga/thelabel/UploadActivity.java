@@ -122,6 +122,7 @@ public class UploadActivity extends AppCompatActivity {
                 });
                 break;
             case YOUTUBE:
+
                 UploadYoutubeContentRequest request2 = new UploadYoutubeContentRequest(this,2,youtubeLastsgment,"", labelId,opento,inputText);
                 NetworkManager.getInstance().getNetworkData(request2, new NetworkManager.OnResultListener<NetworkResult>() {
                     @Override

@@ -103,18 +103,16 @@ public class ProfileSettingFragment extends Fragment {
 
         if (Debug.debugmode)
             Log.i("profile Info", "---------------------------------------------------");
-
         if (Debug.debugmode)
             Log.i(" 유저 정보1 ", " 닉네임 : " + nickname + ", 사용자 ID" + user.getUserID());
         if (Debug.debugmode) Log.i(" 유저 정보2 ", " 자기소개 :" + textInputEditText_introText.getText());
         String text = textInputEditText_introText.getText().toString();
-        if (Debug.debugmode) Log.i(" 유저 정보3 ", " 이미지Url:" + user.getImageUrl());
+//        if (Debug.debugmode) Log.i(" 유저 정보3 ", " 이미지Url:" + imagefile.toString());
         if (Debug.debugmode)
             Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId +
                     ", 시군구:" + townId + ", Need :" + need);
-        ProfileSetRequest request = new ProfileSetRequest(getContext(), nickname, user.getUser_gender()
-                , positionId, genreId, text, cityId, townId, imagefile, need);
-        //성별 변경... 추가해야되는??
+        ProfileSetRequest request = new ProfileSetRequest(nickname, positionId, genreId, text,
+                cityId, townId, imagefile, need);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
@@ -123,7 +121,6 @@ public class ProfileSettingFragment extends Fragment {
                 mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
                 mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
             }
-
             @Override
             public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -511,6 +508,8 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         }
+
+        spinner_town.setSelection(current_townId);
 
     }
 
