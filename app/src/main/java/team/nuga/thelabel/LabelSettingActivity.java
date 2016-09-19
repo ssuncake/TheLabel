@@ -112,6 +112,9 @@ public class LabelSettingActivity extends AppCompatActivity {
     User user;
     int selectGanre;
     String[] ITEMS = {"선택안함","가요", "팝", "랩/힙합", "락", "어쿠스틱/포크","일렉트로니카","뉴에이지","R&B/soul","재즈","CCM"};
+//    @BindArray(R.array.genrelist)    String[] ITEMS;
+
+
     String inputText;
     List<Integer> inputPositions = new ArrayList<>();
 

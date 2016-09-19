@@ -21,7 +21,7 @@ public class FireMemberActivity extends AppCompatActivity {
     public static final String LOGTAG = "FireMemberActivity ";
     RecyclerView listView;
     FireMemberListAdapter firememberlistAdapter;
-    Label label;
+    public static Label label;
     User[] users;
 
     @Override

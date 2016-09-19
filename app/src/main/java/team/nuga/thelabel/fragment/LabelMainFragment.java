@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +44,7 @@ import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
 import team.nuga.thelabel.wiget.LabelMainTop;
+import team.nuga.thelabel.youtube.DeveloperKey;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -137,8 +141,6 @@ public class LabelMainFragment extends Fragment {
             goLabelSetting.setVisibility(View.VISIBLE);
         }
         GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),leaderId);
-
-
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
@@ -185,6 +187,14 @@ public class LabelMainFragment extends Fragment {
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         memberRecycler.setLayoutManager(manager);
 
+        contentsAdatper.setonYoutubeThumnailClickListener(new ContentsAdatper.OnYoutubeThumnailClickListener() {
+            @Override
+            public void onYoutubeThumnailClickListener(View view, Contents contents, int position) {
+                Toast.makeText(getContext(), "클릭", Toast.LENGTH_SHORT).show();
+                Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), DeveloperKey.DEVELOPER_KEY, contents.getFileCode());
+                getActivity().startActivity(intent);
+            }
+        });
         contentsAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
             public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {

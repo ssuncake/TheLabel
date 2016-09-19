@@ -14,26 +14,24 @@ import team.nuga.thelabel.data.NetworkResult;
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class PasswordChangeRequest extends AbstractRequest<NetworkResult> {
+public class FireLabelMemberRequest extends AbstractRequest<NetworkResult> {
 
-    private static final String USERS= "users";
-    private static final String ME = "me";
+    private static final String FIRE= "labels";
 
     Request request;
-    public PasswordChangeRequest(String password, String new_password) {
+    public FireLabelMemberRequest(int label_id, int user_id) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(USERS)
-                .addPathSegment(ME)
-                .addQueryParameter("pass","true")
+                .addPathSegment(FIRE)
+                .addPathSegment(""+label_id)
+                .addQueryParameter("members","true")
                 .build();
         RequestBody body = new FormBody.Builder()
-                .add("password", password)
-                .add("new_password", new_password)
+                .add("user_id", ""+user_id)
                 .build();
 
         request = new Request.Builder()
                 .url(url)
-                .put(body)
+                .delete(body)
                 .build();
     }
 

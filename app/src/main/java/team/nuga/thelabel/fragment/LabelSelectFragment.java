@@ -94,15 +94,15 @@ public class LabelSelectFragment extends Fragment  {
 
             labelView = new LabelSelectView(getContext(), i);
             labelSelectViews[i] = labelView;
-            if(i<labels.length){
-                selectlabel = labels[i];
-            }
+//            if(i<labels.length){
+//                selectlabel = labels[i];
+//            }
 
             labelSelectViews[i].setOnSettingImageClickListener(new LabelSelectView.OnSettingImageClickListener() {
                 @Override
                 public void onSettingClick(Label label) {
                     Intent intent = new Intent(getActivity(), LabelSettingActivity.class);
-                    intent.putExtra(MainActivity.SELECTLABEL,selectlabel);
+                    intent.putExtra(MainActivity.SELECTLABEL,label);
                     startActivity(intent);
                 }
             });
