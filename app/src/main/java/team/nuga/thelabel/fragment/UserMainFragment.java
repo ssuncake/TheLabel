@@ -1,6 +1,7 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
+import team.nuga.thelabel.youtube.DeveloperKey;
 
 
 /**
@@ -124,6 +129,15 @@ public class UserMainFragment extends Fragment {
             }
         });
 
+        contentsAdatper.setonYoutubeThumnailClickListener(new ContentsAdatper.OnYoutubeThumnailClickListener() {
+            @Override
+            public void onYoutubeThumnailClickListener(View view, Contents contents, int position) {
+                Toast.makeText(getContext(), "클릭", Toast.LENGTH_SHORT).show();
+                Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), DeveloperKey.DEVELOPER_KEY, contents.getFileCode());
+                getActivity().startActivity(intent);
+            }
+
+        });
 
         contentsAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
