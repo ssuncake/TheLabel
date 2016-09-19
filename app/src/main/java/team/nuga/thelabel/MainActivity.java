@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity
     public static final int REQUEST_SETTINGLABEL = 410;
 
 
-
     @BindView(R.id.mainactivity_toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -86,7 +85,6 @@ public class MainActivity extends AppCompatActivity
         appFunction = new AppFunction(this);
 
 
-
         actionBar = getSupportActionBar();
         if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -103,17 +101,17 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저를 얻어옴.
 
 
-        User user = (User)getIntent().getSerializableExtra("LoginUser");
-        if (user==null){
+        User user = (User) getIntent().getSerializableExtra("LoginUser");
+        if (user == null) {
 
             mainUser = new User();
             mainUser.setUserName("이정호");
-        }else{
+        } else {
             mainUser = user;
-            Log.w("MainActivity","userId= " +user.getUserID()+"userName = "+user.getUserName()+"user impath ="+user.getUserName());
+            Log.w("MainActivity", "userId= " + user.getUserID() + "userName = " + user.getUserName() + "user impath =" + user.getUserName());
         }
 
-        Toast.makeText(MainActivity.this, "로그인 유저 : "+user.getUserName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "로그인 유저 : " + user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
 
         bundle = new Bundle();
@@ -125,18 +123,23 @@ public class MainActivity extends AppCompatActivity
         headerUserName.setText(mainUser.getUserName());
     }
 
-//    boolean backButtonClicked = false;
+    //    boolean backButtonClicked = false;
 //    Handler mHandler = new Handler(Looper.getMainLooper());
-
+    public static int currentViewPage = 0;
+    int appFinCount=0;
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (currentViewPage == 1) {
+            goMainFragment(1);
+            appFinCount++;
+            if(appFinCount>1)appFunction.appFinished();
         } else {
+            appFinCount=0;
             appFunction.appFinished();
-
-
         }
 
     }
@@ -176,8 +179,10 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    ContentsAdatper contentsAdatper ;
+
+    ContentsAdatper contentsAdatper;
     User profile_getUser;
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
@@ -193,7 +198,6 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
 
-
             ProfileGetRequest request = new ProfileGetRequest(this);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
                 @Override
@@ -205,9 +209,11 @@ public class MainActivity extends AppCompatActivity
                     profileSettingFragment.setArguments(b);
                     getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
                 }
+
                 @Override
                 public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                    if(Debug.debugmode)Toast.makeText(MainActivity.this, "유저 가져오기 실패", Toast.LENGTH_SHORT).show();
+                    if (Debug.debugmode)
+                        Toast.makeText(MainActivity.this, "유저 가져오기 실패", Toast.LENGTH_SHORT).show();
 //                    b.putSerializable(MainActivity.MAINUSER, mainUser);
                 }
             });
@@ -282,11 +288,10 @@ public class MainActivity extends AppCompatActivity
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.drawer_container, mainFragment,"mainContainer")
+                .replace(R.id.drawer_container, mainFragment, "mainContainer")
                 .commit();
 
     }
-
 
 
     public void drawerUserSetting(String name) {
@@ -299,7 +304,8 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(UploadFragment.UPLOADMODE, mode);
         startActivityForResult(intent, MainActivity.REQUEST_UPLOAD);
     }
-    public void goProfileSetting(){
+
+    public void goProfileSetting() {
         drawer.setCheckedItem(R.id.drawer_profile);
         Bundle b = new Bundle();
         b.putSerializable(MainActivity.MAINUSER, mainUser);
@@ -309,9 +315,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     // 단말환경 check
-
-
-
 
 
 }
