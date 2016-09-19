@@ -508,10 +508,13 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         }
-
-        spinner_town.setSelection(current_townId);
+        if (isFirstSet==true){
+            spinner_town.setSelection(current_townId);
+        }
+        isFirstSet=false;
 
     }
+    boolean isFirstSet=true;
 
 
     static final int AVAILABLE = 0;

@@ -70,7 +70,7 @@ public class UploadActivity extends AppCompatActivity {
     File musicFile;
 
     String musicTitle;
-    String youtubeLastsgment;
+   public static String youtubeURL=null;
 
 
 
@@ -122,12 +122,14 @@ public class UploadActivity extends AppCompatActivity {
                 });
                 break;
             case YOUTUBE:
+                if (Debug.debugmode)Log.i("유튭 URL",youtubeURL);
+              f = (UploadYoutubeFragment) getSupportFragmentManager().findFragmentById(R.id.editText_youtubeUpload);
 
-                UploadYoutubeContentRequest request2 = new UploadYoutubeContentRequest(this,2,youtubeLastsgment,"", labelId,opento,inputText);
+                UploadYoutubeContentRequest request2 = new UploadYoutubeContentRequest(this,2, youtubeURL,"", labelId,opento,inputText);
                 NetworkManager.getInstance().getNetworkData(request2, new NetworkManager.OnResultListener<NetworkResult>() {
                     @Override
                     public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
-                        if(Debug.debugmode)Log.d(LOGTAG,"유튜브 업로드  = "+youtubeLastsgment.toString()+" title = "+""+" 올릴레이블 ="+labelId+" 공개범위 = "+opento );
+                        if(Debug.debugmode)Log.d(LOGTAG,"유튜브 업로드  = "+ youtubeURL.toString()+" title = "+""+" 올릴레이블 ="+labelId+" 공개범위 = "+opento );
                     }
 
                     @Override
@@ -139,7 +141,6 @@ public class UploadActivity extends AppCompatActivity {
                 break;
             case MUSIC:
                 UploadMusicContentRequest request1 = new UploadMusicContentRequest(this,0,musicFile,musicTitle,labelId,opento,inputText);
-
                 NetworkManager.getInstance().getNetworkData(request1, new NetworkManager.OnResultListener<NetworkResult>() {
                     @Override
                     public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
@@ -159,8 +160,10 @@ public class UploadActivity extends AppCompatActivity {
         finish();
     }
 
-
-
+    public static void setYoutubeURL(String text){
+        youtubeURL = text;
+    }
+    UploadYoutubeFragment f=new UploadYoutubeFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,7 +190,7 @@ public class UploadActivity extends AppCompatActivity {
                 startActivityForResult(intent, IMAGE_FROM_GALLERY);
                 break;
             case YOUTUBE:
-                getSupportFragmentManager().beginTransaction().replace(R.id.upload_content, new UploadYoutubeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.upload_content, f).commit();
                 break;
 
         }

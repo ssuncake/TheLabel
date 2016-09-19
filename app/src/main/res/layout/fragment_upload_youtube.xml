@@ -9,6 +9,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/PINK_300"
         android:id="@+id/editText_youtubeUpload"
         android:layout_gravity="center_horizontal|top" />
 </FrameLayout>
