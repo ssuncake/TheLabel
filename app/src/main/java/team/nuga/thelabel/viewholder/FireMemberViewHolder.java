@@ -19,7 +19,7 @@ import team.nuga.thelabel.data.User;
  * Created by Tacademy on 2016-08-29.
  */
 public class FireMemberViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.textView_MemberList_Name)
+    @BindView(R.id.textView_FireMember_Name)
     TextView firememberView;
     @BindView(R.id.button_subfiremember)
     Button firememberbutton;
@@ -38,7 +38,8 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
     }
     public FireMemberViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,8 +48,6 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-        firememberView = (TextView)itemView.findViewById(R.id.textView_MemberList_Name);
-        firememberbutton = (Button)itemView.findViewById(R.id.button_subfiremember) ;
         firememberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

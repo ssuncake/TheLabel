@@ -11,7 +11,7 @@ import android.view.View;
 
 import team.nuga.thelabel.adapter.FireMemberListAdapter;
 import team.nuga.thelabel.data.Label;
-import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultLabelMemberManage;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -35,16 +35,17 @@ public class FireMemberActivity extends AppCompatActivity {
         label =(Label) getIntent().getSerializableExtra(MainActivity.SELECTLABEL);
         if (label != null) {
             LabelGetFireMemberRequest request = new LabelGetFireMemberRequest(label.getLabelID());
-            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User[]>>() {
+            Log.e(LOGTAG, "전달받은 레이블 id "+label.getLabelID());
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabelMemberManage>() {
                 @Override
-                public void onSuccess(NetworkRequest<NetworkResult<User[]>> request, NetworkResult<User[]> result) {
-                    users = result.getUser();
+                public void onSuccess(NetworkRequest<NetworkResultLabelMemberManage> request, NetworkResultLabelMemberManage result) {
+                    users = result.getUsers();
                     Log.e(LOGTAG, "users" + users.length);
                     initData(users);
                 }
 
                 @Override
-                public void onFail(NetworkRequest<NetworkResult<User[]>> request, int errorCode, String errorMessage, Throwable e) {
+                public void onFail(NetworkRequest<NetworkResultLabelMemberManage> request, int errorCode, String errorMessage, Throwable e) {
                     Log.e(LOGTAG, "LabelGetFireMemberRequest fail " + errorMessage);
                 }
             });
@@ -66,7 +67,10 @@ public class FireMemberActivity extends AppCompatActivity {
     }
 
     private void initData(User[] users) {
-
+        for(User u : users){
+            Log.e(LOGTAG,"add user = "+u.getUserName());
+            firememberlistAdapter.add(u);
+        }
     }
 
     @Override

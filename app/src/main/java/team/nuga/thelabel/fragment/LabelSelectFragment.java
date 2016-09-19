@@ -46,6 +46,7 @@ public class LabelSelectFragment extends Fragment  {
     Label[] labels;
     LabelSelectView[] labelSelectViews = new LabelSelectView[3];
     LabelSelectView labelView;
+    Label selectlabel;
 
 
     @Override
@@ -93,12 +94,16 @@ public class LabelSelectFragment extends Fragment  {
 
             labelView = new LabelSelectView(getContext(), i);
             labelSelectViews[i] = labelView;
+            if(i<labels.length){
+                selectlabel = labels[i];
+            }
+
             labelSelectViews[i].setOnSettingImageClickListener(new LabelSelectView.OnSettingImageClickListener() {
                 @Override
                 public void onSettingClick(Label label) {
                     Intent intent = new Intent(getActivity(), LabelSettingActivity.class);
-                    intent.putExtra(MainActivity.SELECTLABEL,label);
-                    startActivityForResult(intent,MainActivity.REQUEST_SETTINGLABEL);
+                    intent.putExtra(MainActivity.SELECTLABEL,selectlabel);
+                    startActivity(intent);
                 }
             });
 

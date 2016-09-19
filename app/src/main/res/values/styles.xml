@@ -4,8 +4,8 @@
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorPrimary">@color/color_white</item> <!-- 타이틀바 색상 -->
-        <item name="textColorError">@color/design_textinput_error_color_light</item>
+        <!--<item name="android:textColorPrimary">@color/color_white</item> &lt;!&ndash; 타이틀바 색상 &ndash;&gt;-->
+        <!--<item name="textColorError">@color/design_textinput_error_color_light</item>-->
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
 
