@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.SeekBar;
 
 import java.io.IOException;
+import java.util.List;
 
 import team.nuga.thelabel.data.Contents;
 
@@ -17,7 +18,7 @@ import team.nuga.thelabel.data.Contents;
  */
 public class ContentsMusicPlayer {
 
-    public ContentsMusicPlayer(Context context, Contents[] contentses, SeekBar mainProgressView) {
+    public ContentsMusicPlayer(Context context, List<Contents> contentses, SeekBar mainProgressView) {
         this.context = context;
         this.contentses = contentses;
         this.mainProgressView = mainProgressView;
@@ -42,7 +43,7 @@ public class ContentsMusicPlayer {
 
     MediaPlayer mPlayer;
 
-    Contents[] contentses;
+    List<Contents> contentses;
 
     SeekBar mainProgressView;
 
@@ -52,7 +53,7 @@ public class ContentsMusicPlayer {
 
 
     public void playToPause(Contents contents){
-        Log.w(LOGTAG, "playMode : play ->pause / contentid = " + contents.getContentsID());
+        Log.e(LOGTAG,"playToPause =>"+contents.getContentsID()+" / "+playNowContents.getContentsID());
         mPlayer.pause();
         mState = PlayerState.PAUSED;
         contents.setPlayedMode(Contents.PUASE);
@@ -60,6 +61,7 @@ public class ContentsMusicPlayer {
     }
 
     public void pauseToPlay(Contents contents){
+        Log.e(LOGTAG,"pauseToPlay =>"+contents.getContentsID()+" / "+playNowContents.getContentsID());
 //        if(contents.getContentsID() == userPlayingContentsId) // 사용자가 중지한 컨텐츠가 맞다면
 //        {
             mPlayer.seekTo(contents.getPlayedTIme());
@@ -72,20 +74,28 @@ public class ContentsMusicPlayer {
     }
 
     public void stopToPlay(Contents contents){
+
         if(mPlayer != null){
+            Log.e(LOGTAG,"stopToPlay =>"+contents.getContentsID()+" / "+playNowContents.getContentsID());
             mPlayer.reset();
-        }
+            //다른 플레이어들을 리셋
+            for (Contents c : contentses) {
+                if (c.getContentsID() != contents.getContentsID()) {
+                    if(c.getContentsType() == Contents.MUSIC){
+                        Log.e("컨텐츠 리스트 리셋", "리셋하는 contentid ->" + c.getContentsID() + " / 지우면 안될 contentid = " + contents.getContentsID());
+                        c.setPlayedMode(Contents.STOP);
+                        c.setPlayedTIme(0);
+                    }
 
-
-        //다른 플레이어들을 리셋
-        for (Contents c : contentses) {
-            if (c.getContentsID() != contents.getContentsID()) {
-                Log.d("컨텐츠 리스트 리셋", "리셋하는 contentid ->" + c.getContentsID() + " / 지우면 안될 contentid = " + contents.getContentsID());
-                c.setPlayedMode(Contents.STOP);
-                c.setPlayedTIme(0);
+                }
             }
+            mainProgressView.setProgress(0);
+        }else{
+            Log.e(LOGTAG,"stopToPlay =>"+contents.getContentsID()+"첫시작");
         }
-        mainProgressView.setProgress(0);
+
+
+
 
         // 새로시작
         mPlayer = MediaPlayer.create(context, Uri.parse(contents.getContentsPath()));
@@ -124,7 +134,6 @@ public class ContentsMusicPlayer {
                     int position = mPlayer.getCurrentPosition();
                     mainProgressView.setProgress(position);
                     playNowContents.setPlayedTIme(position);
-
                 }
                 mHandler.postDelayed(this, 100);
             }
@@ -133,7 +142,7 @@ public class ContentsMusicPlayer {
     };
 
 
-    public void setRefreshContentses(Contents[] contentses){
+    public void setRefreshContentses(List<Contents> contentses){
         this.contentses = contentses;
     }
 }

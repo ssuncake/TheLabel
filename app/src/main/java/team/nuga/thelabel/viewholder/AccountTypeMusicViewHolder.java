@@ -38,6 +38,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     SeekBar playSeekbar;
 
     CheckBox playCheckBox;
+    Contents contents;
 
     public SeekBar getPlaySeekbar() {
         return playSeekbar;
@@ -146,31 +147,62 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
 
 
-    public void applyData(Contents contents) {
+    public void applyData(Contents ncontents) {
+        contents = ncontents;
+        if(contents.getContentsType() == Contents.MUSIC){
+            contents.setMoveListener(new Contents.onPlayTimeMoveListener() {
+                @Override
+                public void movePlayTime() {
+                    playSeekbar.setProgress(contents.getPlayedTIme());
+                }
+            });
+
+            contents.setMaxListener(new Contents.onPlayTimeMaxListener() {
+                @Override
+                public void setMax() {
+                    playSeekbar.setMax(contents.getPlayTimeMax());
+                }
+            });
+
+            contents.setOnMusicState(new Contents.onMusicState() {
+                @Override
+                public void setChange(int state) {
+                    switch (state) {
+                        case Contents.PLAY:
+                            playCheckBox.setChecked(true);
+                            break;
+                        case Contents.PUASE:
+                        case Contents.STOP:
+                            playCheckBox.setChecked(false);
+                            break;
+                    }
+                }
+            });
+
+
+            conetentTime.setText(contents.getContentCreateDate());
+            likeCount.setText("" + contents.getLikeCount());
+            if(contents.getPlayedMode()==Contents.PLAY){
+                Log.w("온바인드 뷰홀더",contents.getContentsID()+"PLAY");
+                playCheckBox.setChecked(true);
+                playSeekbar.setProgress(contents.getPlayedTIme());
+            }else if( contents.getPlayedMode() == Contents.PUASE){
+                Log.w("온바인드 뷰홀더",contents.getContentsID()+"PUASE");
+                playCheckBox.setChecked(false);
+                playSeekbar.setProgress(contents.getPlayedTIme());
+            }else if(contents.getPlayedMode() == Contents.STOP){
+                Log.w("온바인드 뷰홀더",contents.getContentsID()+"STOP");
+                playCheckBox.setChecked(false);
+                playSeekbar.setProgress(0);
+            }
+        }
+
         userName.setText(contents.getWriterName());
         Glide.with(profileImage.getContext())
                 .load(contents.getWriterImage())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
-        playSeekbar.setMax(contents.getPlayTimeMax());
 
-            conetentTime.setText(contents.getContentCreateDate());
-            likeCount.setText("" + contents.getLikeCount());
-        if(contents.getPlayedMode()==Contents.PLAY){
-            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"PLAY");
-            playCheckBox.setChecked(true);
-            playSeekbar.setProgress(contents.getPlayedTIme());
-
-
-        }else if( contents.getPlayedMode() == Contents.PUASE){
-            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"PUASE");
-            playCheckBox.setChecked(false);
-            playSeekbar.setProgress(contents.getPlayedTIme());
-        }else if(contents.getPlayedMode() == Contents.STOP){
-            Log.w("온바인드 뷰홀더",contents.getPlayedMode()+"STOP");
-            playCheckBox.setChecked(false);
-            playSeekbar.setProgress(0);
-        }
 
 
     }

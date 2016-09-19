@@ -26,6 +26,10 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
 
+    public ArrayList<Contents> getMcontentslist() {
+        return mcontentslist;
+    }
+
     public void add(Contents contents) {
         mcontentslist.add(contents);
         notifyDataSetChanged();

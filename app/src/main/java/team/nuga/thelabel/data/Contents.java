@@ -61,14 +61,7 @@ public class Contents implements Serializable{
         return writerImage;
     }
 
-    public int getPlayTimeMax() {
-        return playTimeMax;
-    }
 
-
-    public void setPlayTimeMax(int playTimeMax) {
-        this.playTimeMax = playTimeMax;
-    }
 
     public String getContentCreateDate() {
         return ContentCreatedDate;
@@ -122,8 +115,25 @@ public class Contents implements Serializable{
     }
 
 
+    // 뮤직플레이어 관련
+
+    public int getPlayTimeMax() {
+        return playTimeMax;
+    }
+
+    public void setPlayTimeMax(int playTimeMax) {
+        this.playTimeMax = playTimeMax;
+        if(maxlistener != null){
+            maxlistener.setMax();
+        }
+    }
+
     public void setPlayedMode(int playedMode) {
         this.playedMode = playedMode;
+        if(musicStatelistener!=null){
+            musicStatelistener.setChange(playedMode);
+        }
+
     }
 
     public int getPlayedMode() {
@@ -136,6 +146,42 @@ public class Contents implements Serializable{
 
     public void setPlayedTIme(int playedTIme) {
         this.playedTIme = playedTIme;
+        if(movelistener!=null){
+            movelistener.movePlayTime();
+        }
+    }
+
+    public interface onPlayTimeMoveListener{
+        public void movePlayTime();
+    }
+
+    private onPlayTimeMoveListener movelistener;
+
+    public void setMoveListener(onPlayTimeMoveListener listener) {
+        if(listener!=null)
+        movelistener = listener;
+    }
+
+    public interface onPlayTimeMaxListener{
+        public void setMax();
+    }
+
+    private onPlayTimeMaxListener maxlistener;
+
+    public void setMaxListener(onPlayTimeMaxListener listener) {
+        if(listener!=null)
+            maxlistener = listener;
+    }
+
+    public interface onMusicState{
+        public void setChange(int state);
+    }
+
+    private onMusicState musicStatelistener;
+
+    public void setOnMusicState(onMusicState listener) {
+        if(listener!=null)
+            musicStatelistener = listener;
     }
 }
 
