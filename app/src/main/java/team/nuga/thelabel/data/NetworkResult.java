@@ -6,7 +6,6 @@ package team.nuga.thelabel.data;
 public class NetworkResult<T> {
     private String message;
     private int id;
-    ErrorMessage errorMessage;
     int resultCode;
     private T user;
     private T data;

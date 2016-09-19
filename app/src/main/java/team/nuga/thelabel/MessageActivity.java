@@ -32,10 +32,10 @@ public class MessageActivity extends AppCompatActivity {
     public void clickSend(){
         String s = inputText.getText().toString();
         if(sw){
-            DBManager.getInstance(myUser).addMessage(myUser,user,0,s);
+            DBManager.getInstance().addMessage(myUser,user,0,s);
             sw = !sw;
         }else{
-            DBManager.getInstance(myUser).addMessage(myUser,user,1,s);
+            DBManager.getInstance().addMessage(myUser,user,1,s);
             sw = !sw;
         }
         updateMessage();
@@ -87,7 +87,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void updateMessage() {
-        Cursor c = DBManager.getInstance(myUser).getChatMessage(user);
+        Cursor c = DBManager.getInstance().getChatMessage(user);
         adapter.changeCursor(c);
     }
 

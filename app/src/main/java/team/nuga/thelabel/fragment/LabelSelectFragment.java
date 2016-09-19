@@ -94,9 +94,7 @@ public class LabelSelectFragment extends Fragment  {
 
             labelView = new LabelSelectView(getContext(), i);
             labelSelectViews[i] = labelView;
-//            if(i<labels.length){
-//                selectlabel = labels[i];
-//            }
+
 
             labelSelectViews[i].setOnSettingImageClickListener(new LabelSelectView.OnSettingImageClickListener() {
                 @Override

@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.RegistrationIntentService;
+import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.manager.PropertyManager;
@@ -145,6 +146,7 @@ public class IntroActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
                     User getLoginUser = result.getUser();
+                    DBManager.getInstance().setMainUser(getLoginUser);
                     moveMainActivity(getLoginUser);
 
                 }

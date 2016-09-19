@@ -61,7 +61,8 @@ public class MessageListFragment extends Fragment {
 
 
                 // 더미메세지
-                DBManager.getInstance(user).addMessage(user,tempotherUser,0," 더미메세지입니다.");
+//                DBManager.getInstance().setMainUser(user);
+                DBManager.getInstance().addMessage(user,tempotherUser,0," 더미메세지입니다.");
                 updateUser();
             }
 
@@ -120,7 +121,8 @@ public class MessageListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Cursor c = DBManager.getInstance(user).getChatUser();
+//        DBManager.getInstance().setMainUser(user);
+        Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
     }
 
@@ -131,7 +133,8 @@ public class MessageListFragment extends Fragment {
     }
 
     private void updateUser() {
-        Cursor c = DBManager.getInstance(user).getChatUser();
+//        DBManager.getInstance().setMainUser(user);
+        Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
     }
 

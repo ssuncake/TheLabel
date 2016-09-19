@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         headerUserName.setText(mainUser.getUserName());
     }
 
-    //    boolean backButtonClicked = false;
+//    boolean backButtonClicked = false;
 //    Handler mHandler = new Handler(Looper.getMainLooper());
     public static int currentViewPage = 0;
     int appFinCount=0;
@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.drawer_profile) {         ///프로필 설정 이동
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
+
 
             ProfileGetRequest request = new ProfileGetRequest(this);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {

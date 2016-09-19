@@ -21,6 +21,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.text.ParseException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -97,7 +98,7 @@ public class NetworkManager {
     };
 
     public interface OnResultListener<T>{
-        public void onSuccess(NetworkRequest<T> request,T result);
+        public void onSuccess(NetworkRequest<T> request,T result) throws ParseException;
 
         public void onFail(NetworkRequest<T> request,int errorCode, String errorMessage, Throwable e);
     }

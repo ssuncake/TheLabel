@@ -1,6 +1,7 @@
 package team.nuga.thelabel.manager;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -84,7 +85,11 @@ public abstract class NetworkRequest<T> implements Callback {
 
     void sendSuccess() {
         if (listener != null) {
-            listener.onSuccess(this, result);
+            try {
+                listener.onSuccess(this, result);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

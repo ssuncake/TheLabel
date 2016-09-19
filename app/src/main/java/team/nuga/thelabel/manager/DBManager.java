@@ -19,13 +19,9 @@ import team.nuga.thelabel.data.User;
  */
 public class DBManager extends SQLiteOpenHelper {
     private static DBManager instance;
-    static User mainUser;
+    User mainUser;
 
-    public static DBManager getInstance(User user) { // 여기체크
-        if(user!=null){
-            mainUser = user;
-        Log.w("DBM getInstance","userid : "+user.getLongUserID());
-        }
+    public static DBManager getInstance() { // 여기체크
 
         if (instance == null) {
             instance = new DBManager();
@@ -33,7 +29,9 @@ public class DBManager extends SQLiteOpenHelper {
         return instance;
     }
 
-
+    public  void setMainUser(User mainUser) {
+        this.mainUser = mainUser;
+    }
 
     private static final String DB_NAME = "chat_db";
     private static final int DB_VERSION = 1;
@@ -61,31 +59,6 @@ public class DBManager extends SQLiteOpenHelper {
                 ChatContract.ChatMessage.COLUMN_CREATED + " INTEGER);";
         db.execSQL(sql);
 
-        // 더미 데이터 삽입
-
-//        values.clear();
-//        values.put(ChatContract.ChatUser.ME_ID, 300);
-//        values.put(ChatContract.ChatUser.OTHER_ID, 400);
-//        values.put(ChatContract.ChatUser.OTHER_NAME, "더르미");
-//        values.put(ChatContract.ChatUser.COLUMN_LAST_MESSAGE_ID,1);
-//        Log.e("DBM add User","더미 추가");
-//        db.insert(ChatContract.ChatUser.TABLE, null, values);
-
-//        values.clear();
-//        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
-//        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 1);
-//        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "우왓우왓우왓!");
-//        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:00");
-//        Log.e("DBM add User","더미메세지 추가");
-//        db.insert(ChatContract.ChatMessage.TABLE, null, values);
-//
-//        values.clear();
-//        values.put(ChatContract.ChatMessage.COLUMN_CONNET_ID, 1);
-//        values.put(ChatContract.ChatMessage.COLUMN_TYPE, 0);
-//        values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, "므아아아아");
-//        values.put(ChatContract.ChatMessage.COLUMN_CREATED,"22:01");
-//        Log.e("DBM add User","더미메세지1 추가");
-//        db.insert(ChatContract.ChatMessage.TABLE, null, values);
     }
 
     @Override
@@ -135,10 +108,11 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     public long addMessage(User me,User user, int type, String message) {
-        return addMessage(me,user, type, message, new Date());
+
+        return addMessage(me.getUserID(),user, type, message, new Date());
     }
-    public long addMessage(User me,User user, int type, String message, Date date) {
-        String mykey = me.getUserID()+""+user.getUserID();
+    public long addMessage(int meid,User user, int type, String message, Date date) {
+        String mykey = meid+""+user.getUserID();
         Long uid = resolveConnectID.get(mykey);
         if (uid == null) {
             long id = getConnectionId(user.getLongUserID());

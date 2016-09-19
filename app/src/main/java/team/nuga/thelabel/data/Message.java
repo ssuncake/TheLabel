@@ -1,47 +1,35 @@
 package team.nuga.thelabel.data;
 
+import java.io.Serializable;
+
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class Message {
-    public static final int ME=100;
-    public static final int OTHER = 200;
-    public static final int DATE = 300;
+public class Message implements Serializable {
+   int id; // 메세지아이디
 
-    private int MessageType;
-    private String message;
-    private int id;
-    private String date;
+    int user_id; // 기기아이디
+    int you_user_id;
+    String text;
+    String date;
 
-    public int getMessageType() {
-        return MessageType;
-    }
-
-    public void setMessageType(int messageType) {
-        MessageType = messageType;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public int getYou_user_id() {
+        return you_user_id;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }

@@ -22,11 +22,31 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
+
+import team.nuga.thelabel.Utils;
+import team.nuga.thelabel.data.ChatContract;
+import team.nuga.thelabel.data.Message;
+import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.NetworkResultMessageList;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.MessageListRequest;
+import team.nuga.thelabel.request.MessageReceiverGetRequest;
+
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
 
+
     LocalBroadcastManager mLBM;
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,11 +56,57 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
+        String reids = data.getString("receiverId");
         Log.e(TAG, "From: " + from);
         Log.e(TAG, "Message: " + message);
+        Log.e(TAG, "receiverId: " + reids);
+        int reid = Integer.parseInt(reids);
 
         if (from.startsWith("/topics/")) {
         } else {
+            // 메세지보내기
+            long lastTime = DBManager.getInstance().getLastReceiveDate();
+            Date date = new Date(lastTime);
+            MessageListRequest request = new MessageListRequest(this,reid,date);
+            try {
+                NetworkResultMessageList result = NetworkManager.getInstance().getNetworkDataSync(request);
+                Message[] list = result.getMessage();
+                if(list != null){
+                    Log.e(TAG, "messagelist size: " + list.length);
+                }
+
+                for( Message m : list){
+
+                        final Message messagetemp = m;
+                    if(m != null){
+                        Log.e(TAG, "message: " + m.getText()+" myid : "+m.getUser_id()+" youid : "+m.getYou_user_id());
+                    }
+                        MessageReceiverGetRequest request1 = new MessageReceiverGetRequest(m.getYou_user_id());
+                        NetworkManager.getInstance().getNetworkData(request1, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                            @Override
+                            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result){
+                                User other = result.getUser();
+                                Log.e("GCM test  ","너의 유저객체 id : "+other.getUserID());
+                                try {
+                                    Log.e("GCM test addmessage ","내아이디 : "+messagetemp.getUser_id()+" 너아이디 : "+other.getUserID()+" date : "+messagetemp.getDate()+" // "+Utils.convertStringToTime(messagetemp.getDate()));
+                                    DBManager.getInstance().addMessage(messagetemp.getUser_id(),other,ChatContract.ChatMessage.TYPE_RECEIVE, messagetemp.getText(),Utils.convertStringToTime(messagetemp.getDate()));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+
+                            }
+                        });
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
 
         }
 

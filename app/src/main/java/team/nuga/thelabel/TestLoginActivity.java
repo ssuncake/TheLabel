@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.manager.PropertyManager;
@@ -261,6 +262,7 @@ SeekBar progressBar;
                 String message = result.getMessage();
                 Log.e("로그인 성공",message);
                 User user = result.getUser();
+                DBManager.getInstance().setMainUser(user);
                 Log.e("로그인 유저 정보 확인",user.getEmail()+" // "+ user.getUserName());
 
                 startMainAc(user);
