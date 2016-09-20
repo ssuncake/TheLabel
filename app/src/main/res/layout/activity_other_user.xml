@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_white"
+    android:background="@color/BLUE_GREY_50"
     tools:context="team.nuga.thelabel.OtherUserActivity">
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -50,38 +50,32 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/relativeLayout5">
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView_musicContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/cardView_margin"
-            android:orientation="vertical"
-            android:background="@android:color/black">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:background="@color/color_white"
-                >
+                android:layout_marginBottom="10dp">
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
                     android:id="@+id/imageView_OtherUser_profile"
-                    android:layout_marginLeft="33dp"
-                    android:layout_marginStart="33dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imageView_chatting"
-                    android:layout_toEndOf="@+id/imageView_chatting" />
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/imageView_chatting"
-                    android:src="@drawable/chatting"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="19dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageView_otheruser_need"
+                    android:layout_toEndOf="@+id/imageView_otheruser_need" />
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:id="@+id/imageView_message"
+                    android:src="@drawable/btn_message_account"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_above="@+id/textView_profile_otherUserName"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,24 +86,21 @@
                     android:id="@+id/textView_profile_otherUserName"
                     android:textColor="@android:color/black"
                     android:layout_alignTop="@+id/imageView_OtherUser_profile"
-                    android:layout_toRightOf="@+id/imageView_OtherUser_profile"
-                    android:layout_toEndOf="@+id/imageView_OtherUser_profile"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginStart="18dp" />
+                    android:layout_alignLeft="@+id/textView_profile_description"
+                    android:layout_alignStart="@+id/textView_profile_description" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="#랩"
-                    android:id="@+id/textView_profile_subtitle"
-                    android:textSize="14sp"
+                    android:text="랩"
+                    android:id="@+id/textView_otherUser_position"
+                    android:textSize="12sp"
+                    android:textScaleX="0.9"
                     android:textColor="@android:color/black"
                     android:layout_below="@+id/textView_profile_otherUserName"
                     android:layout_alignLeft="@+id/textView_profile_otherUserName"
-                    android:layout_alignStart="@+id/textView_profile_otherUserName"
-                    android:layout_alignRight="@+id/textView_profile_description"
-                    android:layout_alignEnd="@+id/textView_profile_description" />
+                    android:layout_alignStart="@+id/textView_profile_otherUserName" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -118,105 +109,93 @@
                     android:id="@+id/textView_profile_description"
                     android:textSize="12sp"
                     android:textColor="@android:color/black"
-                    android:layout_marginLeft="170dp"
-                    android:layout_marginTop="100dp"/>
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@+id/textView_otherUser_position"
+                    android:layout_toRightOf="@+id/imageView_OtherUser_profile"
+                    android:layout_toEndOf="@+id/imageView_OtherUser_profile" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/imageView_setting"
-                    android:src="@drawable/btn_setting"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-                <TextView
                     android:layout_width="40dp"
-                    android:layout_height="20dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="need"
-                    android:id="@+id/textView_search_user_need"
-                    android:background="@color/PINK_400"
-                    android:textColor="@color/color_white"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView_otheruser_need"
+                    android:src="@drawable/icn_need"
+                   android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignBottom="@+id/imageView_message"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="25dp"
+                    android:text="장르"
+                    android:textColor="@color/PINK_400"
+                    android:background="@drawable/rounded_black"
+                    android:textSize="13sp"
                     android:gravity="center"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_alignBottom="@+id/textView_profile_subtitle"
-                    android:layout_alignLeft="@+id/imageView_setting"
-                    android:layout_alignStart="@+id/imageView_setting" />
+                    android:id="@+id/textView_otherUser_Genre"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="135dp"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:text="레이블"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:id="@+id/textView_otheruser_label"
+                    android:textColor="@color/GREY_600"
+                    android:background="@drawable/btn_view_label"
+                    android:layout_below="@+id/textView_profile_description"
+                    android:layout_alignLeft="@+id/textView_profile_description"
+                    android:layout_alignStart="@+id/textView_profile_description" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:text="레이블 초대"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:id="@+id/textView_otheruser_label_invite"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/btn_invite_label"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@+id/textView_profile_description"
+                    android:layout_toRightOf="@+id/textView_otheruser_label"
+                    android:layout_toEndOf="@+id/textView_otheruser_label" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=" 랩"
+                    android:id="@+id/textView_otherUser_city"
+                    android:textSize="12sp"
+                    android:textScaleX="0.9"
+                    android:textColor="@android:color/black"
+                    android:layout_alignTop="@+id/textView_otherUser_position"
+                    android:layout_toRightOf="@+id/textView_otherUser_position"
+                    android:layout_toEndOf="@+id/textView_otherUser_position" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=" 랩"
+                    android:textScaleX="0.9"
+                    android:id="@+id/textView_otherUser_town"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@+id/textView_profile_otherUserName"
+                    android:layout_toRightOf="@+id/textView_otherUser_city"
+                    android:layout_toEndOf="@+id/textView_otherUser_city" />
 
             </RelativeLayout>
 
-
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:id="@+id/message_container"-->
-                <!--android:background="@color/color_white"-->
-                <!--android:layout_alignParentStart="true"-->
-                <!--android:layout_below="@id/frameLayout">-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="25dp"-->
-                    <!--android:layout_height="25dp"-->
-                    <!--android:id="@+id/imageView_chatting"-->
-                    <!--android:src="@drawable/chatting"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:layout_marginStart="15dp"-->
-                    <!--android:layout_marginTop="10dp" />-->
-
-                <!--<Button-->
-                    <!--android:layout_width="90dp"-->
-                    <!--android:layout_height="55dp"-->
-                    <!--android:id="@+id/button_label"-->
-                    <!--android:text="레이블 없음"-->
-                    <!--android:layout_marginBottom="5dp"-->
-                    <!--android:layout_above="@+id/button_labelinvite"-->
-                    <!--android:layout_alignLeft="@+id/button_labelinvite"-->
-                    <!--android:layout_alignStart="@+id/button_labelinvite">-->
-                <!--</Button>-->
-
-                <!--<Button-->
-                    <!--android:layout_width="90dp"-->
-                    <!--android:layout_height="55dp"-->
-                    <!--android:id="@+id/button_yeslabel"-->
-                    <!--android:text="레이블초대 (리더)"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginTop="100dp"-->
-                    <!--android:layout_below="@+id/imageView_chatting"-->
-                    <!--android:layout_toRightOf="@+id/imageView_chatting"-->
-                    <!--android:layout_toEndOf="@+id/imageView_chatting">-->
-                <!--</Button>-->
-
-                <!--<Button-->
-                    <!--android:layout_width="90dp"-->
-                    <!--android:layout_height="55dp"-->
-                    <!--android:id="@+id/button_labelinvite"-->
-                    <!--android:text="레이블초대 (리더X)"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_alignTop="@+id/button_yeslabel"-->
-                    <!--android:layout_toRightOf="@+id/button_yeslabel"-->
-                    <!--android:layout_toEndOf="@+id/button_yeslabel">-->
-                <!--</Button>-->
-
-                <!--<Button-->
-                    <!--android:layout_width="90dp"-->
-                    <!--android:layout_height="55dp"-->
-                    <!--android:id="@+id/button_onelabel"-->
-                    <!--android:text="레이블 있음"-->
-                    <!--android:layout_alignTop="@+id/button_label"-->
-                    <!--android:layout_alignLeft="@+id/button_yeslabel"-->
-                    <!--android:layout_alignStart="@+id/button_yeslabel" />-->
-
-            <!--</RelativeLayout>-->
-
-        </android.support.v7.widget.CardView>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

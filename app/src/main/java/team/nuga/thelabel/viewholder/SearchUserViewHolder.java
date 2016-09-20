@@ -64,12 +64,12 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
         userCity.setText("#" + user.getSearchUserCity());
         userTown.setText(user.getSearchUserTown());
         searchUserGenre.setText(user.getSearchUserGenre());
-        int need = user.getSearchUserNeed();
+        String need = user.getSearchUserNeed();
         switch (need){
-            case 0:
+            case "0":
                 isNeed.setVisibility(View.INVISIBLE);
                 break;
-            case 1:
+            case "1":
                 isNeed.setVisibility(View.VISIBLE);
                 break;
         }

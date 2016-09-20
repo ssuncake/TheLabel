@@ -24,6 +24,8 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
 //    TextView labelPosition;
     @BindView(R.id.textView_search_label_genre)
     TextView labelGenre;
+    @BindView(R.id.textView_search_label_likeCount)
+    TextView labelLikeCount;
 
     public interface OnSearchLabelItemClickListener{
         public void onLabelItemClick(View view, SearchLabel label, int position);
@@ -49,6 +51,7 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
         this.label = label;
         labelNameView.setText(label.getSearchLabelName());
         labelGenre.setText(label.getSearchLabelGenre());
+        labelLikeCount.setText(""+label.getSearchLike());
 //        labelPosition.setText(label.getSearchLabelPosition());
         Glide.with(labelPhotoView.getContext())
                 .load(label.getSearchLabelImage())

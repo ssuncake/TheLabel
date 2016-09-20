@@ -94,16 +94,16 @@
                     android:layout_marginLeft="37dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="좋아요"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:id="@+id/textView_Iike"
                     android:textColor="@android:color/black" />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:id="@+id/imageView_like"
                     android:src="@drawable/icn_like"
                     android:layout_marginLeft="17dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="2dp"/>
 
                 <TextView
@@ -113,7 +113,7 @@
                     android:id="@+id/textView_numlike"
                     android:layout_marginLeft="@dimen/textview_marginLeft"
                     android:layout_alignBottom="@+id/textView_Iike"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@android:color/black"
                     android:layout_toRightOf="@+id/textView_Iike"
                     android:layout_toEndOf="@+id/textView_Iike"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="개"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:id="@+id/textView_like_count"
                     android:textColor="@android:color/black"
                     android:layout_alignTop="@+id/textView_numlike"

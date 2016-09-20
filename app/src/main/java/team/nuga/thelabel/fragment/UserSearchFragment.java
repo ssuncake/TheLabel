@@ -43,7 +43,7 @@ public class UserSearchFragment extends Fragment {
     public UserSearchFragment() {
         // Required empty public constructor
     }
-
+SearchUser searchUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,10 +58,16 @@ public class UserSearchFragment extends Fragment {
         useradapter.setOnAdapterItemClickListener(new SearchUserResultListAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, SearchUser user, int position) {
+                searchUser = user;
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
                 intent.putExtra("name", user.getSearchUserName());
                 intent.putExtra("genre", user.getSearchUserGenre());
                 intent.putExtra("imagePath",user.getSearchUserImage());
+                intent.putExtra("need",user.getSearchUserNeed());
+                intent.putExtra("user", searchUser);
+                intent.putExtra("position",user.getSearchUserPosition());
+                intent.putExtra("city",user.getSearchUserCity());
+                intent.putExtra("town",user.getSearchUserTown());
                 startActivity(intent);
             }
 

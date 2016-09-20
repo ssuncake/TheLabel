@@ -20,7 +20,7 @@
             android:layout_width="@dimen/upload_icon_size"
             android:layout_height="@dimen/upload_icon_size"
             android:id="@+id/imageView_UploadFragment_MusicIcon"
-            android:src="@drawable/music"
+            android:src="@drawable/icn_sound"
             android:layout_marginRight="@dimen/upload_list_itemleftmargin"
             android:layout_marginLeft="5dp"
             />
@@ -36,12 +36,12 @@
             android:textStyle="bold"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/imageView_Music_Arrow"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="220dp"
-            android:src="@drawable/btn_right_arrow"/>
+            android:src="@drawable/btn_arrow_right"/>
 
     </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_width="@dimen/upload_icon_size"
             android:layout_height="@dimen/upload_icon_size"
             android:id="@+id/imageView_UploadFragment_PictureIcon"
-            android:src="@drawable/picture"
+            android:src="@drawable/icn_image"
             android:layout_marginRight="@dimen/upload_list_itemleftmargin"
             android:layout_marginLeft="5dp"/>
 
@@ -71,12 +71,12 @@
             android:layout_gravity="center_vertical"
             android:textColor="#000000" />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/imageView_Picture_Arrow"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="220dp"
-            android:src="@drawable/btn_right_arrow"/>
+            android:src="@drawable/btn_arrow_right"/>
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +91,7 @@
             android:layout_width="@dimen/upload_icon_size"
             android:layout_height="@dimen/upload_icon_size"
             android:id="@+id/imageView_UploadFragment_YoutubeIcon"
-            android:src="@drawable/youtube"
+            android:src="@drawable/icn_video"
             android:layout_marginRight="@dimen/upload_list_itemleftmargin"
             android:layout_marginLeft="5dp"/>
 
@@ -105,12 +105,12 @@
             android:layout_gravity="center_vertical"
             android:textColor="#000000" />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/imageView_Youtube_Arrow"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="207dp"
-            android:src="@drawable/btn_right_arrow"/>
+            android:src="@drawable/btn_arrow_right"/>
     </LinearLayout>
 
 </LinearLayout>

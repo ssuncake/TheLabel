@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.adapter.MessageListCursorAdapter;
+import team.nuga.thelabel.data.SearchUser;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
@@ -28,6 +30,9 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
     EditText inputText;
     @BindView(R.id.recyclerView_Message_Main)
     RecyclerView message;
+
+    @BindView(R.id.textView_title)
+    TextView textView;
 
     @OnClick(R.id.button_Message_Send)
     public void clickSend(){
@@ -44,6 +49,7 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
 
     User myUser;
     User user;
+    SearchUser searchUser;
     MessageListCursorAdapter adapter;
 
     boolean sw=false;
@@ -58,21 +64,27 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        cals.setMessageUpdateCallBack(this);
+        cals.setMessageUpdateCallBack(this);
 
 
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
         user = (User)getIntent().getSerializableExtra(USER);
+        searchUser = (SearchUser) getIntent().getSerializableExtra("user");
 
         adapter = new MessageListCursorAdapter();
         Log.w("Message Activity","이미지 경로 "+user.getImageUrl());
 
         adapter.setUserImagePath(user.getImageUrl());
+
+        adapter.setUserImagePath(searchUser.getSearchUserImage());
         message.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         message.setLayoutManager(manager);
+
+
+        textView.setText(searchUser.getSearchUserName());//유저 네임 확인용
 
 
 

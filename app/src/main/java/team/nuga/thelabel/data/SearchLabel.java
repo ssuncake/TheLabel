@@ -22,6 +22,18 @@ public class SearchLabel implements Serializable {
     private String searchLabelPosition;
     @SerializedName("need")
     private int searchLabelNeed;
+    @SerializedName("like")
+    private int searchLike;
+
+
+    public int getSearchLike() {
+        return searchLike;
+    }
+
+    public void setSearchLike(int searchLike) {
+        this.searchLike = searchLike;
+    }
+
 
     public int getSearchLabelNeed() {
         return searchLabelNeed;
