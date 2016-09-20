@@ -2,6 +2,7 @@ package team.nuga.thelabel.viewholder;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -219,6 +222,13 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) {
+                    if(contents.getPlayTimeMax() == 0){
+                        MediaMetadataRetriever m = new MediaMetadataRetriever();
+                        m.setDataSource(contents.getContentsPath(),new HashMap<String, String>());
+                        String s =  m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                        int v = Integer.parseInt(s);
+                        contents.setPlayTimeMax(v);
+                    }
                     progress = -1;
                     moveSeekBar.isSeeking(true);
 

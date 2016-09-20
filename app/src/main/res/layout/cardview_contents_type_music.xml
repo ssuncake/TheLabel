@@ -79,12 +79,10 @@
                     android:id="@+id/seekBar_Play"
                     android:progressBackgroundTint="@android:color/black"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="65dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginStart="60dp"
-                    android:thumb="@drawable/img_play"/>
+                    android:thumb="@drawable/img_play"
+                    android:layout_toRightOf="@+id/checkbox_player"
+                    android:layout_toEndOf="@+id/checkbox_player" />
 
                 <CheckBox
                     android:layout_width="30dp"

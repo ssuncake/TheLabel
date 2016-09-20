@@ -27,7 +27,6 @@ import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
-import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.youtube.DeveloperKey;
 
 
@@ -55,7 +54,6 @@ public class UserMainFragment extends Fragment {
     ContentsMusicPlayer musicPlayer;
 
 
-    AccountTypeMusicViewHolder currentMVH;
 
 
     public UserMainFragment() {
@@ -138,8 +136,13 @@ public class UserMainFragment extends Fragment {
         contentsAdatper.setOnProgressBarChangeListener(new ContentsAdatper.onProgressBarChangeListener() {
             @Override
             public void progressBarChange(Contents contents, int progress, int position) {
-                mainProgressView.setProgress(progress);
-                musicPlayer.setMusicProgress(progress);
+              if(contents.getContentsID() == musicPlayer.getPlayedContentsId()) {
+                  mainProgressView.setProgress(progress);
+                  musicPlayer.setMusicProgress(progress);
+              }else{
+                  contents.setPlayedTIme(progress);
+              }
+
             }
             @Override
             public void isSeeking(boolean seeking) {

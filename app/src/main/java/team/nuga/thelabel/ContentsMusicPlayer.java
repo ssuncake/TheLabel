@@ -89,7 +89,6 @@ public class ContentsMusicPlayer {
                         c.setPlayedMode(Contents.STOP);
                         c.setPlayedTIme(0);
                     }
-
                 }
             }
             mainProgressView.setProgress(0);
@@ -116,7 +115,7 @@ public class ContentsMusicPlayer {
         }
 
         if (mState == PlayerState.PREPARED || mState == PlayerState.PAUSED) {
-            mPlayer.seekTo(mainProgressView.getProgress());
+            mPlayer.seekTo(contents.getPlayedTIme());
             mPlayer.start();
             mState = PlayerState.STARTED;
             contents.setPlayedMode(Contents.PLAY);
@@ -175,5 +174,9 @@ public class ContentsMusicPlayer {
         }
 
         Log.e(LOGTAG,"올 리셋");
+    }
+
+    public int getPlayedContentsId(){
+        return playNowContents.getContentsID();
     }
 }
