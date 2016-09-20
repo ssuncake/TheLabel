@@ -27,6 +27,7 @@ import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
+import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.youtube.DeveloperKey;
 
 
@@ -54,6 +55,9 @@ public class UserMainFragment extends Fragment {
     ContentsMusicPlayer musicPlayer;
 
 
+    AccountTypeMusicViewHolder currentMVH;
+
+
     public UserMainFragment() {
         // Required empty public constructor
     }
@@ -68,7 +72,7 @@ public class UserMainFragment extends Fragment {
         PAGE =1;
         contentsAdatper = new ContentsAdatper();
 
-        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
+        // 유튜브 설정부분
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
             public void onSettingItemClick(View view, int position) {
@@ -87,11 +91,13 @@ public class UserMainFragment extends Fragment {
 
         });
 
+
+        //뮤직 플레이어 설정부분
+
+        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
         contentsAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
             public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {
-
-
                 if (contents.getPlayedMode() == Contents.PLAY) {
                     musicPlayer.playToPause(contents);
                 } else if (contents.getPlayedMode() == Contents.PUASE) {
@@ -128,6 +134,22 @@ public class UserMainFragment extends Fragment {
 //            }
         });
 
+
+        contentsAdatper.setOnProgressBarChangeListener(new ContentsAdatper.onProgressBarChangeListener() {
+            @Override
+            public void progressBarChange(Contents contents, int progress, int position) {
+                mainProgressView.setProgress(progress);
+                musicPlayer.setMusicProgress(progress);
+            }
+            @Override
+            public void isSeeking(boolean seeking) {
+                musicPlayer.setSeeking(seeking);
+            }
+        });
+
+
+        //무한 자료불러오기부분
+
        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         contentsRecycerView.setLayoutManager(linearLayoutManager);
         contentsRecycerView.setHasFixedSize(true);
@@ -154,8 +176,8 @@ public class UserMainFragment extends Fragment {
                 }
             }
         });
+        checkresume = true;
         return view;
-
     }
 
     public void addItem(String page, String count) {
@@ -181,6 +203,29 @@ public class UserMainFragment extends Fragment {
             }
         });
 
+    }
+
+    Boolean checkresume;
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            if(checkresume){
+                // 다시보이면 할일
+            }
+        }else{
+            if(musicPlayer != null){
+                musicPlayer.allReset(); // 보이지않을경우 리셋
+            }
+            checkresume=false;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkresume = true;
     }
 
 }

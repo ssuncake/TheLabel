@@ -79,19 +79,19 @@ public class MainFragment extends Fragment {
             public void onPageSelected(int position) {
 //                if(position==0){
 //                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
-//                    f.mediaStop();
-//                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
-//                    f1.mediaStop();
+//                    f.musicPlayer.allReset();
+////                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
+////                    f1.musicPlayer.allReset();
 //                }else if(position==1){
-//                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
-//                    f2.mediaStop();
+////                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
+////                    f2.mediaStop();
 //                    UserMainFragment f = (UserMainFragment)mainViewpagerAdapter.getItem(2);
-//                    f.mediaStop();
+//                    f.musicPlayer.allReset();
 //                }else if(position==2){
-//                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
-//                    f2.mediaStop();
-//                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
-//                    f1.mediaStop();
+////                    NewsFeedFragment f2 = (NewsFeedFragment)mainViewpagerAdapter.getItem(0);
+////                    f2.musicPlayer.allReset();
+////                    LabelMainFragment f1 = (LabelMainFragment)mainViewpagerAdapter.getItem(1);
+////                    f1.mediaStop();
 //                }
             }
 

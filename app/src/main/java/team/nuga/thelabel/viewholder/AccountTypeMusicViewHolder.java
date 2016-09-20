@@ -1,6 +1,7 @@
 package team.nuga.thelabel.viewholder;
 
 import android.content.DialogInterface;
+import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -149,6 +150,12 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     public void applyData(Contents ncontents) {
         contents = ncontents;
+
+        String musicUrl = contents.getContentsPath();
+        MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+//        mediaMetadataRetriever.setDataSource(musicUrl);
+//        String s = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+//        Log.e("미디어 리트리버 테스트",s);
         if(contents.getContentsType() == Contents.MUSIC){
             contents.setMoveListener(new Contents.onPlayTimeMoveListener() {
                 @Override
@@ -176,6 +183,31 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                             playCheckBox.setChecked(false);
                             break;
                     }
+                }
+            });
+
+            playSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                int progress = -1;
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    if (b) {
+                        progress = i;
+                    }
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    progress = -1;
+                    moveSeekBar.isSeeking(true);
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    if (progress != -1) {
+                        moveSeekBar.moveSeekbar(contents,progress, getAdapterPosition());
+                    }
+                    moveSeekBar.isSeeking(false);
                 }
             });
 
@@ -226,5 +258,14 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         playSeekbar.setMax(contents.getPlayTimeMax());
     }
 
+    public interface onMoveSeekBar{
+        public void moveSeekbar(Contents contents,int position, int adapterPosition);
+        public void isSeeking(boolean seeking);
+    }
 
+    public onMoveSeekBar moveSeekBar;
+
+    public void setMoveSeekBar(onMoveSeekBar moveSeekBar) {
+        this.moveSeekBar = moveSeekBar;
+    }
 }

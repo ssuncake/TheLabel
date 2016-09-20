@@ -21,7 +21,10 @@ import team.nuga.thelabel.viewholder.ParentContentsViewHolder;
  * Created by Tacademy on 2016-08-30.
  */
 public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHolder>
-        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick, AccountTypePictureViewHolder.OnPictureContentsItemClick, AccountTypeYoutubeViewHolder.OnYoutubeThumnailClickListener, AccountTypeProfileViewHolder.OnSettingImageClick {
+        implements AccountTypeMusicViewHolder.OnMusicContentsItemClick,
+        AccountTypePictureViewHolder.OnPictureContentsItemClick,
+        AccountTypeYoutubeViewHolder.OnYoutubeThumnailClickListener,
+        AccountTypeProfileViewHolder.OnSettingImageClick, AccountTypeMusicViewHolder.onMoveSeekBar{
 
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
@@ -66,6 +69,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent, false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 accounttypeOne.setOnMusicContentsItemClickListener(this);
+                accounttypeOne.setMoveSeekBar(this);
                 return accounttypeOne;
             case Contents.PICTURE:
                 ViewGroup viewTwo = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_picture, parent, false);
@@ -111,6 +115,17 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     }
 
+
+
+
+    // 유튜브
+    public interface OnYoutubeThumnailClickListener {
+        public void onYoutubeThumnailClickListener(View view, Contents contents , int position);
+    }
+    OnYoutubeThumnailClickListener youtubeThumListener;
+    public void setonYoutubeThumnailClickListener(OnYoutubeThumnailClickListener thumnailClickListener) {
+        this.youtubeThumListener = thumnailClickListener;
+    }
     @Override
     public void onYoutubeThumnailClickListener(View view, Contents contents, int position) {
         if(youtubeThumListener != null){
@@ -119,16 +134,8 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     }
 
 
-    public interface OnYoutubeThumnailClickListener { // 유튜브
-        public void onYoutubeThumnailClickListener(View view, Contents contents , int position);
-    }
-    OnYoutubeThumnailClickListener youtubeThumListener;
-    public void setonYoutubeThumnailClickListener(OnYoutubeThumnailClickListener thumnailClickListener) {
-        this.youtubeThumListener = thumnailClickListener;
-    }
-
-
-    public interface OnSettingItemClickListener { //SettingImage
+    //SettingImage
+    public interface OnSettingItemClickListener {
         public void onSettingItemClick(View view, int position);
     }
     OnSettingItemClickListener settingItemClickListener;
@@ -143,6 +150,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         }
     }
 
+    // 사진클릭
     public interface OnContentsItemClickListener {
         public void onContentsItemClick(View view, Contents user, int position);
     }
@@ -152,9 +160,17 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
     public void setOnAdapterItemClickListener(OnContentsItemClickListener listener) {
         this.listener = listener;
     }
+    @Override
+    public void onPictureContentsItemClick(View view, Contents contents, int adapterPosition) {
+        if (listener != null) {
+            listener.onContentsItemClick(view, contents, adapterPosition);
+        }
+    }
 
 
-    public interface OnPlayerItemClickListener {  //Player
+
+    // 재생 아이콘 클릭
+    public interface OnPlayerItemClickListener {
         public void onPlayerItemClick(View view, View parent, Contents contents, int position);
     }
 
@@ -164,7 +180,6 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         this.playerListener = playerListener;
     }
 
-
     @Override
     public void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition) {
         if (playerListener != null) {
@@ -172,13 +187,31 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
         }
     }
 
-    @Override
-    public void onPictureContentsItemClick(View view, Contents contents, int adapterPosition) {
-        if (listener != null) {
-            listener.onContentsItemClick(view, contents, adapterPosition);
-        }
 
+    // 프로그래스바 터치
+    public interface  onProgressBarChangeListener{
+        public void progressBarChange(Contents contents, int progress,int position);
+        public void isSeeking(boolean seeking);
     }
+    onProgressBarChangeListener onProgressBarChangeListener;
+    public void setOnProgressBarChangeListener(ContentsAdatper.onProgressBarChangeListener onProgressBarChangeListener) {
+        this.onProgressBarChangeListener = onProgressBarChangeListener;
+    }
+
+    @Override
+    public void moveSeekbar(Contents contents,int position, int adapterpositon) {
+        if(onProgressBarChangeListener != null)
+            onProgressBarChangeListener.progressBarChange(contents,position,adapterpositon);
+    }
+
+    @Override
+    public void isSeeking(boolean seeking) {
+        if(onProgressBarChangeListener != null)
+            onProgressBarChangeListener.isSeeking(seeking);
+    }
+
+
+
 
 
 

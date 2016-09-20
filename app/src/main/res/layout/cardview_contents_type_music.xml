@@ -124,9 +124,11 @@
                     <!--android:layout_marginEnd="16dp"-->
                     <!--android:textColor="@android:color/black" />-->
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -194,6 +196,15 @@
                     android:layout_marginBottom="2dp"/>
 
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView_MusicContents_Text"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp" />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
