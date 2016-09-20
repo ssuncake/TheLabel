@@ -1,6 +1,7 @@
 package team.nuga.thelabel.viewholder;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
                 .load(user.getSearchUserImage())
                 .transform(new RoundImageTransform(userphotoView.getContext()))
                 .into(userphotoView);
+        Log.i("이미지",user.getSearchUserImage());
         userPosition.setText("#" + user.getSearchUserPosition());
         userCity.setText("#" + user.getSearchUserCity());
         userTown.setText(user.getSearchUserTown());

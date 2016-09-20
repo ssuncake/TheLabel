@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -690,7 +691,7 @@ public class ProfileSettingFragment extends Fragment {
         positionAdapter.setDropDownViewResource(R.layout.spin_profile);
         spinner_genre.setAdapter(genreAdapter);
 
-        int color = Color.parseColor("#ffffffff");
+        int color = Color.parseColor("#ffff3653");
 
         textInputEditText_introText.addTextChangedListener(introTextWatcher);
 //        textInputEditText_introText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -708,6 +709,7 @@ public class ProfileSettingFragment extends Fragment {
         textInputLayout_introtext.setCounterMaxLength(60);
 
         editText_userNickName.addTextChangedListener(nicknameWatcher);
+        editText_userNickName.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_OUT);
         textView_userEmail.setText(user.getEmail());
         onClickRadioGroup_need();
         preUserInfoSetting();

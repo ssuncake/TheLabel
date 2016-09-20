@@ -36,7 +36,6 @@ public class UserSearchFragment extends Fragment {
     ClearEditText clearEditText;
     @BindView(R.id.imageButton_user_search)
     ImageButton userSearchButton;
-
     public UserSearchFragment() {
         // Required empty public constructor
     }
