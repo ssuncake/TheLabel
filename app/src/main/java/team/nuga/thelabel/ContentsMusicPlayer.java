@@ -101,7 +101,7 @@ public class ContentsMusicPlayer {
         // 새로시작
         mPlayer = MediaPlayer.create(context, Uri.parse(contents.getContentsPath()));
         mainProgressView.setMax(mPlayer.getDuration());
-//        contents.setPlayTimeMax(mPlayer.getDuration());
+        contents.setPlayTimeMax(mPlayer.getDuration());
 
 
         mState = PlayerState.PREPARED;

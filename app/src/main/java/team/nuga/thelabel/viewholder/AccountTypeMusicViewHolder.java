@@ -2,7 +2,6 @@ package team.nuga.thelabel.viewholder;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -17,11 +16,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.Utils;
 import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
@@ -40,15 +38,15 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     ImageView profileImage;
     @BindView(R.id.seekBar_Play)
     SeekBar playSeekbar;
+    @BindView(R.id.textView_MusicContents_currenttime)
+    TextView currntTimeView;
+    @BindView(R.id.textView_MusicContents_MaxTime)
+    TextView endTimeView;
 
     CheckBox playCheckBox;
     Contents contents;
 
     Context context;
-
-
-    HashMap<String, String> retriever = new HashMap<>();
-    MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
 
 
 
@@ -57,8 +55,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     }
 
     private ImageView imageViewMenu;
-
-
 
 
     @Override
@@ -93,6 +89,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         }
         return true;
     }
+
     public interface OnMusicContentsItemClick { //MediaPlayer 리스너
         void onMusicContentItemClick(View view, View parent, Contents contents, int adapterPosition);
     }
@@ -104,9 +101,11 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     }
 
     public interface OnPlayerItemClickListener {  //Player
-        public void onPlayerItemClick(View view, View parent,Contents contents, int position, boolean isChecked);
+        public void onPlayerItemClick(View view, View parent, Contents contents, int position, boolean isChecked);
     }
+
     OnPlayerItemClickListener playerListener;
+
     public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
         this.playerListener = playerListener;
     }
@@ -118,12 +117,12 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
         context = itemView.getContext();
 
 
-        playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
+        playCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_player);
 
         playCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(musicContentslist!=null){
+                if (musicContentslist != null) {
                     musicContentslist.onMusicContentItemClick(view, itemView, contents, getAdapterPosition());
                 }
             }
@@ -162,19 +161,26 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     }
 
 
-
     public void applyData(Contents ncontents) {
         contents = ncontents;
 
-        String musicUri = contents.getContentsPath();
-        mediaMetadataRetriever.setDataSource(musicUri,retriever);
-        String s = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        Log.e("미디어 리트리버 테스트",s+"");
-        if(contents.getContentsType() == Contents.MUSIC){
+
+        if (contents.getContentsType() == Contents.MUSIC) {
             contents.setMoveListener(new Contents.onPlayTimeMoveListener() {
                 @Override
                 public void movePlayTime() {
                     playSeekbar.setProgress(contents.getPlayedTIme());
+                    int current = contents.getPlayedTIme()-contents.getPlayedTIme()%1000;
+                    int max =  contents.getPlayTimeMax()-contents.getPlayedTIme();
+                    int different = max - current;
+                    if(current == 0 || max ==0){
+                        currntTimeView.setText("");
+                        endTimeView.setText("");
+                    }else{
+                        currntTimeView.setText(Utils.convertCalculateMusicTiem(current));
+                        endTimeView.setText("- "+Utils.convertCalculateMusicTiem(different));
+                    }
+
                 }
             });
 
@@ -182,6 +188,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 @Override
                 public void setMax() {
                     playSeekbar.setMax(contents.getPlayTimeMax());
+                    endTimeView.setText("- "+Utils.convertCalculateMusicTiem(contents.getPlayTimeMax()));
                 }
             });
 
@@ -202,6 +209,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
             playSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 int progress = -1;
+
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                     if (b) {
@@ -219,7 +227,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     if (progress != -1) {
-                        moveSeekBar.moveSeekbar(contents,progress, getAdapterPosition());
+                        moveSeekBar.moveSeekbar(contents, progress, getAdapterPosition());
                     }
                     moveSeekBar.isSeeking(false);
                 }
@@ -228,16 +236,16 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
             conetentTime.setText(contents.getContentCreateDate());
             likeCount.setText("" + contents.getLikeCount());
-            if(contents.getPlayedMode()==Contents.PLAY){
-                Log.w("온바인드 뷰홀더",contents.getContentsID()+"PLAY");
+            if (contents.getPlayedMode() == Contents.PLAY) {
+                Log.w("온바인드 뷰홀더", contents.getContentsID() + "PLAY");
                 playCheckBox.setChecked(true);
                 playSeekbar.setProgress(contents.getPlayedTIme());
-            }else if( contents.getPlayedMode() == Contents.PUASE){
-                Log.w("온바인드 뷰홀더",contents.getContentsID()+"PUASE");
+            } else if (contents.getPlayedMode() == Contents.PUASE) {
+                Log.w("온바인드 뷰홀더", contents.getContentsID() + "PUASE");
                 playCheckBox.setChecked(false);
                 playSeekbar.setProgress(contents.getPlayedTIme());
-            }else if(contents.getPlayedMode() == Contents.STOP){
-                Log.w("온바인드 뷰홀더",contents.getContentsID()+"STOP");
+            } else if (contents.getPlayedMode() == Contents.STOP) {
+                Log.w("온바인드 뷰홀더", contents.getContentsID() + "STOP");
                 playCheckBox.setChecked(false);
                 playSeekbar.setProgress(0);
             }
@@ -250,7 +258,6 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 .into(profileImage);
 
 
-
     }
 
     @Override
@@ -258,22 +265,23 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     }
 
-    public void resetMusic(){
+    public void resetMusic() {
         contents.setPlayedMode(Contents.STOP);
         playCheckBox.setChecked(false);
         playSeekbar.setProgress(0);
     }
 
-    public void setSeekbarPlaytime(){
+    public void setSeekbarPlaytime() {
         playSeekbar.setProgress(contents.getPlayedTIme());
     }
 
-    public void setSeekBarMax(){
+    public void setSeekBarMax() {
         playSeekbar.setMax(contents.getPlayTimeMax());
     }
 
-    public interface onMoveSeekBar{
-        public void moveSeekbar(Contents contents,int position, int adapterPosition);
+    public interface onMoveSeekBar {
+        public void moveSeekbar(Contents contents, int position, int adapterPosition);
+
         public void isSeeking(boolean seeking);
     }
 
