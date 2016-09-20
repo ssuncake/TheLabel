@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="전체"
+            android:text="검색결과"
             android:textSize="15sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
@@ -55,6 +55,17 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="@android:color/black" />
+
+        <TextView
+            android:text="0건"
+            android:id="@+id/textView_serch_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView_search_total"
+            android:layout_toRightOf="@+id/textView_search_total"
+            android:layout_toEndOf="@+id/textView_search_total"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
 
         <Spinner
             android:layout_width="wrap_content"

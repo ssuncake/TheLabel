@@ -20,8 +20,8 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
     ImageView labelPhotoView;
     @BindView(R.id.textView_search_labelName)
     TextView labelNameView;
-    @BindView(R.id.textView_search_label_position)
-    TextView labelPosition;
+//    @BindView(R.id.textView_search_label_position)
+//    TextView labelPosition;
     @BindView(R.id.textView_search_label_genre)
     TextView labelGenre;
 
@@ -49,7 +49,7 @@ public class SearchLabelViewHolder extends RecyclerView.ViewHolder {
         this.label = label;
         labelNameView.setText(label.getSearchLabelName());
         labelGenre.setText(label.getSearchLabelGenre());
-        labelPosition.setText(label.getSearchLabelPosition());
+//        labelPosition.setText(label.getSearchLabelPosition());
         Glide.with(labelPhotoView.getContext())
                 .load(label.getSearchLabelImage())
                 .into(labelPhotoView);

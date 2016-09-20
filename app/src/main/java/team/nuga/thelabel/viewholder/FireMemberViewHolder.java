@@ -1,7 +1,6 @@
 package team.nuga.thelabel.viewholder;
 
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,74 +33,76 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
     TextView firememberView;
     @BindView(R.id.button_subfiremember)
     Button firememberbutton;
+
     @OnClick(R.id.button_subfiremember)
     public void onFireClick(final View view) {
-        if(Debug.debugmode) Log.i("유저 프사",""+user.getImageUrl());
-        if(Debug.debugmode) Log.i("유저 ID ",""+user.getUserID());
-        if(Debug.debugmode)Log.i("유저 레이블",""+FireMemberActivity.label.getLabelID());
+        if (Debug.debugmode) Log.i("유저 프사", "" + user.getImageUrl());
+        if (Debug.debugmode) Log.i("유저 ID ", "" + user.getUserID());
+        if (Debug.debugmode) Log.i("유저 레이블", "" + FireMemberActivity.label.getLabelID());
         final int labelId = FireMemberActivity.label.getLabelID();
         final int LABEL_LEADER = FireMemberActivity.label.getLabelLeaderID();
-       if(user.getUserID()!=LABEL_LEADER){
-           new AlertDialog.Builder(view.getContext())
-                   .setMessage(user.getUserName()+"님을"+"\n"+"탈퇴시키겠습니까?")
-                   .setPositiveButton("네, 탈퇴시키겠습니다.", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialogInterface, int i) {
-                           FireLabelMemberRequest request = new FireLabelMemberRequest(labelId,user.getUserID());
-                           NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
-                               @Override
-                               public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
-                                   if(result.getError()==null){
-                                       Toast.makeText(view.getContext(), ""+result.getMessage(), Toast.LENGTH_SHORT).show();
-                                   }else{
-                                       Log.e("에러","메세지"+result.getError().getMessage());
-                                       Log.e("에러","메세지");
-                                   }
-                               }
+        if (user.getUserID() != LABEL_LEADER) {
+            new AlertDialog.Builder(view.getContext())
+                    .setMessage(user.getUserName() + "님을" + "\n" + "탈퇴시키겠습니까?")
+                    .setPositiveButton("네, 탈퇴시키겠습니다.", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            FireLabelMemberRequest request = new FireLabelMemberRequest(labelId, user.getUserID());
+                            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
+                                @Override
+                                public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                                    if (result.getError() == null) {
+                                        Toast.makeText(view.getContext(), "" + result.getMessage(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Log.e("에러", "메세지" + result.getError().getMessage());
+                                        Log.e("에러", "메세지");
+                                    }
+                                }
 
-                               @Override
-                               public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
-                                   Toast.makeText(view.getContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
-                               }
-                           });
-                       }
-                   })
-                   .setNegativeButton("아니요, 취소하겠습니다.", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialogInterface, int i) {
-                       }
-                   })
-                   .show();
-       }else{
-           new AlertDialog.Builder(view.getContext())
-                   .setMessage("리더입니다.. 탈퇴하실거에요?")
-                   .setPositiveButton("탈퇴안할게요..", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialogInterface, int i) {
-                       }
-                   })
-                   .setNegativeButton("레이블을 계속 하겠습니다.", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialogInterface, int i) {
-                       }
-                   })
-                   .show();
-       }
+                                @Override
+                                public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                                    Toast.makeText(view.getContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("아니요, 취소하겠습니다.", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .show();
+        } else {
+            new AlertDialog.Builder(view.getContext())
+                    .setMessage("리더입니다.. 탈퇴하실거에요?")
+                    .setPositiveButton("탈퇴안할게요..", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .setNegativeButton("레이블을 계속 하겠습니다.", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .show();
+        }
     }
 
     @BindView(R.id.image_fireMember)
     ImageView firememberProfile;
 
 
-
-    public interface OnFireMemberListItemClickListener{
+    public interface OnFireMemberListItemClickListener {
         void onUserItemClick(View view, User user, int adapterPosition);
     }
 
     OnFireMemberListItemClickListener userlistener;
-    public void setOnFireMemberListItemClickListener(OnFireMemberListItemClickListener listener){
+
+    public void setOnFireMemberListItemClickListener(OnFireMemberListItemClickListener listener) {
         this.userlistener = userlistener;
     }
+
     public FireMemberViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -109,7 +110,7 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userlistener !=null){
+                if (userlistener != null) {
                     userlistener.onUserItemClick(view, user, getAdapterPosition());
                 }
             }
@@ -118,14 +119,13 @@ public class FireMemberViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-
     User user;
-    public void setUser(User user){
-            this.user = user;
-            firememberView.setText(user.getUserName());
-        Uri uri = Uri.parse(user.getImageUrl());
+
+    public void setUser(User user) {
+        this.user = user;
+        firememberView.setText(user.getUserName());
         Glide.with(firememberProfile.getContext())
-                .load(uri)
+                .load(user.getImageUrl())
                 .transform(new RoundImageTransform(firememberProfile.getContext()))
                 .into(firememberProfile);
     }

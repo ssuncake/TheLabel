@@ -4,6 +4,7 @@
     android:background="@drawable/border">
     <ImageView
         android:id="@+id/image_search_labelimage"
+        android:src="@drawable/img_label_search"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
@@ -17,41 +18,44 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
         android:textSize="15sp"
+        android:gravity="center"
         android:id="@+id/textView_search_labelName"
         android:layout_alignTop="@+id/image_search_labelimage"
         android:layout_toRightOf="@+id/image_search_labelimage"
         android:layout_toEndOf="@+id/image_search_labelimage"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="30dp"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
-        android:textSize="15sp"
+        android:gravity="center"
+        android:textSize="11sp"
+        android:background="@drawable/rounded_black"
         android:layout_marginTop="5dp"
-        android:textColor="@color/search_position_city_town"
+        android:textColor="@color/PINK_400"
         android:id="@+id/textView_search_label_genre"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/textView_search_labelName"
-        android:layout_alignLeft="@+id/textView_search_labelName"
-        android:layout_alignStart="@+id/textView_search_labelName" />
+       />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="도"
-        android:textSize="15sp"
-        android:textColor="@color/search_position_city_town"
-        android:id="@+id/textView_search_label_position"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/textView_search_label_genre"
-        android:layout_alignLeft="@+id/textView_search_label_genre"
-        android:layout_alignStart="@+id/textView_search_label_genre" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:text="도"-->
+        <!--android:textSize="15sp"-->
+        <!--android:textColor="@color/search_position_city_town"-->
+        <!--android:id="@+id/textView_search_label_position"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_below="@+id/textView_search_label_genre"-->
+        <!--android:layout_alignLeft="@+id/textView_search_label_genre"-->
+        <!--android:layout_alignStart="@+id/textView_search_label_genre" />-->
 
 
 </RelativeLayout>

@@ -28,9 +28,10 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
     TextView userCity;
     @BindView(R.id.textView_search_user_town)
     TextView userTown;
-    @BindView(R.id.textView_search_user_need)
-    TextView isNeed;
-
+    @BindView(R.id.imageView_user_need)
+    ImageView isNeed;
+    @BindView(R.id.textView_search_user_genre)
+    TextView searchUserGenre;
     public interface OnSearchUserItemClickListener{
         public void onUserItemClick(View view, SearchUser user, int position);
     }
@@ -62,6 +63,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder{
         userPosition.setText("#" + user.getSearchUserPosition());
         userCity.setText("#" + user.getSearchUserCity());
         userTown.setText(user.getSearchUserTown());
+        searchUserGenre.setText(user.getSearchUserGenre());
         int need = user.getSearchUserNeed();
         switch (need){
             case 0:

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,9 @@ public class UserSearchFragment extends Fragment {
     ClearEditText clearEditText;
     @BindView(R.id.imageButton_user_search)
     ImageButton userSearchButton;
+    @BindView(R.id.textView_serch_count)
+    TextView textView;
+
     public UserSearchFragment() {
         // Required empty public constructor
     }
@@ -71,18 +75,24 @@ public class UserSearchFragment extends Fragment {
     }
 
     String searchText;
-
+int sumsum=0;
+    public static int pageCount=1;
     @OnClick(R.id.imageButton_user_search)
     public void userSearchButton() {
         searchText = clearEditText.getText().toString();
-        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), 1, 10, searchText, "");
+        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), pageCount, 10, searchText, "");
         NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
                 SearchUser[] user = result.getUser();
+                int sum = 0;
+//                if(pageCount==1)
                 for (SearchUser u : user) {
                     useradapter.add(u);
+                    sum++;
                 }
+                sumsum+=sum;
+                textView.setText(+sumsum+"건");
             }
 
             @Override

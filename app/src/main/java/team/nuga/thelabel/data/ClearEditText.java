@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 
 import team.nuga.thelabel.R;
 
@@ -109,5 +108,6 @@ public class ClearEditText extends AppCompatEditText implements View.OnTouchList
     public void setClearIconVisible(boolean visible){
         clearDrawable.setVisible(visible, false);
         setCompoundDrawables(null, null, visible? clearDrawable : null, null);
+
     }
 }
