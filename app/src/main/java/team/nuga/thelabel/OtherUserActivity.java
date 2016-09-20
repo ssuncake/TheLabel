@@ -72,12 +72,12 @@ SearchUser searchUser;
 
         TextView cityText = (TextView)findViewById(R.id.textView_otherUser_city);
         String city = intent.getStringExtra("city");
-        cityText.setText("#"+city);
+        cityText.setText(" #"+city);
         setResult(RESULT_OK, intent);
 
         TextView townText = (TextView)findViewById(R.id.textView_otherUser_town);
         String town = intent.getStringExtra("town");
-        townText.setText(town);
+        townText.setText(" "+town);
         setResult(RESULT_OK, intent);
 
         ImageView imageView = (ImageView)findViewById(R.id.imageView_OtherUser_profile);
