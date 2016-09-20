@@ -7,12 +7,6 @@
     android:background="@color/BLUE_GREY_50">
 
 
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar_debug"
-        android:layout_gravity="center_horizontal"
-        android:indeterminate="false" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

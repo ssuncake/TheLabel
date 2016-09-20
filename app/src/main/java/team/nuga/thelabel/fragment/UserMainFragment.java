@@ -47,8 +47,7 @@ public class UserMainFragment extends Fragment {
     @BindView(R.id.recyclerview_user_main)
     RecyclerView contentsRecycerView;
 
-    @BindView(R.id.seekBar_debug)
-    SeekBar mainProgressView;
+    SeekBar mainProgressView ;
 
     Contents[] contentses;
     ContentsMusicPlayer musicPlayer;
@@ -69,8 +68,10 @@ public class UserMainFragment extends Fragment {
         ButterKnife.bind(this, view);
         PAGE =1;
         contentsAdatper = new ContentsAdatper();
+        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+        contentsAdatper.setUser(user);
+        mainProgressView = new SeekBar(getActivity());
 
-        // 유튜브 설정부분
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
             public void onSettingItemClick(View view, int position) {
@@ -79,12 +80,14 @@ public class UserMainFragment extends Fragment {
             }
         });
 
+        // 유튜브 설정부분
         contentsAdatper.setonYoutubeThumnailClickListener(new ContentsAdatper.OnYoutubeThumnailClickListener() {
             @Override
             public void onYoutubeThumnailClickListener(View view, Contents contents, int position) {
                 Toast.makeText(getContext(), "클릭", Toast.LENGTH_SHORT).show();
                 Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), DeveloperKey.DEVELOPER_KEY, contents.getFileCode());
                 getActivity().startActivity(intent);
+                musicPlayer.allReset();
             }
 
         });

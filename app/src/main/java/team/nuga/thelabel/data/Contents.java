@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by Tacademy on 2016-08-24.
  */
-public class Contents implements Serializable{
+public class Contents implements Serializable {
 
     public static final int MUSIC = 0;
     public static final int PICTURE = 1;
@@ -17,7 +17,7 @@ public class Contents implements Serializable{
     public static final int PUASE = 20;
     public static final int STOP = 30;
 
-    int playedMode= STOP;
+    int playedMode = STOP;
     int playedTIme;
     int playTimeMax;
 
@@ -41,7 +41,9 @@ public class Contents implements Serializable{
     @SerializedName("imagepath")
     private String writerImage;
     @SerializedName("fileCode")
-  private String fileCode;
+    private String fileCode;
+    @SerializedName("fileCode")
+    private String contentsText;
 
 
     public String getFileCode() {
@@ -60,7 +62,6 @@ public class Contents implements Serializable{
     public String getWriterImage() {
         return writerImage;
     }
-
 
 
     public String getContentCreateDate() {
@@ -89,7 +90,7 @@ public class Contents implements Serializable{
         this.contentsText = contentsText;
     }
 
-    private String contentsText;
+
     public int getContentsType() {
         return contentsType;
     }
@@ -123,14 +124,14 @@ public class Contents implements Serializable{
 
     public void setPlayTimeMax(int playTimeMax) {
         this.playTimeMax = playTimeMax;
-        if(maxlistener != null){
+        if (maxlistener != null) {
             maxlistener.setMax();
         }
     }
 
     public void setPlayedMode(int playedMode) {
         this.playedMode = playedMode;
-        if(musicStatelistener!=null){
+        if (musicStatelistener != null) {
             musicStatelistener.setChange(playedMode);
         }
 
@@ -146,41 +147,41 @@ public class Contents implements Serializable{
 
     public void setPlayedTIme(int playedTIme) {
         this.playedTIme = playedTIme;
-        if(movelistener!=null){
+        if (movelistener != null) {
             movelistener.movePlayTime();
         }
     }
 
-    public interface onPlayTimeMoveListener{
+    public interface onPlayTimeMoveListener {
         public void movePlayTime();
     }
 
     private onPlayTimeMoveListener movelistener;
 
     public void setMoveListener(onPlayTimeMoveListener listener) {
-        if(listener!=null)
-        movelistener = listener;
+        if (listener != null)
+            movelistener = listener;
     }
 
-    public interface onPlayTimeMaxListener{
+    public interface onPlayTimeMaxListener {
         public void setMax();
     }
 
     private onPlayTimeMaxListener maxlistener;
 
     public void setMaxListener(onPlayTimeMaxListener listener) {
-        if(listener!=null)
+        if (listener != null)
             maxlistener = listener;
     }
 
-    public interface onMusicState{
+    public interface onMusicState {
         public void setChange(int state);
     }
 
     private onMusicState musicStatelistener;
 
     public void setOnMusicState(onMusicState listener) {
-        if(listener!=null)
+        if (listener != null)
             musicStatelistener = listener;
     }
 }

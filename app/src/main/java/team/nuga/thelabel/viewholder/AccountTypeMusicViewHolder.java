@@ -45,6 +45,8 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     TextView currntTimeView;
     @BindView(R.id.textView_MusicContents_MaxTime)
     TextView endTimeView;
+    @BindView(R.id.textView_MusicContents_Text)
+            TextView contentsTextView;
 
     CheckBox playCheckBox;
     Contents contents;
@@ -257,7 +259,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
             } else if (contents.getPlayedMode() == Contents.STOP) {
                 Log.w("온바인드 뷰홀더", contents.getContentsID() + "STOP");
                 playCheckBox.setChecked(false);
-                playSeekbar.setProgress(0);
+                playSeekbar.setProgress(contents.getPlayedTIme());
             }
         }
 
@@ -266,6 +268,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 .load(contents.getWriterImage())
                 .transform(new RoundImageTransform(profileImage.getContext()))
                 .into(profileImage);
+//        currntTimeView.setText(contents.getContentsText());
 
 
     }
