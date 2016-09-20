@@ -1,5 +1,6 @@
 package team.nuga.thelabel.viewholder;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,11 +44,20 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     CheckBox playCheckBox;
     Contents contents;
 
+    Context context;
+
+
+    HashMap<String, String> retriever = new HashMap<>();
+    MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+
+
+
     public SeekBar getPlaySeekbar() {
         return playSeekbar;
     }
 
     private ImageView imageViewMenu;
+
 
 
 
@@ -98,9 +110,12 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     public void setOnPlayerItemClickListener(OnPlayerItemClickListener playerListener) {
         this.playerListener = playerListener;
     }
+
+
     public AccountTypeMusicViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        context = itemView.getContext();
 
 
         playCheckBox = (CheckBox)itemView.findViewById(R.id.checkbox_player);
@@ -151,11 +166,10 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
     public void applyData(Contents ncontents) {
         contents = ncontents;
 
-        String musicUrl = contents.getContentsPath();
-        MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-//        mediaMetadataRetriever.setDataSource(musicUrl);
-//        String s = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-//        Log.e("미디어 리트리버 테스트",s);
+        String musicUri = contents.getContentsPath();
+        mediaMetadataRetriever.setDataSource(musicUri,retriever);
+        String s = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        Log.e("미디어 리트리버 테스트",s+"");
         if(contents.getContentsType() == Contents.MUSIC){
             contents.setMoveListener(new Contents.onPlayTimeMoveListener() {
                 @Override
