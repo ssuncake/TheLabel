@@ -27,6 +27,8 @@
     <dimen name="editText_nickName_height">40dp</dimen>
     <dimen name="local_height">20dp</dimen>                         <!-- 시/도 , 시/군/구 height 통합용 -->
 
+    <dimen name="line_widthSize">250dp</dimen>
+
     <dimen name="button_overlapCheck">23dp</dimen>                  <!--중복확인 버튼-->
     <dimen name="TextSize_EditSignUp_subtitle">10dp
     </dimen>         <!--성별, 시/도, 시/군/구, 지역, 포지션, 장르-->

@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -709,7 +708,7 @@ public class ProfileSettingFragment extends Fragment {
         textInputLayout_introtext.setCounterMaxLength(60);
 
         editText_userNickName.addTextChangedListener(nicknameWatcher);
-        editText_userNickName.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_OUT);
+//        editText_userNickName.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_OUT);
         textView_userEmail.setText(user.getEmail());
         onClickRadioGroup_need();
         preUserInfoSetting();
@@ -733,7 +732,7 @@ public class ProfileSettingFragment extends Fragment {
         public void afterTextChanged(Editable editable) {
             if (editable.length() > 8) {
                 editText_userNickName.setText(before);
-                editText_userNickName.setSelection(textInputEditText_introText.length());
+                editText_userNickName.setSelection(textInputEditText_introText.length()+1);
                 editText_userNickName.setError("2~8자로 입력해주세요");
             } else if (editable.length() < 2) {
                 editText_userNickName.setError("2~8자로 입력해주세요");
@@ -758,13 +757,13 @@ public class ProfileSettingFragment extends Fragment {
         @Override
         public void afterTextChanged(Editable editable) {
             if (editable.length() > 60) {
-                textInputLayout_introtext.setError("error");
+//                textInputLayout_introtext.setError("error");
             } else {
                 textInputLayout_introtext.setError(null);
             }
             if (textInputEditText_introText.getLineCount() > LIMITTED_TEXTLINE) { //라인수 제한
-                textInputEditText_introText.setText(before);
-                textInputEditText_introText.setSelection(textInputEditText_introText.length());
+//                textInputEditText_introText.setText(before);
+//                textInputEditText_introText.setSelection(textInputEditText_introText.length());
             }
         }
     };
