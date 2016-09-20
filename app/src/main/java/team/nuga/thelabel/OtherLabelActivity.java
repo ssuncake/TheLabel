@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
@@ -35,7 +34,7 @@ public class OtherLabelActivity extends AppCompatActivity {
         text.setText(s + "");
         setResult(RESULT_OK, intent);
 
-        final ImageView joinrequestimageView = (ImageView) findViewById(R.id.image_joinrequest);
+        final TextView joinrequestimageView = (TextView) findViewById(R.id.image_joinrequest);
         joinrequestimageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +43,7 @@ public class OtherLabelActivity extends AppCompatActivity {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                joinrequestimageView.setImageResource(R.drawable.joinstandby);
+                                joinrequestimageView.setText("가입대기중");
 
                                 joinrequestimageView.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -54,7 +53,7 @@ public class OtherLabelActivity extends AppCompatActivity {
                                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                        joinrequestimageView.setImageResource(R.drawable.joinstandby);
+                                                        joinrequestimageView.setText("가입 요청");
                                                     }
                                                 })
                                                 .show();

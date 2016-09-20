@@ -4,32 +4,35 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_main"
-            android:title="메인으로가기"/>
+            android:icon="@drawable/btn_account_off"
+            android:title="메인으로가기" />
         <item
             android:id="@+id/drawer_upload"
+            android:icon="@drawable/common_full_open_on_phone"
             android:title="업로드" />
     </group>
     <group>
-    <item
-        android:title="마이페이지">
-        <menu>
+        <item android:title="마이페이지">
+            <menu>
 
 
-            <item
-                android:id="@+id/drawer_profile"
-                android:title="프로필설정"
-                />
-            <item
-                android:id="@+id/drawer_message"
-                android:title="메세지" />
-            <item
-                android:id="@+id/drawer_likeContents"
-                android:title="내가좋아요 한 게시글" />
-            <item
-                android:id="@+id/drawer_setting"
-                android:title="설정" />
-        </menu>
-    </item>
+                <item
+                    android:id="@+id/drawer_profile"
+                    android:title="프로필설정" />
+                <item
+                    android:id="@+id/drawer_message"
+                    android:icon="@drawable/icn_message"
+                    android:title="메세지" />
+                <item
+                    android:id="@+id/drawer_likeContents"
+                    android:icon="@drawable/btn_like_off"
+                    android:title="내가좋아요 한 게시글" />
+                <item
+                    android:id="@+id/drawer_setting"
+                    android:icon="@drawable/btn_setting"
+                    android:title="설정" />
+            </menu>
+        </item>
     </group>
 
 </menu>

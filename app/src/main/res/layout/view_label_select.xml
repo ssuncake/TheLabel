@@ -9,7 +9,8 @@
         android:id="@+id/imageView_label_select_Profile"
         android:src="@drawable/label_make"
         android:adjustViewBounds="false"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+         />
 
     <FrameLayout
         android:layout_width="match_parent"

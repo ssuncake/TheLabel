@@ -47,7 +47,7 @@ public class UploadImageFragment extends Fragment {
                 e.printStackTrace();
             }
         }else {
-            imageView.setImageResource(R.drawable.profile_girl);
+            imageView.setImageResource(R.drawable.img_user);
         }
 
         return view;

@@ -19,7 +19,7 @@
                     android:id="@+id/cardView_profileImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/profile_girl" />
+                    android:src="@drawable/img_user1" />
                 <TextView
                     android:id="@+id/textView_cardView_profileId"
                     android:layout_width="wrap_content"
