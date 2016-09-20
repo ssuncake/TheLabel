@@ -40,17 +40,19 @@ public class UserMainFragment extends Fragment {
     ContentsAdatper contentsAdatper;
 
     User user;
+
+
     boolean isLastItem;
     private static int PAGE; //페이지
     private static String COUNT="10"; //카운트 수
-
+    ContentsMusicPlayer musicPlayer;
     @BindView(R.id.recyclerview_user_main)
     RecyclerView contentsRecycerView;
 
     SeekBar mainProgressView ;
 
     Contents[] contentses;
-    ContentsMusicPlayer musicPlayer;
+
 
 
 
@@ -67,10 +69,14 @@ public class UserMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this, view);
         PAGE =1;
+        mainProgressView = new SeekBar(getActivity());
         contentsAdatper = new ContentsAdatper();
+        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
+
         user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
         contentsAdatper.setUser(user);
-        mainProgressView = new SeekBar(getActivity());
+
+
 
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
@@ -95,7 +101,7 @@ public class UserMainFragment extends Fragment {
 
         //뮤직 플레이어 설정부분
 
-        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
+
         contentsAdatper.setOnPlayerItemClickListener(new ContentsAdatper.OnPlayerItemClickListener() {
             @Override
             public void onPlayerItemClick(View checkbox, View holderview, Contents contents, int position) {
@@ -108,31 +114,6 @@ public class UserMainFragment extends Fragment {
                 }
             }
 
-//            public String milliSecondsToTimer(long milliseconds) {
-//                String finalTimerString = "";
-//                String secondsString = "";
-//
-//// Convert total duration into time
-//                int hours = (int) (milliseconds / (1000 * 60 * 60));
-//                int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
-//                int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
-//// Add hours if there
-//                if (hours > 0) {
-//                    finalTimerString = hours + ":";
-//                }
-//
-//// Prepending 0 to seconds if it is one digit
-//                if (seconds < 10) {
-//                    secondsString = "0" + seconds;
-//                } else {
-//                    secondsString = "" + seconds;
-//                }
-//
-//                finalTimerString = finalTimerString + minutes + ":" + secondsString;
-//
-//// return timer string
-//                return finalTimerString;
-//            }
         });
 
 

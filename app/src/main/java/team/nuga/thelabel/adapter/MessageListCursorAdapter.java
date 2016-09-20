@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+
 import team.nuga.thelabel.R;
+import team.nuga.thelabel.Utils;
 import team.nuga.thelabel.data.ChatContract;
 import team.nuga.thelabel.viewholder.MessageMeViewHolder;
 import team.nuga.thelabel.viewholder.MessageOtherViewHolder;
@@ -71,15 +74,21 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
             case VIEW_TYPE_SEND : {
                 MessageMeViewHolder mvh = (MessageMeViewHolder)holder;
                 String message = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_MESSAGE));
-                String date = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
-                mvh.setMessage(message,date);
+                String date1= cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
+                long date2 = Long.parseLong(date1);
+                Date date = new Date();
+                date.setTime(date2);
+                mvh.setMessage(message,Utils.convertTimeToString(date));
                 break;
             }
             case VIEW_TYPE_RECEIVE :{
                 MessageOtherViewHolder ovh = (MessageOtherViewHolder)holder;
                 String message = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_MESSAGE));
-                String date = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
-                ovh.setMessage(message,date);
+                String date1= cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_CREATED));
+                long date2 = Long.parseLong(date1);
+                Date date = new Date();
+                date.setTime(date2);
+                ovh.setMessage(message,Utils.convertTimeToString(date));
                 ovh.setImage(UserImagePath);
                 break;
             }

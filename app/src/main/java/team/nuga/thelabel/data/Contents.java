@@ -42,7 +42,7 @@ public class Contents implements Serializable {
     private String writerImage;
     @SerializedName("fileCode")
     private String fileCode;
-    @SerializedName("fileCode")
+
     private String contentsText;
 
 

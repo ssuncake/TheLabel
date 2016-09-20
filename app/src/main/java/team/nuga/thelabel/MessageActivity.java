@@ -1,5 +1,8 @@
 package team.nuga.thelabel;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +23,7 @@ import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
 
-public class MessageActivity extends AppCompatActivity implements MyGcmListenerService.UpdateCallback{
+public class MessageActivity extends AppCompatActivity {
     public static final String USER="dbuser";
 
 
@@ -53,7 +56,6 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
     MessageListCursorAdapter adapter;
 
     boolean sw=false;
-    MyGcmListenerService cals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        cals.setMessageUpdateCallBack(this);
+
 
 
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
@@ -77,19 +79,20 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
 
         adapter.setUserImagePath(user.getImageUrl());
 
-        adapter.setUserImagePath(searchUser.getSearchUserImage());
+
         message.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         message.setLayoutManager(manager);
 
-
-        textView.setText(searchUser.getSearchUserName());//유저 네임 확인용
-
+        message.scrollToPosition(adapter.getItemCount()-1);
 
 
+//        textView.setText(searchUser.getSearchUserName());//유저 네임 확인용
 
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -118,8 +121,19 @@ public class MessageActivity extends AppCompatActivity implements MyGcmListenerS
         adapter.changeCursor(null);
     }
 
-    @Override
-    public void messageUpdate() {
-        updateMessage();
-    }
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            User u = (User) intent.getSerializableExtra(MyGcmListenerService.EXTRA_CHAT_USER);
+            if (u.getUserID() == user.getUserID()) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateMessage();
+                    }
+                });
+                intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
+            }
+        }
+    };
 }

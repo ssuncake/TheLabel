@@ -16,6 +16,7 @@
 
 package team.nuga.thelabel.gcm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -41,7 +42,9 @@ import team.nuga.thelabel.request.MessageReceiverGetRequest;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
-
+    public static final String ACTION_CHAT = "team.nuga.thelabel.action.chatmessage";
+    public static final String EXTRA_CHAT_USER = "chatuser";
+    public static final String EXTRA_RESULT = "result";
 
     LocalBroadcastManager mLBM;
 
@@ -67,6 +70,8 @@ public class MyGcmListenerService extends GcmListenerService {
             // 메세지보내기
             long lastTime = DBManager.getInstance().getLastReceiveDate();
             Date date = new Date(lastTime);
+
+            Log.e(TAG, "date: " + date.toString());
             MessageListRequest request = new MessageListRequest(this,reid,date);
             try {
                 NetworkResultMessageList result = NetworkManager.getInstance().getNetworkDataSync(request);
@@ -90,7 +95,9 @@ public class MyGcmListenerService extends GcmListenerService {
                                 try {
                                     Log.e("GCM test addmessage ","내아이디 : "+messagetemp.getUser_id()+" 너아이디 : "+other.getUserID()+" date : "+messagetemp.getDate()+" // "+Utils.convertStringToTime(messagetemp.getDate()));
                                     DBManager.getInstance().addMessage(messagetemp.getUser_id(),other,ChatContract.ChatMessage.TYPE_RECEIVE, messagetemp.getText(),Utils.convertStringToTime(messagetemp.getDate()));
-                                 //   messageUpdateCallBack.messageUpdate();
+                                    Intent i = new Intent(ACTION_CHAT);
+                                    i.putExtra(EXTRA_CHAT_USER,other);
+                                    mLBM.sendBroadcastSync(i);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -109,15 +116,7 @@ public class MyGcmListenerService extends GcmListenerService {
         }
     }
 
-    public interface UpdateCallback{
-        public void messageUpdate();
-    }
 
-    private UpdateCallback messageUpdateCallBack;
-
-    public void setMessageUpdateCallBack(UpdateCallback updateCallBack){
-        this.messageUpdateCallBack = updateCallBack;
-    }
 
 
 }
