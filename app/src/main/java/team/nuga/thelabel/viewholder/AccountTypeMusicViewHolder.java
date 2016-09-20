@@ -171,7 +171,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                 public void movePlayTime() {
                     playSeekbar.setProgress(contents.getPlayedTIme());
                     int current = contents.getPlayedTIme()-contents.getPlayedTIme()%1000;
-                    int max =  contents.getPlayTimeMax()-contents.getPlayedTIme();
+                    int max =  contents.getPlayTimeMax();
                     int different = max - current;
                     if(current == 0 || max ==0){
                         currntTimeView.setText("");
