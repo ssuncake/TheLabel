@@ -19,7 +19,12 @@ public class User implements Serializable {
     @SerializedName("imagepath")
     private String imageUrl;
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
     @SerializedName("user_id")
+
     private int userID;
 
     //프로필 기본정보

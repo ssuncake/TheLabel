@@ -79,9 +79,11 @@
                     >
                 </com.google.android.youtube.player.YouTubeThumbnailView>
                 <ImageView
-                    android:src="@drawable/btn_gallery"
+                    android:src="@drawable/btn_video_play_fix"
+                    android:scaleType="centerCrop"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:background="@drawable/round_circle"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/imageView_youtubeClick" />
@@ -158,6 +160,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/DummyText"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

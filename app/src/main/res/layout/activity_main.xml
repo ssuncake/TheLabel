@@ -18,16 +18,11 @@
             android:minHeight="?attr/actionBarSize"
             android:background="@color/maintitle_blue"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-
         <FrameLayout
             android:id="@+id/drawer_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_gray_2" >
-
-
-        </FrameLayout>
+            android:background="@color/color_gray_2" />
 
     </LinearLayout>
     <android.support.design.widget.NavigationView
@@ -36,8 +31,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemTextColor="#ffffffff"
-        android:background="#ff000000"
-
-        app:menu="@menu/drawer_menu"        />
+        app:itemIconTint="@color/color_white"
+        app:theme="@style/AppTheme.mytheme"
+        app:itemTextColor="@color/color_white"
+        android:foregroundTint="@color/color_white"
+        android:background="#03030F"
+        app:menu="@menu/drawer_menu"/>
 </android.support.v4.widget.DrawerLayout>

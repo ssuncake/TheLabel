@@ -58,7 +58,7 @@ public abstract class NetworkRequest<T> implements Callback {
         public void onResponse(Call call, Response response) throws IOException {
         if(response.isSuccessful()){
             try{
-                sendSuccess(parse(response.body()));
+                 sendSuccess(parse(response.body()));
             } catch (IOException e){
                 sendError(-1,e.getMessage(),e);
             }

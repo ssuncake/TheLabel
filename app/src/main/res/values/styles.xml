@@ -15,10 +15,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.mytheme" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/color_white</item> <!-- 타이틀바 색상 -->
+        <item name="textColorError">@color/design_textinput_error_color_light</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme.NoActionbar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

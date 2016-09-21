@@ -9,7 +9,15 @@
     <dimen name="text_size_10sp">10sp</dimen>
 
 
-    <!--카드뷰 속성 값들-->
+    <!--네비게이션 드로워 속성-->
+    <dimen name="nav_header_nickname">12dp</dimen>
+    <dimen name="nav_header_email">12dp</dimen>
+    <dimen name="nav_header_position_city">10dp</dimen>
+    <dimen name="nav_header_genre">13dp</dimen>
+    <dimen name="nav_header_profile_image_size">70dp</dimen>
+    <dimen name="nav_header_genre_sidePadding">15dp</dimen>
+
+       <!--카드뷰 속성 값들-->
     <dimen name="cardView_margin">10dp</dimen>                      <!-- 카드뷰와 카드뷰 사이의 마진값 -->
     <dimen name="cardView_textContent_size">15dp</dimen>            <!--카드뷰에 입력한 텍스트의 출력 사이즈-->
     <dimen name="cardView_Like_ShareButton_Size">30dp</dimen>       <!--좋아요 버튼과 공유버튼 사이즈-->

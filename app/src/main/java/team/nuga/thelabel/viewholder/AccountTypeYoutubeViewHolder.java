@@ -146,7 +146,6 @@ public class AccountTypeYoutubeViewHolder extends ParentContentsViewHolder imple
                 Log.e("썸네일 초기화 에러"," 썸네일 페일");
             }
         });
-
     }
 
     public interface OnYoutubeThumnailClickListener { // 유튜브

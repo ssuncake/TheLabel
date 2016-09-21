@@ -17,14 +17,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.LikeNotification;
 import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.fragment.MainFragment;
 import team.nuga.thelabel.fragment.MessageListFragment;
@@ -118,15 +122,26 @@ public class MainActivity extends AppCompatActivity
         goMainFragment(MainFragment.NEWSFEEDTAB);
 
         // 헤더뷰 관련 설정
+        String[] citylist = getResources().getStringArray(R.array.cityList);
+        String[] genrelist = getResources().getStringArray(R.array.genrelist);
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
         headerUserName = (TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
+        TextView headerUserEmail = (TextView) headerView.findViewById(R.id.textView_MainHeaderEmail);
+        headerUserEmail.setText(mainUser.getUserEmail());
         headerUserName.setText(mainUser.getUserName());
+        TextView headerUserGenre = (TextView) headerView.findViewById(R.id.textView_MainHeader_Genre);
+        ImageView headerUserProfile = (ImageView) headerView.findViewById(R.id.imageView_MainHeader_Profile);
+        headerUserGenre.setText("#"+genrelist[mainUser.getGenre()-1]+", #"+citylist[mainUser.getCity()]);
+        Glide.with(this)
+                .load(mainUser.getImageUrl())
+                .transform(new RoundImageTransform(this))
+                .into(headerUserProfile);
     }
-
-//    boolean backButtonClicked = false;
+    //    boolean backButtonClicked = false;
 //    Handler mHandler = new Handler(Looper.getMainLooper());
     public static int currentViewPage = 0;
-    int appFinCount=0;
+    int appFinCount = 0;
+
     @Override
     public void onBackPressed() {
 
@@ -136,9 +151,9 @@ public class MainActivity extends AppCompatActivity
         } else if (currentViewPage == 1) {
             goMainFragment(1);
             appFinCount++;
-            if(appFinCount>1)appFunction.appFinished();
+            if (appFinCount > 1) appFunction.appFinished();
         } else {
-            appFinCount=0;
+            appFinCount = 0;
             appFunction.appFinished();
         }
 
