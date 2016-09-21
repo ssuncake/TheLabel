@@ -15,9 +15,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="250dp"
         android:text="New Text"
         android:id="@+id/textView_MessageOther_Text"
-        android:background="@drawable/img_message_stranger"
+        android:background="@drawable/img_message_stranger_fix"
         android:layout_alignTop="@+id/imageView_MessageOther_ImageView"
         android:layout_toRightOf="@+id/imageView_MessageOther_ImageView"
         android:layout_toEndOf="@+id/imageView_MessageOther_ImageView"

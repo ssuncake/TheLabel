@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -57,6 +58,8 @@ public class MessageActivity extends AppCompatActivity {
             public void onSuccess(NetworkRequest<NetworkResultGCM> request, NetworkResultGCM result) throws ParseException {
                 Log.e("메세지보내기",result.getSuccess()+"");
                 inputText.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(inputText.getWindowToken(), 0);
             }
 
             @Override
