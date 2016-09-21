@@ -24,6 +24,7 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
     SearchLabel label;
 
     public void removeAllItem(){
+        labelset.clear();
         labelitems = new ArrayList<>();
         notifyDataSetChanged();
     }
