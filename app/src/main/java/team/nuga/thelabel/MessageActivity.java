@@ -74,8 +74,6 @@ public class MessageActivity extends AppCompatActivity {
     MessageListCursorAdapter adapter;
     LocalBroadcastManager mLBM;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +86,7 @@ public class MessageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
+        Intent intent = getIntent();
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
         user = (User)getIntent().getSerializableExtra(USER);

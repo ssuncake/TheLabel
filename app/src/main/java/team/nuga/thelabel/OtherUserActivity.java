@@ -63,12 +63,12 @@ public class OtherUserActivity extends AppCompatActivity {
         finish();
     }
 
-//    @OnClick(R.id.imageView_message)
-//    public void Message() {
-//        Intent intent = new Intent(OtherUserActivity.this, MessageActivity.class);
-//        intent.putExtra("user", searchUser);
-//        startActivity(intent);
-//    }
+    @OnClick(R.id.imageView_message)
+    public void Message() {
+        Intent intent = new Intent(OtherUserActivity.this, MessageActivity.class);
+        intent.putExtra("otheruser", searchUser.getOtherUserID());
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
