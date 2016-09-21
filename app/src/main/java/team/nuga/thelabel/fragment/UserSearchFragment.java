@@ -74,7 +74,7 @@ SearchUser searchUser;
     }
 
     String searchText;
-int sumsum=0;
+    int sumsum=0;
     public static int pageCount=1;
     @OnClick(R.id.imageButton_user_search)
     public void userSearchButton() {

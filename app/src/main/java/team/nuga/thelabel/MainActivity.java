@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.toolbar_search:    //툴바 상단 검색 메뉴 클릭시 해당 액티비티 띄움
                 intent = new Intent(this, SearchActivity.class);
+                intent.putExtra(MAINUSER,mainUser);
                 startActivity(intent);
                 return true;
         }

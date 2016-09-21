@@ -15,15 +15,13 @@
         android:layout_height="wrap_content"
         android:text="이름"
         android:id="@+id/textView_LabelMainMember_MemberName"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/text_color"/>
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="포지션"
         android:id="@+id/textView_LabelMainMember_MemberPosition"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/text_color"/>
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

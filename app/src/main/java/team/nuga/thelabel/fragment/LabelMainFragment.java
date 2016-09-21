@@ -52,6 +52,7 @@ public class LabelMainFragment extends Fragment {
     Label label;
     LabelMainListAdapter adapter;
     Member[] members;
+    int labelLeader;
 
 
 
@@ -118,16 +119,13 @@ public class LabelMainFragment extends Fragment {
         contentsAdatper = new ContentsAdatper();
         musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
 
-        int leaderId = getArguments().getInt(MainActivity.LABELID);
+
+        int labelId = getArguments().getInt(MainActivity.LABELID);
         User user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
-
-        int userid = user.getUserID();
+        final int userid = user.getUserID();
         goLabelSetting.setVisibility(View.INVISIBLE);
-        if(leaderId==userid){
 
-            goLabelSetting.setVisibility(View.VISIBLE);
-        }
-        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),leaderId);
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(getActivity(),labelId);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
@@ -138,8 +136,12 @@ public class LabelMainFragment extends Fragment {
                     label = result.getResult();
                     labelMainTop.setLabel(label);
                     labelMainTop.setIsMyLabel(true);
+                    labelLeader = label.getLabelLeaderID();
                     Log.w(LOGTAG," leaderid = "+label.getLabelLeaderID()+"labelneed :"+label.getLabelNeedPositionList().toString());
 
+                    if(labelLeader==userid){
+                        goLabelSetting.setVisibility(View.VISIBLE);
+                    }
 
                     members = result.getMember();
                     for(Member m : members)

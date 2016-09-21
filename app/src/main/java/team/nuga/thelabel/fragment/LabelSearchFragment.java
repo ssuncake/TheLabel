@@ -58,6 +58,8 @@ public class LabelSearchFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, SearchLabel label, int position) {
                 Intent intent = new Intent(getActivity(),OtherLabelActivity.class);
+//                intent.putExtra(MainActivity.MAINUSER,);
+//                intent.putExtra(MainActivity.LABELID,)
                 intent.putExtra("other",label.getSearchLabelName());
                 startActivity(intent);
             }

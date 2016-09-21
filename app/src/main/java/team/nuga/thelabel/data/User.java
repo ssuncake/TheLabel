@@ -172,4 +172,16 @@ public class User implements Serializable {
         this.User_intro_text = text;
     }
 
+    public boolean isMyLabel(int labelId){
+        if(userInLabelList==null){
+            return false;
+        }else{
+            for(Label l : userInLabelList){
+                if(l.getLabelID() == labelId)
+                    return true;
+            }
+            return false;
+        }
+    }
+
 }

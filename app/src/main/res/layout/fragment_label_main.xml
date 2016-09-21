@@ -46,7 +46,8 @@
                     android:text="@string/labelmain_plusmember"
                     android:id="@+id/button_LabelMain_Memberlist"
                     android:layout_gravity="right"
-                    android:background="@color/maintitle_blue"/>
+                    android:background="@color/maintitle_blue"
+                    android:textColor="@color/color_white" />
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -64,13 +65,6 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@color/maintitle_blue"
                 android:textColor="@color/labelmaintopview_textcolor" />
-
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/seekBar_LabelMain_contents"
-                android:layout_gravity="center_horizontal"
-                android:indeterminate="false" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"

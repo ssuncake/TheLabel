@@ -146,6 +146,7 @@ public class MessageListFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             User u = (User) intent.getSerializableExtra(MyGcmListenerService.EXTRA_CHAT_USER);
 
+            if(getActivity()  !=null){
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -153,6 +154,8 @@ public class MessageListFragment extends Fragment {
                     }
                 });
                 intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
+            }
+
 
         }
     };

@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.adapter.SearchViewpagerAdapter;
+import team.nuga.thelabel.data.User;
 
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_tablayout)
@@ -26,6 +27,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText editTextSearch;
     ImageButton searchImageButton;
     SearchViewpagerAdapter searchviewpagerAdapter;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +35,14 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+        user = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
+
         tabLayout.addTab(tabLayout.newTab().setText("사람찾기"));
         tabLayout.addTab(tabLayout.newTab().setText("레이블찾기"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         searchviewpagerAdapter = new SearchViewpagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        searchviewpagerAdapter.setUser(user);
         viewPager.setAdapter(searchviewpagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
