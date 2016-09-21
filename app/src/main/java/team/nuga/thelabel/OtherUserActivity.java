@@ -121,7 +121,13 @@ public class OtherUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 labelID = searchUser.getLabel_id();
-                 final CharSequence item[] = {""+labelID[0],""+labelID[1],""+labelID[2]};
+                CharSequence item[] = new CharSequence[labelID.length];
+
+                if(labelID!=null){
+                   for(int i=0; i<labelID.length; i++){
+                       item[i] = labelID[i]+"";
+                   }
+                }
                 new AlertDialog.Builder(OtherUserActivity.this)
                         .setItems(item, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
