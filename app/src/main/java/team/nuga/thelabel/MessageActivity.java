@@ -3,8 +3,10 @@ package team.nuga.thelabel;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +16,21 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import team.nuga.thelabel.adapter.MessageListCursorAdapter;
+import team.nuga.thelabel.data.ChatContract;
+import team.nuga.thelabel.data.NetworkResultGCM;
 import team.nuga.thelabel.data.SearchUser;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.request.MessageRequest;
 
 public class MessageActivity extends AppCompatActivity {
     public static final String USER="dbuser";
@@ -39,23 +48,30 @@ public class MessageActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_Message_Send)
     public void clickSend(){
-        String s = inputText.getText().toString();
-        if(sw){
-            DBManager.getInstance().addMessage(myUser,user,0,s);
-            sw = !sw;
-        }else{
-            DBManager.getInstance().addMessage(myUser,user,1,s);
-            sw = !sw;
-        }
+        String sendText = inputText.getText().toString();
+        DBManager.getInstance().addMessage(myUser,user, ChatContract.ChatMessage.TYPE_SEND,sendText);
         updateMessage();
+        MessageRequest request = new MessageRequest(this,myUser.getUserID(),user.getUserID(),sendText);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultGCM>() {
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResultGCM> request, NetworkResultGCM result) throws ParseException {
+                Log.e("메세지보내기",result.getSuccess()+"");
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResultGCM> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e("메세지보내기",errorMessage+"");
+            }
+        });
     }
 
     User myUser;
     User user;
     SearchUser searchUser;
     MessageListCursorAdapter adapter;
+    LocalBroadcastManager mLBM;
 
-    boolean sw=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +79,7 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         ButterKnife.bind(this);
 
+        mLBM = LocalBroadcastManager.getInstance(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -113,6 +130,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         updateMessage();
+        mLBM.registerReceiver(mReceiver, new IntentFilter(MyGcmListenerService.ACTION_CHAT));
     }
 
     @Override

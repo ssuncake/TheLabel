@@ -1,11 +1,15 @@
 package team.nuga.thelabel.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +28,7 @@ import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.MessageMemberAdapter;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -36,6 +41,8 @@ public class MessageListFragment extends Fragment {
 
     User user;
     User tempotherUser;
+    LocalBroadcastManager mLBM;
+
 
     @BindView(R.id.editText_messagedebug)
     EditText editText;
@@ -97,7 +104,7 @@ public class MessageListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_message_list, container, false);
         ButterKnife.bind(this,view);
-
+        mLBM = LocalBroadcastManager.getInstance(getActivity());
         adapter = new MessageMemberAdapter();
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -124,6 +131,7 @@ public class MessageListFragment extends Fragment {
 //        DBManager.getInstance().setMainUser(user);
         Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
+        mLBM.registerReceiver(mReceiver, new IntentFilter(MyGcmListenerService.ACTION_CHAT));
     }
 
     @Override
@@ -137,6 +145,22 @@ public class MessageListFragment extends Fragment {
         Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
     }
+
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            User u = (User) intent.getSerializableExtra(MyGcmListenerService.EXTRA_CHAT_USER);
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateUser();
+                    }
+                });
+                intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
+
+        }
+    };
 
 
 }

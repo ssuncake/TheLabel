@@ -84,17 +84,17 @@ public class MyGcmListenerService extends GcmListenerService {
 
                         final Message messagetemp = m;
                     if(m != null){
-                        Log.e(TAG, "message: " + m.getText()+" myid : "+m.getUser_id()+" youid : "+m.getYou_user_id());
+                        Log.e(TAG, "message: " + m.getText()+" myid : "+m.getYou_user_id()+" youid : "+m.getUser_id());
                     }
-                        MessageReceiverGetRequest request1 = new MessageReceiverGetRequest(m.getYou_user_id());
+                        MessageReceiverGetRequest request1 = new MessageReceiverGetRequest(m.getUser_id());
                         NetworkManager.getInstance().getNetworkData(request1, new NetworkManager.OnResultListener<NetworkResult<User>>() {
                             @Override
                             public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result){
                                 User other = result.getUser();
                                 Log.e("GCM test  ","너의 유저객체 id : "+other.getUserID());
                                 try {
-                                    Log.e("GCM test addmessage ","내아이디 : "+messagetemp.getUser_id()+" 너아이디 : "+other.getUserID()+" date : "+messagetemp.getDate()+" // "+Utils.convertStringToTime(messagetemp.getDate()));
-                                    DBManager.getInstance().addMessage(messagetemp.getUser_id(),other,ChatContract.ChatMessage.TYPE_RECEIVE, messagetemp.getText(),Utils.convertStringToTime(messagetemp.getDate()));
+                                    Log.e("GCM test addmessage ","내아이디 : "+messagetemp.getYou_user_id()+" 너아이디 : "+other.getUserID()+" date : "+messagetemp.getDate()+" // "+Utils.convertStringToTime(messagetemp.getDate()));
+                                    DBManager.getInstance().addMessage(messagetemp.getYou_user_id(),other,ChatContract.ChatMessage.TYPE_RECEIVE, messagetemp.getText(),Utils.convertStringToTime(messagetemp.getDate()));
                                     Intent i = new Intent(ACTION_CHAT);
                                     i.putExtra(EXTRA_CHAT_USER,other);
                                     mLBM.sendBroadcastSync(i);

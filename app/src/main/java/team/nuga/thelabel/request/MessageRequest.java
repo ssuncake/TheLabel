@@ -10,14 +10,13 @@ import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import team.nuga.thelabel.data.NetworkResult;
-import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.data.NetworkResultGCM;
 
 
 /**
  * Created by Tacademy on 2016-08-30.
  */
-public class MessageRequest extends AbstractRequest<NetworkResult<User>> {
+public class MessageRequest extends AbstractRequest<NetworkResultGCM> {
 
 
     Request request;
@@ -39,7 +38,7 @@ public class MessageRequest extends AbstractRequest<NetworkResult<User>> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NetworkResult<User>>(){}.getType();
+        return new TypeToken<NetworkResultGCM>(){}.getType();
     }
 
     @Override
