@@ -14,5 +14,15 @@ public class NetworkResultLabelSearch  {
 
     SearchLabel[] label;
 
+    ErrorMessage error;
 
+    public boolean isError(){
+        if(error==null)
+            return false;
+        return true;
+    }
+
+    public ErrorMessage getError() {
+        return error;
+    }
 }

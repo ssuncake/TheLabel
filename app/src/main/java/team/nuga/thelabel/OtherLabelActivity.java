@@ -22,11 +22,9 @@ import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.Label;
 import team.nuga.thelabel.data.Member;
 import team.nuga.thelabel.data.NetworkResultLabeMain;
-import team.nuga.thelabel.data.NetworkResultMyAccount;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
-import team.nuga.thelabel.request.ContentsRequest;
 import team.nuga.thelabel.request.GetLabelByIdMainRequest;
 import team.nuga.thelabel.wiget.LabelMainTop;
 import team.nuga.thelabel.youtube.DeveloperKey;
@@ -46,9 +44,10 @@ public class OtherLabelActivity extends AppCompatActivity {
 
     boolean isLastItem;
     private static int PAGE; //페이지
-    private static String COUNT="10"; //카운트 수
+    private static int COUNT=10; //카운트 수
     ContentsMusicPlayer musicPlayer;
     SeekBar mainProgressView;
+    int labelId;
 
     @BindView(R.id.view_OtherLabelMainTop)
     LabelMainTop labelMainTop;
@@ -95,11 +94,11 @@ public class OtherLabelActivity extends AppCompatActivity {
 
         // 레이블 레이블아이디와 로그인 유저정보를 받아야함
 
-        int labelId = getIntent().getIntExtra(MainActivity.LABELID,-1);
+        labelId = getIntent().getIntExtra(MainActivity.LABELID,-1);
         User user = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
 
-        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId);
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId,PAGE,COUNT);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
@@ -182,13 +181,13 @@ public class OtherLabelActivity extends AppCompatActivity {
         contentsRecycler.setLayoutManager(linearLayoutManager);
         contentsRecycler.setHasFixedSize(true);
         contentsRecycler.setAdapter(contentsAdatper);
-        addItem(""+PAGE,COUNT);
+        addItem(PAGE,COUNT);
         contentsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    addItem(""+PAGE,COUNT);
+                    addItem(PAGE,COUNT);
                 }
             }
 
@@ -206,26 +205,31 @@ public class OtherLabelActivity extends AppCompatActivity {
         });
 
     }
-    public void addItem(String page, String count) {
-        ContentsRequest contentsRequest = new ContentsRequest(this, page, count);
-        NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
+    public void addItem(int page, final int count) {
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId,page,count);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
+            public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
 
-            public void onSuccess(NetworkRequest<NetworkResultMyAccount> request, NetworkResultMyAccount result) {
-                contentses = result.getData();
-                User user = result.getResult();
-                contentsAdatper.setUser(user);
-                for (Contents c : contentses) {
-                    contentsAdatper.add(c);
+                if(result.isError()){
+                    Log.e(LOGTAG,"error : "+result.getError().getMessage());
+                }else{
+                    Contents[] newcontentses = result.getData();
+                    for (Contents c : newcontentses) {
+                        Log.d("게시글 ID", "" + c.getContentsID());
+                        Log.d("파일경로", "" + c.getContentsPath());
+                        Log.d("파일타입", "" + c.getContentsType());
+                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        contentsAdatper.add(c);
+                    }
+                    musicPlayer.setRefreshContentses(contentsAdatper.getMcontentslist());
+
                 }
-                PAGE +=1;
-
-                musicPlayer.setRefreshContentses(contentsAdatper.getMcontentslist());
             }
 
             @Override
-            public void onFail(NetworkRequest<NetworkResultMyAccount> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("유저메인 실패", errorMessage);
+            public void onFail(NetworkRequest<NetworkResultLabeMain> request, int errorCode, String errorMessage, Throwable e) {
+                Log.e(LOGTAG,"레이블 찾기 실패 : "+errorMessage);
             }
         });
 

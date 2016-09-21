@@ -20,6 +20,11 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
                 implements SearchLabelViewHolder.OnSearchLabelItemClickListener{
     List<SearchLabel> labelitems = new ArrayList<>();
     SearchLabel label;
+
+    public void removeAllItem(){
+        labelitems = new ArrayList<>();
+        notifyDataSetChanged();
+    }
     public void add(SearchLabel label) {
         labelitems.add(label);
         notifyDataSetChanged();

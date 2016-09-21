@@ -16,14 +16,14 @@ import team.nuga.thelabel.data.NetworkResultMyAccount;
 public class ContentsRequest extends AbstractRequest<NetworkResultMyAccount> {
 
     Request request;
-    public ContentsRequest(Context context, String page, String count ){
+    public ContentsRequest(Context context, int page, int count ){
 //        String path = "users?page="+page+"&count="+count;
         String path = "users/me?page=1&count=5";
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment("users")
                 .addPathSegment("me")
-                .addQueryParameter("page",page)
-                .addQueryParameter("count",count)
+                .addQueryParameter("page",page+"")
+                .addQueryParameter("count",count+"")
                 .build();
         request = new Request.Builder()
                 .url(url)

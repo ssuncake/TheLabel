@@ -44,7 +44,7 @@ public class UserMainFragment extends Fragment {
 
     boolean isLastItem;
     private static int PAGE; //페이지
-    private static String COUNT="10"; //카운트 수
+    private static int COUNT=10; //카운트 수
     ContentsMusicPlayer musicPlayer;
     @BindView(R.id.recyclerview_user_main)
     RecyclerView contentsRecycerView;
@@ -141,13 +141,13 @@ public class UserMainFragment extends Fragment {
         contentsRecycerView.setLayoutManager(linearLayoutManager);
         contentsRecycerView.setHasFixedSize(true);
         contentsRecycerView.setAdapter(contentsAdatper);
-        addItem(""+PAGE,COUNT);
+        addItem(PAGE,COUNT);
         contentsRecycerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    addItem(""+PAGE,COUNT);
+                    addItem(PAGE,COUNT);
                 }
             }
 
@@ -167,7 +167,7 @@ public class UserMainFragment extends Fragment {
         return view;
     }
 
-    public void addItem(String page, String count) {
+    public void addItem(int page, int count) {
         ContentsRequest contentsRequest = new ContentsRequest(getContext(), page, count);
         NetworkManager.getInstance().getNetworkData(contentsRequest, new NetworkManager.OnResultListener<NetworkResultMyAccount>() {
             @Override

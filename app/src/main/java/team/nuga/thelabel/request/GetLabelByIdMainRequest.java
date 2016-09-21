@@ -20,11 +20,11 @@ public class GetLabelByIdMainRequest extends AbstractRequest<NetworkResultLabeMa
     private static final String PATH2 = ":label_id";
 
     Request request;
-    public GetLabelByIdMainRequest(Context context, int id) {
+    public GetLabelByIdMainRequest(Context context, int id,int page,int count) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegments(PATH+id)
-                .addQueryParameter("page","1")
-                .addQueryParameter("count","10")
+                .addQueryParameter("page",page+"")
+                .addQueryParameter("count",count+"")
                 .build();
 
 
