@@ -64,11 +64,9 @@ public class MessageListFragment extends Fragment {
                 tempotherUser = result.getUser();
                 tempotherUser.setUserID(otherId);
                 Log.e("MessageListFragment","아이디로 유저네임 이미지 얻어오기디버그용 "+tempotherUser.getUserName()+" // "+tempotherUser.getImageUrl());
-
-
                 // 더미메세지
 //                DBManager.getInstance().setMainUser(user);
-                DBManager.getInstance().addMessage(user,tempotherUser,0," 더미메세지입니다.");
+                DBManager.getInstance().addMessage(user,tempotherUser,100,"");
                 updateUser();
             }
 

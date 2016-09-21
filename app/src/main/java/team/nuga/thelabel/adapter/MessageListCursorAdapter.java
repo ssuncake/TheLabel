@@ -12,6 +12,7 @@ import java.util.Date;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.Utils;
 import team.nuga.thelabel.data.ChatContract;
+import team.nuga.thelabel.viewholder.MessageDummyViewHolder;
 import team.nuga.thelabel.viewholder.MessageMeViewHolder;
 import team.nuga.thelabel.viewholder.MessageOtherViewHolder;
 import team.nuga.thelabel.viewholder.MessageParentViewHolder;
@@ -34,6 +35,7 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
     private static final int VIEW_TYPE_SEND = 1;
     private static final int VIEW_TYPE_RECEIVE = 2;
     private static final int VIEW_TYPE_DATELINE = 3;
+    private static final int VIEW_TYPE_DUMMY = 100;
 
     @Override
     public int getItemViewType(int position) {
@@ -44,6 +46,8 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
                 return VIEW_TYPE_SEND;
             case ChatContract.ChatMessage.TYPE_RECEIVE :
                 return VIEW_TYPE_RECEIVE;
+            case 100:
+                return VIEW_TYPE_DUMMY;
         }
         throw new IllegalArgumentException("invalid type");
     }
@@ -59,6 +63,10 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
             case VIEW_TYPE_RECEIVE : {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_message_other, parent, false);
                 return new MessageOtherViewHolder(view);
+            }
+            case VIEW_TYPE_DUMMY :{
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_message_dummy, parent, false);
+                return new MessageDummyViewHolder(view);
             }
         }
         return null;
@@ -90,6 +98,13 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
                 date.setTime(date2);
                 ovh.setMessage(message,Utils.convertTimeToStringm(date));
                 ovh.setImage(UserImagePath);
+                break;
+            }
+
+            case VIEW_TYPE_DUMMY :{
+                MessageDummyViewHolder dvh = (MessageDummyViewHolder)holder;
+                String message = cursor.getString(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_MESSAGE));
+                dvh.setMessage(message,new String("gg"));
                 break;
             }
         }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import team.nuga.thelabel.R;
@@ -19,6 +20,7 @@ import team.nuga.thelabel.viewholder.SearchLabelViewHolder;
 public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLabelViewHolder>
                 implements SearchLabelViewHolder.OnSearchLabelItemClickListener{
     List<SearchLabel> labelitems = new ArrayList<>();
+    HashSet<Integer> labelset = new HashSet<>();
     SearchLabel label;
 
     public void removeAllItem(){
@@ -26,8 +28,12 @@ public class SearchLabelResultListAdapter extends RecyclerView.Adapter<SearchLab
         notifyDataSetChanged();
     }
     public void add(SearchLabel label) {
-        labelitems.add(label);
-        notifyDataSetChanged();
+        if(labelset.contains(label.getSearchLabelId())){
+        }else{
+            labelset.add(label.getSearchLabelId());
+            labelitems.add(label);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
