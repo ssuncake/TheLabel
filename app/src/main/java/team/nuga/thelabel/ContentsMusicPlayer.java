@@ -177,6 +177,11 @@ public class ContentsMusicPlayer {
     }
 
     public int getPlayedContentsId(){
-        return playNowContents.getContentsID();
+        if(playNowContents==null){
+            return -1;
+        }else{
+            return playNowContents.getContentsID();
+        }
+
     }
 }

@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView_MessageMe_Text"
+        android:background="@drawable/img_message_me"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/message_text_margin" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

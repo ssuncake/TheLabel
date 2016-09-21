@@ -97,7 +97,8 @@
         <activity
             android:name=".MessageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionbar" />
+            android:theme="@style/AppTheme.NoActionbar"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".PasswordSettingActivity"
             android:screenOrientation="portrait"

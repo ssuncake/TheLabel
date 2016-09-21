@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class Utils {
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    static SimpleDateFormat sdfm = new SimpleDateFormat("hh:mm");
 
 
     public static String convertTimeToString(Date date) {
@@ -18,6 +19,15 @@ public class Utils {
     public static Date convertStringToTime(String text) throws ParseException {
         return sdf.parse(text);
     }
+
+    public static String convertTimeToStringm(Date date) {
+        return sdfm.format(date);
+    }
+
+    public static Date convertStringToTimem(String text) throws ParseException {
+        return sdfm.parse(text);
+    }
+
 
     public static String convertCalculateMusicTiem(long milliseconds){
         String finalTimerString = "";

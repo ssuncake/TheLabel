@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +93,6 @@ public class MessageListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
-        Log.e("메세지 리스트 프래그먼트 ","프래그먼트 전달 유저 : " +user.getLongUserID());
     }
 
     @Override
@@ -113,7 +111,6 @@ public class MessageListFragment extends Fragment {
         adapter.setOnAdapterItemClickListener(new MessageMemberAdapter.OnAdapterItemClickLIstener() {
             @Override
             public void onAdapterItemClick(View view,User suser, int position) {
-                Toast.makeText(getActivity(), position+"클릭", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(),MessageActivity.class);
                 intent.putExtra(MessageActivity.USER, suser);
                 intent.putExtra(MainActivity.MAINUSER, user);
@@ -128,7 +125,6 @@ public class MessageListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        DBManager.getInstance().setMainUser(user);
         Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
         mLBM.registerReceiver(mReceiver, new IntentFilter(MyGcmListenerService.ACTION_CHAT));
@@ -141,7 +137,6 @@ public class MessageListFragment extends Fragment {
     }
 
     private void updateUser() {
-//        DBManager.getInstance().setMainUser(user);
         Cursor c = DBManager.getInstance().getChatUser();
         adapter.changeCursor(c);
     }

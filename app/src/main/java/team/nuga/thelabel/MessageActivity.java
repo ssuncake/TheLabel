@@ -24,7 +24,6 @@ import butterknife.OnClick;
 import team.nuga.thelabel.adapter.MessageListCursorAdapter;
 import team.nuga.thelabel.data.ChatContract;
 import team.nuga.thelabel.data.NetworkResultGCM;
-import team.nuga.thelabel.data.SearchUser;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
@@ -42,9 +41,10 @@ public class MessageActivity extends AppCompatActivity {
     EditText inputText;
     @BindView(R.id.recyclerView_Message_Main)
     RecyclerView message;
+    @BindView(R.id.textView_Message_title)
+    TextView title;
 
-    @BindView(R.id.textView_title)
-    TextView textView;
+
 
     @OnClick(R.id.button_Message_Send)
     public void clickSend(){
@@ -56,6 +56,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultGCM> request, NetworkResultGCM result) throws ParseException {
                 Log.e("메세지보내기",result.getSuccess()+"");
+                inputText.setText("");
             }
 
             @Override
@@ -67,7 +68,6 @@ public class MessageActivity extends AppCompatActivity {
 
     User myUser;
     User user;
-    SearchUser searchUser;
     MessageListCursorAdapter adapter;
     LocalBroadcastManager mLBM;
 
@@ -89,7 +89,7 @@ public class MessageActivity extends AppCompatActivity {
         myUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
         user = (User)getIntent().getSerializableExtra(USER);
-        searchUser = (SearchUser) getIntent().getSerializableExtra("user");
+        title.setText(user.getUserName());
 
         adapter = new MessageListCursorAdapter();
         Log.w("Message Activity","이미지 경로 "+user.getImageUrl());
@@ -105,7 +105,7 @@ public class MessageActivity extends AppCompatActivity {
         message.scrollToPosition(adapter.getItemCount()-1);
 
 
-//        textView.setText(searchUser.getSearchUserName());//유저 네임 확인용
+
 
     }
 
@@ -123,6 +123,7 @@ public class MessageActivity extends AppCompatActivity {
     private void updateMessage() {
         Cursor c = DBManager.getInstance().getChatMessage(user);
         adapter.changeCursor(c);
+        message.scrollToPosition(adapter.getItemCount()-1);
     }
 
 

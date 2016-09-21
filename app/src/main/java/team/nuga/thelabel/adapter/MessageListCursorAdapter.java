@@ -78,7 +78,7 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
                 long date2 = Long.parseLong(date1);
                 Date date = new Date();
                 date.setTime(date2);
-                mvh.setMessage(message,Utils.convertTimeToString(date));
+                mvh.setMessage(message,Utils.convertTimeToStringm(date));
                 break;
             }
             case VIEW_TYPE_RECEIVE :{
@@ -88,7 +88,7 @@ public class MessageListCursorAdapter extends RecyclerView.Adapter<MessageParent
                 long date2 = Long.parseLong(date1);
                 Date date = new Date();
                 date.setTime(date2);
-                ovh.setMessage(message,Utils.convertTimeToString(date));
+                ovh.setMessage(message,Utils.convertTimeToStringm(date));
                 ovh.setImage(UserImagePath);
                 break;
             }
