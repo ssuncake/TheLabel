@@ -17,12 +17,14 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.OtherUserActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.SearchUserResultListAdapter;
 import team.nuga.thelabel.data.ClearEditText;
 import team.nuga.thelabel.data.NetworkResultUserSearch;
 import team.nuga.thelabel.data.SearchUser;
+import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.UserTextSearchRequest;
@@ -44,6 +46,7 @@ public class UserSearchFragment extends Fragment {
         // Required empty public constructor
     }
 SearchUser searchUser;
+    User mainUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ SearchUser searchUser;
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
         ButterKnife.bind(this, view);
         int color = Color.parseColor("#060928");
+        mainUser = (User)getArguments().getSerializable(MainActivity.MAINUSER);
         userListView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
         clearEditText = (ClearEditText) view.findViewById(R.id.CustomView_claerEditText_user);
         clearEditText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
@@ -61,6 +65,7 @@ SearchUser searchUser;
                 searchUser = user;
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
                 intent.putExtra("id", user.getOtherUserID());
+                intent.putExtra(MainActivity.MAINUSER,mainUser);
                 startActivity(intent);
             }
 
