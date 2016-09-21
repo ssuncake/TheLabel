@@ -60,14 +60,7 @@ SearchUser searchUser;
             public void onAdapterItemClick(View view, SearchUser user, int position) {
                 searchUser = user;
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
-                intent.putExtra("name", user.getSearchUserName());
-                intent.putExtra("genre", user.getSearchUserGenre());
-                intent.putExtra("imagePath",user.getSearchUserImage());
-                intent.putExtra("need",user.getSearchUserNeed());
-                intent.putExtra("user", searchUser);
-                intent.putExtra("position",user.getSearchUserPosition());
-                intent.putExtra("city",user.getSearchUserCity());
-                intent.putExtra("town",user.getSearchUserTown());
+                intent.putExtra("id", user.getOtherUserID());
                 startActivity(intent);
             }
 

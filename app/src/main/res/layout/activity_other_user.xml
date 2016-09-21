@@ -45,7 +45,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/frameLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:background="@color/color_white"
+                android:id="@+id/relativeLayout_OtherUserProfile"
                 android:layout_marginBottom="10dp">
                 <ImageView
                     android:layout_width="95dp"
@@ -192,15 +193,15 @@
                     android:layout_toEndOf="@+id/textView_otherUser_city" />
 
             </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView_otherUser"
+            android:layout_below="@+id/relativeLayout_OtherUserProfile"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
 
     </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerView_otherUser"
-        android:layout_below="@+id/relativeLayout5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -21,9 +21,21 @@ public class SearchUser implements Serializable {
     @SerializedName("town")
     private String searchUserTown;
     @SerializedName("need")
-    private String searchUserNeed;
+    private int searchUserNeed;
     @SerializedName("label_id")
     private int[] label_id;
+    @SerializedName("id")
+    private int otherUserID;
+
+
+    public int getOtherUserID() {
+        return otherUserID;
+    }
+
+    public void setOtherUserID(int otherUserID) {
+        this.otherUserID = otherUserID;
+    }
+
 
     public int[] getLabel_id() {
         return label_id;
@@ -80,11 +92,11 @@ public class SearchUser implements Serializable {
         this.searchUserTown = searchUserTown;
     }
 
-    public String getSearchUserNeed() {
+    public int getSearchUserNeed() {
         return searchUserNeed;
     }
 
-    public void setSearchUserNeed(String searchUserNeed) {
+    public void setSearchUserNeed(int searchUserNeed) {
         this.searchUserNeed = searchUserNeed;
     }
 }

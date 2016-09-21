@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.SearchUser;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.viewholder.AccountTypeMusicViewHolder;
 import team.nuga.thelabel.viewholder.AccountTypePictureViewHolder;
@@ -28,7 +29,7 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
 
     private ArrayList<Contents> mcontentslist = new ArrayList<>();
     User user;
-
+    SearchUser searchUser;
     public ArrayList<Contents> getMcontentslist() {
         return mcontentslist;
     }
