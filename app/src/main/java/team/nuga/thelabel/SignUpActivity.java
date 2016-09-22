@@ -13,12 +13,14 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,11 +162,12 @@ public class SignUpActivity extends AppCompatActivity {
     CheckBox checkBox_service;
 
     @OnCheckedChanged(R.id.checkBox_service)
-    public void onCheckBox_service(boolean checked) {
+    public void onCheckBox_service(CompoundButton view, boolean checked) {
+//        decorview.requestFocus();
         editText_email.clearFocus();
         editText_password.clearFocus();
         editText_passwordCheck.clearFocus();
-        decorview.requestFocus();
+        view.requestFocus();
     }
 
     @BindView(R.id.checkBox_personal)
@@ -192,14 +195,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         appFunction = new AppFunction(this);
         decorview = getWindow().getDecorView();
-
         setSupportActionBar(toolbar);
         if (null != actionBar) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle("이메일 입력 및 약관동의");
         }
+        toolbar.setTitle("이메일");
 
 
         editText_email.getFreezesText();
@@ -216,9 +219,38 @@ public class SignUpActivity extends AppCompatActivity {
         editText_email.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         editText_passwordCheck.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
+        scrollView_parent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                scrollView_service.getParent().requestDisallowInterceptTouchEvent(false);
+                scrollView_personal.getParent().requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+        scrollView_service.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        scrollView_personal.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
     }
 
+    @BindView(R.id.scrollView_signUp_parent)
+    ScrollView scrollView_parent;
+    @BindView(R.id.scrollView_signUp_service)
+    ScrollView scrollView_service;
+    @BindView(R.id.scrollView_signUp_personal)
+    ScrollView scrollView_personal;
 //    @Override
 //    public void onWindowFocusChanged(boolean hasFocus) {
 //if(hasFocus){
@@ -329,6 +361,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));

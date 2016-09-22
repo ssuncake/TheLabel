@@ -1,5 +1,6 @@
 package team.nuga.thelabel;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import team.nuga.thelabel.adapter.EntrustLeaderAdapter;
 import team.nuga.thelabel.data.Label;
@@ -90,5 +93,10 @@ public class EntrustLeaderActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

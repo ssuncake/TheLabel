@@ -15,7 +15,7 @@
 
     <ScrollView
         android:layout_marginTop="?android:attr/actionBarSize"
-        android:id="@+id/scrollView_signUp"
+        android:id="@+id/scrollView_signUp_parent"
         android:layout_width="match_parent"
         android:focusableInTouchMode="true"
         android:focusable="true"
@@ -49,6 +49,7 @@
 
                     <ScrollView
                         android:layout_width="match_parent"
+                        android:id="@+id/scrollView_signUp_personal"
                         android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/textView_personalInformation"
@@ -91,6 +92,7 @@
                     android:layout_alignParentStart="true">
 
                     <ScrollView
+                        android:id="@+id/scrollView_signUp_service"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fillViewport="false">

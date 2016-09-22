@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -681,4 +682,9 @@ public class SignUpEditActivity extends AppCompatActivity {
     public String[] Gwangju;
     @BindArray(R.array.제주도)
     public String[] Jeju;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }
