@@ -13,7 +13,6 @@ public class AppFunction {
     private long backKeyPressedTime = 0; //백버튼 누른시간
     private Toast toast;
     private Activity activity;
-
     public AppFunction(Activity context) {
         this.activity = context;
     }
@@ -35,6 +34,14 @@ public class AppFunction {
         toast.show();
     }
 
-
-
+//    private void setFont(){
+//        Typekit.getInstance()
+//                .addNormal(Typekit.createFromAsset(this, "NanumBarunGothic.ttf"))
+//                .addBold(Typekit.createFromAsset(this, "NanumBarunGothicBold.ttf"));
+//    }
+//
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+//    }
 }
