@@ -240,6 +240,7 @@ public class OtherLabelActivity extends AppCompatActivity {
                         Log.d("좋아요 개수", "" + c.getLikeCount());
                         contentsAdatper.add(c);
                     }
+                    PAGE++;
                     musicPlayer.setRefreshContentses(contentsAdatper.getMcontentslist());
 
                 }

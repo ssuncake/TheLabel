@@ -44,7 +44,7 @@ public class OtherUserActivity extends AppCompatActivity {
     ContentsMusicPlayer musicPlayer;
     boolean isLastItem;
     private static int PAGE; //페이지
-    private static String COUNT="10"; //카운트 수
+    private static int COUNT=10; //카운트 수
     int id;
     int[] labelID;
     User mainUser;
@@ -232,13 +232,13 @@ public class OtherUserActivity extends AppCompatActivity {
         otherUserContents.setLayoutManager(linearLayoutManager);
         otherUserContents.setHasFixedSize(true);
         otherUserContents.setAdapter(contentsAdatper);
-        addItem(""+PAGE,COUNT);
+        addItem(PAGE,COUNT);
         otherUserContents.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    addItem(""+PAGE,COUNT);
+                    addItem(PAGE,COUNT);
                 }
             }
 
@@ -264,8 +264,8 @@ public class OtherUserActivity extends AppCompatActivity {
 //        });
     }
 
-    public void addItem(String page, String count) {
-        OtherUserRequest otherUserRequest = new OtherUserRequest(this, id, 1, 10);
+    public void addItem(final int page, int count) {
+        OtherUserRequest otherUserRequest = new OtherUserRequest(this, id, page, count);
         NetworkManager.getInstance().getNetworkData(otherUserRequest, new NetworkManager.OnResultListener<NetworkResultOtherUser>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultOtherUser> request, NetworkResultOtherUser result) {
@@ -281,6 +281,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 for (Contents c : contentses) {
                     contentsAdatper.add(c);
                 }
+                PAGE ++;
             }
 
             @Override

@@ -270,7 +270,7 @@ SeekBar progressBar;
 
             @Override
             public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                Toast.makeText(TestLoginActivity.this, "로그인 실패 !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestLoginActivity.this, "로그인 실패 !+", Toast.LENGTH_SHORT).show();
                 Log.e("로그인 실패",errorMessage);
             }
         });
