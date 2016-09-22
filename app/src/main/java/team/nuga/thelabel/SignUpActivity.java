@@ -2,9 +2,12 @@ package team.nuga.thelabel;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +32,7 @@ import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.CheckEmailRequest;
 
 public class SignUpActivity extends AppCompatActivity {
+    AppFunction appFunction;
     //    @BindView(R.id.TextInput_signUp_password)
     TextInputLayout inputLayout_password;
     //    @BindView(R.id.TextInput_signUp_password_check)
@@ -50,30 +55,32 @@ public class SignUpActivity extends AppCompatActivity {
         if (validateEmail()) {
             onCheckEmail();
         }
-
     }
 
     private void onCheckEmail() {
         String email = editText_email.getText().toString();
-        CheckEmailRequest emailRequest = new CheckEmailRequest(this, email);
-        NetworkManager.getInstance().getNetworkData(emailRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
-            @Override
-            public void onSuccess(NetworkRequest<CheckEmailResult> request, CheckEmailResult result) {
-                if (result.getMatch() == 0) {
-                    Log.d("Match 값 ", "" + result.getMatch());
-                    Toast.makeText(SignUpActivity.this, "사용해도 좋아용", Toast.LENGTH_SHORT).show();
-                    isCheckedEmail = true;
-                } else if (result.getMatch() == 1) {
-                    Log.d("Match 값 ", "" + result.getMatch());
-                    Toast.makeText(SignUpActivity.this, "이미 가입하신거 같네용ㅋ", Toast.LENGTH_SHORT).show();
-                    isCheckedEmail = false;
+        if (isCheckedEmail == false) {
+            CheckEmailRequest emailRequest = new CheckEmailRequest(this, email);
+            NetworkManager.getInstance().getNetworkData(emailRequest, new NetworkManager.OnResultListener<CheckEmailResult>() {
+                @Override
+                public void onSuccess(NetworkRequest<CheckEmailResult> request, CheckEmailResult result) {
+                    if (result.getMatch() == 0) {
+                        Log.d("Match 값 ", "" + result.getMatch());
+                        Toast.makeText(SignUpActivity.this, "사용해도 좋아용", Toast.LENGTH_SHORT).show();
+                        isCheckedEmail = true;
+                    } else if (result.getMatch() == 1) {
+                        Log.d("Match 값 ", "" + result.getMatch());
+                        Toast.makeText(SignUpActivity.this, "이미 가입하신거 같네용ㅋ", Toast.LENGTH_SHORT).show();
+                        isCheckedEmail = false;
+                    }
                 }
-            }
 
-            @Override
-            public void onFail(NetworkRequest<CheckEmailResult> request, int errorCode, String errorMessage, Throwable e) {
-            }
-        });
+                @Override
+                public void onFail(NetworkRequest<CheckEmailResult> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(SignUpActivity.this, "네트워크 상태가 좋지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @BindView(R.id.button_nextStep_signUp)
@@ -83,39 +90,42 @@ public class SignUpActivity extends AppCompatActivity {
     boolean isSignUpSuccess = false;
 
     @OnClick(R.id.button_nextStep_signUp)                    //다음단계 버튼
-    public void onClcikNextStep() {
+    public void onClcikNextStep(View view) {
+        view.requestFocus();
         String email = editText_email.getText().toString();
         String password = editText_password.getText().toString();
+
         if (isCheckedEmail == false) {
             onCheckEmail();
         }
         onPasswordCheck();
-        if (serviceChecked && personalChecked && isCheckedEmail && isPasswordCheck == true) {
-            isSignUpSuccess = true;
-            Log.d(" 체크상태 ", " 서비스 약관 동의 :" + serviceChecked + ", 개인정보 수집 동의 :" + personalChecked + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
-        }
-//        if (serviceChecked || personalChecked == false) {
-//            Toast.makeText(SignUpActivity.this, "약관에 동의 해주뗴염", Toast.LENGTH_SHORT).show();
-//            isSignUpSuccess = false;
-//            Log.d(" 체크상태 ", " 서비스 약관 동의 :" + serviceChecked + ", 개인정보 수집 동의 :" + personalChecked + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
-//        } else if (isCheckedEmail == false) {
-//            if (validateEmail()) {
-//                onCheckEmail();
-//            }
-//            isSignUpSuccess = false;
-//            Log.d(" 체크상태 ", " 서비스 약관 동의 :" + serviceChecked + ", 개인정보 수집 동의 :" + personalChecked + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
-//        } else if (isPasswordCheck == false) {
-//            onPasswordCheck();
-//            isSignUpSuccess = false;
-//            Log.d(" 체크상태 ", " 서비스 약관 동의 :" + serviceChecked + ", 개인정보 수집 동의 :" + personalChecked + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
-//        }
-        if (isSignUpSuccess == true) {
+        if (checkBox_service.isChecked() && checkBox_personal.isChecked() && isCheckedEmail && isPasswordCheck == true) {
+            if (Debug.debugmode) {
+                Log.d(" 1 ", " 서비스 약관 동의 :" + checkBox_service.isChecked() + ", 개인정보 수집 동의 :" + checkBox_personal.isChecked() + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
+            }
             User signUp_user = new User();
             signUp_user.setUserEmail(email);
             signUp_user.setUserPassword(password);
             Intent intent = new Intent(this, SignUpEditActivity.class);
             intent.putExtra("signUpInfo", signUp_user);
             startActivity(intent);
+        } else if (checkBox_service.isChecked() == false || checkBox_personal.isChecked() == false) {
+            Toast.makeText(SignUpActivity.this, "약관에 동의 해주뗴염", Toast.LENGTH_SHORT).show();
+            isSignUpSuccess = false;
+            if (Debug.debugmode)
+                Log.d(" 2 ", " 서비스 약관 동의 :" + checkBox_service.isChecked() + ", 개인정보 수집 동의 :" + checkBox_personal.isChecked() + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
+        } else if (isCheckedEmail == false) {
+            if (validateEmail()) {
+                onCheckEmail();
+            }
+            isSignUpSuccess = false;
+            if (Debug.debugmode)
+                Log.d(" 3 ", " 서비스 약관 동의 :" + checkBox_service.isChecked() + ", 개인정보 수집 동의 :" + checkBox_personal.isChecked() + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
+        } else if (isPasswordCheck == false) {
+            onPasswordCheck();
+            isSignUpSuccess = false;
+            if (Debug.debugmode)
+                Log.d(" 4 ", " 서비스 약관 동의 :" + checkBox_service.isChecked() + ", 개인정보 수집 동의 :" + checkBox_personal.isChecked() + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);
         }
 
 
@@ -123,6 +133,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     boolean isPasswordCheck = false;
 
+    //패스워드 비교 처리
     private void onPasswordCheck() {
         String password = editText_password.getText().toString();
         String passwodCheck = editText_passwordCheck.getText().toString();
@@ -144,25 +155,31 @@ public class SignUpActivity extends AppCompatActivity {
     TextView agree_personal;
     @BindView(R.id.checkBox_service)
     CheckBox checkBox_service;
-    boolean serviceChecked;
-    boolean personalChecked;
 
     @OnCheckedChanged(R.id.checkBox_service)
     public void onCheckBox_service(boolean checked) {
-        serviceChecked = checkBox_service.isChecked();
+        editText_email.clearFocus();
+        editText_password.clearFocus();
+        editText_passwordCheck.clearFocus();
+        decorview.requestFocus();
     }
 
     @BindView(R.id.checkBox_personal)
     CheckBox checkBox_personal;
 
     @OnCheckedChanged(R.id.checkBox_personal)
-    public void onPersonalAgree(boolean checked) {
-        personalChecked = checkBox_personal.isChecked();
+    public void onPersonalAgree(CompoundButton view, boolean checked) {
+//        decorview.requestFocus();
+        editText_email.clearFocus();
+        editText_password.clearFocus();
+        editText_passwordCheck.clearFocus();
+        view.requestFocus();
     }
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
 
-//    ActionBar actionBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,17 +187,20 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
-//        setSupportActionBar(toolbar);
-//        if (null != actionBar) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setDisplayShowCustomEnabled(true);
-//            actionBar.setDisplayShowTitleEnabled(true);
-//            actionBar.setTitle("이메일 입력 및 약관동의");
-//        }
+        appFunction = new AppFunction(this);
+        decorview = getWindow().getDecorView();
+
+        setSupportActionBar(toolbar);
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle("이메일 입력 및 약관동의");
+        }
 
 
         editText_email.getFreezesText();
-
+        int color = Color.parseColor("#d0777777");
         checkBox_service.setButtonDrawable(R.drawable.oncheck_agreebutton);
         checkBox_personal.setButtonDrawable(R.drawable.oncheck_agreebutton);
         inputLayout_email = (TextInputLayout) findViewById(R.id.TextInput_signUp_email);
@@ -189,8 +209,27 @@ public class SignUpActivity extends AppCompatActivity {
         editText_email.addTextChangedListener(new MyTextWatcher(editText_email));
         editText_password.addTextChangedListener(new MyTextWatcher(editText_password));
         editText_passwordCheck.addTextChangedListener(new MyTextWatcher(editText_passwordCheck));
+        editText_password.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        editText_email.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        editText_passwordCheck.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+
     }
 
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//if(hasFocus){
+//    decorview.requestFocus();
+//}
+//    }
+
+    private View decorview;
+
+    @Override
+    public void onBackPressed() {
+        decorview.requestFocus();
+        appFunction.appFinished();
+    }
 
     private void submitForm() {
         if (!validatePasswordCheck()) {
@@ -267,6 +306,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if (view.getId() == R.id.TextInput_signUp_email) {
+                isCheckedEmail = false;
+            }
         }
 
         public void afterTextChanged(Editable editable) {
@@ -275,6 +317,7 @@ public class SignUpActivity extends AppCompatActivity {
                     validatePasswordCheck();
                     break;
                 case R.id.TextInput_signUp_email:
+                    isCheckedEmail = false;
                     validateEmail();
                     break;
                 case R.id.TextInput_signUp_password:

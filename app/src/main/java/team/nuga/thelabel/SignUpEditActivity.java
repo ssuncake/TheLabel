@@ -142,6 +142,7 @@ public class SignUpEditActivity extends AppCompatActivity {
                 if (result.getMatch() == AVAILABLE) {
                     Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
                     Toast.makeText(SignUpEditActivity.this, "사용해도 좋은 닉네임입니다♪", Toast.LENGTH_SHORT).show();
+                    editText_userNickName.clearFocus();
                 } else if (result.getMatch() == NOT_AVAILABLE) {
                     Log.d("MATCH 값 ", "" + result.getMatch() + "   //  0 = 중복 X  / 1 = 중복 O");
                     Toast.makeText(SignUpEditActivity.this, "닉네임이 이미 있어요!!!!!!!!!!!!!!!!!!!!!!!ㅋ", Toast.LENGTH_SHORT).show();

@@ -38,7 +38,7 @@
     <dimen name="line_widthSize">250dp</dimen>
 
     <dimen name="button_overlapCheck">23dp</dimen>                  <!--중복확인 버튼-->
-    <dimen name="TextSize_EditSignUp_subtitle">10dp
+    <dimen name="TextSize_EditSignUp_subtitle">15dp
     </dimen>         <!--성별, 시/도, 시/군/구, 지역, 포지션, 장르-->
     <dimen name="TextSize_EditSignUp_elementText">14dp
     </dimen>      <!--Spin.xml 텍스트 사이즈  //// 성별,지역....각 요소들 텍스트-->

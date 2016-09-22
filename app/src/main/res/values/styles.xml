@@ -15,7 +15,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.mytheme" parent="Theme.AppCompat">
+    <style name="AppTheme.myTheme">
         <item name="android:textColorPrimary">@color/color_white</item> <!-- 타이틀바 색상 -->
         <item name="textColorError">@color/design_textinput_error_color_light</item>
         <item name="colorPrimary">@color/colorPrimary</item>

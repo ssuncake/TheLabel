@@ -89,6 +89,7 @@ public class LabelSearchFragment extends Fragment {
         searchText = clearEditText.getText().toString();
         LabelTextSelectRequest labelTextSelectRequest = new LabelTextSelectRequest(getContext(),1,10,searchText,"");
         NetworkManager.getInstance().getNetworkData(labelTextSelectRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
+
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
                 if(result.isError()){
@@ -97,7 +98,7 @@ public class LabelSearchFragment extends Fragment {
                 }else{
                     SearchLabel[] label = result.getLabel();
                     for (SearchLabel l : label) {
-                        labeladapter.add(l);
+                                          labeladapter.add(l);
                     }
                 }
             }
