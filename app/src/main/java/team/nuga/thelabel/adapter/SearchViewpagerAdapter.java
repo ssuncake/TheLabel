@@ -34,6 +34,9 @@ public class SearchViewpagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0:
                 UserSearchFragment tab1 = new UserSearchFragment();
+                bundle = new Bundle();
+                bundle.putSerializable(MainActivity.MAINUSER,user);
+                tab1.setArguments(bundle);
                 return tab1;
             case 1:
                 LabelSearchFragment tab2 = new LabelSearchFragment();

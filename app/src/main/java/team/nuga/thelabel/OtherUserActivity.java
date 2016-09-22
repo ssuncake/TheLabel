@@ -25,6 +25,8 @@ import team.nuga.thelabel.data.Contents;
 import team.nuga.thelabel.data.NetworkResultOtherUser;
 import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.SearchUser;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.OtherUserRequest;
@@ -43,6 +45,8 @@ public class OtherUserActivity extends AppCompatActivity {
     private static String COUNT="10"; //카운트 수
     int id;
     int[] labelID;
+    User mainUser;
+    User otherUser = new User();
 
     @BindView(R.id.textView_profile_otherUserName)
     TextView otherUserName;
@@ -65,8 +69,10 @@ public class OtherUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.imageView_message)
     public void Message() {
+        DBManager.getInstance().addMessage(mainUser,otherUser,100,"dd");
         Intent intent = new Intent(OtherUserActivity.this, MessageActivity.class);
-        intent.putExtra("otheruser", searchUser.getOtherUserID());
+        intent.putExtra(MessageActivity.USER, otherUser);
+        intent.putExtra(MainActivity.MAINUSER,mainUser);
         startActivity(intent);
     }
 
@@ -79,6 +85,7 @@ public class OtherUserActivity extends AppCompatActivity {
         PAGE =1;
         mainProgressView = new SeekBar(this);
         musicPlayer = new ContentsMusicPlayer(this,contentsAdatper.getMcontentslist(),mainProgressView);
+        mainUser = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_otheruser);
         setSupportActionBar(toolbar);
@@ -114,7 +121,13 @@ public class OtherUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 labelID = searchUser.getLabel_id();
-                 final CharSequence item[] = {""+labelID[0],""+labelID[1],""+labelID[2]};
+                CharSequence item[] = new CharSequence[labelID.length];
+
+                if(labelID!=null){
+                   for(int i=0; i<labelID.length; i++){
+                       item[i] = labelID[i]+"";
+                   }
+                }
                 new AlertDialog.Builder(OtherUserActivity.this)
                         .setItems(item, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
@@ -256,8 +269,12 @@ public class OtherUserActivity extends AppCompatActivity {
             public void onSuccess(NetworkRequest<NetworkResultOtherUser> request, NetworkResultOtherUser result) {
                 contentses = result.getPost();
                 searchUser = result.getUser();
+
                 if(searchUser != null){
                     setSearchOtherUser();
+                    otherUser.setUserName(searchUser.getSearchUserName());
+                    otherUser.setImageUrl(searchUser.getSearchUserImage());
+                    otherUser.setUserID(searchUser.getOtherUserID());
                 }
                 for (Contents c : contentses) {
                     contentsAdatper.add(c);
