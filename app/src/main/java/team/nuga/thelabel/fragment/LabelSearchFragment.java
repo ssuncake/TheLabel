@@ -87,27 +87,30 @@ public class LabelSearchFragment extends Fragment {
     public void labelSearchButton(){
         labeladapter.removeAllItem();
         searchText = clearEditText.getText().toString();
-        LabelTextSelectRequest labelTextSelectRequest = new LabelTextSelectRequest(getContext(),1,10,searchText,"");
-        NetworkManager.getInstance().getNetworkData(labelTextSelectRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
-
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
-                if(result.isError()){
-                    Log.e(LOGTAG,result.getError().getMessage());
-                    Toast.makeText(getActivity(), result.getError().getMessage(), Toast.LENGTH_SHORT).show();
-                }else{
-                    SearchLabel[] label = result.getLabel();
-                    for (SearchLabel l : label) {
-                                          labeladapter.add(l);
+        if(searchText.trim().isEmpty()){
+            Toast.makeText(getContext(), "레이블 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
+        }else {
+            LabelTextSelectRequest labelTextSelectRequest = new LabelTextSelectRequest(getContext(), 1, 10, searchText, "");
+            NetworkManager.getInstance().getNetworkData(labelTextSelectRequest, new NetworkManager.OnResultListener<NetworkResultLabelSearch>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResultLabelSearch> request, NetworkResultLabelSearch result) {
+                    if (result.isError()) {
+                        Log.e(LOGTAG, result.getError().getMessage());
+                        Toast.makeText(getActivity(), result.getError().getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        SearchLabel[] label = result.getLabel();
+                        for (SearchLabel l : label) {
+                            labeladapter.add(l);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFail(NetworkRequest<NetworkResultLabelSearch> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(LOGTAG,"네트워크 실패 = " +errorMessage);
-            }
+                @Override
+                public void onFail(NetworkRequest<NetworkResultLabelSearch> request, int errorCode, String errorMessage, Throwable e) {
+                    Log.e(LOGTAG, "네트워크 실패 = " + errorMessage);
+                }
 
-        });
+            });
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,26 +85,31 @@ SearchUser searchUser;
     @OnClick(R.id.imageButton_user_search)
     public void userSearchButton() {
         searchText = clearEditText.getText().toString();
-        UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), pageCount, 10, searchText, "");
-        NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
-                SearchUser[] user = result.getUser();
-                int sum = 0;
+        if(searchText.trim().isEmpty()){
+            Toast.makeText(getContext(), "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show();
+        }else {
+
+            UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), pageCount, 10, searchText, "");
+            NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResultUserSearch> request, NetworkResultUserSearch result) {
+                    SearchUser[] user = result.getUser();
+                    int sum = 0;
 //                if(pageCount==1)
-                for (SearchUser u : user) {
-                    useradapter.add(u);
-                    sum++;
+                    for (SearchUser u : user) {
+                        useradapter.add(u);
+                        sum++;
+                    }
+                    sumsum += sum;
+                    textView.setText(+sumsum + "건");
                 }
-                sumsum+=sum;
-                textView.setText(+sumsum+"건");
-            }
 
-            @Override
-            public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
+                @Override
+                public void onFail(NetworkRequest<NetworkResultUserSearch> request, int errorCode, String errorMessage, Throwable e) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
 }

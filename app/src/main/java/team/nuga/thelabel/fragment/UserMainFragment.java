@@ -18,15 +18,18 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.ContentsMusicPlayer;
+import team.nuga.thelabel.Debug;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
+import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.NetworkResultMyAccount;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
 import team.nuga.thelabel.request.ContentsRequest;
+import team.nuga.thelabel.request.ProfileGetRequest;
 import team.nuga.thelabel.youtube.DeveloperKey;
 
 
@@ -44,17 +47,14 @@ public class UserMainFragment extends Fragment {
 
     boolean isLastItem;
     private static int PAGE; //페이지
-    private static int COUNT=10; //카운트 수
+    private static int COUNT = 10; //카운트 수
     ContentsMusicPlayer musicPlayer;
     @BindView(R.id.recyclerview_user_main)
     RecyclerView contentsRecycerView;
 
-    SeekBar mainProgressView ;
+    SeekBar mainProgressView;
 
     Contents[] contentses;
-
-
-
 
 
     public UserMainFragment() {
@@ -68,21 +68,40 @@ public class UserMainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_user_main, container, false);
         ButterKnife.bind(this, view);
-        PAGE =1;
+        PAGE = 1;
         mainProgressView = new SeekBar(getActivity());
         contentsAdatper = new ContentsAdatper();
-        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
+        musicPlayer = new ContentsMusicPlayer(getActivity(), contentsAdatper.getMcontentslist(), mainProgressView);
 
-        user = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+        user = (User) getArguments().getSerializable(MainActivity.MAINUSER);
         contentsAdatper.setUser(user);
-
 
 
         contentsAdatper.setOnSettingImageClickListener(new ContentsAdatper.OnSettingItemClickListener() {
             @Override
             public void onSettingItemClick(View view, int position) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.goProfileSetting();
+
+                ProfileGetRequest request = new ProfileGetRequest(getContext());
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                        User profile_getUser;
+                        profile_getUser = result.getUser();
+                        Bundle b = new Bundle();
+                        b.putSerializable(MainActivity.PROFILEUSER, profile_getUser);
+                        ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
+                        profileSettingFragment.setArguments(b);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                        if (Debug.debugmode)
+                            Toast.makeText(getContext(), "네트워크 연결 실패", Toast.LENGTH_SHORT).show();
+//                    b.putSerializable(MainActivity.MAINUSER, mainUser);
+                    }
+                });
             }
         });
 
@@ -120,14 +139,15 @@ public class UserMainFragment extends Fragment {
         contentsAdatper.setOnProgressBarChangeListener(new ContentsAdatper.onProgressBarChangeListener() {
             @Override
             public void progressBarChange(Contents contents, int progress, int position) {
-              if(contents.getContentsID() == musicPlayer.getPlayedContentsId()) {
-                  mainProgressView.setProgress(progress);
-                  musicPlayer.setMusicProgress(progress);
-              }else{
-                  contents.setPlayedTIme(progress);
-              }
+                if (contents.getContentsID() == musicPlayer.getPlayedContentsId()) {
+                    mainProgressView.setProgress(progress);
+                    musicPlayer.setMusicProgress(progress);
+                } else {
+                    contents.setPlayedTIme(progress);
+                }
 
             }
+
             @Override
             public void isSeeking(boolean seeking) {
                 musicPlayer.setSeeking(seeking);
@@ -137,17 +157,17 @@ public class UserMainFragment extends Fragment {
 
         //무한 자료불러오기부분
 
-       final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         contentsRecycerView.setLayoutManager(linearLayoutManager);
         contentsRecycerView.setHasFixedSize(true);
         contentsRecycerView.setAdapter(contentsAdatper);
-        addItem(PAGE,COUNT);
+        addItem(PAGE, COUNT);
         contentsRecycerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    addItem(PAGE,COUNT);
+                    addItem(PAGE, COUNT);
                 }
             }
 
@@ -156,10 +176,10 @@ public class UserMainFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 int totalItemCount = linearLayoutManager.getItemCount();
                 int lastVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                if(totalItemCount>0 && lastVisibleItemPosition !=RecyclerView.NO_POSITION &&(totalItemCount-1<=lastVisibleItemPosition)){
-                    isLastItem =true;
-                }else {
-                    isLastItem =false;
+                if (totalItemCount > 0 && lastVisibleItemPosition != RecyclerView.NO_POSITION && (totalItemCount - 1 <= lastVisibleItemPosition)) {
+                    isLastItem = true;
+                } else {
+                    isLastItem = false;
                 }
             }
         });
@@ -179,7 +199,7 @@ public class UserMainFragment extends Fragment {
                 for (Contents c : contentses) {
                     contentsAdatper.add(c);
                 }
-                PAGE +=1;
+                PAGE += 1;
 
                 musicPlayer.setRefreshContentses(contentsAdatper.getMcontentslist());
             }
@@ -197,15 +217,15 @@ public class UserMainFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser){
-            if(checkresume){
+        if (isVisibleToUser) {
+            if (checkresume) {
                 // 다시보이면 할일
             }
-        }else{
-            if(musicPlayer != null){
+        } else {
+            if (musicPlayer != null) {
                 musicPlayer.allReset(); // 보이지않을경우 리셋
             }
-            checkresume=false;
+            checkresume = false;
         }
     }
 

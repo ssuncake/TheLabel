@@ -80,7 +80,7 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
                         .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                contentsRemoveListener.contentsRemove(contents,getAdapterPosition());
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -302,5 +302,15 @@ public class AccountTypeMusicViewHolder extends ParentContentsViewHolder impleme
 
     public void setMoveSeekBar(onMoveSeekBar moveSeekBar) {
         this.moveSeekBar = moveSeekBar;
+    }
+
+    public interface onContentsRemoveListener{
+        public void contentsRemove(Contents contents, int position);
+    }
+
+    public onContentsRemoveListener contentsRemoveListener;
+
+    public void setContentsRemoveListener(onContentsRemoveListener contentsRemoveListener) {
+        this.contentsRemoveListener = contentsRemoveListener;
     }
 }

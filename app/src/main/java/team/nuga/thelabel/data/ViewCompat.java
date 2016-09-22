@@ -19,8 +19,6 @@ public class ViewCompat extends Animation {
 
 
     private final View mView;
-
-
     private float mTranslationY;
 
 
@@ -35,7 +33,6 @@ public class ViewCompat extends Animation {
     public void setTranslationY(float translationY) {
         mTranslationY = translationY;
     }
-
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation t) {

@@ -70,6 +70,19 @@ public class ContentsAdatper extends RecyclerView.Adapter<ParentContentsViewHold
                 ViewGroup viewOne = (ViewGroup) layoutInflater.inflate(R.layout.cardview_contents_type_music, parent, false);
                 AccountTypeMusicViewHolder accounttypeOne = new AccountTypeMusicViewHolder(viewOne);
                 accounttypeOne.setOnMusicContentsItemClickListener(this);
+                accounttypeOne.setContentsRemoveListener(new AccountTypeMusicViewHolder.onContentsRemoveListener() {
+                    @Override
+                    public void contentsRemove(Contents contents, int position) {
+                        if(user == null){
+                            mcontentslist.remove(position);
+                            notifyDataSetChanged();
+//                            Log.e("컨테츠 아이템 삭제",""+position, c)
+
+                        }else {
+                            mcontentslist.remove(position-1);
+                        }
+                    }
+                });
                 accounttypeOne.setMoveSeekBar(this);
                 return accounttypeOne;
             case Contents.PICTURE:

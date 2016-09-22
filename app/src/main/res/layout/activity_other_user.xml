@@ -7,7 +7,7 @@
     android:background="@color/BLUE_GREY_50"
     tools:context="team.nuga.thelabel.OtherUserActivity">
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frameLayout_otherUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -45,8 +45,9 @@
 
     <team.nuga.thelabel.data.ParallaxScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
+        android:layout_below="@+id/frameLayout_otherUser"
         app:backgroundView="@+id/relativeLayout_OtherUserProfile"
         app:scrollFactor="0.6"
         android:id="@+id/scrollView" >
@@ -209,9 +210,6 @@
                 android:layout_below="@+id/relativeLayout_OtherUserProfile"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-
-
         </RelativeLayout>
     </team.nuga.thelabel.data.ParallaxScrollView>
-
 </RelativeLayout>
