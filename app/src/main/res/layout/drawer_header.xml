@@ -2,89 +2,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     app:theme="@style/AppTheme.myTheme">
     <!--android:background="@drawable/gradation"-->
-
     <RelativeLayout
-        android:id="@+id/relativeLayout6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-
-        <TextView
-            android:id="@+id/textView_MainHeader_Name"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <RelativeLayout
+            android:id="@+id/relativeLayout6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="워니몬"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/color_white" />
-
-        <TextView
-            android:id="@+id/textView_MainHeaderEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_MainHeader_Name"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="@dimen/activity_horizontal_margin"
-            android:text="email"
-            android:textColor="@color/color_white" />
-
-        <TextView
-            android:id="@+id/textView_MainHeader_Genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_MainHeaderEmail"
-            android:textSize="10dp"
-            android:text="#보컬"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/designColor" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/relativeLayout6"
-        android:layout_toStartOf="@+id/relativeLayout6">
-
-        <ImageView
-            android:id="@+id/imageView_MainHeader_Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp">
+            <TextView
+                android:id="@+id/textView_MainHeader_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="워니몬"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/color_white" />
+            <TextView
+                android:id="@+id/textView_MainHeaderEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_MainHeader_Name"
+                android:layout_centerVertical="true"
+                android:text="email"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/activity_horizontal_margin" />
+            <TextView
+                android:id="@+id/textView_MainHeader_Genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_MainHeaderEmail"
+                android:text="#보컬"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/designColor"
+                android:textSize="10dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativeLayout5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:src="@drawable/img_user" />
-
-        <TextView
-            android:id="@+id/imageView_MainHeader_Ganre"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/genre_height"
-            android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/round_circle_headergenre"
-            android:gravity="center"
-            android:paddingLeft="@dimen/nav_header_genre_sidePadding"
-            android:paddingRight="@dimen/nav_header_genre_sidePadding"
-            android:textSize="@dimen/nav_header_genre"
-            android:text="장르"
-            android:textColor="@color/designColor"
-            android:textStyle="bold"
-            android:layout_alignBottom="@+id/imageView_MainHeader_Profile"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_toLeftOf="@+id/relativeLayout6"
+            android:layout_toStartOf="@+id/relativeLayout6">
+            <ImageView
+                android:id="@+id/imageView_MainHeader_Profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/img_user" />
+            <TextView
+                android:id="@+id/textView_MainHeader_position"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/genre_height"
+                android:layout_alignBottom="@+id/imageView_MainHeader_Profile"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@drawable/round_circle_headergenre"
+                android:gravity="center"
+                android:paddingLeft="@dimen/nav_header_genre_sidePadding"
+                android:paddingRight="@dimen/nav_header_genre_sidePadding"
+                android:text="장르"
+                android:textColor="@color/designColor"
+                android:textSize="@dimen/nav_header_genre"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </RelativeLayout>
 
 

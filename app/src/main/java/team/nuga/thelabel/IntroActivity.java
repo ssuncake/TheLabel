@@ -160,7 +160,7 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
-    private void moveLoginActivity() { //테스트로그인으로,
+    public void moveLoginActivity() { //테스트로그인으로,
         if (Debug.debugmode) {
             Intent i = new Intent(IntroActivity.this, TestLoginActivity.class);
             startActivity(i);

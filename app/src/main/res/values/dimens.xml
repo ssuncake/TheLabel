@@ -15,7 +15,7 @@
     <dimen name="nav_header_position_city">10dp</dimen>
     <dimen name="nav_header_genre">13dp</dimen>
     <dimen name="nav_header_profile_image_size">70dp</dimen>
-    <dimen name="nav_header_genre_sidePadding">15dp</dimen>
+    <dimen name="nav_header_genre_sidePadding">5dp</dimen>
 
     <!--카드뷰 속성 값들-->
     <dimen name="cardView_margin">10dp</dimen>                      <!-- 카드뷰와 카드뷰 사이의 마진값 -->

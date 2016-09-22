@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,8 +38,11 @@ import team.nuga.thelabel.fragment.MessageListFragment;
 import team.nuga.thelabel.fragment.ProfileSettingFragment;
 import team.nuga.thelabel.fragment.SettingFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
+import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
+import team.nuga.thelabel.request.LoginRequest;
 import team.nuga.thelabel.request.ProfileGetRequest;
 
 public class MainActivity extends AppCompatActivity
@@ -85,6 +89,31 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(mainUser==null){
+            String email = PropertyManager.getInstance().getEmail();
+            if (!TextUtils.isEmpty(email)) {
+                String password = PropertyManager.getInstance().getPassword();
+                String regid = PropertyManager.getInstance().getRegistrationId();
+                Log.e("로그인관련","레지아이디 "+regid);
+                LoginRequest request = new LoginRequest(this, email, password, regid);
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                        User getLoginUser = result.getUser();
+                        DBManager.getInstance().setMainUser(getLoginUser);
+
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    finish();
+
+                    }
+                });
+            }
+        }
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         appFunction = new AppFunction(this);
@@ -125,7 +154,11 @@ public class MainActivity extends AppCompatActivity
         // 헤더뷰 관련 설정
         String[] citylist = getResources().getStringArray(R.array.cityList);
         String[] genrelist = getResources().getStringArray(R.array.genrelist);
+        String[] positionlist = getResources().getStringArray(R.array.positionlist);
+
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
+        TextView position = (TextView) headerView.findViewById(R.id.textView_MainHeader_position);
+        position.setText(positionlist[mainUser.getPostition()-1]);
         headerUserName = (TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
         TextView headerUserEmail = (TextView) headerView.findViewById(R.id.textView_MainHeaderEmail);
         headerUserEmail.setText(mainUser.getUserEmail());
@@ -138,8 +171,7 @@ public class MainActivity extends AppCompatActivity
                 .transform(new RoundImageTransform(this))
                 .into(headerUserProfile);
     }
-    //    boolean backButtonClicked = false;
-//    Handler mHandler = new Handler(Looper.getMainLooper());
+
     public static int currentViewPage = 0;
     int appFinCount = 0;
 

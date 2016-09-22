@@ -15,26 +15,25 @@
             android:id="@+id/mainactivity_toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:minHeight="?attr/actionBarSize"
             android:background="@color/maintitle_blue"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
         <FrameLayout
             android:id="@+id/drawer_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_gray_2" />
-
     </LinearLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/drawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#03030F"
         android:fitsSystemWindows="true"
         app:itemIconTint="@color/color_white"
-        app:theme="@style/AppTheme.myTheme"
-        app:itemTextColor="@color/color_white"
-        android:foregroundTint="@color/color_white"
-        android:background="#03030F"
-        app:menu="@menu/drawer_menu"/>
+        app:menu="@menu/drawer_menu"
+        app:theme="@style/AppTheme.myTheme" />
 </android.support.v4.widget.DrawerLayout>

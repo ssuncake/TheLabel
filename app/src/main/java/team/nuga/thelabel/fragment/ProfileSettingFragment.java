@@ -100,34 +100,58 @@ public class ProfileSettingFragment extends Fragment {
     @OnClick(R.id.imageButton_profileSet)
     public void ClickComplete() //수정완료버튼
     {
-
-        if (Debug.debugmode)
-            Log.i("profile Info", "---------------------------------------------------");
-        if (Debug.debugmode)
-            Log.i(" 유저 정보1 ", " 닉네임 : " + nickname + ", 사용자 ID" + user.getUserID());
-        if (Debug.debugmode) Log.i(" 유저 정보2 ", " 자기소개 :" + textInputEditText_introText.getText());
-        String text = textInputEditText_introText.getText().toString();
+        nickname = editText_userNickName.getText().toString();
+        if (nickname.trim().isEmpty()) {
+            Toast.makeText(getContext(), "새 닉네임을 입력해주세욥", Toast.LENGTH_SHORT).show();
+        }else if(nickname == user.getUserName()){
+            String text = textInputEditText_introText.getText().toString();
+            ProfileSetRequest request = new ProfileSetRequest("", positionId, genreId, text,
+                    cityId, townId, imagefile, need);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                    Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
+                    mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
+                }
+                @Override
+                public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    if (Debug.debugmode) Log.e("Profile Setting Fail ", errorMessage + errorCode);
+                }
+            });
+    } else {
+            if (Debug.debugmode)
+                Log.i("profile Info", "---------------------------------------------------");
+            if (Debug.debugmode)
+                Log.i(" 유저 정보1 ", " 닉네임 : " + nickname + ", 사용자 ID" + user.getUserID());
+            if (Debug.debugmode)
+                Log.i(" 유저 정보2 ", " 자기소개 :" + textInputEditText_introText.getText());
+            String text = textInputEditText_introText.getText().toString();
 //        if (Debug.debugmode) Log.i(" 유저 정보3 ", " 이미지Url:" + imagefile.toString());
-        if (Debug.debugmode)
-            Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId +
-                    ", 시군구:" + townId + ", Need :" + need);
-        ProfileSetRequest request = new ProfileSetRequest(nickname, positionId, genreId, text,
-                cityId, townId, imagefile, need);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
-                Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
-                mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
-            }
-            @Override
-            public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
-                Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
-                if (Debug.debugmode) Log.e("Profile Setting Fail ", errorMessage + errorCode);
-            }
-        });
+            if (Debug.debugmode)
+                Log.i(" 유저 정보4 ", ", 포지션:" + positionId + ", 장르:" + genreId + ", 시/도 :" + cityId +
+                        ", 시군구:" + townId + ", Need :" + need);
+            ProfileSetRequest request = new ProfileSetRequest(nickname, positionId, genreId, text,
+                    cityId, townId, imagefile, need);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult>() {
+                @Override
+                public void onSuccess(NetworkRequest<NetworkResult> request, NetworkResult result) {
+                    Toast.makeText(getContext(), "설정완료", Toast.LENGTH_SHORT).show();
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.drawerUserSetting(nickname); //드로워 유저 세팅 변경
+                    mainActivity.goMainFragment(MainFragment.USERTAB); //메인 이동.
+                }
+
+                @Override
+                public void onFail(NetworkRequest<NetworkResult> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(getContext(), "데이터를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    if (Debug.debugmode) Log.e("Profile Setting Fail ", errorMessage + errorCode);
+                }
+            });
 ////        String inputUserName= inputName.getText().toString();
+        }
     }
 
     @BindView(R.id.radioGroup_ProfileSetting_need)
@@ -508,13 +532,14 @@ public class ProfileSettingFragment extends Fragment {
                 }
             });
         }
-        if (isFirstSet==true){
+        if (isFirstSet == true) {
             spinner_town.setSelection(current_townId);
         }
-        isFirstSet=false;
+        isFirstSet = false;
 
     }
-    boolean isFirstSet=true;
+
+    boolean isFirstSet = true;
 
 
     static final int AVAILABLE = 0;
@@ -631,29 +656,32 @@ public class ProfileSettingFragment extends Fragment {
         spinner_position.setSelection(user.getPostition() - 1);
         spinner_genre.setSelection(user.getGenre() - 1);
         spinner_city.setSelection(user.getCity() - 1);
-        if(user.getTown()>1)townSetting();
+        if (user.getTown() > 1) townSetting();
         spinner_town.setSelection(current_townId);
     }
-    int current_townId =0;
-    public void townSetting(){
-        String[][] town = new String[][] {Town_Default,Seoul, Gyeonggi, Gangwon, Incheon,
+
+    int current_townId = 0;
+
+    public void townSetting() {
+        String[][] town = new String[][]{Town_Default, Seoul, Gyeonggi, Gangwon, Incheon,
                 ChungBook, ChungNam, Sejong, DaeJeon, GyongBook,
                 GyonNam, DaeGu, Busan, Ulsan, JeonBook,
                 JeonNam, Gwangju, Jeju
         };
         int sum = 1;
-        int townSum =1;
+        int townSum = 1;
 
         int userTownId = user.getTown();
-        for(int i = 1; i<town.length;i++){
-            townSum += town[i-1].length;
-            townSum -=1;
-            for(int j=0; j<town[i].length;j++){
-                if(j!=0){
+        for (int i = 1; i < town.length; i++) {
+            townSum += town[i - 1].length;
+            townSum -= 1;
+            for (int j = 0; j < town[i].length; j++) {
+                if (j != 0) {
                     sum++;
-                    current_townId = sum-townSum;
-                    if(Debug.debugmode)Log.i("town ","sum :"+sum+", townSum :"+townSum+", 현재 타운 값"+ current_townId);
-                    if(userTownId-sum == 0){
+                    current_townId = sum - townSum;
+                    if (Debug.debugmode)
+                        Log.i("town ", "sum :" + sum + ", townSum :" + townSum + ", 현재 타운 값" + current_townId);
+                    if (userTownId - sum == 0) {
 
                     }
                 }
@@ -732,7 +760,7 @@ public class ProfileSettingFragment extends Fragment {
         public void afterTextChanged(Editable editable) {
             if (editable.length() > 8) {
                 editText_userNickName.setText(before);
-                editText_userNickName.setSelection(textInputEditText_introText.length()+1);
+                editText_userNickName.setSelection(textInputEditText_introText.length() + 1);
                 editText_userNickName.setError("2~8자로 입력해주세요");
             } else if (editable.length() < 2) {
                 editText_userNickName.setError("2~8자로 입력해주세요");
@@ -787,23 +815,23 @@ public class ProfileSettingFragment extends Fragment {
     @BindArray(R.array.경기도)
     public String[] Gyeonggi;
     @BindArray(R.array.강원도)
-    public String[] Gangwon ;
+    public String[] Gangwon;
     @BindArray(R.array.인천광역시)
-    public String[] Incheon ;
+    public String[] Incheon;
     @BindArray(R.array.충청북도)
-    public String[] ChungBook ;
+    public String[] ChungBook;
     @BindArray(R.array.충청남도)
     public String[] ChungNam;
     @BindArray(R.array.세종시)
-    public String[] Sejong ;
+    public String[] Sejong;
     @BindArray(R.array.대전광역시)
-    public String[] DaeJeon ;
+    public String[] DaeJeon;
     @BindArray(R.array.경상북도)
-    public String[] GyongBook ;
+    public String[] GyongBook;
     @BindArray(R.array.경상남도)
     public String[] GyonNam;
     @BindArray(R.array.대구광역시)
-    public String[] DaeGu ;
+    public String[] DaeGu;
     @BindArray(R.array.부산광역시)
     public String[] Busan;
     @BindArray(R.array.울산광역시)
@@ -811,7 +839,7 @@ public class ProfileSettingFragment extends Fragment {
     @BindArray(R.array.전라북도)
     public String[] JeonBook;
     @BindArray(R.array.전라남도)
-    public String[] JeonNam ;
+    public String[] JeonNam;
     @BindArray(R.array.광주광역시)
     public String[] Gwangju;
     @BindArray(R.array.제주도)

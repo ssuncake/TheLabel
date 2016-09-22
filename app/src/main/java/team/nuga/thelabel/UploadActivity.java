@@ -206,7 +206,6 @@ public class UploadActivity extends AppCompatActivity {
 
 
         // 사용자 프로필 설정
-
         String imagePath = user.getImageUrl();
         if(imagePath != null){
             Glide.with(this)

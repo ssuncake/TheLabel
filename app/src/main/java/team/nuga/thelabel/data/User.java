@@ -56,8 +56,6 @@ public class User implements Serializable {
     public String getUserPassword() {
         return userPassword;
     }
-
-
     private Label[] userInLabelList;
 
 
