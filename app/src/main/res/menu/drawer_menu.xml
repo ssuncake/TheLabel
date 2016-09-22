@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <group android:checkableBehavior="none">
-            <item
-                android:id="@+id/drawer_main"
-                android:icon="@drawable/btn_home_off"
-                android:title="메인으로가기" />
-            <item
-                android:id="@+id/drawer_upload"
-                android:icon="@drawable/drawer_icn_upload"
-                android:title="업로드" />
-        </group>
-        <group android:checkableBehavior="single">
-            <item android:title="마이페이지">
-                <menu>
-                    <item
-                        android:id="@+id/drawer_profile"
-                        android:icon="@drawable/drawer_icn_profile"
-                        android:title="프로필설정" />
-                    <item
-                        android:id="@+id/drawer_message"
-                        android:icon="@drawable/drawer_icn_message"
-                        android:title="메세지" />
-                    <item
-                        android:id="@+id/drawer_likeContents"
-                        android:icon="@drawable/drawer_icn_like"
-                        android:title="내가좋아요 한 게시글" />
-                </menu>
-            </item>
-        </group>
-        <group android:checkableBehavior="single">
-            <item
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_main"
+            android:icon="@drawable/btn_home_off"
+            android:title="메인으로가기" />
+        <item
+            android:id="@+id/drawer_upload"
+            android:icon="@drawable/drawer_icn_upload"
+            android:title="업로드" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="마이페이지"
+            >
+            <menu>
+                <item
+                    android:id="@+id/drawer_profile"
+                    android:icon="@drawable/drawer_icn_profile"
+                    android:title="프로필설정" />
+                <item
+                    android:id="@+id/drawer_message"
+                    android:icon="@drawable/drawer_icn_message"
+                    android:title="메세지" />
+                <!--<item-->
+                    <!--android:id="@+id/drawer_likeContents"-->
+                    <!--android:icon="@drawable/drawer_icn_like"-->
+                    <!--android:title="내가좋아요 한 게시글" />-->
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
 
                 android:icon="@drawable/drawer_icn_setting"
                 android:title="설정">

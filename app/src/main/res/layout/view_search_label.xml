@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:background="@drawable/border">
+    android:background="@drawable/border"
+    android:padding="5dp">
     <ImageView
         android:id="@+id/image_search_labelimage"
         android:src="@drawable/img_label_search"
@@ -17,19 +18,18 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:id="@+id/textView_search_labelName"
-        android:layout_alignTop="@+id/image_search_labelimage"
-        android:layout_toRightOf="@+id/image_search_labelimage"
-        android:layout_toEndOf="@+id/image_search_labelimage"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="30dp"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textView_search_label_genre"
+        android:layout_alignStart="@+id/textView_search_label_genre"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
+        android:minWidth="40dp"
         android:layout_height="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="보컬"
@@ -41,7 +41,10 @@
         android:id="@+id/textView_search_label_genre"
         android:layout_marginLeft="130dp"
         android:layout_below="@+id/textView_search_labelName"
-       />
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp" />
 
     <ImageView
         android:layout_width="20dp"

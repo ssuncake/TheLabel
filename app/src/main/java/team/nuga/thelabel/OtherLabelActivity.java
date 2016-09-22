@@ -46,7 +46,7 @@ public class OtherLabelActivity extends AppCompatActivity {
 
     boolean isLastItem;
     private static int PAGE; //페이지
-    private static int COUNT=10; //카운트 수
+    private static int COUNT = 10; //카운트 수
     ContentsMusicPlayer musicPlayer;
     SeekBar mainProgressView;
     int labelId;
@@ -58,17 +58,18 @@ public class OtherLabelActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView_OtherLabelMain_Contetns)
     RecyclerView contentsRecycler;
 
+
     @OnClick(R.id.button_OtherLabelMain_Memberlist)
-    public void clickMemberList(){
+    public void clickMemberList() {
         Intent intent = new Intent(this, MemberListActivity.class);
-        intent.putExtra(MainActivity.LABELID,label.getLabelID());
-        intent.putExtra(LEADERID,label.getLabelLeaderID());
-        Log.w(LOGTAG,"전달해 주는 leaderid = "+label.getLabelLeaderID());
+        intent.putExtra(MainActivity.LABELID, label.getLabelID());
+        intent.putExtra(LEADERID, label.getLabelLeaderID());
+        Log.w(LOGTAG, "전달해 주는 leaderid = " + label.getLabelLeaderID());
         startActivity(intent);
     }
 
     @OnClick(R.id.imageButton_back)
-    public void backButton(){
+    public void backButton() {
         finish();
     }
 
@@ -88,34 +89,48 @@ public class OtherLabelActivity extends AppCompatActivity {
         String s = intent.getStringExtra("other");
         text.setText(s + "");
 
-        PAGE =1;
+        PAGE = 1;
         mainProgressView = new SeekBar(this);
         contentsAdatper = new ContentsAdatper();
-        musicPlayer = new ContentsMusicPlayer(this,contentsAdatper.getMcontentslist(),mainProgressView);
+        musicPlayer = new ContentsMusicPlayer(this, contentsAdatper.getMcontentslist(), mainProgressView);
 
 
         // 레이블 레이블아이디와 로그인 유저정보를 받아야함
 
-        labelId = getIntent().getIntExtra(MainActivity.LABELID,-1);
-        User user = (User)getIntent().getSerializableExtra(MainActivity.MAINUSER);
+        labelId = getIntent().getIntExtra(MainActivity.LABELID, -1);
+        user = (User) getIntent().getSerializableExtra(MainActivity.MAINUSER);
 
 
-        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId,PAGE,COUNT);
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this, labelId, PAGE, COUNT);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
 
-                if(result.isError()){
-                    Log.e(LOGTAG,"error : "+result.getError().getMessage());
-                }else{
+                if (result.isError()) {
+                    Log.e(LOGTAG, "error : " + result.getError().getMessage());
+                } else {
                     label = result.getResult();
                     labelMainTop.setLabel(label);
-                    labelMainTop.setIsMyLabel(true);
+                    labelMainTop.setUser(user);
+                    if (user.getUserInLabelList() != null) {
+                        if (user.getUserInLabelList().length >= 3) {
+                            labelMainTop.setIsMyLabel(true);
+                        } else if (user.isMyLabel(label.getLabelID())) {
+                            labelMainTop.setIsMyLabel(true);
+                        } else {
+                            labelMainTop.setIsMyLabel(false);
+                        }
+                    } else {
+                        Log.e(LOGTAG, "아더레이블 유저 레이블갯수33 = " + user.getUserInLabelList().length);
+                        labelMainTop.setIsMyLabel(false);
+                    }
+
+
                     labelLeader = label.getLabelLeaderID();
-                    Log.w(LOGTAG," leaderid = "+label.getLabelLeaderID()+"labelneed :"+label.getLabelNeedPositionList().toString());
+                    Log.w(LOGTAG, " leaderid = " + label.getLabelLeaderID() + "labelneed :" + label.getLabelNeedPositionList().toString());
 
                     members = result.getMember();
-                    for(Member m : members)
+                    for (Member m : members)
                         adapter.addUser(m);
                     contentses = result.getData();
                     for (Contents c : contentses) {
@@ -125,13 +140,12 @@ public class OtherLabelActivity extends AppCompatActivity {
                         Log.d("좋아요 개수", "" + c.getLikeCount());
                         contentsAdatper.add(c);
                     }
-
                 }
             }
 
             @Override
             public void onFail(NetworkRequest<NetworkResultLabeMain> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(LOGTAG,"레이블 찾기 실패 : "+errorMessage);
+                Log.e(LOGTAG, "레이블 찾기 실패 : " + errorMessage);
             }
         });
 
@@ -165,14 +179,15 @@ public class OtherLabelActivity extends AppCompatActivity {
         contentsAdatper.setOnProgressBarChangeListener(new ContentsAdatper.onProgressBarChangeListener() {
             @Override
             public void progressBarChange(Contents contents, int progress, int position) {
-                if(contents.getContentsID() == musicPlayer.getPlayedContentsId()) {
+                if (contents.getContentsID() == musicPlayer.getPlayedContentsId()) {
                     mainProgressView.setProgress(progress);
                     musicPlayer.setMusicProgress(progress);
-                }else{
+                } else {
                     contents.setPlayedTIme(progress);
                 }
 
             }
+
             @Override
             public void isSeeking(boolean seeking) {
                 musicPlayer.setSeeking(seeking);
@@ -183,13 +198,13 @@ public class OtherLabelActivity extends AppCompatActivity {
         contentsRecycler.setLayoutManager(linearLayoutManager);
         contentsRecycler.setHasFixedSize(true);
         contentsRecycler.setAdapter(contentsAdatper);
-        addItem(PAGE,COUNT);
+        addItem(PAGE, COUNT);
         contentsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (isLastItem && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    addItem(PAGE,COUNT);
+                    addItem(PAGE, COUNT);
                 }
             }
 
@@ -198,24 +213,25 @@ public class OtherLabelActivity extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
                 int totalItemCount = linearLayoutManager.getItemCount();
                 int lastVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                if(totalItemCount>0 && lastVisibleItemPosition !=RecyclerView.NO_POSITION &&(totalItemCount-1<=lastVisibleItemPosition)){
-                    isLastItem =true;
-                }else {
-                    isLastItem =false;
+                if (totalItemCount > 0 && lastVisibleItemPosition != RecyclerView.NO_POSITION && (totalItemCount - 1 <= lastVisibleItemPosition)) {
+                    isLastItem = true;
+                } else {
+                    isLastItem = false;
                 }
             }
         });
 
     }
+
     public void addItem(int page, final int count) {
-        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this,labelId,page,count);
+        GetLabelByIdMainRequest request = new GetLabelByIdMainRequest(this, labelId, page, count);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabeMain>() {
             @Override
             public void onSuccess(NetworkRequest<NetworkResultLabeMain> request, NetworkResultLabeMain result) {
 
-                if(result.isError()){
-                    Log.e(LOGTAG,"error : "+result.getError().getMessage());
-                }else{
+                if (result.isError()) {
+                    Log.e(LOGTAG, "error : " + result.getError().getMessage());
+                } else {
                     Contents[] newcontentses = result.getData();
                     for (Contents c : newcontentses) {
                         Log.d("게시글 ID", "" + c.getContentsID());
@@ -231,19 +247,17 @@ public class OtherLabelActivity extends AppCompatActivity {
 
             @Override
             public void onFail(NetworkRequest<NetworkResultLabeMain> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(LOGTAG,"레이블 찾기 실패 : "+errorMessage);
+                Log.e(LOGTAG, "레이블 찾기 실패 : " + errorMessage);
             }
         });
 
     }
 
 
-
-
     @Override
     public void onStop() {
         super.onStop();
-        if(musicPlayer!=null){
+        if (musicPlayer != null) {
             musicPlayer.allReset();
         }
     }

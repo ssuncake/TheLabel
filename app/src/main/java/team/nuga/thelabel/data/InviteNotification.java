@@ -10,8 +10,8 @@ public class InviteNotification extends Notification implements Serializable {
     private int inviteMode;
     private team.nuga.thelabel.data.Label sendLabel;
     private team.nuga.thelabel.data.User joinUser;
-    public static final int INVITELABEL = 100;
-    public static final int JOINRQUEST = 200;
+    public static final int INVITELABEL = 1100;
+    public static final int JOINRQUEST = 1200;
 
     public int getInviteMode() {
         return inviteMode;

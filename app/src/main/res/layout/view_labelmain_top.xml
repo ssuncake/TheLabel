@@ -16,13 +16,6 @@
         android:background="@color/labelmain_topview_overray"
         android:layout_gravity="right|center_vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="가입 요청"
-            android:id="@+id/button_LabelMainTop_RequestJoin"
-            android:layout_gravity="right|top" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -32,12 +25,13 @@
             android:layout_margin="@dimen/labelmaintop_needmargin">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="Need"
                 android:id="@+id/textView_LabelMainTop_Need"
                 android:textColor="@color/labelmaintopview_textcolor"
-                android:background="@drawable/white_rectangle" />
+                android:background="@drawable/white_rectangle"
+                android:gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
@@ -61,8 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-999"
-                    android:id="@+id/textView_LabelMainTop_Like"
+                    android:id="@+id/textView_LabelMainTop_Likenum"
                     android:textColor="@color/labelmaintopview_textcolor" />
             </LinearLayout>
 
@@ -93,6 +86,34 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/labelmaintopview_textcolor" />
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:id="@+id/frameLayout_LabelMainTop_RequestJoin"
+            android:layout_margin="10dp">
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+
+                android:id="@+id/button_LabelMainTop_RequestJoin"
+                android:layout_gravity="right|top"
+                android:background="@drawable/rounded_rectangle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="가입 요청"
+                android:id="@+id/textView_LabelMainTop_requestJoin"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/colorAccent" />
+
+        </FrameLayout>
+
     </FrameLayout>
 
 </FrameLayout>

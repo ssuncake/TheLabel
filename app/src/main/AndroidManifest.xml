@@ -98,7 +98,7 @@
             android:name=".MessageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionbar"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".PasswordSettingActivity"
             android:screenOrientation="portrait"
@@ -141,7 +141,8 @@
         <activity
             android:name=".TestLoginActivity"
             android:label="TheLabel" />
-        <activity android:name=".MusicListActivity"></activity>
+        <activity android:name=".MusicListActivity" />
+        <activity android:name=".youtube.JoinReqeustManageActivity"></activity>
     </application>
 
 </manifest>

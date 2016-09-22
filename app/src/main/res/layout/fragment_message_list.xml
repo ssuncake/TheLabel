@@ -3,17 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_gray_2"
+    android:id="@+id/linearLayout_MessageFragment"
     tools:context="team.nuga.thelabel.fragment.MessageListFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--sds
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_MessageList"
-        android:choiceMode="singleChoice" />
-        -->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -21,16 +14,6 @@
         android:id="@+id/recyclerView_MessageList"
         android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_messagedebug" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button_messagedebug"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

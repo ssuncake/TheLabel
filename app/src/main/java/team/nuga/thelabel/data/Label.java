@@ -25,6 +25,7 @@ public class Label implements Serializable {
 
     private int genre_id;
 
+    @SerializedName("numlike")
     private int labelILike;
 
 

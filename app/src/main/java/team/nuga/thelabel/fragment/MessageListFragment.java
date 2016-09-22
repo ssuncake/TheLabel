@@ -12,26 +12,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import team.nuga.thelabel.MainActivity;
 import team.nuga.thelabel.MessageActivity;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.MessageMemberAdapter;
-import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.gcm.MyGcmListenerService;
 import team.nuga.thelabel.manager.DBManager;
-import team.nuga.thelabel.manager.NetworkManager;
-import team.nuga.thelabel.manager.NetworkRequest;
-import team.nuga.thelabel.request.GetUserImageByIdRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,44 +38,38 @@ public class MessageListFragment extends Fragment {
     LocalBroadcastManager mLBM;
 
 
-    @BindView(R.id.editText_messagedebug)
-    EditText editText;
 
 
     @BindView(R.id.recyclerView_MessageList)
     RecyclerView recyclerView;
 
+    @BindView(R.id.linearLayout_MessageFragment)
+    LinearLayout linearLayout;
+
     MessageMemberAdapter adapter;
 
-
-    @OnClick(R.id.button_messagedebug)
-    public void addUser(){
-       final int otherId  = Integer.parseInt(editText.getText().toString());
-
-        GetUserImageByIdRequest request = new GetUserImageByIdRequest(getActivity(),otherId);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
-            @Override
-            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
-                tempotherUser = result.getUser();
-                tempotherUser.setUserID(otherId);
-                Log.e("MessageListFragment","아이디로 유저네임 이미지 얻어오기디버그용 "+tempotherUser.getUserName()+" // "+tempotherUser.getImageUrl());
-                // 더미메세지
-//                DBManager.getInstance().setMainUser(user);
-                DBManager.getInstance().addMessage(user,tempotherUser,100,"");
-                updateUser();
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e("MessageListFragment","protocol no.7 error : "+errorMessage);
-            }
-        });
-
-
-
-
-
-    }
+//
+//    @OnClick(R.id.button_messagedebug)
+//    public void addUser(){
+//       final int otherId  = Integer.parseInt(editText.getText().toString());
+//
+//        GetUserImageByIdRequest request = new GetUserImageByIdRequest(getActivity(),otherId);
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+//                tempotherUser = result.getUser();
+//                tempotherUser.setUserID(otherId);
+//                Log.e("MessageListFragment","아이디로 유저네임 이미지 얻어오기디버그용 "+tempotherUser.getUserName()+" // "+tempotherUser.getImageUrl());
+//                DBManager.getInstance().addMessage(user,tempotherUser,100,"");
+//                updateUser();
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+//                Log.e("MessageListFragment","protocol no.7 error : "+errorMessage);
+//            }
+//        });
+//    }
 
     public MessageListFragment() {
         // Required empty public constructor
@@ -115,6 +104,11 @@ public class MessageListFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        if(adapter.getItemCount()==0){
+            TextView tv = new TextView(getActivity());
+            tv.setText("대화를 시작하려면 검색에서 유저를 검색해보세요 !");
+           linearLayout.addView(tv,0);
+        }
 
         return view;
     }

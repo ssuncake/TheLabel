@@ -106,6 +106,10 @@ public class LabelSettingActivity extends AppCompatActivity {
         intent.putExtra(MainActivity.SELECTLABEL,label);
         startActivityForResult(intent,REQUEST_FIREMEMBER);
     }
+    @OnClick(R.id.button_LabelSetting_JoinRequest)
+            public void requestManage(){
+        
+    }
 
 
 

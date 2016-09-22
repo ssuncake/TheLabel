@@ -34,7 +34,6 @@ import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.fragment.MainFragment;
 import team.nuga.thelabel.fragment.MessageListFragment;
-import team.nuga.thelabel.fragment.MyLikeContentsFragment;
 import team.nuga.thelabel.fragment.ProfileSettingFragment;
 import team.nuga.thelabel.fragment.SettingFragment;
 import team.nuga.thelabel.fragment.UploadFragment;
@@ -245,10 +244,10 @@ public class MainActivity extends AppCompatActivity
             MessageListFragment messageListFragment = new MessageListFragment();
             messageListFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, messageListFragment).commit();
-        } else if (id == R.id.drawer_likeContents) {
-            actionBar.setTitle("내가 좋아요한 게시물");
-            drawer.setCheckedItem(R.id.drawer_likeContents);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
+//        } else if (id == R.id.drawer_likeContents) {
+//            actionBar.setTitle("내가 좋아요한 게시물");
+//            drawer.setCheckedItem(R.id.drawer_likeContents);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
             actionBar.setTitle("설정");
             drawer.setCheckedItem(R.id.drawer_setting);
