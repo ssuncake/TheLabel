@@ -139,6 +139,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".LabelMakeActivity" />
         <activity android:name=".LabelSettingActivity" />
+
         <activity
             android:name=".TestLoginActivity"
             android:label="TheLabel" />
