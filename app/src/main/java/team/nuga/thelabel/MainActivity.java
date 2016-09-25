@@ -232,8 +232,7 @@ public class MainActivity extends AppCompatActivity
     ContentsAdatper contentsAdatper;
     User profile_getUser;
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
+    @Override    public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
 
         if (id == R.id.drawer_upload) {

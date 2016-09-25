@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import team.nuga.thelabel.IntroActivity;
 import team.nuga.thelabel.PasswordSettingActivity;
 import team.nuga.thelabel.R;
-import team.nuga.thelabel.TestLoginActivity;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
@@ -35,7 +35,7 @@ public class SettingFragment extends Fragment {
                 Toast.makeText(getContext(), "정상적으로 로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 PropertyManager.getInstance().setEmail(null);
                 PropertyManager.getInstance().setPassword(null);
-                Intent intent = new Intent(getContext(), TestLoginActivity.class);
+                Intent intent = new Intent(getContext(), IntroActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }

@@ -123,6 +123,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignUpEditActivity"

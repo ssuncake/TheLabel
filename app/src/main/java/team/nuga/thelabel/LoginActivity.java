@@ -4,7 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,11 +33,20 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import team.nuga.thelabel.data.NetworkResult;
+import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
+import team.nuga.thelabel.manager.NetworkManager;
+import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
+import team.nuga.thelabel.request.LoginRequest;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -71,9 +84,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        int color = Color.parseColor("#FF4081");
+        mEmailView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -146,6 +162,45 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+    public void startMainAc(User user){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("LoginUser",user);
+        startActivity(intent);
+        finish();
+    }
+    public void goMain(String email,String password, String regid){
+        LoginRequest request = new LoginRequest(this,email,password,regid);
+
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>(){
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                String message = result.getMessage();
+                Log.e("로그인 성공",message);
+                User user = result.getUser();
+                DBManager.getInstance().setMainUser(user);
+                Log.e("로그인 유저 정보 확인",user.getEmail()+" // "+ user.getUserName());
+                startMainAc(user);
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(LoginActivity.this, "로그인 실패 !+", Toast.LENGTH_SHORT).show();
+                Log.e("로그인 실패",errorMessage);
+            }
+        });
+    }
+    public void clicklogin(){
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+
+        //자동로그인 기능 : 이메일 세팅
+        String regid = PropertyManager.getInstance().getRegistrationId();
+        PropertyManager.getInstance().setEmail(email);
+        PropertyManager.getInstance().setPassword(password);
+
+        String regId = PropertyManager.getInstance().getRegistrationId();
+        goMain(email,password,regId);
+    }
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -190,6 +245,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            clicklogin();
         }
     }
 
@@ -200,7 +256,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     /**
@@ -336,7 +392,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
