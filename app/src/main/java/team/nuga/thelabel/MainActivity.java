@@ -197,7 +197,10 @@ public class MainActivity extends AppCompatActivity
                     if (appFinCount > 1) appFunction.appFinished();// 레이블 셀렉에서 나오면 앱종료기능
                     break;
                 case DRAWER:
-                    goMainFragment(0);  // 드로어로 들어간 메뉴에서 나오도록..
+                    goMainFragment(0);
+                    // 드로어로 들어간 메뉴에서 나오도록..
+                    appFinCount++;
+                    if (appFinCount > 1) appFunction.appFinished();
                     break;
                 default:
                     appFinCount = 0;
