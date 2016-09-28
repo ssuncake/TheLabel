@@ -18,8 +18,6 @@
     <style name="AppTheme.myTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColorPrimary">@color/color_white</item> <!-- 타이틀바 색상 -->
         <item name="textColorError">@color/design_textinput_error_color_light</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/color_white</item>
         <item name="android:textColorSecondary">@color/color_white</item>

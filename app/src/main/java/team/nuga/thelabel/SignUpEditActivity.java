@@ -45,12 +45,15 @@ import team.nuga.thelabel.data.CheckEmailResult;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.RoundImageTransform;
 import team.nuga.thelabel.data.User;
+import team.nuga.thelabel.manager.DBManager;
 import team.nuga.thelabel.manager.NetworkManager;
 import team.nuga.thelabel.manager.NetworkRequest;
+import team.nuga.thelabel.manager.PropertyManager;
 import team.nuga.thelabel.request.CheckNicknameRequest;
+import team.nuga.thelabel.request.LoginRequest;
 import team.nuga.thelabel.request.SignUpRequest;
 
-public class SignUpEditActivity extends AppCompatActivity {
+public class SignUpEditActivity extends AppCompatActivity  {
 
     final int IMAGE_FROM_GALLERY = 101;
     @BindView(R.id.imageButton_uploadProfileImage)
@@ -157,15 +160,12 @@ public class SignUpEditActivity extends AppCompatActivity {
         });
     }
 
-    @BindView(R.id.button_signUpComplete)
-    Button button_signUpComplete; //가입완료 버튼
-
-    @OnClick(R.id.button_signUpComplete)
+    @OnClick(R.id.button_signUpComplete) //가입완료 버튼
     public void onsignUpComplete() {
         Intent intent = getIntent();
         User signUp = (User) intent.getSerializableExtra("signUpInfo");
-        String email = signUp.getEmail();
-        String password = signUp.getUserPassword();
+        final String email = signUp.getEmail();
+        final String password = signUp.getUserPassword();
         if (Debug.debugmode) Log.e("인텐트값", "email -" + email + " , password - " + password);
 
         final String nickname = editText_userNickName.getText().toString();
@@ -185,14 +185,52 @@ public class SignUpEditActivity extends AppCompatActivity {
                 result.getId();
                 if (Debug.debugmode)
                     Log.d("메세지 ", "" + result.getMessage() + ", id : " + result.getId());
+                     //자동로그인 기능 : 이메일 세팅
+                    PropertyManager.getInstance().setEmail(email);
+                    PropertyManager.getInstance().setPassword(password);
+                    String regId = PropertyManager.getInstance().getRegistrationId();
+                    goMain(email,password,regId); //로그인 후 메인액티비티로 넘어감.
+                finish();
+                if(!LoginActivity.closeActivity.isFinishing()){  //LoginAcitivity 가 살아있으면...같이 종료
+                    LoginActivity.closeActivity.finish();
+                }
             }
 
             @Override
             public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
                 if (Debug.debugmode)
                     Log.d("fail", errorMessage + ", 코드: " + errorCode + " Throwable : " + e);
+                Toast.makeText(SignUpEditActivity.this, "네트워크 상태를 확인해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public void goMain(String email,String password, String regid){
+        LoginRequest request = new LoginRequest(this,email,password,regid);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>(){
+            @Override
+            public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                String message = result.getMessage();
+                Log.e("로그인 성공",message);
+                User user = result.getUser();
+                DBManager.getInstance().setMainUser(user);
+                Log.e("로그인 유저 정보 확인",user.getEmail()+" // "+ user.getUserName());
+                startMainAc(user);
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(SignUpEditActivity.this, "로그인 실패 !+", Toast.LENGTH_SHORT).show();
+                Log.e("로그인 실패",errorMessage);
+            }
+        });
+    }
+    public void startMainAc(User user){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("LoginUser",user);
+        startActivity(intent);
+        finish();
     }
 
     int townId = 0;

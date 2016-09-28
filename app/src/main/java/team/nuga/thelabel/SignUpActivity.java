@@ -115,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
             intent.putExtra("signUpInfo", signUp_user);
             startActivity(intent);
         } else if (checkBox_service.isChecked() == false || checkBox_personal.isChecked() == false) {
-            Toast.makeText(SignUpActivity.this, "약관에 동의 해주뗴염", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "약관에 동의 해주세요", Toast.LENGTH_SHORT).show();
             isSignUpSuccess = false;
             if (Debug.debugmode)
                 Log.d(" 2 ", " 서비스 약관 동의 :" + checkBox_service.isChecked() + ", 개인정보 수집 동의 :" + checkBox_personal.isChecked() + ", 이메일 중복여부" + isCheckedEmail + ", 비밀번호 중복여부" + isPasswordCheck);

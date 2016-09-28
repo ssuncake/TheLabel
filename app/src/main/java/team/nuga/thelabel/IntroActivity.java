@@ -102,9 +102,9 @@ public class IntroActivity extends AppCompatActivity {
 
 //                        showLoginFragment();
                     }
-                }, 2000);//로그인 1초 후 이동.
+                }, 1000);//로그인 1초 후 이동.
             }
-        }, 3000);
+        }, 2000);
     }
 
     public void signUpFragmentCall() {

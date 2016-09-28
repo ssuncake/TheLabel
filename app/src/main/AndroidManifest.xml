@@ -37,7 +37,6 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
                 <category android:name="team.nuga.thelabel" />
             </intent-filter>
         </receiver>
@@ -67,6 +66,7 @@
             android:theme="@style/AppTheme.NoActionbar" />
         <activity
             android:name=".IntroActivity"
+            android:theme="@style/AppTheme.myTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -123,7 +123,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignUpEditActivity"

@@ -45,14 +45,16 @@ import team.nuga.thelabel.manager.PropertyManager;
 import team.nuga.thelabel.request.LoginRequest;
 import team.nuga.thelabel.request.ProfileGetRequest;
 
+import static team.nuga.thelabel.R.id.drawer_layout;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String MAINUSER = "MainUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
-    public static final String PROFILEUSER = "ProfileUser"; // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String MAINUSER = "MainUser";                   // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
+    public static final String PROFILEUSER = "ProfileUser";             // 다른 프래그먼트 및 액티비디로 이동시킬 사용자 유저정보의 번들태그
     public static final String MAINUSERINLABELS = "MainUserInLabels";
-    public static final String SELECTLABEL = "SelectLabel"; // 선택된 레이블로 이동 또는 세팅할때 이용 레이블객체를 직접 이동
-    public static final String LABELID = "labelId"; // 레이블의 아이디만 전달할때 이용
+    public static final String SELECTLABEL = "SelectLabel";             // 선택된 레이블로 이동 또는 세팅할때 이용 레이블객체를 직접 이동
+    public static final String LABELID = "labelId";                     // 레이블의 아이디만 전달할때 이용
 
     public static final String NEWLEADER = "NewLeader";
     public static final String TABINDEX = "tabindex";
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.mainactivity_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.drawer_layout)
+    @BindView(drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.drawer)
     NavigationView drawer;
@@ -89,12 +91,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(mainUser==null){
+        if (mainUser == null) {             //스플래시에서 유저정보를 못가져왔을경우 프로퍼티 데이터로 다시 로그인
             String email = PropertyManager.getInstance().getEmail();
-            if (!TextUtils.isEmpty(email)) {
+            if (!TextUtils.isEmpty(email)) {  //앱데이터의 email이 있을경우에 로그인.
                 String password = PropertyManager.getInstance().getPassword();
                 String regid = PropertyManager.getInstance().getRegistrationId();
-                Log.e("로그인관련","레지아이디 "+regid);
+                if (Debug.debugmode) Log.e("로그인관련", "레지아이디 " + regid);
                 LoginRequest request = new LoginRequest(this, email, password, regid);
                 NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
                     @Override
@@ -108,10 +110,14 @@ public class MainActivity extends AppCompatActivity
                     public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
-                    finish();
+                        finish();
 
                     }
                 });
+            } else { // 앱에 저장된 email정보가 없을경우. = 로그인 기록 없음
+                Toast.makeText(this, "로그인이 필요한 서비스 입니다.", Toast.LENGTH_SHORT).show();
+                Intent loginIntent = new Intent(this, LoginActivity.class); //재 로그인,회원가입 하도록.
+                startActivity(loginIntent);
             }
         }
         ButterKnife.bind(this);
@@ -137,35 +143,37 @@ public class MainActivity extends AppCompatActivity
 
         User user = (User) getIntent().getSerializableExtra("LoginUser");
         if (user == null) {
-
             mainUser = new User();
             mainUser.setUserName("이정호");
         } else {
             mainUser = user;
             Log.w("MainActivity", "userId= " + user.getUserID() + "userName = " + user.getUserName() + "user impath =" + user.getUserName());
         }
-
         Toast.makeText(MainActivity.this, "로그인 유저 : " + user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
 
         bundle = new Bundle();
         goMainFragment(MainFragment.NEWSFEEDTAB);
 
-        // 헤더뷰 관련 설정
+        setheaderView();//헤더뷰 설정
+
+
+    }
+
+    public void setheaderView() {// 헤더뷰 관련 설정
         String[] citylist = getResources().getStringArray(R.array.cityList);
         String[] genrelist = getResources().getStringArray(R.array.genrelist);
         String[] positionlist = getResources().getStringArray(R.array.positionlist);
-
         View headerView = drawer.inflateHeaderView(R.layout.drawer_header);
         TextView position = (TextView) headerView.findViewById(R.id.textView_MainHeader_position);
-        position.setText(positionlist[mainUser.getPostition()-1]);
+        position.setText(positionlist[mainUser.getPostition() - 1]);
         headerUserName = (TextView) headerView.findViewById(R.id.textView_MainHeader_Name);
         TextView headerUserEmail = (TextView) headerView.findViewById(R.id.textView_MainHeaderEmail);
         headerUserEmail.setText(mainUser.getUserEmail());
         headerUserName.setText(mainUser.getUserName());
         TextView headerUserGenre = (TextView) headerView.findViewById(R.id.textView_MainHeader_Genre);
         ImageView headerUserProfile = (ImageView) headerView.findViewById(R.id.imageView_MainHeader_Profile);
-        headerUserGenre.setText("#"+genrelist[mainUser.getGenre()-1]+", #"+citylist[mainUser.getCity()]);
+        headerUserGenre.setText("#" + genrelist[mainUser.getGenre() - 1] + ", #" + citylist[mainUser.getCity()]);
         Glide.with(this)
                 .load(mainUser.getImageUrl())
                 .transform(new RoundImageTransform(this))
@@ -173,23 +181,30 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static int currentViewPage = 0;
+    public static final int DRAWER = 5;
+    public static final int LABEL_MAIN = 1;
     int appFinCount = 0;
 
     @Override
     public void onBackPressed() {
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (currentViewPage == 1) {
-            goMainFragment(1);
-            appFinCount++;
-            if (appFinCount > 1) appFunction.appFinished();
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            appFinCount = 0;
-            appFunction.appFinished();
+            switch (currentViewPage) {
+                case LABEL_MAIN:
+                    goMainFragment(1);
+                    appFinCount++;
+                    if (appFinCount > 1) appFunction.appFinished();// 레이블 셀렉에서 나오면 앱종료기능
+                    break;
+                case DRAWER:
+                    goMainFragment(0);  // 드로어로 들어간 메뉴에서 나오도록..
+                    break;
+                default:
+                    appFinCount = 0;
+                    appFunction.appFinished();
+                    break;
+            }
         }
-
     }
 
     @Override
@@ -222,7 +237,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.toolbar_search:    //툴바 상단 검색 메뉴 클릭시 해당 액티비티 띄움
                 intent = new Intent(this, SearchActivity.class);
-                intent.putExtra(MAINUSER,mainUser);
+                intent.putExtra(MAINUSER, mainUser);
                 startActivity(intent);
                 return true;
         }
@@ -232,10 +247,12 @@ public class MainActivity extends AppCompatActivity
     ContentsAdatper contentsAdatper;
     User profile_getUser;
 
-    @Override    public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
 
         if (id == R.id.drawer_upload) {
+            currentViewPage = DRAWER;
             actionBar.setTitle("업로드");
             Bundle b = new Bundle();
             b.putSerializable(MainActivity.MAINUSER, mainUser);
@@ -243,9 +260,9 @@ public class MainActivity extends AppCompatActivity
             uploadFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, uploadFragment).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {         ///프로필 설정 이동
+            currentViewPage = DRAWER;
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
-
 
             ProfileGetRequest request = new ProfileGetRequest(this);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
@@ -255,7 +272,7 @@ public class MainActivity extends AppCompatActivity
                     Bundle b = new Bundle();
                     b.putSerializable(MainActivity.PROFILEUSER, profile_getUser);
                     ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
-                    profileSettingFragment.setArguments(b);
+                    profileSettingFragment.setArguments(b); //네비게이션 드로어에 유저정보 전달
                     getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
                 }
 
@@ -263,11 +280,12 @@ public class MainActivity extends AppCompatActivity
                 public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
                     if (Debug.debugmode)
                         Toast.makeText(MainActivity.this, "유저 가져오기 실패", Toast.LENGTH_SHORT).show();
-//                    b.putSerializable(MainActivity.MAINUSER, mainUser);
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.message_network_fail), Toast.LENGTH_SHORT).show();
                 }
             });
 
         } else if (id == R.id.drawer_message) {
+            currentViewPage = DRAWER;
             actionBar.setTitle("메세지");
             drawer.setCheckedItem(R.id.drawer_message);
             Bundle b = new Bundle();
@@ -275,17 +293,18 @@ public class MainActivity extends AppCompatActivity
             MessageListFragment messageListFragment = new MessageListFragment();
             messageListFragment.setArguments(b);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, messageListFragment).commit();
-//        } else if (id == R.id.drawer_likeContents) {
+        } else if (id == R.id.drawer_likeContents) {
+            if (Debug.debugmode) Toast.makeText(this, "추후 구현 예정입니다.", Toast.LENGTH_SHORT).show();
 //            actionBar.setTitle("내가 좋아요한 게시물");
 //            drawer.setCheckedItem(R.id.drawer_likeContents);
 //            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new MyLikeContentsFragment()).commit();
         } else if (id == R.id.drawer_setting) {
+            currentViewPage = DRAWER;
             actionBar.setTitle("설정");
             drawer.setCheckedItem(R.id.drawer_setting);
             getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
         } else if (id == R.id.drawer_main) {
             goMainFragment(MainFragment.NEWSFEEDTAB);
-
         }
 
 

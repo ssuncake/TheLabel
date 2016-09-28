@@ -109,7 +109,7 @@ public class MainFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition()==1){
-                    MainActivity.currentViewPage =1;
+                    MainActivity.currentViewPage =1;//레이블메인의 앱종료 기능시 메인으로 가기위한 페이지 저장
                 }else {
                     MainActivity.currentViewPage = tab.getPosition();
                 }

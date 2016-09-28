@@ -18,6 +18,7 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import team.nuga.thelabel.ContentsMusicPlayer;
+import team.nuga.thelabel.Debug;
 import team.nuga.thelabel.R;
 import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.Contents;
@@ -48,7 +49,6 @@ public class NewsFeedFragment extends Fragment {
     ContentsMusicPlayer musicPlayer;
 
 
-
     @BindView(R.id.recyclerview_newsfeed)
     RecyclerView contentsRecycerView;
 
@@ -69,8 +69,7 @@ public class NewsFeedFragment extends Fragment {
         PAGE = 1;
         mainProgressView = new SeekBar(getActivity());
         contentsAdatper = new ContentsAdatper();
-        musicPlayer = new ContentsMusicPlayer(getActivity(),contentsAdatper.getMcontentslist(),mainProgressView);
-
+        musicPlayer = new ContentsMusicPlayer(getActivity(), contentsAdatper.getMcontentslist(), mainProgressView);
 
 
         contentsAdatper.setonYoutubeThumnailClickListener(new ContentsAdatper.OnYoutubeThumnailClickListener() {
@@ -95,18 +94,22 @@ public class NewsFeedFragment extends Fragment {
                 } else {
                     meetcontentses = result.getMeetpost();
                     for (Contents c : meetcontentses) {
-                        Log.d("게시글 ID", "" + c.getContentsID());
-                        Log.d("파일경로", "" + c.getContentsPath());
-                        Log.d("파일타입", "" + c.getContentsType());
-                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        if (Debug.debugmode) {
+                            Log.d("게시글 ID", "" + c.getContentsID());
+                            Log.d("파일경로", "" + c.getContentsPath());
+                            Log.d("파일타입", "" + c.getContentsType());
+                            Log.d("좋아요 개수", "" + c.getLikeCount());
+                        }
                         contentsAdatper.add(c);
                     }
                     contentses = result.getPost();
                     for (Contents c : contentses) {
-                        Log.d("게시글 ID", "" + c.getContentsID());
-                        Log.d("파일경로", "" + c.getContentsPath());
-                        Log.d("파일타입", "" + c.getContentsType());
-                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        if (Debug.debugmode) {
+                            Log.d("게시글 ID", "" + c.getContentsID());
+                            Log.d("파일경로", "" + c.getContentsPath());
+                            Log.d("파일타입", "" + c.getContentsType());
+                            Log.d("좋아요 개수", "" + c.getLikeCount());
+                        }
                         contentsAdatper.add(c);
                     }
                 }
@@ -197,18 +200,22 @@ public class NewsFeedFragment extends Fragment {
                 } else {
                     meetcontentses = result.getMeetpost();
                     for (Contents c : meetcontentses) {
-                        Log.d("게시글 ID", "" + c.getContentsID());
-                        Log.d("파일경로", "" + c.getContentsPath());
-                        Log.d("파일타입", "" + c.getContentsType());
-                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        if (Debug.debugmode) {
+                            Log.d("게시글 ID", "" + c.getContentsID());
+                            Log.d("파일경로", "" + c.getContentsPath());
+                            Log.d("파일타입", "" + c.getContentsType());
+                            Log.d("좋아요 개수", "" + c.getLikeCount());
+                        }
                         contentsAdatper.add(c);
                     }
                     contentses = result.getPost();
                     for (Contents c : contentses) {
-                        Log.d("게시글 ID", "" + c.getContentsID());
-                        Log.d("파일경로", "" + c.getContentsPath());
-                        Log.d("파일타입", "" + c.getContentsType());
-                        Log.d("좋아요 개수", "" + c.getLikeCount());
+                        if (Debug.debugmode) {
+                            Log.d("게시글 ID", "" + c.getContentsID());
+                            Log.d("파일경로", "" + c.getContentsPath());
+                            Log.d("파일타입", "" + c.getContentsType());
+                            Log.d("좋아요 개수", "" + c.getLikeCount());
+                        }
                         contentsAdatper.add(c);
                     }
                 }
@@ -218,6 +225,7 @@ public class NewsFeedFragment extends Fragment {
             @Override
             public void onFail(NetworkRequest<NewsFeedContents> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e(LOGTAG, "뉴스피드 네트워크 받아오기 실패 " + errorMessage);
+                Toast.makeText(getContext(), "네트워크 연결 상태를 확인해주세요", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -252,13 +252,9 @@ SeekBar progressBar;
 
     public void goMain(String email,String password, String regid){
         LoginRequest request = new LoginRequest(this,email,password,regid);
-
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>(){
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
-
-
-
                 String message = result.getMessage();
                 Log.e("로그인 성공",message);
                 User user = result.getUser();

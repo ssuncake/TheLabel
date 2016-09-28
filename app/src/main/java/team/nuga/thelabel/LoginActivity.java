@@ -3,25 +3,24 @@ package team.nuga.thelabel;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -40,6 +39,8 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.User;
 import team.nuga.thelabel.manager.DBManager;
@@ -54,6 +55,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    public static Activity closeActivity;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -78,13 +80,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    @OnClick(R.id.button_MoveSignUp) //SignUp 버튼
+    public void onMoveSignUp(){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent); //회원가입 페이지로 이동
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+        closeActivity = LoginActivity.this; //액티비티 종료를 위한
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        int color = Color.parseColor("#FF4081");
+        int color = Color.parseColor("#FF4081");        //color
         mEmailView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         populateAutoComplete();
 
@@ -170,7 +180,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
     public void goMain(String email,String password, String regid){
         LoginRequest request = new LoginRequest(this,email,password,regid);
-
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>(){
             @Override
             public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
