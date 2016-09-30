@@ -11,7 +11,7 @@ public class ChatContract {
         public static final String OTHER_ID = "outherid";
         public static final String ME_ID="myid";
         public static final String OTHER_NAME = "othername";
-       public static final String OTHER_IMAGE = "othgerimage";
+        public static final String OTHER_IMAGE = "othgerimage";
         public static final String COLUMN_LAST_MESSAGE_ID = "lastid";
     }
 

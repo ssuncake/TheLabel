@@ -28,7 +28,6 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import team.nuga.thelabel.adapter.ContentsAdatper;
 import team.nuga.thelabel.data.LikeNotification;
 import team.nuga.thelabel.data.NetworkResult;
 import team.nuga.thelabel.data.RoundImageTransform;
@@ -60,13 +59,13 @@ public class MainActivity extends AppCompatActivity
     public static final String TABINDEX = "tabindex";
     public static final String CONTAINERFRAGMENTTAG = "LabelContainer";
 
-
     public static final int REQUEST_LIKENOTIFICATION = 200;
     public static final int REQUEST_UPLOAD = 300;
     public static final int REQUEST_MUSICUPLOAD = 310;
     public static final int REQUEST_MAKELABEL = 400;
     public static final int REQUEST_SETTINGLABEL = 410;
 
+    User profile_getUser;
 
     @BindView(R.id.mainactivity_toolbar)
     Toolbar toolbar;
@@ -76,17 +75,13 @@ public class MainActivity extends AppCompatActivity
     NavigationView drawer;
 
     private TextView headerUserName;
-
     private ActionBarDrawerToggle actionBarDrawerToggle;
-
     private FragmentManager mFragmentManager;
-
     private User mainUser;
     private Bundle bundle;
 
-    private AppFunction appFunction;
+    private AppFunction appFunction; //앱관련 기능 추가
     ActionBar actionBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,16 +93,19 @@ public class MainActivity extends AppCompatActivity
                 String regid = PropertyManager.getInstance().getRegistrationId();
                 if (Debug.debugmode) Log.e("로그인관련", "레지아이디 " + regid);
                 LoginRequest request = new LoginRequest(this, email, password, regid);
-                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+                NetworkManager.getInstance().getNetworkData(request,
+                        new NetworkManager.OnResultListener<NetworkResult<User>>() {
                     @Override
-                    public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
+                    public void onSuccess(NetworkRequest<NetworkResult<User>> request,
+                                          NetworkResult<User> result) {
                         User getLoginUser = result.getUser();
                         DBManager.getInstance().setMainUser(getLoginUser);
 
                     }
 
                     @Override
-                    public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                    public void onFail(NetworkRequest<NetworkResult<User>> request,
+                                       int errorCode, String errorMessage, Throwable e) {
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -147,7 +145,8 @@ public class MainActivity extends AppCompatActivity
             mainUser.setUserName("이정호");
         } else {
             mainUser = user;
-            Log.w("MainActivity", "userId= " + user.getUserID() + "userName = " + user.getUserName() + "user impath =" + user.getUserName());
+            Log.w("MainActivity", "userId= " + user.getUserID() + "userName = " + user.getUserName()
+                    + "user impath =" + user.getUserName());
         }
         Toast.makeText(MainActivity.this, "로그인 유저 : " + user.getUserName(), Toast.LENGTH_SHORT).show();
         //// 가짜  User 데이터를 만들어서 메인프레그먼트로 넘김니다.
@@ -247,9 +246,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    ContentsAdatper contentsAdatper;
-    User profile_getUser;
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {  // 네미게이션 드로어 메뉴 선택시 해당 프래그먼트로 이동
         int id = item.getItemId();
@@ -261,14 +257,17 @@ public class MainActivity extends AppCompatActivity
             b.putSerializable(MainActivity.MAINUSER, mainUser);
             UploadFragment uploadFragment = new UploadFragment();
             uploadFragment.setArguments(b);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, uploadFragment).commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.drawer_container, uploadFragment)
+                    .commit();//업로드 메뉴 선택시 업로드 프래그먼트로 이동
         } else if (id == R.id.drawer_profile) {         ///프로필 설정 이동
             currentViewPage = DRAWER;
             actionBar.setTitle("프로필 설정");
             drawer.setCheckedItem(R.id.drawer_profile);
-
             ProfileGetRequest request = new ProfileGetRequest(this);
-            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResult<User>>() {
+            NetworkManager.getInstance().getNetworkData(request,
+                    new NetworkManager.OnResultListener<NetworkResult<User>>() {
                 @Override
                 public void onSuccess(NetworkRequest<NetworkResult<User>> request, NetworkResult<User> result) {
                     profile_getUser = result.getUser();
@@ -276,11 +275,14 @@ public class MainActivity extends AppCompatActivity
                     b.putSerializable(MainActivity.PROFILEUSER, profile_getUser);
                     ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
                     profileSettingFragment.setArguments(b); //네비게이션 드로어에 유저정보 전달
-                    getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.drawer_container, profileSettingFragment)
+                            .commit();
                 }
 
                 @Override
-                public void onFail(NetworkRequest<NetworkResult<User>> request, int errorCode, String errorMessage, Throwable e) {
+                public void onFail(NetworkRequest<NetworkResult<User>> request,
+                                   int errorCode, String errorMessage, Throwable e) {
                     if (Debug.debugmode)
                         Toast.makeText(MainActivity.this, "유저 가져오기 실패", Toast.LENGTH_SHORT).show();
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.message_network_fail), Toast.LENGTH_SHORT).show();
@@ -295,7 +297,10 @@ public class MainActivity extends AppCompatActivity
             b.putSerializable(MainActivity.MAINUSER, mainUser);
             MessageListFragment messageListFragment = new MessageListFragment();
             messageListFragment.setArguments(b);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, messageListFragment).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.drawer_container, messageListFragment)
+                    .commit();
         } else if (id == R.id.drawer_likeContents) {
             if (Debug.debugmode) Toast.makeText(this, "추후 구현 예정입니다.", Toast.LENGTH_SHORT).show();
 //            actionBar.setTitle("내가 좋아요한 게시물");
@@ -305,23 +310,23 @@ public class MainActivity extends AppCompatActivity
             currentViewPage = DRAWER;
             actionBar.setTitle("설정");
             drawer.setCheckedItem(R.id.drawer_setting);
-            getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, new SettingFragment()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.drawer_container, new SettingFragment())
+                    .commit();
         } else if (id == R.id.drawer_main) {
             goMainFragment(MainFragment.NEWSFEEDTAB);
         }
-
-
         drawerLayout.closeDrawer(GravityCompat.START); // 드로어 닫음
-
         return true;
     }
-
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_LIKENOTIFICATION) {
             if (resultCode == Activity.RESULT_OK) {
-                LikeNotification notification = (LikeNotification) data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
+                LikeNotification notification =
+                        (LikeNotification)data.getSerializableExtra(NotificationActivity.RESULT_NOTIFICATION);
                 goMainFragment(MainFragment.USERTAB);
             }
         } else if (requestCode == REQUEST_UPLOAD) {
@@ -332,21 +337,9 @@ public class MainActivity extends AppCompatActivity
         } else if (requestCode == REQUEST_MAKELABEL) {
             if (resultCode == Activity.RESULT_OK) {
                 int tabindex = data.getIntExtra(MainActivity.TABINDEX, 0);
-
             }
         }
     }
-//
-//    public void refresh(){
-//        Fragment currentFragment = this.getSupportFragmentManager().findFragmentByTag("mainContainer");
-//        if (currentFragment instanceof MainFragment) {
-//            currentFragment.getChildFragmentManager().findFragmentByTag()
-//            FragmentTransaction fragTransaction =   this.getSupportFragmentManager().beginTransaction();
-//            fragTransaction.detach(currentFragment);
-//            fragTransaction.attach(currentFragment);
-//            fragTransaction.commit();}
-//    }
-
 
     public void goMainFragment(int tabIndex) // 메인 프래그먼트로 이동하며 인자로 받은 값 0~2탭으로 바로이동시켜줍니다.
     {
@@ -358,12 +351,11 @@ public class MainActivity extends AppCompatActivity
         }
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.drawer_container, mainFragment, "mainContainer")
                 .commit();
-
     }
-
 
     public void drawerUserSetting(String name) {
         headerUserName.setText(name);
@@ -382,7 +374,10 @@ public class MainActivity extends AppCompatActivity
         b.putSerializable(MainActivity.MAINUSER, mainUser);
         ProfileSettingFragment profileSettingFragment = new ProfileSettingFragment();
         profileSettingFragment.setArguments(b);
-        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, profileSettingFragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.drawer_container, profileSettingFragment)
+                .commit();
     }
 
     // 단말환경 check
@@ -390,5 +385,4 @@ public class MainActivity extends AppCompatActivity
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
-
 }

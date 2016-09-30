@@ -17,6 +17,10 @@ public class LabelGetFireMemberRequest extends AbstractRequest<NetworkResultLabe
     private static final String PATH = "labels";
 
     Request request;
+
+    /**
+     * @param labelId Currently in label ID // 현재 들어가있는 레이블 아이디 값
+     */
     public LabelGetFireMemberRequest(int labelId) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PATH)

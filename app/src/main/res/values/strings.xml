@@ -218,4 +218,6 @@
     <string name="upload_UploadOpenTitle">공개 설정</string>
     <string name="upload_upload_exec">업로드 하기</string>
 
+    <string name="developerKey_youtube">AIzaSyAR3sfnuUolQZbqNZmxBswS6mkM53X_kUs</string>
+
 </resources>

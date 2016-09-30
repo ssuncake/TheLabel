@@ -37,6 +37,7 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="team.nuga.thelabel" />
             </intent-filter>
         </receiver>
@@ -66,8 +67,8 @@
             android:theme="@style/AppTheme.NoActionbar" />
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/AppTheme.myTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.myTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -116,15 +117,15 @@
         <activity android:name=".UploadActivity" />
         <activity
             android:name=".SignUpActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".SignUpEditActivity"
             android:exported="true"
@@ -139,12 +140,13 @@
             android:screenOrientation="portrait" />
         <activity android:name=".LabelMakeActivity" />
         <activity android:name=".LabelSettingActivity" />
-
         <activity
             android:name=".TestLoginActivity"
             android:label="TheLabel" />
         <activity android:name=".MusicListActivity" />
-        <activity android:name=".youtube.JoinReqeustManageActivity"></activity>
+        <activity android:name=".youtube.JoinReqeustManageActivity" />
+        <activity android:name=".TestActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

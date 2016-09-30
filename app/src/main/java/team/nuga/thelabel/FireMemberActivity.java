@@ -35,20 +35,22 @@ public class FireMemberActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        label =(Label) getIntent().getSerializableExtra(MainActivity.SELECTLABEL);
+        label = (Label) getIntent().getSerializableExtra(MainActivity.SELECTLABEL);
         if (label != null) {
             LabelGetFireMemberRequest request = new LabelGetFireMemberRequest(label.getLabelID());
-            Log.e(LOGTAG, "전달받은 레이블 id "+label.getLabelID());
+            Log.e(LOGTAG, "전달받은 레이블 id " + label.getLabelID());
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NetworkResultLabelMemberManage>() {
                 @Override
-                public void onSuccess(NetworkRequest<NetworkResultLabelMemberManage> request, NetworkResultLabelMemberManage result) {
+                public void onSuccess(NetworkRequest<NetworkResultLabelMemberManage> request,
+                                      NetworkResultLabelMemberManage result) {
                     users = result.getUsers();
                     Log.e(LOGTAG, "users" + users.length);
                     initData(users);
                 }
 
                 @Override
-                public void onFail(NetworkRequest<NetworkResultLabelMemberManage> request, int errorCode, String errorMessage, Throwable e) {
+                public void onFail(NetworkRequest<NetworkResultLabelMemberManage> request,
+                                   int errorCode, String errorMessage, Throwable e) {
                     Log.e(LOGTAG, "LabelGetFireMemberRequest fail " + errorMessage);
                 }
             });
@@ -70,8 +72,8 @@ public class FireMemberActivity extends AppCompatActivity {
     }
 
     private void initData(User[] users) {
-        for(User u : users){
-            Log.e(LOGTAG,"add user = "+u.getUserName());
+        for (User u : users) {
+            Log.e(LOGTAG, "add user = " + u.getUserName());
             firememberlistAdapter.add(u);
         }
     }

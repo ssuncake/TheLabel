@@ -61,8 +61,6 @@ public class User implements Serializable {
 
     private String userProfile;
     private String userLocal;
-//    private Position userPosition;
-//    private Genre userGenre;
     private boolean userNeed;
 
     public Label[] getUserInLabelList() {

@@ -23,6 +23,13 @@ public class LoginRequest extends AbstractRequest<NetworkResult<User>> {
     private static final String LOGINADDRESS = "auth/local/login";
 
     Request request;
+
+    /**
+     *
+     * @param email 로그인 유저 아이디
+     * @param password 로그인 유저의 패스워드
+     * @param regid 로그인할 유저의 registration ID
+     */
     public LoginRequest(Context context,String email,String password,String regid) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegments(LOGINADDRESS)

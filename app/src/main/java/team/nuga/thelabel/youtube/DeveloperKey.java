@@ -2,6 +2,8 @@
 
 package team.nuga.thelabel.youtube;
 
+import team.nuga.thelabel.R;
+
 /**
  * Static container class for holding a reference to your YouTube Developer Key.
  */
@@ -12,6 +14,6 @@ public class DeveloperKey {
    * <a href="https://console.developers.google.com/">Google Developers Console</a>
    * to register a new developer key.
    */
-  public static final String DEVELOPER_KEY = "AIzaSyAR3sfnuUolQZbqNZmxBswS6mkM53X_kUs";
 
+  public static final String DEVELOPER_KEY = String.valueOf(R.string.developerKey_youtube);
 }

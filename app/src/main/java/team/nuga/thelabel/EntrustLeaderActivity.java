@@ -70,8 +70,8 @@ public class EntrustLeaderActivity extends AppCompatActivity {
     }
 
     private void initData(User[] users) {
-        for(User u : users){
-            Log.e(LOGTAG,"add user = "+u.getUserName());
+        for (User u : users) {
+            Log.e(LOGTAG, "add user = " + u.getUserName());
             entrustLeaderAdapter.add(u);
         }
     }
