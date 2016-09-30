@@ -117,6 +117,8 @@
         <activity android:name=".UploadActivity" />
         <activity
             android:name=".SignUpActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionbar"
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />

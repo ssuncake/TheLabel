@@ -1,6 +1,7 @@
 package team.nuga.thelabel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.Toast;
 
 /**

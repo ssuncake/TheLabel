@@ -62,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+
     private void onCheckEmail() {
         String email = editText_email.getText().toString();
         if (isCheckedEmail == false) {
@@ -263,7 +264,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         decorview.requestFocus();
-        appFunction.appFinished();
+//        appFunction.goLoginPage();
     }
 
     private void submitForm() {
