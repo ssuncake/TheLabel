@@ -25,7 +25,7 @@ public class EntrustLeaderActivity extends AppCompatActivity {
     public static final String LOGTAG = "EntrustActivity";
     RecyclerView listView;
     EntrustLeaderAdapter entrustLeaderAdapter;
-    public static Label label;
+    public Label label = null;
     User[] users;
 
     @Override
@@ -61,7 +61,7 @@ public class EntrustLeaderActivity extends AppCompatActivity {
         entrustLeaderAdapter.setOnAdapterItemClickListener(new EntrustLeaderAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
-
+                return;
             }
         });
         listView.setAdapter(entrustLeaderAdapter);
@@ -76,21 +76,16 @@ public class EntrustLeaderActivity extends AppCompatActivity {
         }
     }
 
-//    private void initData() {
-//        Random r = new Random();
-//        for (int i = 0; i < 5; i++) {
-//            User u = new User();
-//            u.setUserName("name" + i);
-//            entrustLeaderAdapter.add(u);
-//        }
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            default:
+                Log.e("backpress_error","itemselected_home");
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

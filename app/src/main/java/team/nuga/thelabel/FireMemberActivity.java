@@ -24,7 +24,7 @@ public class FireMemberActivity extends AppCompatActivity {
     public static final String LOGTAG = "FireMemberActivity ";
     RecyclerView listView;
     FireMemberListAdapter firememberlistAdapter;
-    public static Label label;
+    public static Label label = null;
     User[] users;
 
     @Override
@@ -62,7 +62,7 @@ public class FireMemberActivity extends AppCompatActivity {
         firememberlistAdapter.setOnAdapterItemClickListener(new FireMemberListAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, User user, int position) {
-
+            return;
             }
         });
         listView.setAdapter(firememberlistAdapter);
@@ -80,8 +80,7 @@ public class FireMemberActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        if (item.getItemId()==android.R.id.home) {
                 onBackPressed();
                 return true;
         }

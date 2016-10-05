@@ -21,11 +21,11 @@ import team.nuga.thelabel.UploadActivity;
 public class UploadYoutubeFragment extends Fragment {
 
 
-
     public UploadYoutubeFragment() {
         // Required empty public constructor
     }
-@BindView(R.id.editText_youtubeUpload)
+
+    @BindView(R.id.editText_youtubeUpload)
     EditText editText_youtubeUpload;
 
     @Override

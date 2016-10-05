@@ -36,7 +36,7 @@ import team.nuga.thelabel.request.UserTextSearchRequest;
 public class UserSearchFragment extends Fragment {
     RecyclerView userListView;
     SearchUserResultListAdapter useradapter;
-//    EditText userSearchText;
+    //    EditText userSearchText;
     ClearEditText clearEditText;
     @BindView(R.id.imageButton_user_search)
     ImageButton userSearchButton;
@@ -46,8 +46,10 @@ public class UserSearchFragment extends Fragment {
     public UserSearchFragment() {
         // Required empty public constructor
     }
-SearchUser searchUser;
+
+    SearchUser searchUser;
     User mainUser;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ SearchUser searchUser;
         View view = inflater.inflate(R.layout.fragment_user_search, container, false);
         ButterKnife.bind(this, view);
         int color = Color.parseColor("#060928");
-        mainUser = (User)getArguments().getSerializable(MainActivity.MAINUSER);
+        mainUser = (User) getArguments().getSerializable(MainActivity.MAINUSER);
         userListView = (RecyclerView) view.findViewById(R.id.recyclerview_user_search);
         clearEditText = (ClearEditText) view.findViewById(R.id.CustomView_claerEditText_user);
         clearEditText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
@@ -66,7 +68,7 @@ SearchUser searchUser;
                 searchUser = user;
                 Intent intent = new Intent(getActivity(), OtherUserActivity.class);
                 intent.putExtra("id", user.getOtherUserID());
-                intent.putExtra(MainActivity.MAINUSER,mainUser);
+                intent.putExtra(MainActivity.MAINUSER, mainUser);
                 startActivity(intent);
             }
 
@@ -80,14 +82,15 @@ SearchUser searchUser;
     }
 
     String searchText;
-    int sumsum=0;
-    public static int pageCount=1;
+    int sumsum = 0;
+    public static int pageCount = 1;
+
     @OnClick(R.id.imageButton_user_search)
     public void userSearchButton() {
         searchText = clearEditText.getText().toString();
-        if(searchText.trim().isEmpty()){
+        if (searchText.trim().isEmpty()) {
             Toast.makeText(getContext(), "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
 
             UserTextSearchRequest userTextSearchRequest = new UserTextSearchRequest(getContext(), pageCount, 10, searchText, "");
             NetworkManager.getInstance().getNetworkData(userTextSearchRequest, new NetworkManager.OnResultListener<NetworkResultUserSearch>() {

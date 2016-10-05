@@ -24,11 +24,11 @@ public class ContentsMusicPlayer {
         this.mainProgressView = mainProgressView;
     }
 
-    public static final String LOGTAG = "ContentsMusicPlayer";
+    public static final String LOG_MUSIC_PLAYER = "ContentsMusicPlayer";
 
     enum PlayerState {
         IDLE,
-        INITIALIED,
+        INITIALIZED,
         PREPARED,
         STARTED,
         PAUSED,
@@ -38,16 +38,11 @@ public class ContentsMusicPlayer {
     }
 
     Context context;
-
-    PlayerState mState;
-
-    MediaPlayer mPlayer;
-
-    List<Contents> contentses;
-
-    SeekBar mainProgressView;
-
-    Contents playNowContents;
+    private PlayerState mState;
+    private MediaPlayer mPlayer;
+    private List<Contents> contentses;
+    private SeekBar mainProgressView;
+    private Contents playNowContents;
 
 
     public void setMusicProgress(int progress) {
@@ -57,7 +52,7 @@ public class ContentsMusicPlayer {
 
 
     public void playToPause(Contents contents) {
-        Log.d(LOGTAG, "playToPause =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
+        Log.d(LOG_MUSIC_PLAYER, "playToPause =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
         mPlayer.pause();
         mState = PlayerState.PAUSED;
         contents.setPlayedMode(Contents.PUASE);
@@ -65,30 +60,26 @@ public class ContentsMusicPlayer {
     }
 
     public void pauseToPlay(Contents contents) {
-        Log.d(LOGTAG, "pauseToPlay =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
-//        if(contents.getContentsID() == userPlayingContentsId) // 사용자가 중지한 컨텐츠가 맞다면
-//        {
+        Log.d(LOG_MUSIC_PLAYER, "pauseToPlay =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
+
         mPlayer.seekTo(contents.getPlayedTIme());
         mainProgressView.setProgress(contents.getPlayedTIme());
         mPlayer.start();
         contents.setPlayedMode(Contents.PLAY);
         mState = PlayerState.STARTED;
         mHandler.post(progressRunnable);
-//        }
     }
 
     public void stopToPlay(Contents contents) {
-
         if (mPlayer != null) {
-            Log.d(LOGTAG, "stopToPlay =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
+            Log.d(LOG_MUSIC_PLAYER, "stopToPlay =>" + contents.getContentsID() + " / " + playNowContents.getContentsID());
             mPlayer.reset();
             //다른 플레이어들을 리셋
             for (Contents c : contentses) {
-                if (c.getContentsID() != contents.getContentsID()) {
-                    if (c.getContentsType() == Contents.MUSIC) {
+                if (c.getContentsID() != contents.getContentsID()&&c.getContentsType() == Contents.MUSIC) {
                         c.setPlayedMode(Contents.STOP);
                         c.setPlayedTIme(0);
-                    }
+
                 }
             }
             mainProgressView.setProgress(0);
@@ -103,12 +94,12 @@ public class ContentsMusicPlayer {
 
         mState = PlayerState.PREPARED;
 
-        if (mState == PlayerState.INITIALIED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
+        if (mState == PlayerState.INITIALIZED || mState == PlayerState.STOPPED) { //INITIALIED상태나 STOPPED상태이면 prepare 상태가 아니므로 prpare을 호출하여 prepare상태로 만든다.
             try {
                 mPlayer.prepare();
                 mState = PlayerState.PREPARED;
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
         }
 
@@ -171,7 +162,7 @@ public class ContentsMusicPlayer {
             }
         }
 
-        Log.e(LOGTAG, "올 리셋");
+        Log.e(LOG_MUSIC_PLAYER, "올 리셋");
     }
 
     public int getPlayedContentsId() {
